@@ -1,0 +1,43 @@
+@startuml Diagram
+
+'skinparam style strictuml
+skinparam Class {
+    FontName Arial
+    FontSize 15
+
+    BorderColor DarkBlue
+    BackgroundColor APPLICATION
+    BorderThickness 3
+    ArrowColor DarkBlue
+    ArrowThickness 2
+    HeaderBackgroundColor Aquamarine
+}
+skinparam MinClassWidth 200
+
+enum AccountType <<enumeration>> {
+    CORRIENTE
+    AHORROS
+}
+
+class BankAccount {
+    -name : String
+    -lastname : String
+    -accountNumber : String
+    -accountType : AccountType
+
+    +getName()
+    +setName(String)
+    +getLastName()
+    +setLastName(String)
+    +getAccountNumber()
+    +setAccountNumber(String)
+    +getAccountType()
+    +setAccountType(String)
+    +consignBalance(Double)
+    +withDrawBalance(Double)
+    +compareBalanceTo(BankAccount)
+    +sendBalance(BankAccount, Double)
+}
+left to right direction
+BankAccount "1" --> "1" AccountType
+@enduml
