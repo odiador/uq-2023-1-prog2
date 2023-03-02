@@ -9,9 +9,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-import javax.swing.JOptionPane;
-
-@SuppressWarnings({ "unchecked", "serial" })
+@SuppressWarnings({ "unchecked"})
 public class data implements Serializable {
 	public Color verde = new Color(0, 255, 0);
 	public Color azul = new Color(0, 0, 173);
