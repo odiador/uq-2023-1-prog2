@@ -1,4 +1,4 @@
-package co.edu.uniquindio.biblioteca.model;
+package co.edu.uniquindio.empresa.model;
 
 import java.util.ArrayList;
 import java.util.List;

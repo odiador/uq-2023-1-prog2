@@ -1,13 +1,13 @@
-package co.edu.uniquindio.biblioteca.test;
+package co.edu.uniquindio.empresa.test;
 
 import java.util.ArrayList;
 
-import co.edu.uniquindio.biblioteca.model.Categoria;
-import co.edu.uniquindio.biblioteca.model.Cliente;
-import co.edu.uniquindio.biblioteca.model.Directivo;
-import co.edu.uniquindio.biblioteca.model.Empleado;
-import co.edu.uniquindio.biblioteca.model.Empresa;
-import co.edu.uniquindio.biblioteca.model.Persona;
+import co.edu.uniquindio.empresa.model.Categoria;
+import co.edu.uniquindio.empresa.model.Cliente;
+import co.edu.uniquindio.empresa.model.Directivo;
+import co.edu.uniquindio.empresa.model.Empleado;
+import co.edu.uniquindio.empresa.model.Empresa;
+import co.edu.uniquindio.empresa.model.Persona;
 
 public class Test {
 

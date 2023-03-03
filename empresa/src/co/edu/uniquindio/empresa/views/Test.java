@@ -1,4 +1,4 @@
-package co.edu.uniquindio.biblioteca.views;
+package co.edu.uniquindio.empresa.views;
 
 public class Test {
 

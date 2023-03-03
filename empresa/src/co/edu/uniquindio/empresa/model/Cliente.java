@@ -1,4 +1,4 @@
-package co.edu.uniquindio.biblioteca.model;
+package co.edu.uniquindio.empresa.model;
 
 public class Cliente extends Persona {
 
