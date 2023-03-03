@@ -1,19 +1,29 @@
 package co.edu.uniquindio.biblioteca.model;
 
 public abstract class Persona {
-	
+
 	private String nombre;
 	private int edad;
-	
+
+	/**
+	 * El constructor de la clase Persona
+	 * 
+	 * @param nombre
+	 * @param edad
+	 */
 	public Persona(String nombre, int edad) {
 		super();
 		this.nombre = nombre;
 		this.edad = edad;
 	}
 
+	/**
+	 * El constructor de la clase Persona sin parámetros
+	 */
 	public Persona() {
 		super();
 	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -21,6 +31,7 @@ public abstract class Persona {
 		result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -37,12 +48,9 @@ public abstract class Persona {
 			return false;
 		return true;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Persona [nombre=" + nombre + ", edad=" + edad + "]";
 	}
-	
-	
-
 }
