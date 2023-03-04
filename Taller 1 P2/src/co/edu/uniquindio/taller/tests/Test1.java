@@ -1,10 +1,10 @@
-package co.edu.uniquindio.taller.ejercicio1.tests;
+package co.edu.uniquindio.taller.tests;
 
 import java.util.ArrayList;
 
 import co.edu.uniquindio.taller.ejercicio1.model.*;
 
-public class Test {
+public class Test1 {
 
 	public static void main (String[] args) {
 
