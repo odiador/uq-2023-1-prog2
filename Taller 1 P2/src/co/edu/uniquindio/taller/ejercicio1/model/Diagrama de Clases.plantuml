@@ -1,0 +1,53 @@
+@startuml Diagrama de Clases Empresa
+
+skinparam Class {
+    FontSize 15
+    BorderColor Blue
+    BackgroundColor APPLICATION
+    BorderThickness 3
+}
+abstract class Persona {
+    -name : String
+    -age : Integer
+    +getName()
+    +getAge()
+    +setName(String)
+    +setAge(String)
+}
+class Empleado {
+    -sueldoBruto : Double
+    +getSueldoBruto()
+    +setSueldoBruto(Double)
+    +obtenerDatos()
+}
+enum Categoria {
+    ADMINISTRADOR
+    GERENTE
+    SUBGERENTE
+}
+class Directivo {
+    -categoria : Categoria
+    +getCategoria()
+    +setCategoria(String)
+}
+class Cliente {
+    -phone : String
+    getPhone()
+    setPhone(String)
+}
+class Empresa {
+    -name
+    +getName()
+    +setName(String)
+}
+
+Empleado --|> Persona
+Cliente -|> Persona
+Directivo -> Categoria
+Directivo -down-|> Empleado
+
+Empresa "1" *--- " 0..* " Persona : +listaPersonas
+Empleado "1" o--up-- " 0..*" Directivo : +listaDirectivos
+Directivo "1" o--up-- " 1..*" Empleado : +listaSubordinados
+
+@enduml
