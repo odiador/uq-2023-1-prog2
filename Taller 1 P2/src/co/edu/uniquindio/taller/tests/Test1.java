@@ -25,8 +25,8 @@ public class Test1 {
 
 		empresa.getListaPersonas().add(directivo);
 		System.out.println(empresa.getListaPersonas());
-		System.out.println(empresa.getListaEmpleados());
-		System.out.println(empresa.getListaEmpleados2());
+		System.out.println(empresa.getSalarioEmpleados());
+		System.out.println(empresa.getSalarioEmpleados2());
 
 		// hacer un metodo que imprima el salriobruot de los empleado debe manipular la
 		// lista personas de la empresa
