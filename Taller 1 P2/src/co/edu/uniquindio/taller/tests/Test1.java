@@ -6,7 +6,7 @@ import co.edu.uniquindio.taller.ejercicio1.model.*;
 
 public class Test1 {
 
-	public static void main (String[] args) {
+	public static void main(String[] args) {
 
 		Empresa empresa = new Empresa("Uq empresa");
 
