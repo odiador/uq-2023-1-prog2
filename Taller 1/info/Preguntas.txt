@@ -1,0 +1,41 @@
+Taller Seguimiento en clase POO
+
+1. Realizar el diagrama de clases usando las relaciones de asociación, contención, agregación, herencia.
+
+EMPLEADOS DE UNA EMPRESA
+Representa mediante un diagrama de clases la siguiente
+especificación:
+   Una aplicación necesita almacenar información sobre
+   empresas, sus empleados y sus clientes. Ambos se
+   caracterizan por su nombre y edad.
+   Los empleados tienen un sueldo bruto, los empleados que
+   son directivos tienen una categoría, así como un conjunto
+   de empleados subordinados.
+   De los clientes además se necesita conocer su teléfono de
+   contacto.
+   La aplicación necesita mostrar los datos de empleados y
+   clientes
+
+2. Se requiere un programa que modele una cuenta bancaria que posee los siguientes atributos:
+- Nombres del titular.
+- Apellidos del titular.
+- Número de la cuenta bancaria.
+- Tipo de cuenta: puede ser una cuenta de ahorros o una cuenta corriente.
+Saldo de la cuenta.
+
+Hacer el diagrama de clases
+
+Se debe definir un constructor que inicialice los atributos de la clase. Cuando se crea una cuenta bancaria, su saldo inicial tiene un valor de cero.
+
+En una determinada cuenta bancaria se puede: 
+
+- Imprimir por pantalla los valores de los atributos de una cuenta bancaria.
+Consultar el saldo de una cuenta bancaria.
+- Consignar un determinado valor en la cuenta bancaria, actualizando el saldo correspondiente.
+Retirar un determinado valor de la cuenta bancaria, actualizando el saldo correspondiente. Es necesario tener en cuenta que no se puede realizar el retiro si el valor solicitado supera el saldo actual de la cuenta.
+
+3. Se requiere modificar el programa de la cuenta bancaria (ejercicio 2.) para que realice las siguientes actividades:
+
+- Comparar saldos entre cuentas bancarias. La cuenta para comparar es un objeto que se envía como parámetro del método. El método devuelve un valor booleano de verdadero si la cuenta actual es mayor o igual a la cuenta que se pasó como parámetro.
+
+- Transferir dinero de una cuenta bancaria a otra. El método debe recibir como parámetro la cuenta de destino y el valor a transferir. El saldo de la cuenta actual debe disminuir el valor a transferir y el saldo de la cuenta destino debe aumentar. El método debe reutilizar el método retirar para evaluar si la cantidad a transferir se encuentra en la cuenta de origen.
