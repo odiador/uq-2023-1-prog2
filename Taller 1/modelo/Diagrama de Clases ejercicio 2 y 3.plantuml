@@ -17,7 +17,19 @@ enum AccountType <<enumeration>> {
     CORRIENTE
     AHORROS
 }
+class Bank {
+    -name : String
+    -code : String
+    getName()
+    setName(String)
+    getCode()
+    setCode(String)
+    sendBalance(String, String, Double)
+    addBankAccount(String, String, String, AccountType)
+    searchBankAccount(String)
+    validateBankAccount(String)
 
+}
 class BankAccount {
     -name : String
     -lastname : String
@@ -38,5 +50,7 @@ class BankAccount {
     +sendBalance(BankAccount, Double)
 }
 left to right direction
-BankAccount "1" --> "1" AccountType
+Bank o-- BankAccount : +bankAccountList
+Bank -->  AccountType
+BankAccount -->  AccountType
 @enduml
