@@ -21,6 +21,12 @@ public class Client {
     }
 
     /**
+     * Es el constructor del cliente sin parámetros
+     */
+    public Client() {
+    }
+
+    /**
      * Obtiene el apellido del cliente
      * 
      * @return
@@ -67,10 +73,41 @@ public class Client {
 
     /**
      * Obtiene la lista de cuentas de banco del cliente
+     * 
      * @param bankAccountList
      */
     public void setBankAccountList(List<BankAccount> bankAccountList) {
         this.bankAccountList = bankAccountList;
+    }
+
+    /**
+     * Determina si el nombre existe (no es null ni está vacía la cadena)
+     * 
+     * @return
+     */
+    public boolean getNameExists() {
+        return !(getName() == null || getName().trim().isEmpty());
+    }
+
+    /**
+     * Determina si el apellido existe (no es null ni está vacía la cadena)
+     * 
+     * @return
+     */
+    public boolean getLastNameExists() {
+        return !(getLastName() == null || getLastName().trim().isEmpty());
+    }
+
+    /**
+     * Determina si un cliente existe a partir de saber si existen sus nombres y
+     * apellidos
+     * 
+     * @see {@link #getLastNameExists()}
+     *      <li>{@link #getNameExists()}
+     * @return
+     */
+    public boolean getExists() {
+        return getNameExists() && getLastNameExists();
     }
 
 }

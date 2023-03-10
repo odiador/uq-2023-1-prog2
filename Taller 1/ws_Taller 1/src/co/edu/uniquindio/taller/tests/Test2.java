@@ -5,8 +5,8 @@ import co.edu.uniquindio.taller.ejercicio2a3.model.BankAccount;
 
 public class Test2 {
     public static void main(String[] args) {
-        BankAccount cuentaBancaria = new BankAccount("Juan", "Amador", "1000", AccountType.AHORROS);
-        BankAccount cuentaBancaria2 = new BankAccount("Manuel", "Roa", "1002", AccountType.AHORROS);
+        BankAccount cuentaBancaria = new BankAccount("1000", AccountType.AHORROS);
+        BankAccount cuentaBancaria2 = new BankAccount("1002", AccountType.AHORROS);
         System.out.println("Se crean las cuentas bancarias:");
         System.out.println(cuentaBancaria);
         System.out.println(cuentaBancaria2);

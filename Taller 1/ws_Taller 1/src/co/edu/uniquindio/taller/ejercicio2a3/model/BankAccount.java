@@ -2,11 +2,10 @@ package co.edu.uniquindio.taller.ejercicio2a3.model;
 
 public class BankAccount {
 
-    private String name;
-    private String lastName;
     private final String accountNumber;
     private AccountType accountType;
     private Double balance;
+    private Client owner;
 
     /**
      * Es el constructor de la cuenta bancaria sin parámetros
@@ -16,58 +15,31 @@ public class BankAccount {
     }
 
     /**
-     * Es el constructor de la cuenta bancaria
+     * Es el constructor de la cuenta bancaria sin un dueño
      * 
-     * @param name
-     * @param lastName
      * @param accountNumber
      * @param accountType
-     * @param balance
      * @see AccountType
      */
-    public BankAccount(final String name, final String lastName, final String accountNumber,
+    public BankAccount(final String accountNumber,
             final AccountType accountType) {
-        this.name = name;
-        this.lastName = lastName;
         this.accountNumber = accountNumber;
         this.accountType = accountType;
         this.balance = 0d;
+        this.owner = new Client();
     }
 
     /**
-     * Obtiene el nombre del propietario de la cuenta
+     * Es el constructor de la cuenta bancaria con dueño
      * 
-     * @return
+     * @param accountNumber
+     * @param accountType
+     * @see AccountType
      */
-    public String getName() {
-        return name;
-    }
-
-    /**
-     * Cambia el nombre del propietario de la cuenta
-     * 
-     * @param name
-     */
-    public void setName(final String name) {
-        this.name = name;
-    }
-
-    /**
-     * Obtiene el apellido del propietario de la cuenta
-     * 
-     * @return
-     */
-    public String getLastName() {
-        return lastName;
-    }
-
-    /**
-     * Cambia el apellido del propietario de la cuenta
-     * 
-     * @param lastName
-     */
-    public void setLastName(final String lastName) {
-        this.lastName = lastName;
+    public BankAccount(final String accountNumber,
+            final AccountType accountType, final Client owner) {
+        this(accountNumber, accountType);
+        this.owner = owner;
     }
 
     /**
@@ -125,24 +97,6 @@ public class BankAccount {
     }
 
     /**
-     * Determina si el nombre existe (no es null ni está vacía la cadena)
-     * 
-     * @return
-     */
-    public boolean getNameExists() {
-        return !(getName() == null || getName().trim().isEmpty());
-    }
-
-    /**
-     * Determina si el apellido existe (no es null ni está vacía la cadena)
-     * 
-     * @return
-     */
-    public boolean getLastNameExists() {
-        return !(getLastName() == null || getLastName().trim().isEmpty());
-    }
-
-    /**
      * Determina si el tipo de cuenta existe (no es null)
      * 
      * @return
@@ -155,12 +109,12 @@ public class BankAccount {
      * Determina si la cuenta bancaria existe preguntando si existe el nombre,
      * apellido, numero de cuenta y tipo de cuenta
      * 
-     * @see {@link #getNameExists()}, {@link #getLastNameExists()},
-     *      {@link #getAccountNumberExists()}, {@link #getAccountTypeExists()}
+     * @see {@link #getAccountNumberExists()}
+     *      <li>{@link #getAccountTypeExists()}
      * @return si la cuenta bancaria existe (true) o no (false)
      */
     public boolean getExists() {
-        return getNameExists() && getLastNameExists() && getAccountNumberExists() && getAccountTypeExists();
+        return getAccountNumberExists() && getAccountTypeExists() && getOwner().getExists();
     }
 
     /**
@@ -215,7 +169,7 @@ public class BankAccount {
      *      <li>{@link #withDrawBalance()}
      *      <li>{@link #getExists()}
      */
-    public void sendBalance(BankAccount cb, Double amount) throws Exception {
+    public void sendBalance(final BankAccount cb, final Double amount) throws Exception {
         if (!getExists() || !cb.getExists())
             throw new Exception("Alguna de las cuentas no existe");
         withDrawBalance(amount);
@@ -230,8 +184,26 @@ public class BankAccount {
      * @return true si el saldo actual de la cuenta es mayor o igual que el saldo de
      *         la cuenta enviada
      */
-    public boolean compareBalanceTo(BankAccount cb) {
+    public boolean compareBalanceTo(final BankAccount cb) {
         return getBalance() >= cb.getBalance();
+    }
+
+    /**
+     * Obtiene el dueño de la cuenta bancaria
+     * 
+     * @return
+     */
+    public Client getOwner() {
+        return owner;
+    }
+
+    /**
+     * Cambia el dueño de la cuenta bancaria
+     * 
+     * @param owner
+     */
+    public void setOwner(final Client owner) {
+        this.owner = owner;
     }
 
     @Override
@@ -243,14 +215,14 @@ public class BankAccount {
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if (this == obj)
             return true;
         if (obj == null)
             return false;
         if (getClass() != obj.getClass())
             return false;
-        BankAccount other = (BankAccount) obj;
+        final BankAccount other = (BankAccount) obj;
         if (accountNumber == null) {
             if (other.accountNumber != null)
                 return false;
@@ -262,8 +234,9 @@ public class BankAccount {
     @Override
     public String toString() {
         return getExists()
-                ? "CuentaBancaria [name=" + name + ", lastName=" + lastName + ", accountNumber=" + accountNumber
-                        + ", accountType=" + accountType + ", balance=" + balance + "]"
+                ? "CuentaBancaria [OwnerName=" + getOwner().getName() + ", OwnerLastName=" + getOwner().getLastName()
+                        + ", accountNumber=" + accountNumber + ", accountType=" + accountType + ", balance=" + balance
+                        + "]"
                 : "CuentaBancaria [?]";
     }
 }

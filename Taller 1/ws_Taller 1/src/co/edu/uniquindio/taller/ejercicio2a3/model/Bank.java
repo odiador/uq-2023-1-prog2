@@ -43,7 +43,7 @@ public class Bank {
         if (validateBankAccount(accountNumber)) {
             throw new Exception("La cuenta ya existe, no se puede agregar");
         }
-        BankAccount account = new BankAccount(name, lastName, accountNumber, accountType);
+        BankAccount account = new BankAccount(accountNumber, accountType);
 
         bankAccountList.add(account);
     }
