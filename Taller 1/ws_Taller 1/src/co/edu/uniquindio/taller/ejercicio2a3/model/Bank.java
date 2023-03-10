@@ -32,13 +32,11 @@ public class Bank {
      * Agrega una nueva cuenta de banco, muestra un error en caso de que ya se
      * encuentre alguna con el mismo numero de cuenta {@code accountNumber}
      * 
-     * @param name
-     * @param lastName
      * @param accountNumber
      * @param accountType
      * @throws Exception
      */
-    public void addBankAccount(final String name, final String lastName, final String accountNumber,
+    public String addBankAccount(final String accountNumber,
             final AccountType accountType) throws Exception {
         if (validateBankAccount(accountNumber)) {
             throw new Exception("La cuenta ya existe, no se puede agregar");
@@ -46,6 +44,7 @@ public class Bank {
         BankAccount account = new BankAccount(accountNumber, accountType);
 
         bankAccountList.add(account);
+        return "La cuenta fue agregada exitosamente (" + accountNumber + ")";
     }
 
     /**

@@ -1,6 +1,8 @@
 package co.edu.uniquindio.taller.ejercicio2a3.model;
 
-public class BankAccount {
+import java.util.Comparator;
+
+public class BankAccount implements Comparator<BankAccount>, Comparable<BankAccount> {
 
     private final String accountNumber;
     private AccountType accountType;
@@ -114,7 +116,7 @@ public class BankAccount {
      * @return si la cuenta bancaria existe (true) o no (false)
      */
     public boolean getExists() {
-        return getAccountNumberExists() && getAccountTypeExists() && getOwner().getExists();
+        return getAccountNumberExists() && getAccountTypeExists();
     }
 
     /**
@@ -136,10 +138,11 @@ public class BankAccount {
      * @throws Exception
      * @see {@link #getExists()}
      */
-    public void consignBalance(final Double balance) throws Exception {
+    public String consignBalance(final Double balance) throws Exception {
         if (!getExists())
             throw new Exception("La cuenta no existe");
         setBalance(getBalance() + balance);
+        return "Han sido agregados " + balance + " a la cuenta (" + getAccountNumber() + ")";
     }
 
     /**
@@ -238,5 +241,15 @@ public class BankAccount {
                         + ", accountNumber=" + accountNumber + ", accountType=" + accountType + ", balance=" + balance
                         + "]"
                 : "CuentaBancaria [?]";
+    }
+
+    @Override
+    public int compareTo(BankAccount o) {
+        return getAccountNumber().compareTo(o.getAccountNumber());
+    }
+
+    @Override
+    public int compare(BankAccount o1, BankAccount o2) {
+        return o1.compareTo(o2);
     }
 }
