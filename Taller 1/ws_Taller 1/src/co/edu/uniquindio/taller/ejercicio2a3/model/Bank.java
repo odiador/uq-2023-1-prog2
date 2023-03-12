@@ -21,7 +21,7 @@ public class Bank {
      * @param name
      * @param code
      */
-    public Bank(String name, String code) {
+    public Bank(final String name, final String code) {
         this.name = name;
         this.code = code;
         this.bankAccountList = new ArrayList<BankAccount>();
@@ -41,7 +41,7 @@ public class Bank {
         if (validateBankAccount(accountNumber)) {
             throw new Exception("La cuenta ya existe, no se puede agregar");
         }
-        BankAccount account = new BankAccount(accountNumber, accountType);
+        final BankAccount account = new BankAccount(accountNumber, accountType);
 
         bankAccountList.add(account);
         return "La cuenta fue agregada exitosamente (" + accountNumber + ")";
@@ -55,9 +55,9 @@ public class Bank {
      * @param accountNumber
      * @return
      */
-    public BankAccount searchBankAccount(String accountNumber) {
+    public BankAccount searchBankAccount(final String accountNumber) {
         BankAccount account = new BankAccount();
-        for (BankAccount eachAccount : bankAccountList) {
+        for (final BankAccount eachAccount : bankAccountList) {
             if (eachAccount.getAccountNumber().equals(accountNumber)) {
                 account = eachAccount;
                 break;
@@ -73,7 +73,7 @@ public class Bank {
      * @param accountNumber
      * @return
      */
-    public boolean validateBankAccount(String accountNumber) {
+    public boolean validateBankAccount(final String accountNumber) {
         return searchBankAccount(accountNumber).getExists();
     }
 
@@ -85,10 +85,10 @@ public class Bank {
      * @param quantity
      * @throws Exception
      */
-    public void sendBalance(String senderAccountNumber, String recieverAccountNumber, Double quantity)
+    public void sendBalance(final String senderAccountNumber, final String recieverAccountNumber, final Double quantity)
             throws Exception {
-        BankAccount senderAccount = searchBankAccount(senderAccountNumber);
-        BankAccount recieverAccount = searchBankAccount(recieverAccountNumber);
+        final BankAccount senderAccount = searchBankAccount(senderAccountNumber);
+        final BankAccount recieverAccount = searchBankAccount(recieverAccountNumber);
         senderAccount.sendBalance(recieverAccount, quantity);
     }
 
@@ -106,7 +106,7 @@ public class Bank {
      * 
      * @param name
      */
-    public void setName(String name) {
+    public void setName(final String name) {
         this.name = name;
     }
 
@@ -124,7 +124,7 @@ public class Bank {
      * 
      * @param code
      */
-    public void setCode(String code) {
+    public void setCode(final String code) {
         this.code = code;
     }
 
@@ -142,7 +142,7 @@ public class Bank {
      * 
      * @param bankAccountList
      */
-    public void setBankAccountList(List<BankAccount> bankAccountList) {
+    public void setBankAccountList(final List<BankAccount> bankAccountList) {
         this.bankAccountList = bankAccountList;
     }
 
@@ -160,7 +160,7 @@ public class Bank {
      * 
      * @param clientList
      */
-    public void setClientList(List<Client> clientList) {
+    public void setClientList(final List<Client> clientList) {
         this.clientList = clientList;
     }
 }
