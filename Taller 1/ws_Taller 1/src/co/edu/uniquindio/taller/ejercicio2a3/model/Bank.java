@@ -2,6 +2,7 @@ package co.edu.uniquindio.taller.ejercicio2a3.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Bank {
     private String name;
@@ -45,6 +46,23 @@ public class Bank {
 
         bankAccountList.add(account);
         return "La cuenta fue agregada exitosamente (" + accountNumber + ")";
+    }
+
+    /**
+     * Elimina una cuenta de banco, a partir de un numero de cuenta
+     * {@code accountNumber}, muestra un error en caso de que la cuenta no exista
+     * 
+     * @param accountNumber es el numero de cuenta
+     * @return "La cuenta ha sido eliminada con éxito"
+     * @throws Exception en caso de que no exista
+     */
+    public String removeBankAccount(final String accountNumber) throws Exception {
+        if (!validateBankAccount(accountNumber)) {
+            throw new Exception("La cuenta no existe, no se puede eliminar");
+        }
+        setBankAccountList(bankAccountList.stream().filter(e -> !e.getAccountNumber().equals(accountNumber))
+                .collect(Collectors.toList()));
+        return "La cuenta ha sido eliminada con éxito";
     }
 
     /**
