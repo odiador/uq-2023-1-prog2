@@ -96,6 +96,51 @@ public class Bank {
     }
 
     /**
+     * Valida si un cliente está en la lista a partir de un código {@code code}
+     * 
+     * @param code es el código del cliente
+     * @return true si existe
+     */
+    public boolean validateClient(final String code) {
+        return searchClient(code) != null;
+    }
+
+    /**
+     * Agrega un cliente a partir de su nombre, apellido y código; muestra un error
+     * cuando el cliente ya existe
+     * 
+     * @param name     es el nombre del cliente
+     * @param lastName es el apellido del cliente
+     * @param code     es el código del cliente
+     * @return "El cliente fue agregado de manera exitosa"
+     * @throws BankException cuando el cliente ya existe
+     */
+    public String addClient(final String name, final String lastName, final String code) throws BankException {
+        if (validateClient(code)) {
+            throw new BankException("El cliente ya existe");
+        }
+        clientList.add(new Client(name, lastName, code));
+        return "El cliente fue agregado de manera exitosa";
+    }
+
+    /**
+     * Elimina un cliente a partir de su código, muestra un error en caso de que el
+     * cliente no exista
+     * 
+     * @param code es el código del cliente
+     * @return "El cliente fue eliminado de manera exitosa"
+     * @throws BankException en caso de que el cliente no exista
+     */
+    public String removeClient(final String code) throws BankException {
+        Client client = searchClient(code);
+        if (client == null) {
+            throw new BankException("El cliente no existe");
+        }
+        clientList.remove(client);
+        return "El cliente fue eliminado de manera exitosa";
+    }
+
+    /**
      * Valida si la cuenta de banco se encuentra o no a partir del número de cuenta
      * {@code accountNumber}
      * 
