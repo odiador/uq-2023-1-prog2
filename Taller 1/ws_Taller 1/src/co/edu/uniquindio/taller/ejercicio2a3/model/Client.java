@@ -9,15 +9,36 @@ public class Client {
     private String lastName;
     private List<BankAccount> bankAccountList;
 
+    private String code;
+
     /**
      * Es el constructor del cliente
      * 
      * @param name
      * @param lastName
      */
-    public Client(String name, String lastName) {
+    public Client(final String name, final String lastName, final String code) {
         this.name = name;
         this.lastName = lastName;
+        this.code = code;
+    }
+
+    /**
+     * Obtiene el código del cliente
+     * 
+     * @return
+     */
+    public String getCode() {
+        return code;
+    }
+
+    /**
+     * Cambia el código del cliente
+     * 
+     * @param code
+     */
+    public void setCode(final String code) {
+        this.code = code;
     }
 
     /**
@@ -40,7 +61,7 @@ public class Client {
      * 
      * @param lastName
      */
-    public void setLastName(String lastName) {
+    public void setLastName(final String lastName) {
         this.lastName = lastName;
     }
 
@@ -58,7 +79,7 @@ public class Client {
      * 
      * @param name
      */
-    public void setName(String name) {
+    public void setName(final String name) {
         this.name = name;
     }
 
@@ -76,7 +97,7 @@ public class Client {
      * 
      * @param bankAccountList
      */
-    public void setBankAccountList(List<BankAccount> bankAccountList) {
+    public void setBankAccountList(final List<BankAccount> bankAccountList) {
         this.bankAccountList = bankAccountList;
     }
 
@@ -110,4 +131,9 @@ public class Client {
         return getNameExists() && getLastNameExists();
     }
 
+    @Override
+    public String toString() {
+        return "Client [name=" + name + ", lastName=" + lastName + ", bankAccountList=" + bankAccountList + ", code="
+                + code + "]";
+    }
 }

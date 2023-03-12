@@ -85,6 +85,17 @@ public class Bank {
     }
 
     /**
+     * Busca un cliente por medio de su código {@code code}, si no lo encuentra
+     * retorna un null
+     * 
+     * @param code
+     * @return
+     */
+    public Client searchClient(final String code) {
+        return clientList.stream().filter(client -> code.equals(client.getCode())).findFirst().orElse(null);
+    }
+
+    /**
      * Valida si la cuenta de banco se encuentra o no a partir del número de cuenta
      * {@code accountNumber}
      * 
