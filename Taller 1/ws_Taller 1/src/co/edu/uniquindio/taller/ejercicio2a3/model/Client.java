@@ -120,6 +120,15 @@ public class Client {
     }
 
     /**
+     * Determina si el código existe (no es null ni está vacía la cadena)
+     * 
+     * @return
+     */
+    public boolean getCodeExists() {
+        return !(getCode() == null || getCode().trim().isEmpty());
+    }
+
+    /**
      * Determina si un cliente existe a partir de saber si existen sus nombres y
      * apellidos
      * 
@@ -128,7 +137,7 @@ public class Client {
      * @return
      */
     public boolean getExists() {
-        return getNameExists() && getLastNameExists();
+        return getNameExists() && getLastNameExists() && getCodeExists();
     }
 
     @Override

@@ -86,13 +86,13 @@ public class Bank {
 
     /**
      * Busca un cliente por medio de su código {@code code}, si no lo encuentra
-     * retorna un null
+     * retorna un cliente sin parámetros
      * 
      * @param code
      * @return
      */
     public Client searchClient(final String code) {
-        return clientList.stream().filter(client -> code.equals(client.getCode())).findFirst().orElse(null);
+        return clientList.stream().filter(client -> code.equals(client.getCode())).findFirst().orElse(new Client());
     }
 
     /**
@@ -102,7 +102,7 @@ public class Bank {
      * @return true si existe
      */
     public boolean validateClient(final String code) {
-        return searchClient(code) != null;
+        return searchClient(code).getExists();
     }
 
     /**
@@ -133,7 +133,7 @@ public class Bank {
      */
     public String removeClient(final String code) throws BankException {
         Client client = searchClient(code);
-        if (client == null) {
+        if (!client.getExists()) {
             throw new BankException("El cliente no existe");
         }
         clientList.remove(client);
