@@ -20,26 +20,41 @@ enum AccountType <<enumeration>> {
 class Bank {
     -name : String
     -code : String
-    getName()
-    setName(String)
-    getCode()
-    setCode(String)
-    sendBalance(String, String, Double)
-    addBankAccount(String, String, String, AccountType)
-    searchBankAccount(String)
-    validateBankAccount(String)
+
+    +getName() : String
+    +setName(String)
+    +getCode() : String
+    +setCode(String)
+
+    +addBankAccount(String, String, String, AccountType) : String
+    +addClient(String, String, String) : String
+    +removeBankAccount(String) : String
+    +removeClient(String) : String
+    +searchBankAccount(String) : BankAccount
+    +searchClient(String) : Client
+    +validateClient(String) : boolean
+    +validateBankAccount(String) : boolean
+    +sendBalance(String, String, Double)
+
+}
+class Client{
+    -name : String
+    -lastname : String
+    -code : String
+
+    +getName() : String
+    +setName(String)
+    +getLastName() : String
+    +setLastName(String)
+    +getCode() : String
+    +setCode(String)
+    +addBankAccount(BankAccount) : String
 
 }
 class BankAccount {
-    -name : String
-    -lastname : String
     -accountNumber : String
     -accountType : AccountType
 
-    +getName()
-    +setName(String)
-    +getLastName()
-    +setLastName(String)
     +getAccountNumber()
     +setAccountNumber(String)
     +getAccountType()
@@ -49,8 +64,10 @@ class BankAccount {
     +compareBalanceTo(BankAccount)
     +sendBalance(BankAccount, Double)
 }
-left to right direction
 Bank o-- BankAccount : +bankAccountList
+Client o-- BankAccount : +bankAccountList
+Bank o-- Client : +ClientList
 Bank -->  AccountType
+Client -->  BankAccount
 BankAccount -->  AccountType
 @enduml
