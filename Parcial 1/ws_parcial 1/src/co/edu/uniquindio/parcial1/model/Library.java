@@ -1,10 +1,18 @@
 package co.edu.uniquindio.parcial1.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Library {
 
 	private String name;
 	private String address;
 	private String phoneNumber;
+
+	private final List<Student> studentList = new ArrayList<Student>();
+	private final List<Lending> lendingList = new ArrayList<Lending>();
+	private final List<Book> bookList = new ArrayList<Book>();
+	private final List<Employer> employerList = new ArrayList<Employer>();
 
 	/**
 	 * Es el constructor de la biblioteca
@@ -23,7 +31,42 @@ public class Library {
 	 * Es el constructor de la biblioteca sin parámetros
 	 */
 	public Library() {
+	}
 
+	/**
+	 * Obtiene la lista de estudiantes de la biblioteca
+	 * 
+	 * @return la lista de estudiantes
+	 */
+	public List<Student> getStudentList() {
+		return studentList;
+	}
+
+	/**
+	 * Obtiene la lista de libros de la biblioteca
+	 * 
+	 * @return la lista de libros
+	 */
+	public List<Book> getBookList() {
+		return bookList;
+	}
+
+	/**
+	 * Obtiene la lista de préstamos de la biblioteca
+	 * 
+	 * @return la lista de préstamos
+	 */
+	public List<Lending> getLendingList() {
+		return lendingList;
+	}
+
+	/**
+	 * Obtiene la lista de empleados de la biblioteca
+	 * 
+	 * @return la lista de empleados
+	 */
+	public List<Employer> getEmployerList() {
+		return employerList;
 	}
 
 	/**
@@ -31,7 +74,7 @@ public class Library {
 	 * 
 	 * @return el nombre
 	 */
-	public String getName () {
+	public String getName() {
 		return name;
 	}
 
@@ -40,7 +83,7 @@ public class Library {
 	 * 
 	 * @param name el nombre
 	 */
-	public void setName (String name) {
+	public void setName(String name) {
 		this.name = name;
 	}
 
@@ -49,7 +92,7 @@ public class Library {
 	 * 
 	 * @return la dirección
 	 */
-	public String getAddress () {
+	public String getAddress() {
 		return address;
 	}
 
@@ -58,7 +101,7 @@ public class Library {
 	 * 
 	 * @param address la dirección
 	 */
-	public void setAddress (String address) {
+	public void setAddress(String address) {
 		this.address = address;
 	}
 
@@ -67,7 +110,7 @@ public class Library {
 	 * 
 	 * @return el número de teléfono
 	 */
-	public String getPhoneNumber () {
+	public String getPhoneNumber() {
 		return phoneNumber;
 	}
 
@@ -76,8 +119,7 @@ public class Library {
 	 * 
 	 * @param phoneNumber
 	 */
-	public void setPhoneNumber (String phoneNumber) {
+	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
-
 }
