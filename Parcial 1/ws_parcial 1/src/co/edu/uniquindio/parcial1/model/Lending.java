@@ -1,12 +1,15 @@
 package co.edu.uniquindio.parcial1.model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Lending {
     private LocalDate date;
     private String total;
     private LocalDate deliveryDate;
     private String code;
+    private final List<LendingDetail> lendingDetailList = new ArrayList<LendingDetail>();
 
     /**
      * Es el constructor de la clase prestamo
@@ -99,5 +102,14 @@ public class Lending {
      */
     public void setCode(String code) {
         this.code = code;
+    }
+
+    /**
+     * Obtiene la lista de detalles de préstamo del préstamo
+     * 
+     * @return la lista de detalles de préstamo
+     */
+    public List<LendingDetail> getLendingDetailList() {
+        return lendingDetailList;
     }
 }
