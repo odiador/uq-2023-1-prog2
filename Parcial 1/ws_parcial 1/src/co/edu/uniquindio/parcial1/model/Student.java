@@ -1,5 +1,8 @@
 package co.edu.uniquindio.parcial1.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Student {
     private String name;
     private String lastName;
@@ -7,6 +10,7 @@ public class Student {
     private String program;
     private String state;
     private String id;
+    private final List<Lending> lendingList = new ArrayList<Lending>();
 
     /**
      * Es el constructor de la clase estudiante
@@ -31,6 +35,15 @@ public class Student {
      * Es el constructor de la clase estudiante sin parámetros
      */
     public Student() {
+    }
+
+    /**
+     * Obtiene la lista de préstamos del estudiante
+     * 
+     * @return la lista de préstamos
+     */
+    public List<Lending> getLendingList() {
+        return lendingList;
     }
 
     /**
