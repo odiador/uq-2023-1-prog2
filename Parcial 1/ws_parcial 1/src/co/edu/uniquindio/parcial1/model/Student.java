@@ -1,6 +1,6 @@
 package co.edu.uniquindio.parcial1.model;
 
-public class Estudiante {
+public class Student {
     private String name;
     private String lastName;
     private Integer age;
@@ -18,7 +18,7 @@ public class Estudiante {
      * @param state    el estado del estudiante
      * @param id       la identificación del estudiante
      */
-    public Estudiante(String name, String lastName, Integer age, String program, String state, String id) {
+    public Student(String name, String lastName, Integer age, String program, String state, String id) {
         this.name = name;
         this.lastName = lastName;
         this.age = age;
@@ -30,7 +30,7 @@ public class Estudiante {
     /**
      * Es el constructor de la clase estudiante sin parámetros
      */
-    public Estudiante() {
+    public Student() {
     }
 
     /**
