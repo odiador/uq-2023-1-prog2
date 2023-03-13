@@ -4,6 +4,7 @@ public class LendingDetail {
     private String code;
     private Double subTotal;
     private Integer quantity;
+    private Book book;
 
     /**
      * Es el constructor del detalle del préstamo
@@ -12,10 +13,11 @@ public class LendingDetail {
      * @param subTotal
      * @param quantity
      */
-    public LendingDetail(String code, Double subTotal, Integer quantity) {
+    public LendingDetail(String code, Double subTotal, Integer quantity, Book book) {
         this.code = code;
         this.subTotal = subTotal;
         this.quantity = quantity;
+        this.book = book;
     }
 
     /**
@@ -79,4 +81,23 @@ public class LendingDetail {
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
     }
+
+    /**
+     * Obtiene el libro del detalle de prestamo
+     * 
+     * @return el libro
+     */
+    public Book getBook() {
+        return book;
+    }
+
+    /**
+     * Cambia el libro del detalle de prestamo
+     * 
+     * @param book el libro
+     */
+    public void setBook(Book book) {
+        this.book = book;
+    }
+
 }
