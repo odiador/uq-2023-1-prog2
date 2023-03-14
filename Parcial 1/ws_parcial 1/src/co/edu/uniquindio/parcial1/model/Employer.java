@@ -28,14 +28,15 @@ public class Employer {
     public Employer() {
 
     }
-	/**
-	 * Obtiene la lista de préstamos del empleado
-	 * 
-	 * @return la lista de préstamos
-	 */
-	public List<Lending> getLendingList() {
-		return lendingList;
-	}
+
+    /**
+     * Obtiene la lista de préstamos del empleado
+     * 
+     * @return la lista de préstamos
+     */
+    public List<Lending> getLendingList() {
+        return lendingList;
+    }
 
     /**
      * Obtiene el nombre del empleado
@@ -80,6 +81,16 @@ public class Employer {
      */
     public String getAppointment() {
         return appointment;
+    }
+
+    /**
+     * Determina si el empleado existe o no dependiendo de que su nombre, cargo y
+     * salario no sea null
+     * 
+     * @return true si existe
+     */
+    public boolean getExists() {
+        return getName() != null && getAppointment() != null && getSalary() != null;
     }
 
     /**
