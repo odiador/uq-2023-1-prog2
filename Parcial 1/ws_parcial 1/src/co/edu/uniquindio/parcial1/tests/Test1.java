@@ -1,5 +1,7 @@
 package co.edu.uniquindio.parcial1.tests;
 
+import java.time.LocalDate;
+
 import co.edu.uniquindio.parcial1.model.*;
 
 public class Test1 {
@@ -15,6 +17,13 @@ public class Test1 {
         } catch (LibraryException e) {
             System.out.println(e.getMessage());
         }
-        Employer e = biblioteca.getEmployerByISBNOfLendings("ISBN");
+
+        biblioteca.addLending(LocalDate.now(), LocalDate.now().plusWeeks(1), "1000",
+                new Employer("Pablo", 20000d, ""));
+        try {
+            Employer employer = biblioteca.getEmployerByISBNOfLendings("ISBN");
+        } catch (LibraryException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }
