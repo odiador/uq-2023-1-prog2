@@ -79,4 +79,14 @@ public class Book {
     public void setAuthor(String author) {
         this.author = author;
     }
+
+    /**
+     * Pregunta si el isbn es el mismo que el del libro
+     * 
+     * @param isbn es el isbn del libro
+     * @return true si tiene el mismo isbn
+     */
+    public boolean hasIsbn(String isbn) {
+        return getIsbn().equals(isbn);
+    }
 }
