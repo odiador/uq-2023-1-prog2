@@ -179,4 +179,30 @@ public class Library {
 		return getLendingList().stream().filter(lending -> lending.getCode().equals(name)).findFirst()
 				.orElse(new Lending());
 	}
+
+	/**
+	 * Obtiene del empleado que ha realizado un préstamo de un Libro dado el isbn
+	 * del libro.
+	 * 
+	 * @param isbn es el isbn del libro
+	 * @return el empleado en caso de que exista
+	 * @throws LibraryException en caso de que no exista, muestra un error con
+	 *                          mensaje: "No se pudo obtener la información del
+	 *                          empleado que ha realizado un préstamo de un Libro
+	 *                          dado el ISBN del libro."
+	 */
+	public Employer getEmployerByISBNOfLendings(String isbn) throws LibraryException {
+		Employer employer = new Employer();
+		for (Lending eachlending : getLendingList()) {
+			employer = eachlending.getEmployerByIsbn(isbn);
+			if (employer.getExists())
+				break;
+		}
+		if (!employer.getExists()) {
+			throw new LibraryException(
+					"No se pudo obtener la información del empleado que ha realizado un préstamo de un Libro dado el ISBN del libro.");
+		}
+
+		return employer;
+	}
 }
