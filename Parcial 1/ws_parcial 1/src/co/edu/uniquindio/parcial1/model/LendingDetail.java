@@ -2,7 +2,7 @@ package co.edu.uniquindio.parcial1.model;
 
 public class LendingDetail {
     private String code;
-    private Double subTotal;
+    private Double unitaryValue;
     private Integer quantity;
     private Book book;
 
@@ -10,12 +10,12 @@ public class LendingDetail {
      * Es el constructor del detalle del préstamo
      * 
      * @param code
-     * @param subTotal
+     * @param unitaryValue
      * @param quantity
      */
-    public LendingDetail(String code, Double subTotal, Integer quantity, Book book) {
+    public LendingDetail(String code, Double unitaryValue, Integer quantity, Book book) {
         this.code = code;
-        this.subTotal = subTotal;
+        this.unitaryValue = unitaryValue;
         this.quantity = quantity;
         this.book = book;
     }
@@ -37,7 +37,7 @@ public class LendingDetail {
     }
 
     /**
-     * Cambia el codigo de detallle de prestamo
+     * Cambia el codigo de detalle de prestamo
      *
      * @param code
      */
@@ -46,21 +46,30 @@ public class LendingDetail {
     }
 
     /**
-     * Obtiene el subTotal del prestamo
-     *
-     * @return el subTotal del prestamo
+     * Obtiene el subtotal del detalle del préstamo
+     * 
+     * @return el subtotal
      */
     public Double getSubTotal() {
-        return subTotal;
+        return getUnitaryValue() * getQuantity();
     }
 
     /**
-     * Cambia el subTotal del prestamo
-     * 
-     * @param subTotal
+     * Obtiene el valor unitario del detalle del prestamo
+     *
+     * @return el valor unitario
      */
-    public void setSubTotal(Double subTotal) {
-        this.subTotal = subTotal;
+    public Double getUnitaryValue() {
+        return unitaryValue;
+    }
+
+    /**
+     * Cambia el valor unitario del detalle del prestamo
+     * 
+     * @param unitaryValue es el valor unitario
+     */
+    public void setUnitaryValue(Double unitaryValue) {
+        this.unitaryValue = unitaryValue;
     }
 
     /**
@@ -108,6 +117,10 @@ public class LendingDetail {
      */
     public boolean hasIsbn(String isbn) {
         return book.hasIsbn(isbn);
+    }
+
+    public boolean getExists() {
+        return getCode() != null && getUnitaryValue() != null && getQuantity() != null && getBook() != null;
     }
 
 }
