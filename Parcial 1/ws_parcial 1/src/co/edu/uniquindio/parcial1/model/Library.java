@@ -1,5 +1,6 @@
 package co.edu.uniquindio.parcial1.model;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -121,5 +122,43 @@ public class Library {
 	 */
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
+	}
+
+	/**
+	 * Busca un empleado a partir de su nombre, si no se encuentra se retorna un
+	 * empleado con constructor vacío
+	 * 
+	 * @param name es el nombre a buscar del empleado
+	 * @return el empleado encontrado
+	 */
+	public Employer searchEmployer(String name) {
+		return getEmployerList().stream().filter(employer -> employer.getName().equals(name)).findFirst()
+				.orElse(new Employer());
+	}
+
+	/**
+	 * Valida si un empleado existe o no a partir de su nombre
+	 * 
+	 * @param name es el nombre
+	 * @return true si se encuentra, false si no
+	 */
+	public boolean validateEmployer(String name) {
+		return searchEmployer(name).getExists();
+	}
+
+	/**
+	 * 
+	 * @param name
+	 * @param salary
+	 * @param appointment
+	 * @return El empleado ha sido agregado ({@code name})
+	 * @throws LibraryException
+	 */
+	public String addEmployer(String name, Double salary, String appointment) throws LibraryException {
+		if (validateEmployer(name)) {
+			throw new LibraryException("El empleado ya existe");
+		}
+		getEmployerList().add(new Employer(name, salary, appointment));
+		return "El empleado ha sido agregado (" + name + ")";
 	}
 }
