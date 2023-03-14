@@ -8,8 +8,10 @@ public class Lending {
     private LocalDate date;
     private LocalDate deliveryDate;
     private String code;
-    private final List<LendingDetail> lendingDetailList = new ArrayList<LendingDetail>();
     private Employer employer;
+
+    private boolean isEnded = false;
+    private final List<LendingDetail> lendingDetailList = new ArrayList<LendingDetail>();
 
     /**
      * Es el constructor de la clase prestamo
@@ -142,6 +144,84 @@ public class Lending {
             }
         }
         return employer;
+    }
+
+    /**
+     * Agrega un detalle de préstamo al préstamo, muestra un error en caso de que ya
+     * esté terminado el préstamo o si ya exista el código
+     * 
+     * @param code         es el codigo del detalle del préstamo
+     * @param unitaryValue es el valor unitario del detalle del préstamo
+     * @param quantity     es la cantidad del detalle del préstamo
+     * @param book         es el libro del detalle del préstamo
+     * @return El detalle del préstamo ha sido añadido ({@code code})
+     * @throws LibraryException En caso de que ya exista
+     *                          <li>En caso de que ya haya terminado el préstamo
+     * @see {@link #isEnded()}
+     *      <li>{@link #throwIfEnded()}
+     * 
+     */
+    public String addLendingDetail(String code, Double unitaryValue, Integer quantity, Book book)
+            throws LibraryException {
+        throwIfEnded();
+        if (validateLendingDetail(code)) {
+            throw new LibraryException("El detalle del préstamo ya existe (" + code + ")");
+        }
+        getLendingDetailList().add(new LendingDetail(code, unitaryValue, quantity, book));
+        return "El detalle del préstamo ha sido añadido (" + code + ")";
+    }
+
+    /**
+     * Elimina un detalle del préstamo a partir del código, muestra un error si el
+     * préstamo está bloqueado o no lo encuentra
+     * 
+     * @param code es el codigo del detalle del préstamo
+     * @return El detalle del préstamo ha sido eliminado ({@code code})
+     * @throws LibraryException En caso de que no exista
+     *                          <li>En caso de que ya haya terminado el préstamo
+     * @see {@link #isEnded()}
+     *      <li>{@link #throwIfEnded()}
+     */
+    public String removeLendingDetail(String code) throws LibraryException {
+        throwIfEnded();
+        if (validateLendingDetail(code)) {
+            throw new LibraryException("El detalle del préstamo no existe (" + code + ")");
+        }
+        getLendingDetailList().remove(searchLendingDetail(code));
+        return "El detalle del préstamo ha sido eliminado (" + code + ")";
+    }
+
+    private void throwIfEnded() throws LibraryException {
+        if (isEnded())
+            throw new LibraryException("El detalle de préstamo no puede ser cambiado");
+    }
+
+    public boolean validateLendingDetail(String code) {
+        return searchLendingDetail(code).getExists();
+    }
+
+    public LendingDetail searchLendingDetail(String code) {
+        return getLendingDetailList().stream().filter(lendingDetail -> lendingDetail.getCode().equals(code)).findFirst()
+                .orElse(new LendingDetail());
+    }
+
+    /**
+     * Determina si un préstamo ya ha sido terminado, en caso de que sí, no se
+     * pueden ni agregar ni eliminar detalles
+     * 
+     * @return true si ya terminó
+     */
+    public boolean isEnded() {
+        return isEnded;
+    }
+
+    /**
+     * Termina el préstamo y hace que no se puedan agregar o eliminar detalles
+     * 
+     * @see {@link #isEnded()}
+     */
+    public void endLending() {
+        this.isEnded = true;
     }
 
     /**
