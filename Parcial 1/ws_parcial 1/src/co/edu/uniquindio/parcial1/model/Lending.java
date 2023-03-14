@@ -6,24 +6,24 @@ import java.util.List;
 
 public class Lending {
     private LocalDate date;
-    private String total;
     private LocalDate deliveryDate;
     private String code;
     private final List<LendingDetail> lendingDetailList = new ArrayList<LendingDetail>();
+    private Employer employer;
 
     /**
      * Es el constructor de la clase prestamo
      *
      * @param date
-     * @param total
+     * @param total2
      * @param deliveryDate
      * @param code
      */
-    public Lending(LocalDate date, String total, LocalDate deliveryDate, String code) {
+    public Lending(LocalDate date, LocalDate deliveryDate, String code, Employer employer) {
         this.date = date;
-        this.total = total;
         this.deliveryDate = deliveryDate;
         this.code = code;
+        this.employer = employer;
     }
 
     /**
@@ -51,21 +51,16 @@ public class Lending {
     }
 
     /**
-     * Obtiene el total del prestamo
+     * Obtiene el total del prestamo por médio de cada detalle del préstamo
      *
      * @return el total
      */
-    public String getTotal() {
+    public Double getTotal() {
+        Double total = 0d;
+        for (LendingDetail eachlendingDetail : getLendingDetailList()) {
+            total += eachlendingDetail.getSubTotal();
+        }
         return total;
-    }
-
-    /**
-     * Cambia el total del prestamo
-     *
-     * @param total es el total
-     */
-    public void setTotal(String total) {
-        this.total = total;
     }
 
     /**
@@ -111,5 +106,51 @@ public class Lending {
      */
     public List<LendingDetail> getLendingDetailList() {
         return lendingDetailList;
+    }
+
+    /**
+     * Obtiene el empleado del préstamo
+     * 
+     * @return el empleado
+     */
+    public Employer getEmployer() {
+        return employer;
+    }
+
+    /**
+     * Cambia el empleado del préstamo
+     * 
+     * @param employer es el empleado
+     */
+    public void setEmployer(Employer employer) {
+        this.employer = employer;
+    }
+
+    /**
+     * Obtiene el empleado que ha realizado un préstamo de un Libro a partir del
+     * isbn {@code isbn} del libro.
+     * 
+     * @param isbn es el isbn del libro
+     * @return el empleado, si no se encuentra se retorna un empleado sin atributos
+     *         (inexistente)
+     */
+    public Employer getEmployerByIsbn(String isbn) {
+        Employer employer = new Employer();
+        for (LendingDetail eachLendingDetail : getLendingDetailList()) {
+            if (eachLendingDetail.hasIsbn(isbn)) {
+                employer = getEmployer();
+            }
+        }
+        return employer;
+    }
+
+    /**
+     * Determina si un préstamo existe o no dependiendo de que su código, dia, dia
+     * de entrega y empleado son diferentes de null
+     * 
+     * @return true si ninguna es null
+     */
+    public boolean getExists() {
+        return getCode() != null && getDate() != null && getDeliveryDate() != null && getEmployer() != null;
     }
 }
