@@ -161,4 +161,22 @@ public class Library {
 		getEmployerList().add(new Employer(name, salary, appointment));
 		return "El empleado ha sido agregado (" + name + ")";
 	}
+
+	public String addLending(LocalDate date, LocalDate deliveryDate, String code, Employer employer)
+			throws LibraryException {
+		if (!validateLending(code))
+			throw new LibraryException("El préstamo ya existe (" + code + ")");
+
+		getLendingList().add(new Lending(date, deliveryDate, code, employer));
+		return "El préstamo ha sido agregado (" + code + ")";
+	}
+
+	private boolean validateLending(String code) {
+		return searchLending(code).getExists();
+	}
+
+	public Lending searchLending(String code) {
+		return getLendingList().stream().filter(lending -> lending.getCode().equals(name)).findFirst()
+				.orElse(new Lending());
+	}
 }
