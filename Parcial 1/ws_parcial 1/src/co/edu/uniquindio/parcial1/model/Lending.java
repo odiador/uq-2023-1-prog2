@@ -53,7 +53,8 @@ public class Lending {
     }
 
     /**
-     * Obtiene el total del prestamo por médio de cada detalle del préstamo
+     * Obtiene el total del prestamo por médio de cada subtotal de detalles del
+     * préstamo
      *
      * @return el total
      */
