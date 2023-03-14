@@ -100,4 +100,14 @@ public class LendingDetail {
         this.book = book;
     }
 
+    /**
+     * Determina si el detalle del préstamo tiene un libro por medio de su isbn
+     * 
+     * @param isbn es el isbn del libro
+     * @return true si lo tiene
+     */
+    public boolean hasIsbn(String isbn) {
+        return book.hasIsbn(isbn);
+    }
+
 }
