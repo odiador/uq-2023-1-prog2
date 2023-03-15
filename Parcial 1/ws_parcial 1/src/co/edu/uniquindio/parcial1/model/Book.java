@@ -89,4 +89,8 @@ public class Book {
     public boolean hasIsbn(String isbn) {
         return getIsbn().equals(isbn);
     }
+
+    public boolean getExists() {
+        return getAuthor() != null && getIsbn() != null && getTitle() != null;
+    }
 }
