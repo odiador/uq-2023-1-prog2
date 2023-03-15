@@ -146,7 +146,7 @@ public class Library {
 
 	public String addBook(String title, String author, String isbn) throws LibraryException {
 		if (validateBook(isbn)) {
-			throw new LibraryException("El libro no fue encontrado  (" + isbn + ")");
+			throw new LibraryException("El libro ya existe  (" + isbn + ")");
 		}
 		getBookList().add(new Book(isbn, title, author));
 		return "El libro ha sido agregado (" + isbn + ")";
