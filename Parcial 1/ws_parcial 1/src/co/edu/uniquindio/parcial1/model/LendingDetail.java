@@ -13,7 +13,7 @@ public class LendingDetail {
      * @param unitaryValue
      * @param quantity
      */
-    public LendingDetail(String code, Double unitaryValue, Integer quantity, Book book) {
+    public LendingDetail(final String code, final Double unitaryValue, final Integer quantity, final Book book) {
         this.code = code;
         this.unitaryValue = unitaryValue;
         this.quantity = quantity;
@@ -41,7 +41,7 @@ public class LendingDetail {
      *
      * @param code
      */
-    public void setCode(String code) {
+    public void setCode(final String code) {
         this.code = code;
     }
 
@@ -68,7 +68,7 @@ public class LendingDetail {
      * 
      * @param unitaryValue es el valor unitario
      */
-    public void setUnitaryValue(Double unitaryValue) {
+    public void setUnitaryValue(final Double unitaryValue) {
         this.unitaryValue = unitaryValue;
     }
 
@@ -87,7 +87,7 @@ public class LendingDetail {
      * 
      * @param quantity la cantidad
      */
-    public void setQuantity(Integer quantity) {
+    public void setQuantity(final Integer quantity) {
         this.quantity = quantity;
     }
 
@@ -96,7 +96,7 @@ public class LendingDetail {
      * 
      * @param quantity es la cantidad
      */
-    public void addQuantity(Integer quantity) {
+    public void addQuantity(final Integer quantity) {
         setQuantity(getQuantity() + quantity);
     }
 
@@ -114,7 +114,7 @@ public class LendingDetail {
      * 
      * @param book el libro
      */
-    public void setBook(Book book) {
+    public void setBook(final Book book) {
         this.book = book;
     }
 
@@ -124,7 +124,7 @@ public class LendingDetail {
      * @param isbn es el isbn del libro
      * @return true si lo tiene
      */
-    public boolean hasIsbn(String isbn) {
+    public boolean hasIsbn(final String isbn) {
         return book.hasIsbn(isbn);
     }
 

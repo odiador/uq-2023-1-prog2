@@ -21,7 +21,7 @@ public class Lending {
      * @param deliveryDate
      * @param code
      */
-    public Lending(LocalDate date, LocalDate deliveryDate, String code, Employer employer) {
+    public Lending(final LocalDate date, final LocalDate deliveryDate, final String code, final Employer employer) {
         this.date = date;
         this.deliveryDate = deliveryDate;
         this.code = code;
@@ -48,7 +48,7 @@ public class Lending {
      *
      * @param date la fecha
      */
-    public void setDate(LocalDate date) {
+    public void setDate(final LocalDate date) {
         this.date = date;
     }
 
@@ -60,7 +60,7 @@ public class Lending {
      */
     public Double getTotal() {
         Double total = 0d;
-        for (LendingDetail eachlendingDetail : getLendingDetailList()) {
+        for (final LendingDetail eachlendingDetail : getLendingDetailList()) {
             total += eachlendingDetail.getSubTotal();
         }
         return total;
@@ -80,7 +80,7 @@ public class Lending {
      *
      * @param deliveryDate la fecha de entrega
      */
-    public void setDeliveryDate(LocalDate deliveryDate) {
+    public void setDeliveryDate(final LocalDate deliveryDate) {
         this.deliveryDate = deliveryDate;
     }
 
@@ -98,7 +98,7 @@ public class Lending {
      *
      * @param code el código
      */
-    public void setCode(String code) {
+    public void setCode(final String code) {
         this.code = code;
     }
 
@@ -125,7 +125,7 @@ public class Lending {
      * 
      * @param employer es el empleado
      */
-    public void setEmployer(Employer employer) {
+    public void setEmployer(final Employer employer) {
         this.employer = employer;
     }
 
@@ -137,9 +137,9 @@ public class Lending {
      * @return el empleado, si no se encuentra se retorna un empleado sin atributos
      *         (inexistente)
      */
-    public Employer getEmployerByIsbn(String isbn) {
+    public Employer getEmployerByIsbn(final String isbn) {
         Employer employer = new Employer();
-        for (LendingDetail eachLendingDetail : getLendingDetailList()) {
+        for (final LendingDetail eachLendingDetail : getLendingDetailList()) {
             if (eachLendingDetail.hasIsbn(isbn)) {
                 employer = getEmployer();
             }
@@ -158,13 +158,13 @@ public class Lending {
      * @see {@link #isEnded()}
      *      <li>{@link #throwIfEnded()}
      */
-    public String addLendingDetail(String code, Double unitaryValue, Integer quantity, Book book)
+    public String addLendingDetail(final String code, final Double unitaryValue, final Integer quantity, final Book book)
             throws LibraryException {
         throwIfEnded();
-        LendingDetail lendingDetail = searchLendingDetail(book);
+        final LendingDetail lendingDetail = searchLendingDetail(book);
         String msg = "El detalle del préstamo ha sido añadido (" + code + ")";
         if (lendingDetail.getExists()) {
-            int index = getLendingDetailList().indexOf(lendingDetail);
+            final int index = getLendingDetailList().indexOf(lendingDetail);
             lendingDetail.addQuantity(quantity);
             getLendingDetailList().set(index, lendingDetail);
             msg = "El detalle del préstamo ya existe (" + code + "), por lo que se agregó una cantidad";
@@ -184,7 +184,7 @@ public class Lending {
      * @see {@link #isEnded()}
      *      <li>{@link #throwIfEnded()}
      */
-    public String removeLendingDetail(Book book) throws LibraryException {
+    public String removeLendingDetail(final Book book) throws LibraryException {
         throwIfEnded();
         if (validateLendingDetail(book)) {
             throw new LibraryException("El detalle del préstamo no existe (" + code + ")");
@@ -198,11 +198,11 @@ public class Lending {
             throw new LibraryException("El detalle de préstamo no puede ser cambiado");
     }
 
-    public boolean validateLendingDetail(Book book) {
+    public boolean validateLendingDetail(final Book book) {
         return searchLendingDetail(book).getExists();
     }
 
-    public LendingDetail searchLendingDetail(Book book) {
+    public LendingDetail searchLendingDetail(final Book book) {
         return getLendingDetailList().stream().filter(lendingDetail -> lendingDetail.hasIsbn(book.getIsbn()))
                 .findFirst()
                 .orElse(new LendingDetail());

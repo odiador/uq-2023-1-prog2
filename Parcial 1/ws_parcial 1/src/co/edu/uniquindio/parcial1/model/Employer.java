@@ -16,7 +16,7 @@ public class Employer {
      * @param salary
      * @param appointment
      */
-    public Employer(String name, Double salary, String appointment) {
+    public Employer(final String name, final Double salary, final String appointment) {
         this.name = name;
         this.salary = salary;
         this.appointment = appointment;
@@ -52,7 +52,7 @@ public class Employer {
      * 
      * @param name el nombre
      */
-    public void setName(String name) {
+    public void setName(final String name) {
         this.name = name;
     }
 
@@ -70,7 +70,7 @@ public class Employer {
      * 
      * @param salary el salario
      */
-    public void setSalary(Double salary) {
+    public void setSalary(final Double salary) {
         this.salary = salary;
     }
 
@@ -98,7 +98,7 @@ public class Employer {
      * 
      * @param appointment el cargo
      */
-    public void setAppointment(String appointment) {
+    public void setAppointment(final String appointment) {
         this.appointment = appointment;
     }
 
@@ -117,14 +117,14 @@ public class Employer {
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if (this == obj)
             return true;
         if (obj == null)
             return false;
         if (getClass() != obj.getClass())
             return false;
-        Employer other = (Employer) obj;
+        final Employer other = (Employer) obj;
         if (name == null) {
             if (other.name != null)
                 return false;

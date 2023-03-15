@@ -13,7 +13,7 @@ public class Book {
      * @param title
      * @param author
      */
-    public Book(String isbn, String title, String author) {
+    public Book(final String isbn, final String title, final String author) {
         this.isbn = isbn;
         this.title = title;
         this.author = author;
@@ -40,7 +40,7 @@ public class Book {
      * 
      * @param isbn el ISBN
      */
-    public void setIsbn(String isbn) {
+    public void setIsbn(final String isbn) {
         this.isbn = isbn;
     }
 
@@ -58,7 +58,7 @@ public class Book {
      * 
      * @param title el título
      */
-    public void setTitle(String title) {
+    public void setTitle(final String title) {
         this.title = title;
     }
 
@@ -76,7 +76,7 @@ public class Book {
      * 
      * @param author el nombre del autor
      */
-    public void setAuthor(String author) {
+    public void setAuthor(final String author) {
         this.author = author;
     }
 
@@ -86,7 +86,7 @@ public class Book {
      * @param isbn es el isbn del libro
      * @return true si tiene el mismo isbn
      */
-    public boolean hasIsbn(String isbn) {
+    public boolean hasIsbn(final String isbn) {
         return getIsbn().equals(isbn);
     }
 

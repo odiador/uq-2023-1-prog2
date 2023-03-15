@@ -22,7 +22,7 @@ public class Student {
      * @param state    el estado del estudiante
      * @param id       la identificación del estudiante
      */
-    public Student(String name, String lastName, Integer age, String program, String state, String id) {
+    public Student(final String name, final String lastName, final Integer age, final String program, final String state, final String id) {
         this.name = name;
         this.lastName = lastName;
         this.age = age;
@@ -60,7 +60,7 @@ public class Student {
      * 
      * @param name el nombre
      */
-    public void setName(String name) {
+    public void setName(final String name) {
         this.name = name;
     }
 
@@ -78,7 +78,7 @@ public class Student {
      * 
      * @param lastName el apellido
      */
-    public void setLastName(String lastName) {
+    public void setLastName(final String lastName) {
         this.lastName = lastName;
     }
 
@@ -96,7 +96,7 @@ public class Student {
      * 
      * @param age la edad
      */
-    public void setAge(Integer age) {
+    public void setAge(final Integer age) {
         this.age = age;
     }
 
@@ -114,7 +114,7 @@ public class Student {
      * 
      * @param program el programa
      */
-    public void setProgram(String program) {
+    public void setProgram(final String program) {
         this.program = program;
     }
 
@@ -132,7 +132,7 @@ public class Student {
      * 
      * @param state el estado
      */
-    public void setState(String state) {
+    public void setState(final String state) {
         this.state = state;
     }
 
@@ -150,7 +150,7 @@ public class Student {
      * 
      * @param id la identificación
      */
-    public void setId(String id) {
+    public void setId(final String id) {
         this.id = id;
     }
 }
