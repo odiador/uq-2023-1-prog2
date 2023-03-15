@@ -8,6 +8,7 @@ public class Employer {
     private Double salary;
     private String appointment;
     private final List<Lending> lendingList = new ArrayList<Lending>();
+    private Integer aniosExperiencia;
 
     /**
      * Es el constructor del empleado
@@ -16,10 +17,11 @@ public class Employer {
      * @param salary
      * @param appointment
      */
-    public Employer(final String name, final Double salary, final String appointment) {
+    public Employer(final String name, final Double salary, final String appointment, Integer aniosExperiencia) {
         this.name = name;
         this.salary = salary;
         this.appointment = appointment;
+        this.aniosExperiencia = aniosExperiencia;
     }
 
     /**
@@ -100,6 +102,24 @@ public class Employer {
      */
     public void setAppointment(final String appointment) {
         this.appointment = appointment;
+    }
+
+    /**
+     * Obtiene los años de experiencia del empleado
+     * 
+     * @return los años de experiencia
+     */
+    public Integer getAniosExperiencia() {
+        return aniosExperiencia;
+    }
+
+    /**
+     * Cambia los años de experiencia del empleado
+     * 
+     * @param aniosExperiencia son los años de experiencia
+     */
+    public void setAniosExperiencia(Integer aniosExperiencia) {
+        this.aniosExperiencia = aniosExperiencia;
     }
 
     @Override
