@@ -187,15 +187,17 @@ public class Library {
 	 * @return El empleado ha sido agregado ({@code name})
 	 * @throws LibraryException
 	 */
-	public String addEmployer(final String name, final Double salary, final String appointment) throws LibraryException {
+	public String addEmployer(final String name, final Double salary, final String appointment,
+			final Integer aniosExperiencia) throws LibraryException {
 		if (validateEmployer(name)) {
 			throw new LibraryException("El empleado ya existe (" + name + ")");
 		}
-		getEmployerList().add(new Employer(name, salary, appointment));
+		getEmployerList().add(new Employer(name, salary, appointment, aniosExperiencia));
 		return "El empleado ha sido agregado (" + name + ")";
 	}
 
-	public String addLending(final LocalDate date, final LocalDate deliveryDate, final String code, final Employer employer)
+	public String addLending(final LocalDate date, final LocalDate deliveryDate, final String code,
+			final Employer employer)
 			throws LibraryException {
 		if (validateLending(code))
 			throw new LibraryException("El préstamo ya existe (" + code + ")");
@@ -239,7 +241,8 @@ public class Library {
 		return employer;
 	}
 
-	public String addLendingDetail(final String lendingCode, final Double unitaryValue, final Integer quantity, final Book book)
+	public String addLendingDetail(final String lendingCode, final Double unitaryValue, final Integer quantity,
+			final Book book)
 			throws LibraryException {
 		final Lending lending = searchLending(lendingCode);
 		if (!lending.getExists()) {
