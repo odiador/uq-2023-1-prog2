@@ -136,6 +136,39 @@ public class Library {
 				.orElse(new Employer());
 	}
 
+	public Employer searchEmployerOrThrow(String name) throws LibraryException {
+		Employer employer = searchEmployer(name);
+		if (!employer.getExists()) {
+			throw new LibraryException("No se encontró el empleado con nombre " + name);
+		}
+		return employer;
+	}
+
+	public String addBook(String title, String author, String isbn) throws LibraryException {
+		if (validateBook(isbn)) {
+			throw new LibraryException("El libro no fue encontrado  (" + isbn + ")");
+		}
+		getBookList().add(new Book(isbn, title, author));
+		return "El libro ha sido agregado (" + isbn + ")";
+	}
+
+	public Book searchBookOrThrow(String isbn) throws LibraryException {
+		Book book = searchBook(isbn);
+		if (!book.getExists()) {
+			throw new LibraryException("No se encontró el empleado con nombre " + name);
+		}
+		return book;
+	}
+
+	public Book searchBook(String isbn) {
+		return getBookList().stream().filter(book -> book.getIsbn().equals(isbn)).findFirst()
+				.orElse(new Book());
+	}
+
+	public boolean validateBook(String isbn) {
+		return searchBook(isbn).getExists();
+	}
+
 	/**
 	 * Valida si un empleado existe o no a partir de su nombre
 	 * 
@@ -156,7 +189,7 @@ public class Library {
 	 */
 	public String addEmployer(String name, Double salary, String appointment) throws LibraryException {
 		if (validateEmployer(name)) {
-			throw new LibraryException("El empleado ya existe");
+			throw new LibraryException("El empleado ya existe (" + name + ")");
 		}
 		getEmployerList().add(new Employer(name, salary, appointment));
 		return "El empleado ha sido agregado (" + name + ")";
@@ -164,7 +197,7 @@ public class Library {
 
 	public String addLending(LocalDate date, LocalDate deliveryDate, String code, Employer employer)
 			throws LibraryException {
-		if (!validateLending(code))
+		if (validateLending(code))
 			throw new LibraryException("El préstamo ya existe (" + code + ")");
 
 		getLendingList().add(new Lending(date, deliveryDate, code, employer));
@@ -176,7 +209,7 @@ public class Library {
 	}
 
 	public Lending searchLending(String code) {
-		return getLendingList().stream().filter(lending -> lending.getCode().equals(name)).findFirst()
+		return getLendingList().stream().filter(lending -> lending.getCode().equals(code)).findFirst()
 				.orElse(new Lending());
 	}
 
@@ -191,7 +224,7 @@ public class Library {
 	 *                          empleado que ha realizado un préstamo de un Libro
 	 *                          dado el ISBN del libro."
 	 */
-	public Employer getEmployerByISBNOfLendings(String isbn) throws LibraryException {
+	public Employer getEmployerByISBNBookofLending(String isbn) throws LibraryException {
 		Employer employer = new Employer();
 		for (Lending eachlending : getLendingList()) {
 			employer = eachlending.getEmployerByIsbn(isbn);
@@ -204,5 +237,15 @@ public class Library {
 		}
 
 		return employer;
+	}
+
+	public String addLendingDetail(String code, Double unitaryValue, Integer quantity, Book book)
+			throws LibraryException {
+		Lending lending = searchLending(code);
+		if (!lending.getExists()) {
+			throw new LibraryException("El préstamo no se ha encontrado (" + code + ")");
+		}
+		lending.addLendingDetail(code, unitaryValue, quantity, book);
+		return "El detalle del préstamo ha sido agregado (" + code + ")";
 	}
 }
