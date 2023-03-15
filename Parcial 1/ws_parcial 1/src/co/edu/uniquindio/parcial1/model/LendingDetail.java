@@ -92,6 +92,15 @@ public class LendingDetail {
     }
 
     /**
+     * Agrega una cantidad de libros
+     * 
+     * @param quantity es la cantidad
+     */
+    public void addQuantity(Integer quantity) {
+        setQuantity(getQuantity() + quantity);
+    }
+
+    /**
      * Obtiene el libro del detalle de prestamo
      * 
      * @return el libro
