@@ -18,8 +18,34 @@ public class Test1 {
             System.out.println(e.getMessage());
         }
 
-        biblioteca.addLending(LocalDate.now(), LocalDate.now().plusWeeks(1), "1000",
-                new Employer("Pablo", 20000d, ""));
+        try {
+            System.out.println(biblioteca.addLending(LocalDate.now(), LocalDate.now().plusWeeks(1), "1000",
+                    biblioteca.searchEmployerOrThrow("Pablo")));
+        } catch (LibraryException e) {
+            System.out.println(e.getMessage());
+        }
+        try {
+            System.out.println(biblioteca.addLending(LocalDate.now(), LocalDate.now().plusWeeks(1), "1001",
+                    biblioteca.searchEmployerOrThrow("Antonio")));
+        } catch (LibraryException e) {
+            System.out.println(e.getMessage());
+        }
+        try {
+            System.out.println(biblioteca.addLending(LocalDate.now(), LocalDate.now().plusWeeks(1), "1000",
+                    biblioteca.searchEmployerOrThrow("Pablo")));
+        } catch (LibraryException e) {
+            System.out.println(e.getMessage());
+        }
+        try {
+            System.out.println(biblioteca.addLendingDetail("1000", 10000d, 3, new Book("ISBN", "name", "ozuna")));
+        } catch (LibraryException e) {
+            System.out.println(e.getMessage());
+        }
+        try {
+            System.out.println(biblioteca.addLendingDetail("1000", 10000d, 3, new Book("ibn", "name", "ozuna")));
+        } catch (LibraryException e) {
+            System.out.println(e.getMessage());
+        }
         try {
             Employer employer = biblioteca.getEmployerByISBNOfLendings("ISBN");
         } catch (LibraryException e) {
