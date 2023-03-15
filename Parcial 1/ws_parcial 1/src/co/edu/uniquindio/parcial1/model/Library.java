@@ -239,13 +239,13 @@ public class Library {
 		return employer;
 	}
 
-	public String addLendingDetail(String code, Double unitaryValue, Integer quantity, Book book)
+	public String addLendingDetail(String lendingCode, Double unitaryValue, Integer quantity, Book book)
 			throws LibraryException {
-		Lending lending = searchLending(code);
+		Lending lending = searchLending(lendingCode);
 		if (!lending.getExists()) {
-			throw new LibraryException("El préstamo no se ha encontrado (" + code + ")");
+			throw new LibraryException("El préstamo no se ha encontrado (" + lendingCode + ")");
 		}
-		lending.addLendingDetail(code, unitaryValue, quantity, book);
-		return "El detalle del préstamo ha sido agregado (" + code + ")";
+		lending.addLendingDetail(lendingCode, unitaryValue, quantity, book);
+		return "El detalle del préstamo ha sido agregado (" + lendingCode + ")";
 	}
 }
