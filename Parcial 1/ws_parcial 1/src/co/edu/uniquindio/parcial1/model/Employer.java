@@ -25,7 +25,7 @@ public class Employer {
     }
 
     /**
-     * Es el constructor del empleado
+     * Es el constructor del empleado sin parámetros
      */
     public Employer() {
 
