@@ -148,28 +148,29 @@ public class Lending {
     }
 
     /**
-     * Agrega un detalle de préstamo al préstamo, muestra un error en caso de que ya
-     * esté terminado el préstamo o si ya exista el código
      * 
      * @param code         es el codigo del detalle del préstamo
      * @param unitaryValue es el valor unitario del detalle del préstamo
      * @param quantity     es la cantidad del detalle del préstamo
      * @param book         es el libro del detalle del préstamo
-     * @return El detalle del préstamo ha sido añadido ({@code code})
-     * @throws LibraryException En caso de que ya exista
-     *                          <li>En caso de que ya haya terminado el préstamo
+     * @return 2 mensajes dependiendo de que si el detalle existe o no
+     * @throws LibraryException En caso de que ya haya terminado el préstamo
      * @see {@link #isEnded()}
      *      <li>{@link #throwIfEnded()}
-     * 
      */
     public String addLendingDetail(String code, Double unitaryValue, Integer quantity, Book book)
             throws LibraryException {
         throwIfEnded();
-        if (validateLendingDetail(book)) {
-            throw new LibraryException("El detalle del préstamo ya existe (" + code + ")");
+        LendingDetail lendingDetail = searchLendingDetail(book);
+        String msg = "El detalle del préstamo ha sido añadido (" + code + ")";
+        if (lendingDetail.getExists()) {
+            int index = getLendingDetailList().indexOf(lendingDetail);
+            lendingDetail.addQuantity(quantity);
+            getLendingDetailList().set(index, lendingDetail);
+            msg = "El detalle del préstamo ya existe (" + code + "), por lo que se agregó una cantidad";
         }
         getLendingDetailList().add(new LendingDetail(code, unitaryValue, quantity, book));
-        return "El detalle del préstamo ha sido añadido (" + code + ")";
+        return msg;
     }
 
     /**
