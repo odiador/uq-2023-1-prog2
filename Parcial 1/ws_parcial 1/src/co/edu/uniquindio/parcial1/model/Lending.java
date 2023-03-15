@@ -165,7 +165,7 @@ public class Lending {
     public String addLendingDetail(String code, Double unitaryValue, Integer quantity, Book book)
             throws LibraryException {
         throwIfEnded();
-        if (validateLendingDetail(code)) {
+        if (validateLendingDetail(book)) {
             throw new LibraryException("El detalle del préstamo ya existe (" + code + ")");
         }
         getLendingDetailList().add(new LendingDetail(code, unitaryValue, quantity, book));
@@ -183,12 +183,12 @@ public class Lending {
      * @see {@link #isEnded()}
      *      <li>{@link #throwIfEnded()}
      */
-    public String removeLendingDetail(String code) throws LibraryException {
+    public String removeLendingDetail(Book book) throws LibraryException {
         throwIfEnded();
-        if (validateLendingDetail(code)) {
+        if (validateLendingDetail(book)) {
             throw new LibraryException("El detalle del préstamo no existe (" + code + ")");
         }
-        getLendingDetailList().remove(searchLendingDetail(code));
+        getLendingDetailList().remove(searchLendingDetail(book));
         return "El detalle del préstamo ha sido eliminado (" + code + ")";
     }
 
@@ -197,12 +197,13 @@ public class Lending {
             throw new LibraryException("El detalle de préstamo no puede ser cambiado");
     }
 
-    public boolean validateLendingDetail(String code) {
-        return searchLendingDetail(code).getExists();
+    public boolean validateLendingDetail(Book book) {
+        return searchLendingDetail(book).getExists();
     }
 
-    public LendingDetail searchLendingDetail(String code) {
-        return getLendingDetailList().stream().filter(lendingDetail -> lendingDetail.getCode().equals(code)).findFirst()
+    public LendingDetail searchLendingDetail(Book book) {
+        return getLendingDetailList().stream().filter(lendingDetail -> lendingDetail.hasIsbn(book.getIsbn()))
+                .findFirst()
                 .orElse(new LendingDetail());
     }
 
@@ -232,6 +233,7 @@ public class Lending {
      * @return true si ninguna es null
      */
     public boolean getExists() {
-        return getCode() != null && getDate() != null && getDeliveryDate() != null && getEmployer() != null;
+        return getCode() != null && getDate() != null && getDeliveryDate() != null && getEmployer() != null
+                && getEmployer().getExists();
     }
 }
