@@ -37,6 +37,21 @@ public class Test1 {
             System.out.println(e.getMessage());
         }
         try {
+            System.out.println(biblioteca.addBook("Santiago el esquizofrénico", "Amador", "I0001"));
+        } catch (LibraryException e) {
+            System.out.println(e.getMessage());
+        }
+        try {
+            System.out.println(biblioteca.addBook("Santiago el esquizofrénico", "Amador", "I0001"));
+        } catch (LibraryException e) {
+            System.out.println(e.getMessage());
+        }
+        try {
+            System.out.println(biblioteca.addBook("Santiago el esquizofrénico", "Amador", "I0002"));
+        } catch (LibraryException e) {
+            System.out.println(e.getMessage());
+        }
+        try {
             System.out.println(biblioteca.addLendingDetail("1000", 10000d, 3, new Book("ISBN", "name", "ozuna")));
         } catch (LibraryException e) {
             System.out.println(e.getMessage());
@@ -47,7 +62,8 @@ public class Test1 {
             System.out.println(e.getMessage());
         }
         try {
-            Employer employer = biblioteca.getEmployerByISBNOfLendings("ISBN");
+            Employer empleadeishon = biblioteca.getEmployerByISBNBookofLending("ISBN2");
+            System.out.println("si sirvio");
         } catch (LibraryException e) {
             System.out.println(e.getMessage());
         }
