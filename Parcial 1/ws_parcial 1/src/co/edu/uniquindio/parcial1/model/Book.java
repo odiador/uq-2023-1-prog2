@@ -90,6 +90,12 @@ public class Book {
         return getIsbn().equals(isbn);
     }
 
+    /**
+     * Determina si el libro existe o no dependiendo de que su autor, isbn y titulo
+     * no sean null
+     * 
+     * @return true si ninguno es null
+     */
     public boolean getExists() {
         return getAuthor() != null && getIsbn() != null && getTitle() != null;
     }
