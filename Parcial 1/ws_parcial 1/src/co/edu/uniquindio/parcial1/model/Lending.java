@@ -285,5 +285,5 @@ public class Lending {
         return "Lending [date=" + date + ", deliveryDate=" + deliveryDate + ", code=" + code + ", employer=" + employer
                 + ", isEnded=" + isEnded + ", lendingDetailList=" + lendingDetailList + "]";
     }
-    
+
 }
