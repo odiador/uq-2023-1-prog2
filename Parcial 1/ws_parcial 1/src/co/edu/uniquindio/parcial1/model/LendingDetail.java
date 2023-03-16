@@ -153,15 +153,6 @@ public class LendingDetail {
     }
 
     @Override
-    public String toString() {
-        return getExists()
-                ? "LendingDetail [code=" + code + ", unitaryValue=" + unitaryValue + ", quantity=" + quantity
-                        + ", book="
-                        + book + "]"
-                : "LendingDetail [Doesn't exists]";
-    }
-
-    @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
@@ -184,6 +175,15 @@ public class LendingDetail {
         } else if (!code.equals(other.code))
             return false;
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return getExists()
+                ? "LendingDetail [code=" + code + ", unitaryValue=" + unitaryValue + ", quantity=" + quantity
+                        + ", book="
+                        + book + "]"
+                : "LendingDetail [Doesn't exists]";
     }
 
 }
