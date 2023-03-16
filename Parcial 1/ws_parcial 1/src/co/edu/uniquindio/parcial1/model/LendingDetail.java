@@ -154,8 +154,11 @@ public class LendingDetail {
 
     @Override
     public String toString() {
-        return "LendingDetail [code=" + code + ", unitaryValue=" + unitaryValue + ", quantity=" + quantity + ", book="
-                + book + "]";
+        return getExists()
+                ? "LendingDetail [code=" + code + ", unitaryValue=" + unitaryValue + ", quantity=" + quantity
+                        + ", book="
+                        + book + "]"
+                : "LendingDetail [Doesn't exists]";
     }
 
     @Override
