@@ -158,7 +158,8 @@ public class Lending {
      * @see {@link #isEnded()}
      *      <li>{@link #throwIfEnded()}
      */
-    public String addLendingDetail(final String code, final Double unitaryValue, final Integer quantity, final Book book)
+    public String addLendingDetail(final String code, final Double unitaryValue, final Integer quantity,
+            final Book book)
             throws LibraryException {
         throwIfEnded();
         final LendingDetail lendingDetail = searchLendingDetail(book);
@@ -236,5 +237,21 @@ public class Lending {
     public boolean getExists() {
         return getCode() != null && getDate() != null && getDeliveryDate() != null && getEmployer() != null
                 && getEmployer().getExists();
+    }
+
+    /**
+     * Determina en agún detalle del préstamo se tiene la cantidad entre 2 valores
+     * 
+     * @param min es el valor mínimo
+     * @param max es el valor máximo
+     * @return true si está entre esos 2 valores
+     */
+    public boolean lendingHasQuantityBetween(Integer min, Integer max) {
+        for (LendingDetail lendingDetail : lendingDetailList) {
+            if (lendingDetail.hasQuantityBetween(min, max)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
