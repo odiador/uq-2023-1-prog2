@@ -8,12 +8,17 @@ public class Test1 {
     public static void main(String[] args) {
         Library biblioteca = new Library("Biblioteca UQ", "Cra 23 # 23 - 50", "1232313");
         try {
-            System.out.println(biblioteca.addEmployer("Pablo", 20000d, ""));
+            System.out.println(biblioteca.addEmployer("Pablo", 20000d, "", 0));
         } catch (LibraryException e) {
             System.out.println(e.getMessage());
         }
         try {
-            System.out.println(biblioteca.addEmployer("Pablo", 20000d, ""));
+            System.out.println(biblioteca.addEmployer("Pablo", 20000d, "", 0));
+        } catch (LibraryException e) {
+            System.out.println(e.getMessage());
+        }
+        try {
+            System.out.println(biblioteca.addEmployer("Simón", 20000d, "", 1));
         } catch (LibraryException e) {
             System.out.println(e.getMessage());
         }
@@ -37,7 +42,7 @@ public class Test1 {
             System.out.println(e.getMessage());
         }
         try {
-            System.out.println(biblioteca.addBook("Santiago el esquizofrénico", "Amador", "I0001"));
+            System.out.println(biblioteca.addBook("Santiago el esquizofrénico", "Ozuna", "I0001"));
         } catch (LibraryException e) {
             System.out.println(e.getMessage());
         }
@@ -52,7 +57,21 @@ public class Test1 {
             System.out.println(e.getMessage());
         }
         try {
-            System.out.println(biblioteca.addLendingDetail("1000", 10000d, 3, new Book("ISBN", "name", "ozuna")));
+            Book libroDeOzuna = biblioteca.searchBookOrThrow("I0001");
+            biblioteca.addLendingDetail("1000", 20000d, 3, libroDeOzuna);
+        } catch (LibraryException e) {
+            System.out.println(e.getMessage());
+        }
+        try {
+            Book libroDeOzuna = biblioteca.searchBookOrThrow("I0001");
+            biblioteca.addLendingDetail("1000", 20000d, 3, libroDeOzuna);
+        } catch (LibraryException e) {
+            System.out.println(e.getMessage());
+        }
+        try {
+
+            Book libroDeOzuna = biblioteca.searchBookOrThrow("I0001");
+            System.out.println(biblioteca.addLendingDetail("1000", 10000d, 3, libroDeOzuna));
         } catch (LibraryException e) {
             System.out.println(e.getMessage());
         }
@@ -62,8 +81,8 @@ public class Test1 {
             System.out.println(e.getMessage());
         }
         try {
-            Employer empleadeishon = biblioteca.getEmployerByISBNBookofLending("ISBN2");
-            System.out.println("si sirvio");
+            Employer empleadeishon = biblioteca.getEmployerByISBNBookofLending("I0002");
+            System.out.println("El empleado fue obtenido epicamente: " + empleadeishon.toString());
         } catch (LibraryException e) {
             System.out.println(e.getMessage());
         }
