@@ -128,8 +128,28 @@ public class LendingDetail {
         return book.hasIsbn(isbn);
     }
 
+    /**
+     * Determina si el detalle del préstamo existe o no dependiendo de que su
+     * cantidad
+     * {@code quantity}, código {@code code}, valor unitario {@code unitaryValue} y
+     * libro {@code book} existan y no sean null
+     * 
+     * @return true si existe
+     */
     public boolean getExists() {
-        return getCode() != null && getUnitaryValue() != null && getQuantity() != null && getBook() != null;
+        return getCode() != null && getUnitaryValue() != null && getQuantity() != null && getBook() != null
+                && getBook().getExists();
+    }
+
+    /**
+     * Determina si el detalle del préstamo tiene la cantidad entre 2 valores
+     * 
+     * @param min es el valor mínimo
+     * @param max es el valor máximo
+     * @return
+     */
+    public boolean hasQuantityBetween(Integer min, Integer max) {
+        return getQuantity() >= min && getQuantity() <= max;
     }
 
 }
