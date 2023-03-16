@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Student {
+
     private String name;
     private String lastName;
     private Integer age;
@@ -22,7 +23,8 @@ public class Student {
      * @param state    el estado del estudiante
      * @param id       la identificación del estudiante
      */
-    public Student(final String name, final String lastName, final Integer age, final String program, final String state, final String id) {
+    public Student(final String name, final String lastName, final Integer age, final String program,
+            final String state, final String id) {
         this.name = name;
         this.lastName = lastName;
         this.age = age;
@@ -44,6 +46,64 @@ public class Student {
      */
     public List<Lending> getLendingList() {
         return lendingList;
+    }
+
+    /**
+     * Busca un préstamo a partir de su código {@code code}, si no se encuentra se
+     * retorna un préstamo sin parámetros (que no existe)
+     * 
+     * @param code es el código del préstamo
+     * @return el préstamo
+     */
+    public Lending searchLending(final String code) {
+        return getLendingList().stream().filter(lending -> lending.hasCode(code)).findFirst().orElse(new Lending());
+    }
+
+    /**
+     * Busca un préstamo a partir de su código {@code code}
+     * 
+     * @param code es el código del préstamo
+     * @return el préstamo
+     * @throws LibraryException si no se encuentra el préstamo: "El préstamo no fue
+     *                          encontrado ( + {@code code} + )"
+     * @see {@link #searchLending(String)}
+     */
+    public Lending searchLendingOrThrow(final String code) throws LibraryException {
+        final Lending lending = searchLending(code);
+        if (!lending.getExists()) {
+            throw new LibraryException("El préstamo no fue encontrado (" + code + ")");
+        }
+        return lending;
+    }
+
+    /**
+     * Valida si un préstamo existe o no a partir de su código {@code code}
+     * 
+     * @param code es el código del préstamo
+     * @return true si se encuentra
+     */
+    public boolean validateLending(final String code) {
+        return searchLending(code).getExists();
+    }
+
+    /**
+     * Agrega un préstamo ya terminado a la lista de préstamos del estudiante
+     * 
+     * @param lending
+     * @return
+     * @throws LibraryException
+     */
+    public String addLending(final Lending lending)
+            throws LibraryException {
+        final String code = lending.getCode();
+        if (validateLending(code)) {
+            throw new LibraryException("El préstamo ya existe (" + code + ")");
+        }
+        if (!lending.isEnded()) {
+            throw new LibraryException("El préstamo no ha sido términado (" + code + ")");
+        }
+        getLendingList().add(lending);
+        return "Se agregó un nuevo préstamo (" + code + ")";
     }
 
     /**
