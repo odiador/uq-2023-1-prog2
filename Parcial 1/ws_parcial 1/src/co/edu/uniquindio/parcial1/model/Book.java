@@ -2,7 +2,7 @@ package co.edu.uniquindio.parcial1.model;
 
 public class Book {
 
-    private String isbn;
+    private final String isbn;
     private String title;
     private String author;
 
@@ -24,6 +24,7 @@ public class Book {
      * Es el constructor del libro sin parámetros
      */
     public Book() {
+        this.isbn = null;
     }
 
     /**
@@ -33,15 +34,6 @@ public class Book {
      */
     public String getIsbn() {
         return isbn;
-    }
-
-    /**
-     * Cambia el ISBN del libro
-     * 
-     * @param isbn el ISBN
-     */
-    public void setIsbn(final String isbn) {
-        this.isbn = isbn;
     }
 
     /**
