@@ -21,7 +21,7 @@ public class Employer {
      * @param aniosExperiencia
      */
     public Employer(final String id, final String name, final Double salary, final String appointment,
-            Integer aniosExperiencia) {
+            final Integer aniosExperiencia) {
         this.id = id;
         this.name = name;
         this.salary = salary;
@@ -59,7 +59,7 @@ public class Employer {
      * 
      * @param id es la identificación
      */
-    public void setId(String id) {
+    public void setId(final String id) {
         this.id = id;
     }
 
@@ -142,7 +142,7 @@ public class Employer {
      * 
      * @param aniosExperiencia son los años de experiencia
      */
-    public void setAniosExperiencia(Integer aniosExperiencia) {
+    public void setAniosExperiencia(final Integer aniosExperiencia) {
         this.aniosExperiencia = aniosExperiencia;
     }
 
