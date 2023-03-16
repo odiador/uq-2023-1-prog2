@@ -241,6 +241,17 @@ public class Library {
 		return employer;
 	}
 
+	/**
+	 * Agrega un detalle de préstamo, a partir del código del préstamo, muestra un
+	 * error si el préstamo
+	 * 
+	 * @param lendingCode  es el código del préstamo
+	 * @param unitaryValue
+	 * @param quantity
+	 * @param book
+	 * @return
+	 * @throws LibraryException
+	 */
 	public String addLendingDetail(final String lendingCode, final Double unitaryValue, final Integer quantity,
 			final Book book)
 			throws LibraryException {
@@ -248,7 +259,6 @@ public class Library {
 		if (!lending.getExists()) {
 			throw new LibraryException("El préstamo no se ha encontrado (" + lendingCode + ")");
 		}
-		lending.addLendingDetail(lendingCode, unitaryValue, quantity, book);
-		return "El detalle del préstamo ha sido agregado (" + lendingCode + ")";
+		return lending.addLendingDetail(lendingCode, unitaryValue, quantity, book);
 	}
 }
