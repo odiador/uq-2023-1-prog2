@@ -9,15 +9,20 @@ public class Employer {
     private String appointment;
     private final List<Lending> lendingList = new ArrayList<Lending>();
     private Integer aniosExperiencia;
+    private String id;
 
     /**
      * Es el constructor del empleado
      * 
+     * @param id
      * @param name
      * @param salary
      * @param appointment
+     * @param aniosExperiencia
      */
-    public Employer(final String name, final Double salary, final String appointment, Integer aniosExperiencia) {
+    public Employer(final String id, final String name, final Double salary, final String appointment,
+            Integer aniosExperiencia) {
+        this.id = id;
         this.name = name;
         this.salary = salary;
         this.appointment = appointment;
@@ -38,6 +43,24 @@ public class Employer {
      */
     public List<Lending> getLendingList() {
         return lendingList;
+    }
+
+    /**
+     * Obtiene la identificación del empleado
+     * 
+     * @return la identificación
+     */
+    public String getId() {
+        return id;
+    }
+
+    /**
+     * Cambia la identificación del empleado
+     * 
+     * @param id es la identificación
+     */
+    public void setId(String id) {
+        this.id = id;
     }
 
     /**
@@ -86,13 +109,14 @@ public class Employer {
     }
 
     /**
-     * Determina si el empleado existe o no dependiendo de que su nombre, cargo y
-     * salario no sea null
+     * Determina si el empleado existe o no dependiendo de que su identificación,
+     * nombre, cargo, salario no sea null
      * 
      * @return true si existe
      */
     public boolean getExists() {
-        return getName() != null && getAppointment() != null && getSalary() != null;
+        return getId() != null && getName() != null && getAppointment() != null && getSalary() != null
+                && getAniosExperiencia() != null;
     }
 
     /**
@@ -123,12 +147,6 @@ public class Employer {
     }
 
     @Override
-    public String toString() {
-        return "Employer [name=" + name + ", salary=" + salary + ", appointment=" + appointment + ", lendingList="
-                + lendingList + "]";
-    }
-
-    @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
@@ -151,5 +169,11 @@ public class Employer {
         } else if (!name.equals(other.name))
             return false;
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Employer [name=" + name + ", salary=" + salary + ", appointment=" + appointment + ", lendingList="
+                + lendingList + ", aniosExperiencia=" + aniosExperiencia + ", id=" + id + "]";
     }
 }
