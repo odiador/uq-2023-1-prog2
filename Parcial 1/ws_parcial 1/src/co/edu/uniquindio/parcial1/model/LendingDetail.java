@@ -153,6 +153,12 @@ public class LendingDetail {
     }
 
     @Override
+    public String toString() {
+        return "LendingDetail [code=" + code + ", unitaryValue=" + unitaryValue + ", quantity=" + quantity + ", book="
+                + book + "]";
+    }
+
+    @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
