@@ -181,28 +181,30 @@ public class Library {
 
 	/**
 	 * 
+	 * @param id
 	 * @param name
 	 * @param salary
 	 * @param appointment
+	 * @param aniosExperiencia
 	 * @return El empleado ha sido agregado ({@code name})
 	 * @throws LibraryException
 	 */
-	public String addEmployer(final String name, final Double salary, final String appointment,
+	public String addEmployer(final String id, final String name, final Double salary, final String appointment,
 			final Integer aniosExperiencia) throws LibraryException {
 		if (validateEmployer(name)) {
 			throw new LibraryException("El empleado ya existe (" + name + ")");
 		}
-		getEmployerList().add(new Employer(name, salary, appointment, aniosExperiencia));
+		getEmployerList().add(new Employer(id, name, salary, appointment, aniosExperiencia));
 		return "El empleado ha sido agregado (" + name + ")";
 	}
 
 	public String addLending(final LocalDate date, final LocalDate deliveryDate, final String code,
-			final Employer employer)
+			final Employer employer, final Student student)
 			throws LibraryException {
 		if (validateLending(code))
 			throw new LibraryException("El préstamo ya existe (" + code + ")");
 
-		getLendingList().add(new Lending(date, deliveryDate, code, employer));
+		getLendingList().add(new Lending(date, deliveryDate, code, employer, student));
 		return "El préstamo ha sido agregado (" + code + ")";
 	}
 
