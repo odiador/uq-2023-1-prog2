@@ -282,8 +282,11 @@ public class Lending {
 
     @Override
     public String toString() {
-        return "Lending [date=" + date + ", deliveryDate=" + deliveryDate + ", code=" + code + ", employer=" + employer
-                + ", isEnded=" + isEnded + ", lendingDetailList=" + lendingDetailList + "]";
+        return getExists()
+                ? "Lending [date=" + date + ", deliveryDate=" + deliveryDate + ", code=" + code + ", employer="
+                        + employer
+                        + ", isEnded=" + isEnded + ", lendingDetailList=" + lendingDetailList + "]"
+                : "Lending [Doesn't exists]";
     }
 
 }
