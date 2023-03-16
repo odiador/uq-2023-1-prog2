@@ -127,6 +127,7 @@ public class Book {
 
     @Override
     public String toString() {
-        return "Book [isbn=" + isbn + ", title=" + title + ", author=" + author + "]";
+        return getExists() ? "Book [isbn=" + isbn + ", title=" + title + ", author=" + author + "]"
+                : "Book [Doesn't exists]";
     }
 }
