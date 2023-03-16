@@ -9,23 +9,27 @@ public class Lending {
     private LocalDate deliveryDate;
     private String code;
     private Employer employer;
+    private Student student;
 
-    private boolean isEnded = false;
     private final List<LendingDetail> lendingDetailList = new ArrayList<LendingDetail>();
+    private boolean isEnded = false;
 
     /**
      * Es el constructor de la clase prestamo
-     *
+     * 
      * @param date
-     * @param total2
      * @param deliveryDate
      * @param code
+     * @param employer
+     * @param student
      */
-    public Lending(final LocalDate date, final LocalDate deliveryDate, final String code, final Employer employer) {
+    public Lending(final LocalDate date, final LocalDate deliveryDate, final String code, final Employer employer,
+            final Student student) {
         this.date = date;
         this.deliveryDate = deliveryDate;
         this.code = code;
         this.employer = employer;
+        this.student = student;
     }
 
     /**
@@ -127,6 +131,24 @@ public class Lending {
      */
     public void setEmployer(final Employer employer) {
         this.employer = employer;
+    }
+
+    /**
+     * Obtiene el estudiante del préstamo
+     * 
+     * @return el estudiante
+     */
+    public Student getStudent() {
+        return student;
+    }
+
+    /**
+     * Cambia el estudiante del préstamo
+     * 
+     * @param student el estudiante
+     */
+    public void setStudent(Student student) {
+        this.student = student;
     }
 
     /**
@@ -280,12 +302,23 @@ public class Lending {
         return true;
     }
 
+    /**
+     * Determina si el préstamo tiene un código {@code code} especificado
+     * 
+     * @param code es el código a comparar
+     * @return true si lo tiene
+     */
+    public boolean hasCode(String code) {
+        return getCode().equals(code);
+    }
+
     @Override
     public String toString() {
         return getExists()
                 ? "Lending [date=" + date + ", deliveryDate=" + deliveryDate + ", code=" + code + ", employer="
                         + employer
-                        + ", isEnded=" + isEnded + ", lendingDetailList=" + lendingDetailList + "]"
+                        + ", student=" + student + ", isEnded=" + isEnded + ", lendingDetailList=" + lendingDetailList
+                        + "]"
                 : "Lending [Doesn't exists]";
     }
 
