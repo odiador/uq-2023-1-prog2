@@ -7,37 +7,72 @@ import co.edu.uniquindio.parcial1.model.*;
 public class Test1 {
     public static void main(String[] args) {
         Library biblioteca = new Library("Biblioteca UQ", "Cra 23 # 23 - 50", "1232313");
+        System.out.println("Intenta crear un empleado con identificación 0001:");
         try {
-            System.out.println(biblioteca.addEmployer("Pablo", 20000d, "", 0));
+            System.out.println(biblioteca.addEmployer("0001", "Pablo", 20000d, "", 0));
         } catch (LibraryException e) {
             System.out.println(e.getMessage());
         }
+        System.out.println("Intenta crear otro empleado con identificación 0001:");
         try {
-            System.out.println(biblioteca.addEmployer("Pablo", 20000d, "", 0));
+            System.out.println(biblioteca.addEmployer("0001", "Pablo", 20000d, "", 0));
         } catch (LibraryException e) {
             System.out.println(e.getMessage());
         }
+        System.out.println("Intenta crear otro empleado con identificación 0002:");
         try {
-            System.out.println(biblioteca.addEmployer("Simón", 20000d, "", 1));
+            System.out.println(biblioteca.addEmployer("0002", "Simón", 20000d, "", 1));
         } catch (LibraryException e) {
             System.out.println(e.getMessage());
         }
 
+        System.out.println("Intenta crear un estudiante con identificación 0001:");
+
+        try {
+
+            System.out.println(
+                    biblioteca.addStudent("Juan", "Amador", 17, "I. S.", "314231463", "tamo activo papi", "0001"));
+        } catch (LibraryException e) {
+            System.out.println(e.getMessage());
+        }
+
+        System.out.println("Intenta crear otro estudiante con identificación 0001:");
+
+        try {
+            System.out.println(
+                    biblioteca.addStudent("Juan", "Amador", 17, "I. S.", "314231463", "tamo activo papi", "0001"));
+        } catch (LibraryException e) {
+            System.out.println(e.getMessage());
+        }
+
+        System.out.println("Intenta crear otro estudiante con identificación 0002:");
+
+        try {
+            System.out.println(
+                    biblioteca.addStudent("Fabian", "Valencia", 17, "I. S.", "314231463", "tamo activo papi", "0002"));
+        } catch (LibraryException e) {
+            System.out.println(e.getMessage());
+        }
+
+        System.out.println(
+                "Intenta crear un préstamo con código 1000 al empleado con id 0001 y el estudiante con id 0002:");
         try {
             System.out.println(biblioteca.addLending(LocalDate.now(), LocalDate.now().plusWeeks(1), "1000",
-                    biblioteca.searchEmployerOrThrow("Pablo")));
+                    biblioteca.searchEmployerOrThrow("0001"), biblioteca.searchStudentOrThrow("0002")));
+        } catch (LibraryException e) {
+            System.out.println(e.getMessage());
+        }
+        System.out.println(
+                "Intenta crear otro préstamo con código 1000 al empleado con id 0001 y el estudiante con id 0002:");
+        try {
+            System.out.println(biblioteca.addLending(LocalDate.now(), LocalDate.now().plusWeeks(1), "1000",
+                    biblioteca.searchEmployerOrThrow("0001"), biblioteca.searchStudentOrThrow("0002")));
         } catch (LibraryException e) {
             System.out.println(e.getMessage());
         }
         try {
-            System.out.println(biblioteca.addLending(LocalDate.now(), LocalDate.now().plusWeeks(1), "1001",
-                    biblioteca.searchEmployerOrThrow("Antonio")));
-        } catch (LibraryException e) {
-            System.out.println(e.getMessage());
-        }
-        try {
             System.out.println(biblioteca.addLending(LocalDate.now(), LocalDate.now().plusWeeks(1), "1000",
-                    biblioteca.searchEmployerOrThrow("Pablo")));
+                    biblioteca.searchEmployerOrThrow("0001"), biblioteca.searchStudentOrThrow("0002")));
         } catch (LibraryException e) {
             System.out.println(e.getMessage());
         }
