@@ -125,14 +125,15 @@ public class Library {
 	}
 
 	/**
-	 * Busca un empleado a partir de su nombre, si no se encuentra se retorna un
+	 * Busca un empleado a partir de su identificación, si no se encuentra se
+	 * retorna un
 	 * empleado con constructor vacío
 	 * 
-	 * @param name es el nombre a buscar del empleado
+	 * @param id es la identificación a buscar del empleado
 	 * @return el empleado encontrado
 	 */
-	public Employer searchEmployer(final String name) {
-		return getEmployerList().stream().filter(employer -> employer.getName().equals(name)).findFirst()
+	public Employer searchEmployer(final String id) {
+		return getEmployerList().stream().filter(employer -> employer.getId().equals(id)).findFirst()
 				.orElse(new Employer());
 	}
 
@@ -172,11 +173,11 @@ public class Library {
 	/**
 	 * Valida si un empleado existe o no a partir de su nombre
 	 * 
-	 * @param name es el nombre
+	 * @param id es la identificación
 	 * @return true si se encuentra, false si no
 	 */
-	public boolean validateEmployer(final String name) {
-		return searchEmployer(name).getExists();
+	public boolean validateEmployer(final String id) {
+		return searchEmployer(id).getExists();
 	}
 
 	/**
@@ -191,11 +192,11 @@ public class Library {
 	 */
 	public String addEmployer(final String id, final String name, final Double salary, final String appointment,
 			final Integer aniosExperiencia) throws LibraryException {
-		if (validateEmployer(name)) {
-			throw new LibraryException("El empleado ya existe (" + name + ")");
+		if (validateEmployer(id)) {
+			throw new LibraryException("El empleado ya existe (" + name + ", " + id + ")");
 		}
 		getEmployerList().add(new Employer(id, name, salary, appointment, aniosExperiencia));
-		return "El empleado ha sido agregado (" + name + ")";
+		return "El empleado ha sido agregado (" + name + ", " + id + ")";
 	}
 
 	public String addLending(final LocalDate date, final LocalDate deliveryDate, final String code,
@@ -206,6 +207,18 @@ public class Library {
 
 		getLendingList().add(new Lending(date, deliveryDate, code, employer, student));
 		return "El préstamo ha sido agregado (" + code + ")";
+	}
+
+	public Student searchStudent(String id) {
+		return getStudentList().stream().filter(student -> student.hasId(id)).findFirst().orElse(new Student());
+	}
+
+	public Student searchStudentOrThrow(String id) throws LibraryException {
+		Student student = searchStudent(id);
+		if (student.getExists()) {
+			throw new LibraryException("El estudiante no fue encontrado");
+		}
+		return student;
 	}
 
 	private boolean validateLending(final String code) {
@@ -263,4 +276,24 @@ public class Library {
 		}
 		return lending.addLendingDetail(lendingCode, unitaryValue, quantity, book);
 	}
+
+	public String addStudent(String name, String lastName, Integer age, String phoneNumber, String program,
+			String state,
+			String id) throws LibraryException {
+		if (validateStudent(id)) {
+			throw new LibraryException("El estudiante ya existe (" + id + ")");
+		}
+		getStudentList().add(new Student(name, lastName, age, program, state, id));
+		return "El estudiante ha sido agregado (" + name + ", " + id + ")";
+	}
+
+	/**
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public boolean validateStudent(String id) {
+		return searchStudent(id).getExists();
+	}
+
 }
