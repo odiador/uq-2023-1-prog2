@@ -213,4 +213,28 @@ public class Student {
     public void setId(final String id) {
         this.id = id;
     }
+
+    /**
+     * Determina si un estudiante existe dependiendo de que su id, nombre, apellido,
+     * edad, programa y estado no sean null
+     * 
+     * @return true si ninguno es null
+     * @see {@link #getId()}
+     *      <li>{@link #getName()}
+     *      <li>
+     */
+    public boolean getExists() {
+        return getId() != null && getName() != null && getLastName() != null && getAge() != null && getProgram() != null
+                && getState() != null;
+    }
+
+    /**
+     * Determina si el estudiante tiene una identificación especificada
+     * 
+     * @param id es la identificación a comparar
+     * @return true si son las mismas ids
+     */
+    public boolean hasId(String id) {
+        return getId().equals(id);
+    }
 }
