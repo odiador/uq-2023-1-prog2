@@ -8,8 +8,9 @@ public class Employer {
     private Double salary;
     private String appointment;
     private final List<Lending> lendingList = new ArrayList<Lending>();
-    private Integer aniosExperiencia;
+    private Integer yearsOfExperience;
     private String id;
+    
 
     /**
      * Es el constructor del empleado
@@ -26,7 +27,7 @@ public class Employer {
         this.name = name;
         this.salary = salary;
         this.appointment = appointment;
-        this.aniosExperiencia = aniosExperiencia;
+        this.yearsOfExperience = aniosExperiencia;
     }
 
     /**
@@ -116,7 +117,7 @@ public class Employer {
      */
     public boolean getExists() {
         return getId() != null && getName() != null && getAppointment() != null && getSalary() != null
-                && getAniosExperiencia() != null;
+                && getYearsOfExperience() != null;
     }
 
     /**
@@ -133,8 +134,8 @@ public class Employer {
      * 
      * @return los años de experiencia
      */
-    public Integer getAniosExperiencia() {
-        return aniosExperiencia;
+    public Integer getYearsOfExperience() {
+        return yearsOfExperience;
     }
 
     /**
@@ -142,8 +143,8 @@ public class Employer {
      * 
      * @param aniosExperiencia son los años de experiencia
      */
-    public void setAniosExperiencia(final Integer aniosExperiencia) {
-        this.aniosExperiencia = aniosExperiencia;
+    public void setYearsOfExperience(final Integer aniosExperiencia) {
+        this.yearsOfExperience = aniosExperiencia;
     }
 
     @Override
@@ -174,6 +175,6 @@ public class Employer {
     @Override
     public String toString() {
         return "Employer [name=" + name + ", salary=" + salary + ", appointment=" + appointment + ", lendingList="
-                + lendingList + ", aniosExperiencia=" + aniosExperiencia + ", id=" + id + "]";
+                + lendingList + ", aniosExperiencia=" + yearsOfExperience + ", id=" + id + "]";
     }
 }
