@@ -1,5 +1,8 @@
 @startuml Diagram
 
+skinparam Linetype ortho
+skinparam style strictuml
+
 skinparam Class {
     FontName Arial
     FontSize 15
@@ -11,49 +14,53 @@ skinparam Class {
     ArrowThickness 2
     HeaderBackgroundColor Aquamarine
 }
-skinparam MinClassWidth 200
 
 enum AccountType <<enumeration>> {
     CORRIENTE
     AHORROS
 }
+
 class Bank {
     -name : String
     -code : String
 
-    +getName() : String
+    +getName()
     +setName(String)
-    +getCode() : String
+    +getCode()
     +setCode(String)
 
-    +addBankAccount(String, String, String, AccountType) : String
-    +addClient(String, String, String) : String
-    +removeBankAccount(String) : String
-    +removeClient(String) : String
-    +searchBankAccount(String) : BankAccount
-    +searchClient(String) : Client
-    +validateClient(String) : boolean
-    +validateBankAccount(String) : boolean
+    +addBankAccount(String, String, String, AccountType)
+    +removeBankAccount(String)
+    +searchBankAccount(String)
+    +validateBankAccount(String)
+    +addClient(String, String, String)
+    +removeClient(String)
+    +searchClient(String)
+    +validateClient(String)
     +sendBalance(String, String, Double)
-
 }
+
 class Client{
     -name : String
     -lastname : String
     -code : String
 
-    +getName() : String
-    +setName(String)
-    +getLastName() : String
-    +setLastName(String)
-    +getCode() : String
-    +setCode(String)
-    +addBankAccount(BankAccount) : String
+    +getName()
+    +getLastName()
+    +getCode()
 
+    +setName(String)
+    +setLastName(String)
+    +setCode(String)
+
+    +addBankAccount(BankAccount)
+    +removeBankAccount(String)
+    +searchBankAccount(String)
+    +validateBankAccount(String)
 }
+
 class BankAccount {
     -accountNumber : String
-    -accountType : AccountType
 
     +getAccountNumber()
     +setAccountNumber(String)
@@ -64,10 +71,10 @@ class BankAccount {
     +compareBalanceTo(BankAccount)
     +sendBalance(BankAccount, Double)
 }
-Bank o-- BankAccount : +bankAccountList
-Client o-- BankAccount : +bankAccountList
-Bank o-- Client : +ClientList
-Bank -->  AccountType
-Client -->  BankAccount
-BankAccount -->  AccountType
+
+Bank " 1 " o--down- " * " BankAccount : - bankAccountList
+Bank " 1 " o-down- " * " Client : - clientList
+Client " 1 " o--down- " * " BankAccount : - bankAccountList
+Client -up->  BankAccount
+BankAccount -up-> " 1 " AccountType : - accountType
 @enduml
