@@ -110,6 +110,10 @@ public abstract class Cuenta {
 		return "$" + darFormato("%.2f", args);
 	}
 
+	public int getNumTransacciones() {
+		return getNumConsignaciones() + getNumRetiros();
+	}
+
 	@Override
 	public String toString() {
 		return "Cuenta [saldo=" + saldo + ", numConsignaciones=" + numConsignaciones + ", numRetiros=" + numRetiros
