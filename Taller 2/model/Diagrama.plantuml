@@ -39,9 +39,9 @@ class CuentaCorriente {
 class CuentaException <<exception>> {
     CuentaException(msg: String)
 }
-Cuenta ..> CuentaException : <<send>>
-CuentaAhorros .> CuentaException : <<send>>
-CuentaCorriente .> CuentaException : <<send>>
+Cuenta --> CuentaException : <<send>>
+CuentaAhorros -> CuentaException : <<send>>
+CuentaCorriente -> CuentaException : <<send>>
 
 CuentaAhorros -|> Cuenta
 CuentaCorriente --|> Cuenta
