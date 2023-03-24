@@ -102,6 +102,14 @@ public abstract class Cuenta {
 		this.comisionMensual = comisionMensual;
 	}
 
+	public static String darFormato(String format, Object... args) {
+		return String.format(format, args).replace(',', '.');
+	}
+
+	public static String darFormatoDinero(Object... args) {
+		return "$" + darFormato("%.2f", args);
+	}
+
 	@Override
 	public String toString() {
 		return "Cuenta [saldo=" + saldo + ", numConsignaciones=" + numConsignaciones + ", numRetiros=" + numRetiros
