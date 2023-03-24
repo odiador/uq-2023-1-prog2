@@ -7,8 +7,8 @@ import java.util.stream.Collectors;
 public class Bank {
     private String name;
     private String code;
-    private List<BankAccount> bankAccountList;
-    private List<Client> clientList;
+    private List<BankAccount> bankAccountList = new ArrayList<BankAccount>();
+    private List<Client> clientList = new ArrayList<Client>();
 
     /**
      * Es el constructor del banco sin parámetros
@@ -25,8 +25,6 @@ public class Bank {
     public Bank(final String name, final String code) {
         this.name = name;
         this.code = code;
-        this.bankAccountList = new ArrayList<BankAccount>();
-        this.clientList = new ArrayList<Client>();
     }
 
     /**
@@ -38,9 +36,9 @@ public class Bank {
      * @throws Exception
      */
     public String addBankAccount(final String accountNumber,
-            final AccountType accountType) throws Exception {
+            final AccountType accountType) throws BankException {
         if (validateBankAccount(accountNumber)) {
-            throw new Exception("La cuenta ya existe, no se puede agregar");
+            throw new BankException("La cuenta ya existe, no se puede agregar");
         }
         final BankAccount account = new BankAccount(accountNumber, accountType);
 
@@ -54,11 +52,11 @@ public class Bank {
      * 
      * @param accountNumber es el numero de cuenta
      * @return "La cuenta ha sido eliminada con éxito"
-     * @throws Exception en caso de que no exista
+     * @throws BankException en caso de que no exista
      */
-    public String removeBankAccount(final String accountNumber) throws Exception {
+    public String removeBankAccount(final String accountNumber) throws BankException {
         if (!validateBankAccount(accountNumber)) {
-            throw new Exception("La cuenta no existe, no se puede eliminar");
+            throw new BankException("La cuenta no existe, no se puede eliminar");
         }
         setBankAccountList(bankAccountList.stream().filter(e -> !e.getAccountNumber().equals(accountNumber))
                 .collect(Collectors.toList()));
@@ -85,24 +83,14 @@ public class Bank {
     }
 
     /**
-     * Busca un cliente por medio de su código {@code code}, si no lo encuentra
-     * retorna un cliente sin parámetros
+     * Valida si la cuenta de banco se encuentra o no a partir del número de cuenta
+     * {@code accountNumber}
      * 
-     * @param code
+     * @param accountNumber
      * @return
      */
-    public Client searchClient(final String code) {
-        return clientList.stream().filter(client -> code.equals(client.getCode())).findFirst().orElse(new Client());
-    }
-
-    /**
-     * Valida si un cliente está en la lista a partir de un código {@code code}
-     * 
-     * @param code es el código del cliente
-     * @return true si existe
-     */
-    public boolean validateClient(final String code) {
-        return searchClient(code).getExists();
+    public boolean validateBankAccount(final String accountNumber) {
+        return searchBankAccount(accountNumber).getExists();
     }
 
     /**
@@ -141,14 +129,24 @@ public class Bank {
     }
 
     /**
-     * Valida si la cuenta de banco se encuentra o no a partir del número de cuenta
-     * {@code accountNumber}
+     * Busca un cliente por medio de su código {@code code}, si no lo encuentra
+     * retorna un cliente sin parámetros
      * 
-     * @param accountNumber
+     * @param code
      * @return
      */
-    public boolean validateBankAccount(final String accountNumber) {
-        return searchBankAccount(accountNumber).getExists();
+    public Client searchClient(final String code) {
+        return clientList.stream().filter(client -> code.equals(client.getCode())).findFirst().orElse(new Client());
+    }
+
+    /**
+     * Valida si un cliente está en la lista a partir de un código {@code code}
+     * 
+     * @param code es el código del cliente
+     * @return true si existe
+     */
+    public boolean validateClient(final String code) {
+        return searchClient(code).getExists();
     }
 
     /**
@@ -157,13 +155,60 @@ public class Bank {
      * @param senderAccountNumber
      * @param recieverAccountNumber
      * @param quantity
-     * @throws Exception
+     * @throws BankException
      */
     public void sendBalance(final String senderAccountNumber, final String recieverAccountNumber, final Double quantity)
-            throws Exception {
+            throws BankException {
         final BankAccount senderAccount = searchBankAccount(senderAccountNumber);
         final BankAccount recieverAccount = searchBankAccount(recieverAccountNumber);
         senderAccount.sendBalance(recieverAccount, quantity);
+    }
+
+    /**
+     * Compara el dinero de una cuenta a otra, muestra un error en caso de que
+     * alguna de las cuentas no exista
+     * 
+     * @param senderAccountNumber
+     * @param recieverAccountNumber
+     * @param quantity
+     * @return
+     * @throws BankException
+     */
+    public boolean compareBalance(final String senderAccountNumber, final String recieverAccountNumber,
+            final Double quantity)
+            throws BankException {
+        final BankAccount senderAccount = searchBankAccount(senderAccountNumber);
+        final BankAccount recieverAccount = searchBankAccount(recieverAccountNumber);
+        return senderAccount.compareBalanceTo(recieverAccount);
+    }
+
+    /**
+     * Saca dinero de una cuenta con un código {@code code} determinado, muestra un
+     * error si no se encuentra la cuenta de banco o si la cantidad a quitar es
+     * mayor a la cantidad que se tiene
+     * 
+     * @param code
+     * @param quantity
+     * @throws BankException
+     */
+    public void withdrawBalance(final String code,
+            final Double quantity)
+            throws BankException {
+        final BankAccount accountToWithdraw = searchBankAccount(code);
+        accountToWithdraw.withDrawBalance(quantity);
+    }
+
+    /**
+     * Agrega dinero a una cuenta con un código {@code code} determinado, muestra un
+     * error si no se encuentra la cuenta de banco
+     * 
+     * @param code
+     * @param quantity
+     * @return
+     * @throws BankException
+     */
+    public String consignBalance(final String code, final Double quantity) throws BankException {
+        return searchBankAccount(code).consignBalance(quantity);
     }
 
     /**
@@ -237,4 +282,45 @@ public class Bank {
     public void setClientList(final List<Client> clientList) {
         this.clientList = clientList;
     }
+
+    /**
+     * Determina si un banco existe o no dependiendo de que su nombre y código no
+     * sean null
+     * 
+     * @return true si ninguno es null
+     */
+    public boolean getExists() {
+        return getName() != null && getCode() != null;
+    }
+
+    @Override
+    public String toString() {
+        return getExists() ? "Bank [name=" + name + ", code=" + code + "]" : "Bank [?]";
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((code == null) ? 0 : code.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Bank other = (Bank) obj;
+        if (code == null) {
+            if (other.code != null)
+                return false;
+        } else if (!code.equals(other.code))
+            return false;
+        return true;
+    }
+
 }

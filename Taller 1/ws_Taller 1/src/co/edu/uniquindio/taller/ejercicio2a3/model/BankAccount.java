@@ -133,12 +133,12 @@ public class BankAccount implements Comparator<BankAccount>, Comparable<BankAcco
 	 * la cuenta no exista
 	 * 
 	 * @param balance
-	 * @throws Exception
+	 * @throws BankException
 	 * @see {@link #getExists()}
 	 */
-	public String consignBalance(final Double balance) throws Exception {
+	public String consignBalance(final Double balance) throws BankException {
 		if (!getExists())
-			throw new Exception("La cuenta no existe");
+			throw new BankException("La cuenta no existe");
 		setBalance(getBalance() + balance);
 		return "Han sido agregados " + balance + " a la cuenta (" + getAccountNumber() + ")";
 	}
@@ -148,14 +148,14 @@ public class BankAccount implements Comparator<BankAccount>, Comparable<BankAcco
 	 * es suficiente o la cuenta no existe
 	 * 
 	 * @param balance
-	 * @throws Exception
+	 * @throws BankException
 	 * @see {@link #getExists()}
 	 */
-	public void withDrawBalance(final Double balance) throws Exception {
+	public void withDrawBalance(final Double balance) throws BankException {
 		if (!getExists())
-			throw new Exception("La cuenta no existe");
+			throw new BankException("La cuenta no existe");
 		if (getBalance() < balance)
-			throw new Exception("El saldo es insuficiente");
+			throw new BankException("El saldo es insuficiente");
 		setBalance(getBalance() - balance);
 	}
 
@@ -165,14 +165,14 @@ public class BankAccount implements Comparator<BankAccount>, Comparable<BankAcco
 	 * 
 	 * @param cb
 	 * @param amount
-	 * @throws Exception
+	 * @throws BankException
 	 * @see {@link #consignBalance()}
 	 *      <li>{@link #withDrawBalance()}
 	 *      <li>{@link #getExists()}
 	 */
-	public void sendBalance(final BankAccount cb, final Double amount) throws Exception {
+	public void sendBalance(final BankAccount cb, final Double amount) throws BankException {
 		if (!getExists() || !cb.getExists())
-			throw new Exception("Alguna de las cuentas no existe");
+			throw new BankException("Alguna de las cuentas no existe");
 		withDrawBalance(amount);
 		cb.consignBalance(amount);
 	}

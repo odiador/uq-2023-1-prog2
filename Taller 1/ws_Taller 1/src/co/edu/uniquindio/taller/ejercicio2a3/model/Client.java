@@ -1,5 +1,6 @@
 package co.edu.uniquindio.taller.ejercicio2a3.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Client {
@@ -21,6 +22,7 @@ public class Client {
         this.name = name;
         this.lastName = lastName;
         this.code = code;
+        this.bankAccountList = new ArrayList<BankAccount>();
     }
 
     /**
@@ -99,6 +101,35 @@ public class Client {
      */
     public void setBankAccountList(final List<BankAccount> bankAccountList) {
         this.bankAccountList = bankAccountList;
+    }
+
+    public BankAccount searchBankAccount(String accountNumber) {
+        for (BankAccount bankAccount : bankAccountList) {
+            if (accountNumber.equals(bankAccount.getAccountNumber())) {
+                return bankAccount;
+            }
+        }
+        return new BankAccount();
+    }
+
+    public boolean validateBankAccount(String accountNumber) {
+        return searchBankAccount(accountNumber).getExists();
+    }
+
+    public String addBankAccount(BankAccount bankAccount) throws BankException {
+        throwIfDoesntExists();
+
+        if (validateBankAccount(bankAccount.getAccountNumber())) {
+            throw new BankException("La cuenta ya existe (" + bankAccount.getAccountNumber() + ")");
+        }
+        bankAccountList.add(bankAccount);
+        return "La cuenta fue agregada exitosamente al cliente";
+    }
+
+    private void throwIfDoesntExists() throws BankException {
+        if (!getExists()) {
+            throw new BankException("La cuenta de banco no existe");
+        }
     }
 
     /**
