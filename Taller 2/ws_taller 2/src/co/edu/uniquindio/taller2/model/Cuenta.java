@@ -1,6 +1,6 @@
 package co.edu.uniquindio.taller2.model;
 
-public class Cuenta {
+public abstract class Cuenta {
 	protected float saldo = 0f;
 	protected int numConsignaciones = 0;
 	protected int numRetiros = 0;
@@ -24,6 +24,7 @@ public class Cuenta {
 	 * @return
 	 */
 	public String consignarDinero(float saldo) {
+		setSaldo(getSaldo() + saldo);
 		return "Se consignó " + saldo + ", ahora tienes: " + this.saldo;
 	}
 
@@ -31,8 +32,12 @@ public class Cuenta {
 	 *
 	 * @param saldo
 	 * @return
+	 * @throws CuentaException
 	 */
-	public String retirarDinero(float saldo) {
+	public String retirarDinero(float saldo) throws CuentaException {
+		if (getSaldo() < saldo) {
+			throw new CuentaException("El saldo a retirar no puede sobrepasar el saldo actual");
+		}
 		return "Se consignó " + saldo + ", ahora tienes: " + this.saldo;
 	}
 
@@ -40,9 +45,7 @@ public class Cuenta {
 	 *
 	 * @return
 	 */
-	public float calcularIntereses() {
-		return 0f;
-	}
+	public abstract float calcularIntereses();
 
 	/**
 	 *
