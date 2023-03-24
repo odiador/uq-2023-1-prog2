@@ -38,9 +38,16 @@ class Bank {
     +searchClient(String)
     +validateClient(String)
     +sendBalance(String, String, Double)
+    +compareBalance(String, String)
+    +withdrawBalance(String, Double)
+    +consignBalance(String, Double)
 }
 
-class Client{
+class BankException <<exception>> {
+    +BankException(msg: String)
+}
+
+class Client {
     -name : String
     -lastname : String
     -code : String
@@ -74,7 +81,9 @@ class BankAccount {
 
 Bank " 1 " o--down- " * " BankAccount : - bankAccountList
 Bank " 1 " o-down- " * " Client : - clientList
+BankAccount " 1 " -up-> " 1 "  Client : - owner
 Client " 1 " o--down- " * " BankAccount : - bankAccountList
-Client -up->  BankAccount
 BankAccount -up-> " 1 " AccountType : - accountType
+Client ..> BankException : <<send>>
+Bank ..> BankException : <<send>>
 @enduml
