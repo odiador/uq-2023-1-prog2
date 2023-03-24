@@ -1,3 +1,38 @@
-@startuml Diagrama punto 1
+@startuml Diagrama Taller Herencia
 
+skinparam Linetype ortho
+skinparam style strictuml
+
+class Cuenta {
+    #saldo : float
+    #numConsignaciones : int
+    #numRetiros : int
+    #tasaAnual : float
+    #comisionMensual : float
+
+    +consignarDinero(saldo: float) : String
+    +retirarDinero(saldo: float) : String
+    +calcularInteres() : float
+    +extractoMensual()
+    +imprimir() : String
+}
+
+class CuentaAhorros {
+    #estaActiva : boolean
+
+    +consignarDinero(saldo: float) : String
+    +retirarDinero(saldo: float) : String
+    +extractoMensual()
+    +imprimir() : String
+}
+class CuentaCorriente {
+    #sobregiro : float
+
+    +consignarDinero(saldo: float) : String
+    +retirarDinero(saldo: float) : String
+    +haySobregiro() : boolean
+    +imprimir() : String
+}
+CuentaAhorros -|> Cuenta
+CuentaCorriente --|> Cuenta
 @enduml
