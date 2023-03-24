@@ -2,7 +2,7 @@ package co.edu.uniquindio.taller2.model;
 
 public class CuentaAhorros extends Cuenta {
 
-	private boolean estaActiva;
+	protected boolean estaActiva;
 
 	/**
 	 * Es el constructor de la cuenta de ahorros
