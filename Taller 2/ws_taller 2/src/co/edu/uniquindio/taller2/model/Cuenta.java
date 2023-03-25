@@ -22,10 +22,11 @@ public abstract class Cuenta {
 	 *
 	 * @param saldo
 	 * @return
+	 * @throws CuentaException
 	 */
-	public String consignarDinero(float saldo) {
+	public void consignarDinero(float saldo) throws CuentaException {
 		setSaldo(getSaldo() + saldo);
-		return "Se consignó " + saldo + ", ahora tienes: " + this.saldo;
+		setNumConsignaciones(getNumConsignaciones() + 1);
 	}
 
 	/**
@@ -38,28 +39,28 @@ public abstract class Cuenta {
 		if (getSaldo() < saldo) {
 			throw new CuentaException("El saldo a retirar no puede sobrepasar el saldo actual");
 		}
-		return "Se consignó " + saldo + ", ahora tienes: " + this.saldo;
+		setSaldo(getSaldo() - saldo);
+		setNumRetiros(getNumRetiros() + 1);
+
+		return "Se retiró " + saldo + ", ahora tienes: " + getSaldo();
 	}
 
 	/**
 	 *
 	 * @return
 	 */
-	public abstract float calcularIntereses();
+	public void calcularIntereses() {
+		float tasaMensual = getTasaAnual() / 12;
+		float interesMensual = saldo * tasaMensual;
+		setSaldo(getSaldo() + interesMensual);
+	}
 
 	/**
 	 *
 	 */
 	public void extractoMensual() {
-
-	}
-
-	/**
-	 *
-	 * @return
-	 */
-	public String imprimir() {
-		return toString();
+		setSaldo(getSaldo() - getComisionMensual());
+		calcularIntereses();
 	}
 
 	public float getSaldo() {
