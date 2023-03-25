@@ -4,24 +4,24 @@ skinparam Linetype ortho
 skinparam style strictuml
 
 abstract class Cuenta <<abstract>> {
+    #codigo : String
     #saldo : float
     #numConsignaciones : int
     #numRetiros : int
     #tasaAnual : float
     #comisionMensual : float
 
-    +Cuenta(saldo: float, tasaAnual: float)
+    +Cuenta(codigo: String, saldo: float, tasaAnual: float)
 
     +consignarDinero(saldo: float) : void
     +retirarDinero(saldo: float) : void
     +calcularInteres() : void
     +extractoMensual() : void
-    +imprimir() : String
 }
 
 class CuentaAhorros {
     #estaActiva : boolean
-    +CuentaAhorros(saldo: float, tasaAnual: float)
+    +CuentaAhorros(codigo: String, saldo: float, tasaAnual: float)
 
     +consignarDinero(saldo: float) : void
     +retirarDinero(saldo: float) : void
