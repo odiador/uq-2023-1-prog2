@@ -14,23 +14,30 @@ public class CuentaCorriente extends Cuenta {
 		super(saldo, tasaAnual);
 	}
 
-	@Override
-	public String consignarDinero(float saldo) {
-		return super.consignarDinero(saldo);
+	public float getSobregiro() {
+		return sobregiro;
+	}
+
+	public void setSobregiro(float sobregiro) {
+		this.sobregiro = sobregiro;
 	}
 
 	@Override
-	public String imprimir() {
-		return super.imprimir();
+	public void consignarDinero(float saldo) throws CuentaException {
+		super.consignarDinero(saldo);
 	}
 
 	@Override
-	public String retirarDinero(float saldo) {
-		return super.retirarDinero(saldo);
+	public void retirarDinero(float saldo) throws CuentaException {
+		super.retirarDinero(saldo);
 	}
 
 	public boolean haySobregiro() {
-		return sobregiro > 0;
+		return getSobregiro() > 0;
+	}
+
+	public String imprimir() {
+		return toString();
 	}
 
 }
