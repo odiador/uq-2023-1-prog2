@@ -19,9 +19,10 @@ public abstract class Cuenta {
 	}
 
 	/**
+	 * Consigna una cantidad de dinero al saldo actual, puede mostrar un error
+	 * dependiendo del tipo de cuenta
 	 *
 	 * @param saldo
-	 * @return
 	 * @throws CuentaException
 	 */
 	public void consignarDinero(float saldo) throws CuentaException {
@@ -30,24 +31,22 @@ public abstract class Cuenta {
 	}
 
 	/**
+	 * Retira el dinero de una cuenta, muestra un error si el saldo a retirar
+	 * sobrepasa el saldo actual
 	 *
 	 * @param saldo
-	 * @return
 	 * @throws CuentaException
 	 */
-	public String retirarDinero(float saldo) throws CuentaException {
+	public void retirarDinero(float saldo) throws CuentaException {
 		if (getSaldo() < saldo) {
 			throw new CuentaException("El saldo a retirar no puede sobrepasar el saldo actual");
 		}
 		setSaldo(getSaldo() - saldo);
 		setNumRetiros(getNumRetiros() + 1);
-
-		return "Se retiró " + saldo + ", ahora tienes: " + getSaldo();
 	}
 
 	/**
-	 *
-	 * @return
+	 * Calcula los intereses de la cuenta y los agrega al saldo actual
 	 */
 	public void calcularIntereses() {
 		float tasaMensual = getTasaAnual() / 12;
@@ -56,9 +55,12 @@ public abstract class Cuenta {
 	}
 
 	/**
+	 * Extrae mensualmente una comisión y luego agrega los intereses a la cuenta
 	 *
+	 * @throws CuentaException
 	 */
-	public void extractoMensual() {
+	public void extractoMensual() throws CuentaException {
+		retirarDinero(getComisionMensual());
 		setSaldo(getSaldo() - getComisionMensual());
 		calcularIntereses();
 	}
