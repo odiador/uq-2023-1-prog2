@@ -24,12 +24,28 @@ public class CuentaCorriente extends Cuenta {
 
 	@Override
 	public void consignarDinero(float saldo) throws CuentaException {
-		super.consignarDinero(saldo);
+		if (haySobregiro()) {
+			if (getSobregiro() >= saldo) {
+				setSobregiro(getSobregiro() - saldo);
+			} else {
+				setSaldo(saldo - getSobregiro());
+				setSobregiro(0f);
+			}
+		} else {
+			super.consignarDinero(saldo);
+		}
 	}
 
 	@Override
 	public void retirarDinero(float saldo) throws CuentaException {
-		super.retirarDinero(saldo);
+		if (haySobregiro()) {
+			setSobregiro(getSobregiro() + saldo);
+		} else {
+			if (saldo > getSaldo()) {
+				setSobregiro(saldo - getSaldo());
+				setSaldo(0f);
+			}
+		}
 	}
 
 	public boolean haySobregiro() {
