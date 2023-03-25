@@ -7,11 +7,12 @@ public class CuentaCorriente extends Cuenta {
 	/**
 	 * Es el constructor de la cuenta corriente
 	 *
+	 * @param codigo
 	 * @param saldo
 	 * @param tasaAnual
 	 */
-	public CuentaCorriente(float saldo, float tasaAnual) {
-		super(saldo, tasaAnual);
+	public CuentaCorriente(String codigo, float saldo, float tasaAnual) {
+		super(codigo, saldo, tasaAnual);
 	}
 
 	public float getSobregiro() {

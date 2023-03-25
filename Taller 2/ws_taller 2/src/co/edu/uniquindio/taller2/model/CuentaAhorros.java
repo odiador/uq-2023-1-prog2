@@ -5,11 +5,12 @@ public class CuentaAhorros extends Cuenta {
 	/**
 	 * Es el constructor de la cuenta de ahorros
 	 *
+	 * @param codigo
 	 * @param saldo
 	 * @param tasaAnual
 	 */
-	public CuentaAhorros(float saldo, float tasaAnual) {
-		super(saldo, tasaAnual);
+	public CuentaAhorros(String codigo, float saldo, float tasaAnual) {
+		super(codigo, saldo, tasaAnual);
 	}
 
 	/**

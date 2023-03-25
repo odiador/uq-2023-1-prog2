@@ -1,6 +1,7 @@
 package co.edu.uniquindio.taller2.model;
 
 public abstract class Cuenta {
+	protected String codigo;
 	protected float saldo = 0f;
 	protected int numConsignaciones = 0;
 	protected int numRetiros = 0;
@@ -10,10 +11,12 @@ public abstract class Cuenta {
 	/**
 	 * Es el constructor de la cuenta
 	 *
+	 * @param codigo
 	 * @param saldo
 	 * @param tasaAnual
 	 */
-	public Cuenta(float saldo, float tasaAnual) {
+	public Cuenta(String codigo, float saldo, float tasaAnual) {
+		this.codigo = codigo;
 		this.saldo = saldo;
 		this.tasaAnual = tasaAnual;
 	}
@@ -105,6 +108,14 @@ public abstract class Cuenta {
 		this.comisionMensual = comisionMensual;
 	}
 
+	public String getCodigo() {
+		return codigo;
+	}
+
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
+	}
+
 	public static String darFormato(String format, Object... args) {
 		return String.format(format, args).replace(',', '.');
 	}
@@ -115,6 +126,31 @@ public abstract class Cuenta {
 
 	public int getNumTransacciones() {
 		return getNumConsignaciones() + getNumRetiros();
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Cuenta other = (Cuenta) obj;
+		if (codigo == null) {
+			if (other.codigo != null)
+				return false;
+		} else if (!codigo.equals(other.codigo))
+			return false;
+		return true;
 	}
 
 	@Override
