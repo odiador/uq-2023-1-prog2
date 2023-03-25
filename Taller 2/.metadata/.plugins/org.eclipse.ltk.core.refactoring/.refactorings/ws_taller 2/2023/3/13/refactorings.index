@@ -2,3 +2,5 @@
 1679661818535	Encapsulate field 'estaActiva'
 1679664989186	Extract method 'extracted'
 1679779164011	Encapsulate field 'sobregiro'
+1679782419621	Extract method 'extracted'
+1679782621391	Inline local variable 'saldoNuevo'
