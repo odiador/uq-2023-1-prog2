@@ -1,7 +1,6 @@
 package co.edu.uniquindio.taller2.model;
 
 public class CuentaAhorros extends Cuenta {
-
 	protected boolean estaActiva;
 
 	/**
@@ -23,23 +22,31 @@ public class CuentaAhorros extends Cuenta {
 	}
 
 	@Override
-	public String consignarDinero(float saldo) {
-		return super.consignarDinero(saldo);
+	public void consignarDinero(float saldo) throws CuentaException {
+		if (!estaActiva()) {
+			throw new CuentaException("No se pudo consignar el dinero");
+		}
+		super.consignarDinero(saldo);
 	}
 
 	@Override
-	public String retirarDinero(float saldo) {
-		return super.retirarDinero(saldo);
+	public void retirarDinero(float saldo) throws CuentaException {
+		super.retirarDinero(saldo);
 	}
 
 	@Override
-	public void extractoMensual() {
+	public void extractoMensual() throws CuentaException {
 		super.extractoMensual();
 	}
 
-	@Override
 	public String imprimir() {
-		return super.imprimir();
+		return toString();
+	}
+
+	@Override
+	public String toString() {
+		return "CuentaAhorros[saldo:" + darFormatoDinero(saldo) + ", comision: " + darFormatoDinero(comisionMensual)
+				+ ", numero de transacciones: " + getNumTransacciones() + "]";
 	}
 
 }
