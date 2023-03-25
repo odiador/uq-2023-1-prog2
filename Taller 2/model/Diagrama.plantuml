@@ -20,9 +20,9 @@ abstract class Cuenta <<abstract>> {
 }
 
 class CuentaAhorros {
-    #estaActiva : boolean
     +CuentaAhorros(codigo: String, saldo: float, tasaAnual: float)
 
+    +estaActiva() : boolean
     +consignarDinero(saldo: float) : void
     +retirarDinero(saldo: float) : void
     +extractoMensual() : void
