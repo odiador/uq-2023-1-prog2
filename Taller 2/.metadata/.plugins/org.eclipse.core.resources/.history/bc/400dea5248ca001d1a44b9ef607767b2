@@ -1,0 +1,50 @@
+package co.edu.uniquindio.taller2.model;
+
+public class CuentaAhorros extends Cuenta {
+
+	/**
+	 * Es el constructor de la cuenta de ahorros
+	 *
+	 * @param saldo
+	 * @param tasaAnual
+	 */
+	public CuentaAhorros(float saldo, float tasaAnual) {
+		super(saldo, tasaAnual);
+	}
+
+	/**
+	 * Determina si la cuenta de ahorros está activa o no
+	 *
+	 * @return true si el saldo es mayor o igual a 10000
+	 */
+	public boolean estaActiva() {
+		return getSaldo() >= 10000;
+	}
+
+	@Override
+	public String consignarDinero(float saldo) {
+		return super.consignarDinero(saldo);
+	}
+
+	@Override
+	public String retirarDinero(float saldo) throws CuentaException {
+		return super.retirarDinero(saldo);
+	}
+
+	@Override
+	public void extractoMensual() {
+		super.extractoMensual();
+	}
+
+	@Override
+	public String imprimir() {
+		return super.imprimir();
+	}
+
+	@Override
+	public float calcularIntereses() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+}

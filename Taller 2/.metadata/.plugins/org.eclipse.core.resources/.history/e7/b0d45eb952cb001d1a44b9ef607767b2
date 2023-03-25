@@ -1,0 +1,43 @@
+package co.edu.uniquindio.taller2.model;
+
+public class CuentaCorriente extends Cuenta {
+
+	private float sobregiro = 0f;
+
+	/**
+	 * Es el constructor de la cuenta corriente
+	 *
+	 * @param saldo
+	 * @param tasaAnual
+	 */
+	public CuentaCorriente(float saldo, float tasaAnual) {
+		super(saldo, tasaAnual);
+	}
+
+	@Override
+	public void consignarDinero(float saldo) throws CuentaException {
+		super.consignarDinero(saldo);
+	}
+
+	public String imprimir() {
+		return toString();
+	}
+
+	@Override
+	public String retirarDinero(float saldo) throws CuentaException {
+		return super.retirarDinero(saldo);
+	}
+
+	public boolean haySobregiro() {
+		return getSobregiro() > 0;
+	}
+
+	public float getSobregiro() {
+		return sobregiro;
+	}
+
+	public void setSobregiro(float sobregiro) {
+		this.sobregiro = sobregiro;
+	}
+
+}
