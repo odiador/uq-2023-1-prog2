@@ -31,7 +31,7 @@ class CuentaAhorros {
 class CuentaCorriente {
     #sobregiro : float
 
-    +CuentaCorriente(saldo: float, tasaAnual: float)
+    +CuentaCorriente(codigo: String, saldo: float, tasaAnual: float)
 
     +consignarDinero(saldo: float) : void
     +retirarDinero(saldo: float) : void
@@ -39,11 +39,11 @@ class CuentaCorriente {
     +imprimir() : String
 }
 class CuentaException <<exception>> {
-    CuentaException(msg: String)
+    +CuentaException(msg: String)
 }
-Cuenta --> CuentaException : <<send>>
-CuentaAhorros -> CuentaException : <<send>>
-CuentaCorriente -> CuentaException : <<send>>
+Cuenta ..> CuentaException : <<send>>
+CuentaAhorros .> CuentaException : <<send>>
+CuentaCorriente .> CuentaException : <<send>>
 
 CuentaAhorros -|> Cuenta
 CuentaCorriente --|> Cuenta
