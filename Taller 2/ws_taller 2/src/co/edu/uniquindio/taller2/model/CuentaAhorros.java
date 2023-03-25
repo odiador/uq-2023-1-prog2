@@ -23,19 +23,25 @@ public class CuentaAhorros extends Cuenta {
 
 	@Override
 	public void consignarDinero(float saldo) throws CuentaException {
-		if (!estaActiva()) {
-			throw new CuentaException("No se pudo consignar el dinero");
-		}
+		throwIfNotActive("No se pudo consignar el dinero (cuenta no activa)");
 		super.consignarDinero(saldo);
+	}
+
+	public void throwIfNotActive(String msg) throws CuentaException {
+		if (!estaActiva())
+			throw new CuentaException(msg);
 	}
 
 	@Override
 	public void retirarDinero(float saldo) throws CuentaException {
+		throwIfNotActive("No se pudo retirar el dinero (cuenta no activa)");
 		super.retirarDinero(saldo);
 	}
 
 	@Override
 	public void extractoMensual() throws CuentaException {
+		if (getNumRetiros() > 4)
+			setComisionMensual(getComisionMensual() + (getNumRetiros() - 4) * 1000f);
 		super.extractoMensual();
 	}
 
