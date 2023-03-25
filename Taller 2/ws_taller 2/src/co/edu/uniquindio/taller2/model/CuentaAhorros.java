@@ -1,7 +1,6 @@
 package co.edu.uniquindio.taller2.model;
 
 public class CuentaAhorros extends Cuenta {
-	protected boolean estaActiva;
 
 	/**
 	 * Es el constructor de la cuenta de ahorros
@@ -13,12 +12,13 @@ public class CuentaAhorros extends Cuenta {
 		super(saldo, tasaAnual);
 	}
 
+	/**
+	 * Determina si la cuenta de ahorros está activa o no
+	 *
+	 * @return true si el saldo es mayor o igual a 10000
+	 */
 	public boolean estaActiva() {
-		return estaActiva;
-	}
-
-	public void setActiva(boolean estaActiva) {
-		this.estaActiva = estaActiva;
+		return getSaldo() >= 10000f;
 	}
 
 	@Override
