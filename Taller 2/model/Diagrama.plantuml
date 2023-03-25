@@ -11,28 +11,30 @@ class Cuenta {
     #comisionMensual : float
 
     +Cuenta(saldo: float, tasaAnual: float)
-    +consignarDinero(saldo: float) : String
-    +retirarDinero(saldo: float) : String
-    +calcularInteres() : float
-    +extractoMensual()
+
+    +consignarDinero(saldo: float) : void
+    +retirarDinero(saldo: float) : void
+    +calcularInteres() : void
+    +extractoMensual() : void
     +imprimir() : String
 }
 
 class CuentaAhorros {
     #estaActiva : boolean
-
     +CuentaAhorros(saldo: float, tasaAnual: float)
-    +consignarDinero(saldo: float) : String
-    +retirarDinero(saldo: float) : String
-    +extractoMensual()
+
+    +consignarDinero(saldo: float) : void
+    +retirarDinero(saldo: float) : void
+    +extractoMensual() : void
     +imprimir() : String
 }
 class CuentaCorriente {
     #sobregiro : float
 
     +CuentaCorriente(saldo: float, tasaAnual: float)
-    +consignarDinero(saldo: float) : String
-    +retirarDinero(saldo: float) : String
+
+    +consignarDinero(saldo: float) : void
+    +retirarDinero(saldo: float) : void
     +haySobregiro() : boolean
     +imprimir() : String
 }
