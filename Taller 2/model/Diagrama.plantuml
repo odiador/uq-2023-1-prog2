@@ -3,7 +3,7 @@
 skinparam Linetype ortho
 skinparam style strictuml
 
-class Cuenta {
+abstract class Cuenta <<abstract>> {
     #saldo : float
     #numConsignaciones : int
     #numRetiros : int
