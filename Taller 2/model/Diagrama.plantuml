@@ -3,6 +3,19 @@
 skinparam Linetype ortho
 skinparam style strictuml
 
+class Banco {
+    #nombre : String
+    #direccion : String
+    #codigo : String
+    +Banco(nombre: String, direccion: String, codigo: String)
+
+    +agregarCuentaAhorros(codigo: String, saldo: float, tasaAnual: float) : void
+    +agregarCuentaCorriente(codigo: String, saldo: float, tasaAnual: float) : void
+    +eliminarCuenta(codigo: String) : void
+    +buscarCuenta(codigo: String) : Cuenta
+    +validarCuenta(codigo: String) : boolean
+}
+
 abstract class Cuenta <<abstract>> {
     #codigo : String
     #saldo : float
@@ -41,10 +54,12 @@ class CuentaCorriente {
 class CuentaException <<exception>> {
     +CuentaException(msg: String)
 }
-Cuenta ..> CuentaException : <<send>>
-CuentaAhorros .> CuentaException : <<send>>
-CuentaCorriente .> CuentaException : <<send>>
+Banco " 1 " o--- " * " Cuenta : -listaCuentas
 
-CuentaAhorros -|> Cuenta
-CuentaCorriente --|> Cuenta
+Cuenta ..> CuentaException : <<send>>
+CuentaAhorros ..> CuentaException : <<send>>
+CuentaCorriente ..> CuentaException : <<send>>
+
+CuentaAhorros -right-|> Cuenta
+CuentaCorriente -left-|> Cuenta
 @enduml
