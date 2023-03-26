@@ -14,6 +14,15 @@ class Banco {
     +eliminarCuenta(codigo: String) : void
     +buscarCuenta(codigo: String) : Cuenta
     +validarCuenta(codigo: String) : boolean
+    +consignarDineroCuenta(codigo: String, dinero: float) : void
+    +retirarDineroCuenta(codigo: String, dinero: float) : void
+    +calcularInteresesCuenta(codigo: String) : void
+    +extraerMensualCuenta(codigo: String) : void
+    +imprimirCuenta(codigo: String) : void
+    +estaActivaCuenta(codigo: String) : boolean
+    +obtenerSobregiroCuenta(codigo: String) : float
+    -buscarCuentaOError(codigo: String) : void
+    -actualizarCuenta(cuenta: Cuenta) : void
 }
 
 abstract class Cuenta <<abstract>> {
@@ -49,8 +58,8 @@ class CuentaCorriente {
 
     +consignarDinero(saldo: float) : void
     +retirarDinero(saldo: float) : void
-    -haySobregiro() : boolean
     +imprimir() : String
+    -haySobregiro() : boolean
 }
 class CuentaException <<exception>> {
     +CuentaException(msg: String)
