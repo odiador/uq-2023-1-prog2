@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><testrun name="TestEqualsTrue" project="ws_taller 2" tests="2" started="2" failures="0" errors="0" ignored="0">
-  <testsuite name="co.edu.uniquindio.taller2.tests.TestEqualsTrue" time="0.0">
-    <testcase name="testBancoEquals1" classname="co.edu.uniquindio.taller2.tests.TestEqualsTrue" time="0.0"/>
-    <testcase name="testCuentaAhorrosEquals1" classname="co.edu.uniquindio.taller2.tests.TestEqualsTrue" time="0.0"/>
-  </testsuite>
-</testrun>

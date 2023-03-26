@@ -1,0 +1,255 @@
+package co.edu.uniquindio.taller2.model;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Banco {
+
+	protected String nombre;
+	protected String direccion;
+	protected String codigo;
+	protected List<Cuenta> listaCuentas = new ArrayList<Cuenta>();
+
+	/**
+	 * Es el constructor de la clase Banco
+	 *
+	 * @param nombre
+	 * @param direccion
+	 * @param codigo
+	 */
+	public Banco(String nombre, String direccion, String codigo) {
+		this.nombre = nombre;
+		this.direccion = direccion;
+		this.codigo = codigo;
+	}
+
+	/**
+	 * Es el constructor de la clase Banco sin parámetros
+	 */
+	public Banco() {
+	}
+
+	/**
+	 * Busca una cuenta a partir de su código {@code code}, muestra un null en
+	 * caso de que no se encuentre
+	 *
+	 * @param codigo
+	 *            es el codigo
+	 * @return
+	 */
+	public Cuenta buscarCuenta(String codigo) {
+		return getListaCuentas().stream().filter(cadaCuenta -> cadaCuenta.getCodigo().equals(codigo)).findFirst()
+				.orElse(null);
+	}
+
+	/**
+	 * Busca una cuenta a partir de su código {@code codigo} y si no se
+	 * encuentra se
+	 *
+	 * @param codigo
+	 * @return
+	 * @throws CuentaException
+	 */
+	private Cuenta buscarCuentaOError(String codigo) throws CuentaException {
+		Cuenta cuentaEncontrada = buscarCuenta(codigo);
+		if (cuentaEncontrada == null) {
+			throw new CuentaException("La cuenta no existe (" + codigo + ")");
+		}
+		return cuentaEncontrada;
+	}
+
+	/**
+	 * Agrega una cuenta de ahorros a la lista de cuentas, muestra un error en
+	 * caso de que ya exista
+	 *
+	 * @param codigo
+	 * @param saldo
+	 * @param tasaAnual
+	 * @throws CuentaException
+	 */
+	public void agregarCuentaAhorros(String codigo, float saldo, float tasaAnual) throws CuentaException {
+		if (validarCuenta(codigo)) {
+			throw new CuentaException("La cuenta ya existe (" + codigo + ")");
+		}
+		getListaCuentas().add(new CuentaAhorros(codigo, saldo, tasaAnual));
+	}
+
+	/**
+	 * Agrega una cuenta corriente a la lista de cuentas, muestra un error en
+	 * caso de que ya exista
+	 *
+	 * @param codigo
+	 * @param saldo
+	 * @param tasaAnual
+	 * @throws CuentaException
+	 */
+	public void agregarCuentaCorriente(String codigo, float saldo, float tasaAnual) throws CuentaException {
+		if (validarCuenta(codigo)) {
+			throw new CuentaException("La cuenta ya existe (" + codigo + ")");
+		}
+		getListaCuentas().add(new CuentaCorriente(codigo, saldo, tasaAnual));
+	}
+
+	/**
+	 * Elimina una cuenta a partir de su código {@code codigo}, muestra un error
+	 * en caso de que no se encuentre la cuenta
+	 *
+	 * @param codigo
+	 * @throws CuentaException
+	 */
+	public void eliminarCuenta(String codigo) throws CuentaException {
+		if (!validarCuenta(codigo)) {
+			throw new CuentaException("La cuenta no existe (" + codigo + ")");
+		}
+	}
+
+	/**
+	 * Actualiza una cuenta a una nueva version de ella {@code cuenta}
+	 *
+	 * @param cuenta
+	 */
+	private void actualizarCuenta(Cuenta cuenta) {
+		Cuenta cuentaEncontrada = buscarCuenta(cuenta.getCodigo());
+
+		int index = listaCuentas.indexOf(cuentaEncontrada);
+		listaCuentas.set(index, cuenta);
+	}
+
+	/**
+	 * Consigna un dinero a una cuenta que se encuentra a partir del código
+	 * {@code codigo}
+	 *
+	 * @param codigo
+	 * @param dinero
+	 * @throws CuentaException
+	 */
+	public void consignarDineroCuenta(String codigo, float dinero) throws CuentaException {
+		Cuenta cuentaEncontrada = buscarCuentaOError(codigo);
+		cuentaEncontrada.consignarDinero(dinero);
+		actualizarCuenta(cuentaEncontrada);
+	}
+
+	/**
+	 * Retira un dinero a una cuenta que se encuentra a partir del código
+	 * {@code codigo}
+	 *
+	 * @param codigo
+	 * @param dinero
+	 * @throws CuentaException
+	 */
+	public void retirarDineroCuenta(String codigo, float dinero) throws CuentaException {
+		Cuenta cuentaEncontrada = buscarCuentaOError(codigo);
+		cuentaEncontrada.retirarDinero(dinero);
+		actualizarCuenta(cuentaEncontrada);
+	}
+
+	/**
+	 * Calcula los intereses de una cuenta a partir de su codigo
+	 * @param codigo
+	 * @throws CuentaException
+	 */
+	public void calcularInteresesCuenta(String codigo) throws CuentaException {
+		Cuenta cuentaEncontrada = buscarCuentaOError(codigo);
+		cuentaEncontrada.calcularIntereses();
+		actualizarCuenta(cuentaEncontrada);
+	}
+
+	/**
+	 * Extrae el interes mensual de una cuenta a partir de su codigo
+	 * @param codigo
+	 * @throws CuentaException
+	 */
+	public void extraerMensualCuenta(String codigo) throws CuentaException {
+		Cuenta cuentaEncontrada = buscarCuentaOError(codigo);
+		cuentaEncontrada.extractoMensual();
+		actualizarCuenta(cuentaEncontrada);
+	}
+
+	public void imprimirCuenta(String codigo) throws CuentaException {
+		Cuenta cuentaEncontrada = buscarCuentaOError(codigo);
+		cuentaEncontrada.imprimir();
+		actualizarCuenta(cuentaEncontrada);
+	}
+
+	public boolean estaActivaCuenta(String codigo) throws CuentaException {
+		Cuenta cuentaEncontrada = buscarCuentaOError(codigo);
+		if (!cuentaEncontrada.getClass().equals(CuentaAhorros.class)) {
+			throw new CuentaException("La cuenta tiene que ser de ahorros");
+		}
+		CuentaAhorros cuentaEncontradaAhorros = (CuentaAhorros) cuentaEncontrada;
+		return cuentaEncontradaAhorros.estaActiva();
+	}
+
+	public float obtenerSobregiroCuenta(String codigo) throws CuentaException {
+		Cuenta cuentaEncontrada = buscarCuentaOError(codigo);
+		if (!cuentaEncontrada.getClass().equals(CuentaCorriente.class)) {
+			throw new CuentaException("La cuenta tiene que ser corriente");
+		}
+		CuentaCorriente cuentaEncontradaAhorros = (CuentaCorriente) cuentaEncontrada;
+		return cuentaEncontradaAhorros.getSobregiro();
+	}
+
+	public List<Cuenta> getListaCuentas() {
+		return listaCuentas;
+	}
+
+	public boolean validarCuenta(String codigo) {
+		return buscarCuenta(codigo) != null;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public String getDireccion() {
+		return direccion;
+	}
+
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
+	}
+
+	public String getCodigo() {
+		return codigo;
+	}
+
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Banco other = (Banco) obj;
+		if (codigo == null) {
+			if (other.codigo != null)
+				return false;
+		} else if (!codigo.equals(other.codigo))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return String.format("Banco [nombre=%s, direccion=%s, codigo=%s, listaCuentas=%s]", nombre, direccion, codigo,
+				listaCuentas);
+	}
+
+}
