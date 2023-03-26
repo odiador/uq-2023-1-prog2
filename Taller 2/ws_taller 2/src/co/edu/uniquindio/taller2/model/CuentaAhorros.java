@@ -28,6 +28,14 @@ public class CuentaAhorros extends Cuenta {
 		super.consignarDinero(saldo);
 	}
 
+	/**
+	 * Muestra un error en caso de que no esté activa la cuenta
+	 *
+	 * @param msg
+	 *            es el mensaje de error
+	 * @throws CuentaException
+	 *             si no esta activa
+	 */
 	public void throwIfNotActive(String msg) throws CuentaException {
 		if (!estaActiva())
 			throw new CuentaException(msg);
@@ -48,13 +56,15 @@ public class CuentaAhorros extends Cuenta {
 
 	@Override
 	public String imprimir() {
-		return toString();
+		return String.format("CuentaAhorros [saldo=%s, comisionMensual=%s, numTransacciones=%s]", getSaldo(),
+				getComisionMensual(), getNumTransacciones());
 	}
 
 	@Override
 	public String toString() {
-		return "CuentaAhorros[saldo:" + darFormatoDinero(saldo) + ", comision: " + darFormatoDinero(comisionMensual)
-				+ ", numero de transacciones: " + getNumTransacciones() + "]";
+		return String.format(
+				"CuentaAhorros [codigo=%s, saldo=%s, numConsignaciones=%s, numRetiros=%s, tasaAnual=%s, comisionMensual=%s, estaActiva=%s]",
+				codigo, saldo, numConsignaciones, numRetiros, tasaAnual, comisionMensual, estaActiva());
 	}
 
 }
