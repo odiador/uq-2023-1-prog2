@@ -24,6 +24,14 @@ public class Banco {
 				.orElse(null);
 	}
 
+	private Cuenta buscarCuentaOError(String codigo) throws CuentaException {
+		Cuenta cuentaEncontrada = buscarCuenta(codigo);
+		if (cuentaEncontrada == null) {
+			throw new CuentaException("La cuenta no existe (" + codigo + ")");
+		}
+		return cuentaEncontrada;
+	}
+
 	public void agregarCuentaAhorros(String codigo, float saldo, float tasaAnual) throws CuentaException {
 		if (validarCuenta(codigo)) {
 			throw new CuentaException("La cuenta ya existe (" + codigo + ")");
@@ -42,6 +50,61 @@ public class Banco {
 		if (!validarCuenta(codigo)) {
 			throw new CuentaException("La cuenta no existe (" + codigo + ")");
 		}
+	}
+
+	private void actualizarCuenta(Cuenta cuenta) {
+		Cuenta cuentaEncontrada = buscarCuenta(cuenta.getCodigo());
+
+		int index = listaCuentas.indexOf(cuentaEncontrada);
+		listaCuentas.set(index, cuenta);
+	}
+
+	public void consignarDineroCuenta(String codigo, float dinero) throws CuentaException {
+		Cuenta cuentaEncontrada = buscarCuentaOError(codigo);
+		cuentaEncontrada.consignarDinero(dinero);
+		actualizarCuenta(cuentaEncontrada);
+	}
+
+	public void retirarDineroCuenta(String codigo, float dinero) throws CuentaException {
+		Cuenta cuentaEncontrada = buscarCuentaOError(codigo);
+		cuentaEncontrada.retirarDinero(dinero);
+		actualizarCuenta(cuentaEncontrada);
+	}
+
+	public void calcularInteresesCuenta(String codigo) throws CuentaException {
+		Cuenta cuentaEncontrada = buscarCuentaOError(codigo);
+		cuentaEncontrada.calcularIntereses();
+		actualizarCuenta(cuentaEncontrada);
+	}
+
+	public void extraerMensualCuenta(String codigo) throws CuentaException {
+		Cuenta cuentaEncontrada = buscarCuentaOError(codigo);
+		cuentaEncontrada.extractoMensual();
+		actualizarCuenta(cuentaEncontrada);
+	}
+
+	public void imprimirCuenta(String codigo) throws CuentaException {
+		Cuenta cuentaEncontrada = buscarCuentaOError(codigo);
+		cuentaEncontrada.imprimir();
+		actualizarCuenta(cuentaEncontrada);
+	}
+
+	public boolean estaActivaCuenta(String codigo) throws CuentaException {
+		Cuenta cuentaEncontrada = buscarCuentaOError(codigo);
+		if (!cuentaEncontrada.getClass().equals(CuentaAhorros.class)) {
+			throw new CuentaException("La cuenta tiene que ser de ahorros");
+		}
+		CuentaAhorros cuentaEncontradaAhorros = (CuentaAhorros) cuentaEncontrada;
+		return cuentaEncontradaAhorros.estaActiva();
+	}
+
+	public float obtenerSobregiroCuenta(String codigo) throws CuentaException {
+		Cuenta cuentaEncontrada = buscarCuentaOError(codigo);
+		if (!cuentaEncontrada.getClass().equals(CuentaCorriente.class)) {
+			throw new CuentaException("La cuenta tiene que ser corriente");
+		}
+		CuentaCorriente cuentaEncontradaAhorros = (CuentaCorriente) cuentaEncontrada;
+		return cuentaEncontradaAhorros.getSobregiro();
 	}
 
 	public List<Cuenta> getListaCuentas() {
