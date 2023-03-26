@@ -53,6 +53,7 @@ public class CuentaCorriente extends Cuenta {
 		return getSobregiro() > 0;
 	}
 
+	@Override
 	public String imprimir() {
 		return toString();
 	}

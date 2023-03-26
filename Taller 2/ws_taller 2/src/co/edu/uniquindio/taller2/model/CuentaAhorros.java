@@ -46,6 +46,7 @@ public class CuentaAhorros extends Cuenta {
 		super.extractoMensual();
 	}
 
+	@Override
 	public String imprimir() {
 		return toString();
 	}

@@ -68,6 +68,8 @@ public abstract class Cuenta {
 		calcularIntereses();
 	}
 
+	public abstract String imprimir();
+
 	public float getSaldo() {
 		return saldo;
 	}
