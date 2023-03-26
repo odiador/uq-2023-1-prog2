@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="Test1" project="ws_taller 2" tests="2" started="2" failures="0" errors="0" ignored="0">
+  <testsuite name="co.edu.uniquindio.taller2.tests.Test1" time="0.002">
+    <testcase name="testCuentaAhorrosEqualsCuentaCorriente" classname="co.edu.uniquindio.taller2.tests.Test1" time="0.0"/>
+    <testcase name="testCuentaAhorrosEquals1" classname="co.edu.uniquindio.taller2.tests.Test1" time="0.0"/>
+  </testsuite>
+</testrun>

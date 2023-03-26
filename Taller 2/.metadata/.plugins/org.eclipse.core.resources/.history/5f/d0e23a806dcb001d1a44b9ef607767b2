@@ -1,0 +1,16 @@
+package co.edu.uniquindio.taller2.tests;
+
+import org.junit.Assert;
+
+import org.junit.Test;
+
+import co.edu.uniquindio.taller2.model.Banco;
+
+public class TestBankTrue {
+
+	@Test
+	public void test() {
+		Banco bank = new Banco("Bancolombia", "Cra 9 # 23 - 01", "AB-001");
+	}
+
+}

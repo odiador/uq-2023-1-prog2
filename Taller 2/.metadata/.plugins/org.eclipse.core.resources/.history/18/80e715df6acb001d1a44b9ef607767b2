@@ -1,0 +1,14 @@
+package co.edu.uniquindio.taller2.tests;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+public class Test1 {
+
+	@Test
+	public void testCuenta() {
+		fail("Not yet implemented");
+	}
+
+}

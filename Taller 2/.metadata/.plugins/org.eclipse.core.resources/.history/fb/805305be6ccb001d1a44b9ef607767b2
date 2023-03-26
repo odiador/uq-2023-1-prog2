@@ -1,0 +1,11 @@
+package co.edu.uniquindio.taller2.tests;
+
+import org.junit.Assert;
+import org.junit.Test;
+
+import co.edu.uniquindio.taller2.model.Banco;
+import co.edu.uniquindio.taller2.model.CuentaAhorros;
+
+public class TestEqualsFalse {
+
+}

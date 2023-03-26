@@ -1,0 +1,32 @@
+package co.edu.uniquindio.taller2.tests;
+
+import org.junit.Assert;
+
+import org.junit.Test;
+
+import co.edu.uniquindio.taller2.model.*;
+
+public class TestEquals {
+
+	@Test
+	public void testCuentaAhorrosEquals1() {
+		CuentaAhorros cuentaAhorros = new CuentaAhorros("0001", 0f, 0f);
+		Assert.assertTrue(cuentaAhorros.equals(new CuentaAhorros("0001", 100, 100)));
+	}
+
+	@Test
+	public void testCuentaAhorrosEquals2() {
+		//Falla porque tienen diferente código
+		CuentaAhorros cuentaAhorros = new CuentaAhorros("0001", 0f, 0f);
+		Assert.assertTrue(cuentaAhorros.equals(new CuentaAhorros("0002", 100, 100)));
+	}
+
+	@Test
+	public void testCuentaAhorrosEqualsCuentaCorriente() {
+		//A pesar de que una sea Tienen el mismo
+		Cuenta cuentaAhorros = new CuentaAhorros("0001", 0f, 0f);
+		Cuenta cuentaCorriente = new CuentaCorriente("0001", 0f, 0f);
+		Assert.assertTrue(cuentaAhorros.equals(cuentaCorriente));
+	}
+
+}

@@ -7,3 +7,8 @@
 1679788097563	Rename local variable 'cuentaaux'
 1679788108382	Rename local variable 'cadacuenta'
 1679788668682	Extract local variable 'buscarCuenta'
+1679789919045	Rename type 'Test1'
+1679790020209	Extract local variable 'obj'
+1679790064863	Rename type 'TestEquals'
+1679790071303	Rename type 'Test2'
+1679790399638	Extract local variable 'actual'
