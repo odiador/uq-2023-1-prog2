@@ -110,10 +110,12 @@ public class Banco {
 	 *             en caso de que no se encuentre la cuenta
 	 */
 	public void eliminarCuenta(String codigo) throws CuentaException {
-		if (!validarCuenta(codigo)) {
+		Cuenta cuenta = buscarCuenta(codigo);
+		if (cuenta == null) {
 			throw new CuentaException("La cuenta no existe (" + codigo + ")");
 		}
-		// TODO
+		getListaCuentas().remove(cuenta);
+
 	}
 
 	/**
