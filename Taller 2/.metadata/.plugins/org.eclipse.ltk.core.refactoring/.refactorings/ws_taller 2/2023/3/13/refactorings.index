@@ -12,3 +12,8 @@
 1679790064863	Rename type 'TestEquals'
 1679790071303	Rename type 'Test2'
 1679790399638	Extract local variable 'actual'
+1679793190165	Extract local variable 'buscarCuenta'
+1679793367319	Extract local variable 'indexOf'
+1679793566391	Extract local variable 'buscarCuenta'
+1679793589876	Extract local variable 'indexOf'
+1679794538475	Extract local variable 'buscarCuenta'
