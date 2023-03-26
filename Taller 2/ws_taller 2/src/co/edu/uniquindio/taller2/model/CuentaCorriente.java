@@ -15,10 +15,20 @@ public class CuentaCorriente extends Cuenta {
 		super(codigo, saldo, tasaAnual);
 	}
 
+	/**
+	 * Obtiene el sobregiro de la cuenta corriente
+	 *
+	 * @return
+	 */
 	public float getSobregiro() {
 		return sobregiro;
 	}
 
+	/**
+	 * Cambia el sobregiro de la cuenta corriente
+	 *
+	 * @param sobregiro
+	 */
 	public void setSobregiro(float sobregiro) {
 		this.sobregiro = sobregiro;
 	}
@@ -49,7 +59,12 @@ public class CuentaCorriente extends Cuenta {
 		}
 	}
 
-	public boolean haySobregiro() {
+	/**
+	 * Determina si hay sobregiro o no
+	 *
+	 * @return
+	 */
+	private boolean haySobregiro() {
 		return getSobregiro() > 0;
 	}
 
