@@ -1,0 +1,24 @@
+package co.edu.uniquindio.taller2.model;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Banco {
+
+	private String nombre;
+	private String direccion;
+	private String codigo;
+	private final List<Cuenta> listaCuentas;
+
+	public Banco(String nombre, String direccion, String codigo) {
+		this.nombre = nombre;
+		this.direccion = direccion;
+		this.codigo = codigo;
+		listaCuentas = new ArrayList<Cuenta>();
+	}
+
+	public void agregarCuentaAhorros(String codigo, float saldo, float tasaAnual) {
+
+	}
+
+}

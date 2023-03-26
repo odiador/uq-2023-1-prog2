@@ -4,3 +4,6 @@
 1679779164011	Encapsulate field 'sobregiro'
 1679782419621	Extract method 'extracted'
 1679782621391	Inline local variable 'saldoNuevo'
+1679788097563	Rename local variable 'cuentaaux'
+1679788108382	Rename local variable 'cadacuenta'
+1679788668682	Extract local variable 'buscarCuenta'
