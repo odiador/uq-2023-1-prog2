@@ -64,7 +64,7 @@ public abstract class Cuenta {
 	 */
 	public void extractoMensual() throws CuentaException {
 		retirarDinero(getComisionMensual());
-		setSaldo(getSaldo() - getComisionMensual());
+		setNumRetiros(getNumRetiros() - 1);
 		calcularIntereses();
 	}
 
