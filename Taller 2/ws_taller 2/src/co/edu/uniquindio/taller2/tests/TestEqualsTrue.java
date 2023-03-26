@@ -13,7 +13,7 @@ public class TestEqualsTrue {
 
 		CuentaAhorros cuentaAhorros = new CuentaAhorros("0001", 0f, 0f);
 		CuentaAhorros cuentaAhorros2 = new CuentaAhorros("0001", 100, 100);
-		Assert.assertTrue(cuentaAhorros.equals(cuentaAhorros2));
+		Assert.assertEquals(cuentaAhorros, cuentaAhorros2);
 	}
 
 	@Test
