@@ -49,7 +49,7 @@ class CuentaCorriente {
 
     +consignarDinero(saldo: float) : void
     +retirarDinero(saldo: float) : void
-    +haySobregiro() : boolean
+    -haySobregiro() : boolean
     +imprimir() : String
 }
 class CuentaException <<exception>> {
