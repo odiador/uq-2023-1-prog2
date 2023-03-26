@@ -3,7 +3,6 @@
 <fullyQualifiedTypeName name="java.awt.List"/>
 <fullyQualifiedTypeName name="java.util.List"/>
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
-<fullyQualifiedTypeName name="co.edu.uniquindio.taller2.model.Cuenta"/>
 <fullyQualifiedTypeName name="co.edu.uniquindio.taller2.model.Banco"/>
 <fullyQualifiedTypeName name="org.junit.Assert"/>
 <fullyQualifiedTypeName name="org.junit.rules.ExpectedException"/>
@@ -11,4 +10,5 @@
 <fullyQualifiedTypeName name="co.edu.uniquindio.taller2.model.CuentaException"/>
 <fullyQualifiedTypeName name="co.edu.uniquindio.taller2.model.CuentaAhorros"/>
 <fullyQualifiedTypeName name="co.edu.uniquindio.taller2.model.CuentaCorriente"/>
+<fullyQualifiedTypeName name="co.edu.uniquindio.taller2.model.Cuenta"/>
 </qualifiedTypeNameHistroy>

@@ -6,6 +6,7 @@ INDEX VERSION 1.129+C:\Users\juana\OneDrive\Documentos\GitHub\uq-prog2\Taller 2\
 3119455041.index
 2927524569.index
 3452167551.index
+98133461.index
 1904741536.index
 3681335767.index
 1847969816.index
