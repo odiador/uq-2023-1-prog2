@@ -28,7 +28,7 @@ public abstract class Cuenta {
 	 * @param saldo
 	 * @throws CuentaException
 	 */
-	public void consignarDinero(float saldo) throws CuentaException {
+	public void consignarDinero(float saldo) {
 		setSaldo(getSaldo() + saldo);
 		setNumConsignaciones(getNumConsignaciones() + 1);
 	}

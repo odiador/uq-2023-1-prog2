@@ -23,8 +23,7 @@ public class CuentaAhorros extends Cuenta {
 	}
 
 	@Override
-	public void consignarDinero(float saldo) throws CuentaException {
-		throwIfNotActive("No se pudo consignar el dinero (cuenta no activa)");
+	public void consignarDinero(float saldo) {
 		super.consignarDinero(saldo);
 	}
 
