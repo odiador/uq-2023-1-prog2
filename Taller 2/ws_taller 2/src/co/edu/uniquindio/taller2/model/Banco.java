@@ -124,7 +124,7 @@ public class Banco {
 	 * @param cuenta
 	 *            es la cuenta a actualizar
 	 */
-	private void actualizarCuenta(Cuenta cuenta) {
+	public void actualizarCuenta(Cuenta cuenta) {
 		Cuenta cuentaEncontrada = buscarCuenta(cuenta.getCodigo());
 
 		int index = listaCuentas.indexOf(cuentaEncontrada);
@@ -200,11 +200,11 @@ public class Banco {
 	 *            es el código
 	 * @throws CuentaException
 	 *             en caso de que no se encuentre la cuenta
+	 * @return la cuenta en String
 	 */
-	public void imprimirCuenta(String codigo) throws CuentaException {
+	public String imprimirCuenta(String codigo) throws CuentaException {
 		Cuenta cuentaEncontrada = buscarCuentaOError(codigo);
-		cuentaEncontrada.imprimir();
-		actualizarCuenta(cuentaEncontrada);
+		return cuentaEncontrada.imprimir();
 	}
 
 	/**
