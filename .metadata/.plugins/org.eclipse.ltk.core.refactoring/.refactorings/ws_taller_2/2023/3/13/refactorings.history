@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Rename package &apos;application&apos; to &apos;co.edu.uniquindio.taller_2.application&apos;&#x0D;&#x0A;- Original project: &apos;ws_taller_2&apos;&#x0D;&#x0A;- Original element: &apos;ws_taller_2/src/application&apos;&#x0D;&#x0A;- Renamed element: &apos;ws_taller_2/src/co.edu.uniquindio.taller_2.application&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename package &apos;application&apos;" flags="589830" hierarchical="false" id="org.eclipse.jdt.ui.rename.package" input="/src&lt;application" name="co.edu.uniquindio.taller_2.application" qualified="false" references="true" stamp="1679660839622" textual="false" version="1.0"/>
-</session>
