@@ -25,10 +25,12 @@ public class TestBankTrue {
 
 	@Test
 	public void TestBancoAgregarCuenta2() throws CuentaException {
+		// Espera un error de tipo CuentaException
 		expectedException.expect(CuentaException.class);
 		// Agrega una cuenta de ahorros
 		bank.agregarCuentaAhorros("A001", 0, 0);
-		// Agrega una cuenta de ahorros con el mismo código (error)
+		// Agrega una cuenta de ahorros con el mismo código (error pero es el
+		// esperado)
 		bank.agregarCuentaAhorros("A001", 0, 0);
 	}
 }
