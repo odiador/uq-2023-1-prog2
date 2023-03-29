@@ -19,7 +19,7 @@ public class TestBankTrue {
 
 		// Agrega una cuenta de ahorros
 		bank.agregarCuentaAhorros("A001", 0, 0);
-		// Agrega una cuenta de ahorros con diferente código
+		// Agrega una cuenta de ahorros con diferente cï¿½digo
 		bank.agregarCuentaAhorros("A002", 0, 0);
 	}
 
@@ -29,7 +29,7 @@ public class TestBankTrue {
 		expectedException.expect(CuentaException.class);
 		// Agrega una cuenta de ahorros
 		bank.agregarCuentaAhorros("A001", 0, 0);
-		// Agrega una cuenta de ahorros con el mismo código (error pero es el
+		// Agrega una cuenta de ahorros con el mismo cï¿½digo (error pero es el
 		// esperado)
 		bank.agregarCuentaAhorros("A001", 0, 0);
 	}
