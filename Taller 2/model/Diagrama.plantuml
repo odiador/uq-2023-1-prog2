@@ -21,8 +21,8 @@ class Banco {
     +imprimirCuenta(codigo: String) : void
     +estaActivaCuenta(codigo: String) : boolean
     +obtenerSobregiroCuenta(codigo: String) : float
+    +actualizarCuenta(cuenta: Cuenta) : void
     -buscarCuentaOError(codigo: String) : void
-    -actualizarCuenta(cuenta: Cuenta) : void
 }
 
 abstract class Cuenta <<abstract>> {
@@ -61,14 +61,25 @@ class CuentaCorriente {
     +imprimir() : String
     -haySobregiro() : boolean
 }
+
 class CuentaException <<exception>> {
     +CuentaException(msg: String)
 }
+
+class Util {
+    darFormato(format: String, args: Object...) : String
+    darFormatoDinero(args: Object...) : String
+}
+
 Banco " 1 " o--- " * " Cuenta : -listaCuentas
 
-Cuenta ..> CuentaException : <<send>>
-CuentaAhorros ..> CuentaException : <<send>>
-CuentaCorriente ..> CuentaException : <<send>>
+Cuenta .up.> CuentaException : <<send>>
+CuentaAhorros .up.> CuentaException : <<send>>
+CuentaCorriente .up.> CuentaException : <<send>>
+Banco .up..> CuentaException : <<send>>
+
+CuentaAhorros ..down.> Util : <<use>>
+CuentaCorriente ..down.> Util : <<use>>
 
 CuentaAhorros -right-|> Cuenta
 CuentaCorriente -left-|> Cuenta
