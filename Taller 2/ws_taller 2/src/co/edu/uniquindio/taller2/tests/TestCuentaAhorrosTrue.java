@@ -5,9 +5,9 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import co.edu.uniquindio.taller2.exceptions.CuentaException;
 import co.edu.uniquindio.taller2.model.Banco;
 import co.edu.uniquindio.taller2.model.Cuenta;
-import co.edu.uniquindio.taller2.model.CuentaException;
 
 public class TestCuentaAhorrosTrue {
 	public Banco bank = new Banco("Bancolombia", "Cra 9 # 23 - 01", "AB-001");
