@@ -58,7 +58,7 @@ public abstract class Cuenta {
 	}
 
 	/**
-	 * Extrae mensualmente una comisi�n y luego agrega los intereses a la cuenta
+	 * Extrae mensualmente una comisi�n y luego agrega los intereses a la cuenta
 	 *
 	 * @throws CuentaException
 	 */
@@ -70,58 +70,133 @@ public abstract class Cuenta {
 
 	public abstract String imprimir();
 
+	/**
+	 * Obtiene el saldo de la cuenta
+	 *
+	 * @return
+	 */
 	public float getSaldo() {
 		return saldo;
 	}
 
+	/**
+	 * Cambia el saldo de la cuenta
+	 *
+	 * @param saldo
+	 */
 	public void setSaldo(float saldo) {
 		this.saldo = saldo;
 	}
 
+	/**
+	 * Obtiene el número de consignaciones de la cuenta
+	 *
+	 * @return
+	 */
 	public int getNumConsignaciones() {
 		return numConsignaciones;
 	}
 
+	/**
+	 * Cambia el número de consignaciones de la cuenta
+	 *
+	 * @param numConsignaciones
+	 */
 	public void setNumConsignaciones(int numConsignaciones) {
 		this.numConsignaciones = numConsignaciones;
 	}
 
+	/**
+	 * Obtiene el número de retiros de la cuenta
+	 *
+	 * @return
+	 */
 	public int getNumRetiros() {
 		return numRetiros;
 	}
 
+	/**
+	 * Obtiene el número de retiros de la cuenta
+	 *
+	 * @param numRetiros
+	 */
 	public void setNumRetiros(int numRetiros) {
 		this.numRetiros = numRetiros;
 	}
 
+	/**
+	 * Obtiene la tasa anual de la cuenta
+	 *
+	 * @return
+	 */
 	public float getTasaAnual() {
 		return tasaAnual;
 	}
 
+	/**
+	 * Cambia la tasa anual de la cuenta
+	 *
+	 * @param tasaAnual
+	 */
 	public void setTasaAnual(float tasaAnual) {
 		this.tasaAnual = tasaAnual;
 	}
 
+	/**
+	 * Obtiene la comisión mensual de la cuenta
+	 *
+	 * @return
+	 */
 	public float getComisionMensual() {
 		return comisionMensual;
 	}
 
+	/**
+	 * Cambia la comisión mensual de la cuenta
+	 *
+	 * @param comisionMensual
+	 */
 	public void setComisionMensual(float comisionMensual) {
 		this.comisionMensual = comisionMensual;
 	}
 
+	/**
+	 * Obtiene el codigo de la cuenta
+	 *
+	 * @return
+	 */
 	public String getCodigo() {
 		return codigo;
 	}
 
+	/**
+	 * Cambia el codigo de la cuenta
+	 *
+	 * @param codigo
+	 */
 	public void setCodigo(String codigo) {
 		this.codigo = codigo;
 	}
 
+	/**
+	 * Obtiene una cadena con un formato especificado
+	 *
+	 * @param format
+	 * @param args
+	 * @return
+	 */
 	public static String darFormato(String format, Object... args) {
 		return String.format(format, args).replace(',', '.');
 	}
 
+	/**
+	 * Obtiene una cadena con formato de dinero
+	 * <li>Ejemplo: Para un decimal 1536.73 se obtiene como resultado lo
+	 * siguiente: $1536.73
+	 *
+	 * @param args
+	 * @return
+	 */
 	public static String darFormatoDinero(Object... args) {
 		return "$" + darFormato("%.2f", args);
 	}
