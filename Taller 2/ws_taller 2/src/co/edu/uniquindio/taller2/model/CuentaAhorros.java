@@ -55,7 +55,7 @@ public class CuentaAhorros extends Cuenta {
 
 	@Override
 	public String imprimir() {
-		return String.format("CuentaAhorros [saldo=%s, comisionMensual=%s, numTransacciones=%s]", getSaldo(),
+		return String.format("CuentaAhorros [saldo=%s, comisionMensual=%s, numTransacciones=%s]", Util.darFormatoDinero(getSaldo()),
 				getComisionMensual(), getNumTransacciones());
 	}
 

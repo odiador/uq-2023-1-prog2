@@ -71,8 +71,8 @@ public class CuentaCorriente extends Cuenta {
 
 	@Override
 	public String imprimir() {
-		return String.format("CuentaCorriente [saldo=%s, comisionMensual=%s, numTransacciones=%s, sobregiro=%s]", saldo,
-				comisionMensual, getNumTransacciones(), sobregiro);
+		return String.format("CuentaCorriente [saldo=%s, comisionMensual=%s, numTransacciones=%s, sobregiro=%s]",
+				Util.darFormatoDinero(saldo), comisionMensual, getNumTransacciones(), Util.darFormatoDinero(sobregiro));
 	}
 
 	@Override
