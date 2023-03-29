@@ -10,7 +10,7 @@ public class Util {
 	 * @return
 	 */
 	public static String darFormato(String format, Object... args) {
-		return String.format(format, args).replace(',', '.');
+		return String.format(format, args);
 	}
 
 	/**
@@ -22,6 +22,6 @@ public class Util {
 	 * @return
 	 */
 	public static String darFormatoDinero(Object... args) {
-		return "$" + darFormato("%.2f", args);
+		return "$" + darFormato("%.2f", args).replace(',', '.');
 	}
 }
