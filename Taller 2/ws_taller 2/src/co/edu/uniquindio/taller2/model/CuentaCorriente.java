@@ -57,6 +57,7 @@ public class CuentaCorriente extends Cuenta {
 				setSaldo(0f);
 			}
 		}
+		setNumRetiros(getNumRetiros() + 1);
 	}
 
 	/**
