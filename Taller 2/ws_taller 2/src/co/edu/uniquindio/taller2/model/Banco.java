@@ -3,6 +3,8 @@ package co.edu.uniquindio.taller2.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import co.edu.uniquindio.taller2.exceptions.CuentaException;
+
 public class Banco {
 
 	protected String nombre;

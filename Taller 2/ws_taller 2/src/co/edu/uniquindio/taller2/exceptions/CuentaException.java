@@ -1,4 +1,4 @@
-package co.edu.uniquindio.taller2.model;
+package co.edu.uniquindio.taller2.exceptions;
 
 public class CuentaException extends java.lang.Exception {
 	/**

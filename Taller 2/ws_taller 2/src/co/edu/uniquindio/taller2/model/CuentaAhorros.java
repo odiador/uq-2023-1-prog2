@@ -1,5 +1,7 @@
 package co.edu.uniquindio.taller2.model;
 
+import co.edu.uniquindio.taller2.exceptions.CuentaException;
+
 public class CuentaAhorros extends Cuenta {
 
 	/**
