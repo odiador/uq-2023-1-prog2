@@ -1,0 +1,42 @@
+@startuml Diagrama
+
+skinparam Linetype ortho
+skinparam style strictuml
+
+class CentroImpresion {
+    +agregarDocumento(code: String, titulo: String, prioridad: int): void
+    +agregarImpresora(code: String, estaConectada: boolean): void
+    
+    +eliminarDocumento(code: String) : void
+    +eliminarImpresora(code: String) : void
+    +imprimirDocumento(): void
+    -ordenarDocumentos(): void
+}
+
+enum EstadoImpresora <<enumeration>> {
+    ACTIVO
+    INACTIVO
+    MANTENIMIENTO
+}
+
+class Impresora {
+    -code : String
+    -marca : String
+    +imprimirDocumento(documento: Documento)
+}
+
+class Documento {
+    -code : String
+    -titulo : String
+    -prioridad : int
+    -fechaAgregado : LocalDateTime
+    -fechaImpresion : LocalDateTime
+    +estadoImpresion() : boolean
+}
+
+CentroImpresion " 1 " o-- " * " Documento : -listaDocumentos
+CentroImpresion " 1 " *-- " * " Impresora : -listaImpresoras
+Impresora " 1 " o-- " * " Documento : -listaDocumentos
+
+Impresora ". 1 " --> EstadoImpresora : -estado
+@enduml
