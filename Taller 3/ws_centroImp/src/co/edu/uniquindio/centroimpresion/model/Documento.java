@@ -29,6 +29,10 @@ public class Documento implements Comparable<Documento> {
 		this.code = "";
 	}
 
+	public int obtenerCantidadPaginas() {
+		return 1;
+	}
+
 	public boolean estadoImpresion() {
 		return fechaImpresion != null;
 	}
@@ -102,13 +106,15 @@ public class Documento implements Comparable<Documento> {
 		return true;
 	}
 
-	public int compararPorTitulo(Documento o) {
-		return getTitulo().compareTo(o.getTitulo());
-	}
-
 	@Override
 	public int compareTo(Documento o) {
 		return o.getPrioridad() - getPrioridad();
+	}
+
+	@Override
+	public String toString() {
+		return "Documento [code=" + code + ", titulo=" + titulo + ", prioridad=" + prioridad + ", contenido="
+				+ contenido + ", fechaAgregado=" + fechaAgregado + ", fechaImpresion=" + fechaImpresion + "]";
 	}
 
 }

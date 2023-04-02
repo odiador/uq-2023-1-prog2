@@ -12,12 +12,46 @@ public abstract class Impresora {
 	private String marca;
 	private EstadoImpresora estado;
 	private final TreeSet<Documento> listaDocumentos = new TreeSet<Documento>();
+	private double paginasPorMinuto;
+	private boolean esAColor;
+	private int paginasImpresas;
 
-	public Impresora(String code, String marca, EstadoImpresora estado) {
+	public Impresora(String code, String marca, EstadoImpresora estado, boolean esAColor, double paginasPorMinuto) {
 		this.code = code;
 		this.marca = marca;
 		this.estado = estado;
+		this.esAColor = esAColor;
+		this.paginasPorMinuto = paginasPorMinuto;
 	}
+
+	public void addDocumento(String code, String titulo, int prioridad, String contenido, LocalDateTime fechaAgregado)
+			throws ImpresoraException {
+		throwIfNotActive();
+
+		if (!getListaDocumentos().add(new Documento(code, titulo, prioridad, contenido, fechaAgregado)))
+			throw new ImpresoraException("El documento ya existe");
+	}
+
+	public Documento buscarDocumento(String code) {
+		return getListaDocumentos().stream().filter(doc -> doc.getCode().equals(code)).findAny()
+				.orElse(new Documento());
+	}
+
+	public void deleteDocumento(String code) throws ImpresoraException {
+		throwIfNotActive();
+
+		if (!getListaDocumentos().remove(buscarDocumento(code)))
+			throw new ImpresoraException("El documento no existe");
+	}
+
+	private void throwIfNotActive() throws ImpresoraException {
+		if (!estaActiva())
+			throw new ImpresoraException("La impresora no esta activa");
+	}
+
+	public abstract boolean imprimirDocumento();
+
+	public abstract boolean imprimirDocumento(String code);
 
 	public String getCode() {
 		return code;
@@ -47,31 +81,60 @@ public abstract class Impresora {
 		return listaDocumentos;
 	}
 
-	public void addDocumento(String code, String titulo, int prioridad, String contenido, LocalDateTime fechaAgregado)
-			throws ImpresoraException {
-		throwIfNotActive();
-
-		if (!getListaDocumentos().add(new Documento(code, titulo, prioridad, contenido, fechaAgregado)))
-			throw new ImpresoraException("El documento ya existe");
+	public double getPaginasPorMinuto() {
+		return paginasPorMinuto;
 	}
 
-	public Documento buscarDocumento(String code) {
-		return getListaDocumentos().stream().filter(doc -> doc.getCode().equals(code)).findAny()
-				.orElse(new Documento());
+	public void setPaginasPorMinuto(double paginasPorMinuto) {
+		this.paginasPorMinuto = paginasPorMinuto;
 	}
 
-	public void deleteDocumento(String code) throws ImpresoraException {
-		throwIfNotActive();
-
-		if (!getListaDocumentos().remove(buscarDocumento(code)))
-			throw new ImpresoraException("El documento no existe");
+	public boolean isEsAColor() {
+		return esAColor;
 	}
 
-	private void throwIfNotActive() throws ImpresoraException {
-		if (!estaActiva())
-			throw new ImpresoraException("La impresora no esta activa");
+	public void setEsAColor(boolean esAColor) {
+		this.esAColor = esAColor;
 	}
 
-	public abstract boolean imprimir();
+	public int getPaginasImpresas() {
+		return paginasImpresas;
+	}
+
+	public void setPaginasImpresas(int paginasImpresas) {
+		this.paginasImpresas = paginasImpresas;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((code == null) ? 0 : code.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Impresora other = (Impresora) obj;
+		if (code == null) {
+			if (other.code != null)
+				return false;
+		} else if (!code.equals(other.code))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Impresora [code=" + code + ", marca=" + marca + ", estado=" + estado + ", listaDocumentos="
+				+ listaDocumentos + ", paginasPorMinuto=" + paginasPorMinuto + ", esAColor=" + esAColor
+				+ ", paginasImpresas=" + paginasImpresas + "]";
+	}
 
 }

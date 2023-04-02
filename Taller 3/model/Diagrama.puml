@@ -11,6 +11,8 @@ class CentroImpresion {
     +buscarDocumento(code: String) : Documento
     +buscarImpresora(code: String) : Impresora
     +imprimirDocumento(): void
+    +imprimirDocumento(codeImpresora: String): void
+    +imprimirDocumento(codeImpresora: String, codeDocumento: String): void
 }
 
 enum EstadoImpresora <<enumeration>> {
@@ -26,6 +28,7 @@ abstract class Impresora <<abstract>> {
     -marca : String
     -paginasPorMinuto : double
     -esAColor : boolean
+    -paginasImpresas : int
     +estaActiva() : boolean
     +agregarDocumento(code: String, titulo: String, prioridad: int, contenido: String): void
     +eliminarDocumento(code: String) : void
@@ -35,7 +38,7 @@ abstract class Impresora <<abstract>> {
     -throwIfNotActive() : void
 }
 class ImpresoraLaser {
-    -paginasImpresas : int
+    -nivelToner : int
     -duracionToner : int
     +recargarToner() : void
     +imprimirDocumento() : void
@@ -43,8 +46,8 @@ class ImpresoraLaser {
 }
 
 class ImpresoraCartucho {
-    -volumenMaxCartucho : double
-    -volumenCartucho : double
+    -capacidadCartucho : double
+    -nivelCartucho : double
     -desgasteCartucho : double
     +recargarCartucho() :void
     +imprimirDocumento() : void
