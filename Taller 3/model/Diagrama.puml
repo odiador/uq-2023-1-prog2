@@ -20,14 +20,14 @@ enum EstadoImpresora <<enumeration>> {
     MANTENIMIENTO
 }
 
-class Impresora {
+abstract class Impresora <<abstract>> {
     -code : String
     -marca : String
     +estaActiva() : boolean
     +agregarDocumento(code: String, titulo: String, prioridad: int, contenido: String): void
     +eliminarDocumento(code: String) : void
     +buscarDocumento(code: String) : Documento
-    +imprimirDocumento() : void
+    +<i>imprimirDocumento() : void
     -throwIfNotActive() : void
 }
 
