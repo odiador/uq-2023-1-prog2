@@ -11,7 +11,6 @@ class CentroImpresion {
     +buscarDocumento(code: String) : Documento
     +buscarImpresora(code: String) : Impresora
     +imprimirDocumento(): void
-    -ordenarDocumentos(): void
 }
 
 enum EstadoImpresora <<enumeration>> {
