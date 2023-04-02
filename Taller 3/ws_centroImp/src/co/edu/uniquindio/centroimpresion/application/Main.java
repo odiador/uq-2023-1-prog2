@@ -1,4 +1,4 @@
-package application;
+package co.edu.uniquindio.centroimpresion.application;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
