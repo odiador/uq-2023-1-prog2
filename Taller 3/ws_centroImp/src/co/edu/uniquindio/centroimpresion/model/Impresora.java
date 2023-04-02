@@ -55,7 +55,7 @@ public abstract class Impresora {
 			throw new ImpresoraException("El documento ya existe");
 	}
 
-	public Documento buscarDoc(String code) {
+	public Documento buscarDocumento(String code) {
 		return getListaDocumentos().stream().filter(doc -> doc.getCode().equals(code)).findAny()
 				.orElse(new Documento());
 	}
@@ -63,7 +63,7 @@ public abstract class Impresora {
 	public void deleteDocumento(String code) throws ImpresoraException {
 		throwIfNotActive();
 
-		if (!getListaDocumentos().remove(buscarDoc(code)))
+		if (!getListaDocumentos().remove(buscarDocumento(code)))
 			throw new ImpresoraException("El documento no existe");
 	}
 
