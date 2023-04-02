@@ -1,5 +1,5 @@
 package co.edu.uniquindio.centroimpresion.model;
 
-public class EstadoImpresora {
-
+public enum EstadoImpresora {
+	ACTIVO, INACTIVO, MANTENIMIENTO;
 }
