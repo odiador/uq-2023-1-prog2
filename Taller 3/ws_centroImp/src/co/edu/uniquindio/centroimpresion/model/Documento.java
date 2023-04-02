@@ -4,17 +4,20 @@ public class Documento implements Comparable<Documento> {
 	private String code;
 	private String titulo;
 	private int prioridad;
+	private String cuerpo;
 
 	/**
 	 *
 	 * @param code
 	 * @param titulo
 	 * @param prioridad
+	 * @param cuerpo
 	 */
-	public Documento(String code, String titulo, int prioridad) {
+	public Documento(String code, String titulo, int prioridad, String cuerpo) {
 		this.code = code;
 		this.titulo = titulo;
 		this.prioridad = prioridad;
+		this.cuerpo = cuerpo;
 	}
 
 	public String getCode() {
@@ -39,6 +42,14 @@ public class Documento implements Comparable<Documento> {
 
 	public void setPrioridad(int prioridad) {
 		this.prioridad = prioridad;
+	}
+
+	public String getCuerpo() {
+		return cuerpo;
+	}
+
+	public void setCuerpo(String cuerpo) {
+		this.cuerpo = cuerpo;
 	}
 
 	@Override
