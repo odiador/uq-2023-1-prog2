@@ -4,11 +4,12 @@ skinparam Linetype ortho
 skinparam style strictuml
 
 class CentroImpresion {
-    +agregarDocumento(code: String, titulo: String, prioridad: int): void
+    +agregarDocumento(code: String, titulo: String, prioridad: int, contenido: String): void
     +agregarImpresora(code: String, estaConectada: boolean): void
-    
     +eliminarDocumento(code: String) : void
     +eliminarImpresora(code: String) : void
+    +buscarDocumento(code: String) : Documento
+    +buscarImpresora(code: String) : Impresora
     +imprimirDocumento(): void
     -ordenarDocumentos(): void
 }
@@ -22,7 +23,12 @@ enum EstadoImpresora <<enumeration>> {
 class Impresora {
     -code : String
     -marca : String
-    +imprimirDocumento(documento: Documento)
+    +estaActiva() : boolean
+    +agregarDocumento(code: String, titulo: String, prioridad: int, contenido: String): void
+    +eliminarDocumento(code: String) : void
+    +buscarDocumento(code: String) : Documento
+    +imprimirDocumento() : void
+    -throwIfNotActive() : void
 }
 
 class Documento {
