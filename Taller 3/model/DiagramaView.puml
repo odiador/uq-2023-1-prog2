@@ -1,0 +1,63 @@
+@startuml Diagrama Vista
+
+skinparam Linetype ortho
+
+class PanelPrincipal {
+    -nombre: String
+
+    +initComp() : void
+    +movementPerformed(source: OpcionPrincipal)
+}
+class PanelPrincipalIzq {
+    -nombre: String
+
+    +initComp() : void
+}
+class Header {
+    -nombre: String
+    +initComp() : void
+}
+class TabPanelPrincipal {
+
+}
+/'
+Actua como medio de comunicacion para el panel de
+la izquierda y el central
+'/
+interface TabComunicationListener <<interface>> {
+    +<i>movementPerformed(source: OpcionPrincipal)
+}
+enum OpcionPrincipal <<enumeration>> {
+    OpcionPrincipal(text: String)
+
+    AGREGAR_DOCUMENTO
+    AGREGAR_IMPRESORA
+    IMPRIMIR_DOCUMENTO
+    IMPRIMIR_DOCUMENTO_ESPECIFICO
+    ELIMINAR_DOCUMENTO
+    ELIMINAR_IMPRESORA
+    VER_DOCUMENTOS
+    VER_IMPRESORAS
+    ACERCA_DE
+}
+'Agregacion Opciones
+PanelPrincipal --> " 1..9 " OpcionPrincipal : -opciones
+PanelPrincipalIzq --> " 1..9 " OpcionPrincipal : -opciones
+TabPanelPrincipal --> " 1..9 " OpcionPrincipal : -opciones
+
+'Asociaciones
+PanelPrincipal -->  PanelPrincipalIzq : 1
+PanelPrincipal --> TabPanelPrincipal : 1
+PanelPrincipalIzq --> Header : 1
+
+'Herencia de clases de javafx
+TabPanelPrincipal --|> TabPane
+PanelPrincipal --|> BorderPane
+PanelPrincipalIzq --|> VBox
+Header --|> BorderPane
+
+'Comunicacion entre paneles
+PanelPrincipal ..|> TabComunicationListener
+PanelPrincipalIzq ..> TabComunicationListener
+
+@enduml
