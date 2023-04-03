@@ -1,6 +1,7 @@
 @startuml Diagrama Vista
 
 skinparam Linetype ortho
+skinparam style strictuml
 
 class PanelPrincipal {
     -nombre: String
@@ -17,9 +18,26 @@ class Header {
     -nombre: String
     +initComp() : void
 }
-class TabPanelPrincipal {
+class TabPanelPrincipal{
+    +initComp() : void
+}
+
+class PanelAcercaDe {
 
 }
+class PanelAdd {
+
+}
+class PanelRemove {
+
+}
+class PanelImprimir {
+
+}
+class PanelVer {
+
+}
+
 /'
 Actua como medio de comunicacion para el panel de
 la izquierda y el central
@@ -30,31 +48,41 @@ interface TabComunicationListener <<interface>> {
 enum OpcionPrincipal <<enumeration>> {
     OpcionPrincipal(text: String)
 
-    AGREGAR_DOCUMENTO
-    AGREGAR_IMPRESORA
-    IMPRIMIR_DOCUMENTO
-    IMPRIMIR_DOCUMENTO_ESPECIFICO
-    ELIMINAR_DOCUMENTO
-    ELIMINAR_IMPRESORA
-    VER_DOCUMENTOS
-    VER_IMPRESORAS
+    AGREGAR
+    IMPRIMIR
+    ELIMINAR
+    VER
     ACERCA_DE
 }
 'Agregacion Opciones
-PanelPrincipal --> " 1..9 " OpcionPrincipal : -opciones
-PanelPrincipalIzq --> " 1..9 " OpcionPrincipal : -opciones
-TabPanelPrincipal --> " 1..9 " OpcionPrincipal : -opciones
+PanelPrincipal --> " 1..5 " OpcionPrincipal : -opciones
+PanelPrincipalIzq --> " 1..5 " OpcionPrincipal : -opciones
+TabPanelPrincipal --> " 1..5 " OpcionPrincipal : -opciones
 
 'Asociaciones
 PanelPrincipal -->  PanelPrincipalIzq : 1
 PanelPrincipal --> TabPanelPrincipal : 1
 PanelPrincipalIzq --> Header : 1
 
+'Asociaciones del panel de pestañas
+TabPanelPrincipal --> PanelAcercaDe : 0..1
+TabPanelPrincipal --> PanelAdd : 0..1
+TabPanelPrincipal --> PanelRemove : 0..1
+TabPanelPrincipal --> PanelImprimir : 0..1
+TabPanelPrincipal --> PanelVer : 0..1
+
 'Herencia de clases de javafx
-TabPanelPrincipal --|> TabPane
+TabPanelPrincipal --|> BorderPane
 PanelPrincipal --|> BorderPane
 PanelPrincipalIzq --|> VBox
 Header --|> BorderPane
+
+PanelAcercaDe --|> BorderPane
+PanelVer --|> BorderPane
+PanelAdd --|> BorderPane
+PanelRemove --|> BorderPane
+PanelImprimir --|> BorderPane
+
 
 'Comunicacion entre paneles
 PanelPrincipal ..|> TabComunicationListener
