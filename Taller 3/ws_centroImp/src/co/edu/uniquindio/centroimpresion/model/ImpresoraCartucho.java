@@ -48,7 +48,8 @@ public class ImpresoraCartucho extends Impresora {
 	}
 
 	@Override
-	public boolean imprimirDocumento(String code) {
+	public boolean imprimirDocumento(Documento documento) {
+		// TODO Auto-generated method stub
 		return false;
 	}
 

@@ -1,12 +1,13 @@
 package co.edu.uniquindio.centroimpresion.model;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.TreeSet;
 
 import co.edu.uniquindio.centroimpresion.exceptions.ImpresoraException;
 
-public abstract class Impresora {
+public abstract class Impresora implements Serializable {
 
 	private final String code;
 	private String marca;
@@ -22,6 +23,10 @@ public abstract class Impresora {
 		this.estado = estado;
 		this.esAColor = esAColor;
 		this.paginasPorMinuto = paginasPorMinuto;
+	}
+
+	public Impresora(String code) {
+		this.code = code;
 	}
 
 	public void addDocumento(String code, String titulo, int prioridad, String contenido, LocalDateTime fechaAgregado)
@@ -51,7 +56,7 @@ public abstract class Impresora {
 
 	public abstract boolean imprimirDocumento();
 
-	public abstract boolean imprimirDocumento(String code);
+	public abstract boolean imprimirDocumento(Documento documento);
 
 	public String getCode() {
 		return code;

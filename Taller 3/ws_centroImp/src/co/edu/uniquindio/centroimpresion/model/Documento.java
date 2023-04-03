@@ -1,8 +1,9 @@
 package co.edu.uniquindio.centroimpresion.model;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public class Documento implements Comparable<Documento> {
+public class Documento implements Comparable<Documento>, Serializable {
 	private final String code;
 	private String titulo;
 	private int prioridad;
@@ -27,6 +28,10 @@ public class Documento implements Comparable<Documento> {
 
 	public Documento() {
 		this.code = "";
+	}
+
+	public Documento(String code) {
+		this.code = code;
 	}
 
 	public int obtenerCantidadPaginas() {
