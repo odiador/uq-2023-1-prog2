@@ -20,20 +20,12 @@ public class PanelMenuAdd extends PanelMenuOpcionObjetos {
 	public OpcionObjeto[] generarOpciones(TipoEmpleado tipoEmpleado) {
 		ArrayList<OpcionObjeto> listaOpciones = new ArrayList<OpcionObjeto>(Arrays.asList(OpcionObjeto.values()));
 		listaOpciones.remove(OpcionObjeto.DOCUMENTO_ESPEFICO);
+		listaOpciones.remove(OpcionObjeto.IMPRESORA);
 		if (!tipoEmpleado.puedeAgregarImpresora()) {
 			listaOpciones.remove(OpcionObjeto.IMPRESORA_LASER);
 			listaOpciones.remove(OpcionObjeto.IMPRESORA_CARTUCHO);
 		}
 		return listaOpciones.toArray(new OpcionObjeto[listaOpciones.size()]);
-	}
-
-	public void eliminarbtnEspecifico() {
-		OpcionObjeto[] opciones = getOpciones();
-		for (int i = 0; i < opciones.length; i++) {
-			OpcionObjeto opt = opciones[i];
-
-		}
-		initComp();
 	}
 
 	@Override
@@ -53,6 +45,11 @@ public class PanelMenuAdd extends PanelMenuOpcionObjetos {
 
 	@Override
 	public void btnDocEspPresionado() {
+	}
+
+	@Override
+	public void btnImpPresionado() {
+
 	}
 
 }

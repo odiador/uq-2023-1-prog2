@@ -63,6 +63,8 @@ public abstract class PanelMenuOpcionObjetos extends BorderPane implements Event
 
 	public abstract void btnImpLaserPresionado();
 
+	public abstract void btnImpPresionado();
+
 	@Override
 	public void handle(Event event) {
 		Label label = (Label) event.getSource();
@@ -79,6 +81,11 @@ public abstract class PanelMenuOpcionObjetos extends BorderPane implements Event
 			break;
 		case DOCUMENTO_ESPEFICO:
 			btnDocEspPresionado();
+			break;
+		case IMPRESORA:
+			btnImpPresionado();
+			break;
+		default:
 			break;
 		}
 
