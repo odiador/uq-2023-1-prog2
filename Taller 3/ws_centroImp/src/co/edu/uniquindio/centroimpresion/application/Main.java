@@ -1,7 +1,7 @@
 package co.edu.uniquindio.centroimpresion.application;
 
-import co.edu.uniquindio.centroimpresion.view.OpcionPrincipal;
-import co.edu.uniquindio.centroimpresion.view.PanelPrincipal;
+import co.edu.uniquindio.centroimpresion.view.principal.OpcionPrincipal;
+import co.edu.uniquindio.centroimpresion.view.principal.PanelPrincipal;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;

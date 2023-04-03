@@ -1,4 +1,4 @@
-package co.edu.uniquindio.centroimpresion.view;
+package co.edu.uniquindio.centroimpresion.view.principal;
 
 import java.util.ArrayList;
 import java.util.List;

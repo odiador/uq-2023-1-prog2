@@ -1,4 +1,4 @@
-package co.edu.uniquindio.centroimpresion.view;
+package co.edu.uniquindio.centroimpresion.view.principal;
 
 public enum OpcionPrincipal {
 	AGREGAR_DOCUMENTO("Agregar Documento"), AGREGAR_IMPRESORA("Agregar Impresora"), IMPRIMIR_DOCUMENTO(
