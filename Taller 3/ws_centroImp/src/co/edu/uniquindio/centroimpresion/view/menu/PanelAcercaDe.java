@@ -1,4 +1,4 @@
-package co.edu.uniquindio.centroimpresion.view.principalmenu;
+package co.edu.uniquindio.centroimpresion.view.menu;
 
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
