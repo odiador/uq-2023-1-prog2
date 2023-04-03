@@ -22,3 +22,6 @@
 	-fx-border-style: solid inside;
 	-fx-border-color: rgb(0.0,0.0,0.0,0.2);
 }
+#lbl-error {
+	-fx-background-color: red
+}
