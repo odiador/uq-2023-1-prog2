@@ -8,8 +8,4 @@ public class PanelAcercaDe extends BorderPane {
 	public PanelAcercaDe() {
 		setCenter(new Label("Hola"));
 	}
-	public PanelAcercaDe(String cad) {
-		setCenter(new Label(cad));
-	}
-
 }
