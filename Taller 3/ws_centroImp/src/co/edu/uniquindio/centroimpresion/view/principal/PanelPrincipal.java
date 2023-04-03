@@ -1,5 +1,7 @@
 package co.edu.uniquindio.centroimpresion.view.principal;
 
+import co.edu.uniquindio.centroimpresion.model.TipoAccion;
+import co.edu.uniquindio.centroimpresion.model.TipoEmpleado;
 import javafx.scene.layout.BorderPane;
 
 public class PanelPrincipal extends BorderPane implements TabComunicationListener {
@@ -7,7 +9,7 @@ public class PanelPrincipal extends BorderPane implements TabComunicationListene
 	private PanelPrincipalIzq panelIzq;
 	private TabPanelPrincipal tabPane;
 	private String nombre;
-	private OpcionPrincipal[] opciones;
+	private TipoEmpleado tipoEmpleado;
 
 	/**
 	 * Es el constructor del Panel principal, este contiene su panel izquierdo y
@@ -18,9 +20,9 @@ public class PanelPrincipal extends BorderPane implements TabComunicationListene
 	 * @param opciones
 	 *            son las opciones que tiene el empleado de elegir
 	 */
-	public PanelPrincipal(String nombre, OpcionPrincipal[] opciones) {
+	public PanelPrincipal(String nombre, TipoEmpleado tipoEmpleado) {
 		this.nombre = nombre;
-		this.opciones = opciones;
+		this.tipoEmpleado = tipoEmpleado;
 
 		initComp();
 	}
@@ -30,15 +32,15 @@ public class PanelPrincipal extends BorderPane implements TabComunicationListene
 	 * agrega
 	 */
 	public void initComp() {
-		panelIzq = new PanelPrincipalIzq(nombre, opciones);
-		tabPane = new TabPanelPrincipal(opciones);
+		panelIzq = new PanelPrincipalIzq(nombre, tipoEmpleado);
+		tabPane = new TabPanelPrincipal(tipoEmpleado);
 		setLeft(panelIzq);
 		panelIzq.addTabComunicationListener(this);
 		setCenter(tabPane);
 	}
 
 	@Override
-	public void movementPerformed(OpcionPrincipal source) {
+	public void movementPerformed(TipoAccion source) {
 		tabPane.updateView(source);
 	}
 
@@ -66,12 +68,12 @@ public class PanelPrincipal extends BorderPane implements TabComunicationListene
 		this.nombre = nombre;
 	}
 
-	public OpcionPrincipal[] getOpciones() {
-		return opciones;
+	public TipoEmpleado getOpciones() {
+		return tipoEmpleado;
 	}
 
-	public void setOpciones(OpcionPrincipal[] opciones) {
-		this.opciones = opciones;
+	public void setOpciones(TipoEmpleado tipoEmpleado) {
+		this.tipoEmpleado = tipoEmpleado;
 	}
 
 }

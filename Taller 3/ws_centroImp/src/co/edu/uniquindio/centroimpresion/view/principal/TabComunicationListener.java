@@ -1,5 +1,7 @@
 package co.edu.uniquindio.centroimpresion.view.principal;
 
+import co.edu.uniquindio.centroimpresion.model.TipoAccion;
+
 public interface TabComunicationListener {
 	/**
 	 * Este metodo se activa especialmente para la comunicación de la ventana
@@ -8,5 +10,5 @@ public interface TabComunicationListener {
 	 *
 	 * @param source
 	 */
-	public void movementPerformed(OpcionPrincipal source);
+	public void movementPerformed(TipoAccion source);
 }

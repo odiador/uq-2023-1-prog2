@@ -2,8 +2,12 @@
 	-fx-text-fill: rgb(255.0,255.0,255.0);
 
 	-fx-font-size: 25.0;
+	-fx-pref-height: 50.0;
 	-fx-alignment: center;
+	-fx-max-width: 100000.0;
 	-fx-font-weight: bold;
+}
+#tabpane {
 }
 #label-opciones-principal:hover {
 	-fx-background-color: rgb(0.0,0.0,0.0,0.2)
@@ -18,10 +22,32 @@
 		#5b87ee 50.0%,
 		black 100.0%
 	);
-	-fx-border-width: 11.0,10.0,100.0,5.0;
+	-fx-border-width: 10.0px;
 	-fx-border-style: solid inside;
 	-fx-border-color: rgb(0.0,0.0,0.0,0.2);
+
+	-fx-pref-width: 250.0;
+}
+#btn-inferior {
+	-fx-max-width: 100000.0;
+	-fx-alignment: center;
+	-fx-background-color: red;
+}
+#header{
+	-fx-pref-height: 200.0;
 }
 #lbl-error {
 	-fx-background-color: red
+}
+#boton-opcion {
+	-fx-ellipsis-string: "";
+	-fx-alignment: center;
+	-fx-font-size: 25.0;
+	-fx-alignment: center;
+	-fx-background-color: red;
+	-fx-font-weight: bold;
+	-fx-pref-height: 40.0;
+	-fx-pref-width: 300.0;
+	-fx-arc-width: 3.0;
+	-fx-fit-to-width: true;
 }

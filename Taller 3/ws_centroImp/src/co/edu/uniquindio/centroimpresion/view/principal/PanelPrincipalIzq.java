@@ -3,6 +3,8 @@ package co.edu.uniquindio.centroimpresion.view.principal;
 import java.util.ArrayList;
 import java.util.List;
 
+import co.edu.uniquindio.centroimpresion.model.TipoAccion;
+import co.edu.uniquindio.centroimpresion.model.TipoEmpleado;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.control.Label;
@@ -11,20 +13,47 @@ import javafx.scene.layout.VBox;
 
 public class PanelPrincipalIzq extends VBox implements EventHandler<Event> {
 	private final List<TabComunicationListener> listaListeners = new ArrayList<TabComunicationListener>();
-	private OpcionPrincipal[] opciones;
+	private TipoEmpleado tipoEmpleado;
 
-	public PanelPrincipalIzq(String nombre, OpcionPrincipal opciones[]) {
-		this.opciones = opciones;
+	public PanelPrincipalIzq(String nombre, TipoEmpleado tipoEmpleado) {
+		this.tipoEmpleado = tipoEmpleado;
 		getChildren().add(new Header(nombre));
-		for (OpcionPrincipal opcion : opciones) {
-			Label labelOpciones = new Label(opcion.getText());
-			labelOpciones.setMaxWidth(Double.MAX_VALUE);
-			labelOpciones.setPrefHeight(50d);
-			labelOpciones.setId("label-opciones-principal");
-			labelOpciones.setOnMouseReleased(this);
-			getChildren().add(labelOpciones);
-		}
+		initComp();
+		setFillWidth(true);
 		setId("vbox-principal");
+	}
+
+	public void initComp() {
+		Label labelOpcion;
+
+		labelOpcion = new Label(TipoAccion.AGREGAR.getText());
+		labelOpcion.setId("label-opciones-principal");
+		labelOpcion.setOnMouseReleased(this);
+		getChildren().add(labelOpcion);
+
+		labelOpcion = new Label(TipoAccion.IMPRIMIR.getText());
+		labelOpcion.setId("label-opciones-principal");
+		labelOpcion.setOnMouseReleased(this);
+		getChildren().add(labelOpcion);
+
+		if (tipoEmpleado.puedeEliminarDocumentos() || tipoEmpleado.puedeEliminarImpresoras()) {
+			labelOpcion = new Label(TipoAccion.ELIMINAR.getText());
+			labelOpcion.setId("label-opciones-principal");
+			labelOpcion.setOnMouseReleased(this);
+			getChildren().add(labelOpcion);
+		}
+		if (tipoEmpleado.puedeVerDocs() || tipoEmpleado.puedeVerImpresoras()) {
+
+			labelOpcion = new Label(TipoAccion.VER.getText());
+			labelOpcion.setId("label-opciones-principal");
+			labelOpcion.setOnMouseReleased(this);
+			getChildren().add(labelOpcion);
+		}
+		labelOpcion = new Label(TipoAccion.ACERCA_DE.getText());
+		labelOpcion.setId("label-opciones-principal");
+		labelOpcion.setOnMouseReleased(this);
+		getChildren().add(labelOpcion);
+
 	}
 
 	@Override
@@ -36,8 +65,8 @@ public class PanelPrincipalIzq extends VBox implements EventHandler<Event> {
 			executeTabComunicationListeners(label.getText());
 	}
 
-	public OpcionPrincipal obtenerOpcion(String source) {
-		for (OpcionPrincipal opcion : opciones) {
+	public TipoAccion obtenerOpcion(String source) {
+		for (TipoAccion opcion : TipoAccion.values()) {
 			if (opcion.getText().equals(source)) {
 				return opcion;
 			}
@@ -46,7 +75,7 @@ public class PanelPrincipalIzq extends VBox implements EventHandler<Event> {
 	}
 
 	public void executeTabComunicationListeners(String source) {
-		OpcionPrincipal opcionEncontrada = obtenerOpcion(source);
+		TipoAccion opcionEncontrada = obtenerOpcion(source);
 		if (opcionEncontrada != null) {
 			for (TabComunicationListener tabComunicationListener : listaListeners) {
 				tabComunicationListener.movementPerformed(opcionEncontrada);
