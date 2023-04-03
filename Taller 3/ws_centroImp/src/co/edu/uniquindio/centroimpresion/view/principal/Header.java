@@ -23,8 +23,7 @@ public class Header extends BorderPane {
 	private void initComp() {
 		lblNombre = new Label(nombre);
 		setCenter(lblNombre);
-		setPrefHeight(200d);
-		setPrefWidth(200d);
+		setId("header");
 	}
 
 	public Label getLblNombre() {
