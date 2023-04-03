@@ -6,8 +6,7 @@ import javafx.scene.layout.BorderPane;
 public class PanelPrincipal extends BorderPane implements TabComunicationListener {
 
 	private PanelPrincipalIzq panelIzq;
-	private BorderPane tabPane;
-	private Label label;
+	private TabPanelPrincipal tabPane;
 	private String nombre;
 	private OpcionPrincipal[] opciones;
 
@@ -33,8 +32,7 @@ public class PanelPrincipal extends BorderPane implements TabComunicationListene
 	 */
 	public void initComp() {
 		panelIzq = new PanelPrincipalIzq(nombre, opciones);
-		label = new Label("Elige un boton");
-		tabPane = new BorderPane(label);
+		tabPane = new TabPanelPrincipal(opciones);
 		setLeft(panelIzq);
 		panelIzq.addTabComunicationListener(this);
 		setCenter(tabPane);
@@ -42,7 +40,7 @@ public class PanelPrincipal extends BorderPane implements TabComunicationListene
 
 	@Override
 	public void movementPerformed(OpcionPrincipal source) {
-		label.setText(source.getText());
+		tabPane.updateView(source);
 	}
 
 	public PanelPrincipalIzq getPanelIzq() {
@@ -53,20 +51,12 @@ public class PanelPrincipal extends BorderPane implements TabComunicationListene
 		this.panelIzq = panelIzq;
 	}
 
-	public BorderPane getTabPane() {
+	public TabPanelPrincipal getTabPane() {
 		return tabPane;
 	}
 
-	public void setTabPane(BorderPane tabPane) {
+	public void setTabPane(TabPanelPrincipal tabPane) {
 		this.tabPane = tabPane;
-	}
-
-	public Label getLabel() {
-		return label;
-	}
-
-	public void setLabel(Label label) {
-		this.label = label;
 	}
 
 	public String getNombre() {
