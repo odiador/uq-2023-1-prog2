@@ -19,6 +19,7 @@ public class PanelPrincipalIzq extends VBox implements EventHandler<Event> {
 		for (OpcionPrincipal opcion : opciones) {
 			Label labelOpciones = new Label(opcion.getText());
 			labelOpciones.setMaxWidth(Double.MAX_VALUE);
+			labelOpciones.setPrefHeight(50d);
 			labelOpciones.setId("label-opciones-principal");
 			labelOpciones.setOnMouseReleased(this);
 			getChildren().add(labelOpciones);
