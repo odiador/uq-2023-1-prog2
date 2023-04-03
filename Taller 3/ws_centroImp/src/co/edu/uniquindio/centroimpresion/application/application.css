@@ -1,1 +1,24 @@
-/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+#label-opciones-principal{
+	-fx-text-fill: rgb(255.0,255.0,255.0);
+
+	-fx-font-size: 18.0;
+	-fx-alignment: center;
+	-fx-font-weight: bold;
+}
+#label-opciones-principal:hover {
+	-fx-background-color: rgb(0.0,0.0,0.0,0.2)
+}
+
+#label-opciones-principal:pressed {
+	-fx-background-color: rgb(0.0,0.0,0.0,0.3);
+}
+
+#vbox-principal {
+	-fx-background-color: linear-gradient(from 0.0% 0.0% to 0.0% 120.0%,
+		#5b87ee 50.0%,
+		black 100.0%
+	);
+	-fx-border-width: 11.0,10.0,100.0,5.0;
+	-fx-border-style: solid inside;
+	-fx-border-color: rgb(0.0,0.0,0.0,0.2);
+}
