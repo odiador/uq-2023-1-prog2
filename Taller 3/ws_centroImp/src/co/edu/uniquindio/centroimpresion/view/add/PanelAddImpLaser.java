@@ -8,7 +8,6 @@ public class PanelAddImpLaser extends PanelConVolver {
 
 	public PanelAddImpLaser(PanelMenuOpcionObjetos panel) {
 		this.panel = panel;
-		initComp();
 	}
 
 	@Override

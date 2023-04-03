@@ -8,7 +8,6 @@ public class PanelAddImpCartucho extends PanelConVolver {
 
 	public PanelAddImpCartucho(PanelMenuOpcionObjetos panel) {
 		this.panel = panel;
-		initComp();
 	}
 
 	@Override

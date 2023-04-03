@@ -8,7 +8,6 @@ public class PanelAddDoc extends PanelConVolver {
 
 	public PanelAddDoc(PanelMenuOpcionObjetos panel) {
 		this.panel = panel;
-		initComp();
 	}
 
 	@Override
