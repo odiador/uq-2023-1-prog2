@@ -8,7 +8,6 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
 
 public class PanelPrincipalIzq extends VBox implements EventHandler<Event> {
 	private final List<TabComunicationListener> listaListeners = new ArrayList<TabComunicationListener>();
@@ -21,22 +20,19 @@ public class PanelPrincipalIzq extends VBox implements EventHandler<Event> {
 			Label labelOpciones = new Label(opcion.getText());
 			labelOpciones.setMaxWidth(Double.MAX_VALUE);
 			labelOpciones.setId("label-opciones-principal");
+			labelOpciones.setOnMouseReleased(this);
 			getChildren().add(labelOpciones);
 		}
 		setId("vbox-principal");
-		setOnMouseDragged(this);
-		setOnMousePressed(this);
 	}
 
 	@Override
 	public void handle(Event event) {
 		MouseEvent evento = (MouseEvent) event;
-		try {
-			Text label = (Text) evento.getPickResult().getIntersectedNode();
-			if (label != null)
-				executeTabComunicationListeners(label.getText());
-		} catch (ClassCastException e) {
-		}
+		Label label = (Label) event.getSource();
+		if (evento.getX() >= 0 && evento.getY() >= 0 && evento.getX() <= label.getWidth()
+				&& evento.getY() <= label.getHeight())
+			executeTabComunicationListeners(label.getText());
 	}
 
 	public OpcionPrincipal obtenerOpcion(String source) {
