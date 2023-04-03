@@ -1,6 +1,5 @@
 package co.edu.uniquindio.centroimpresion.view.principal;
 
-import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 
 public class PanelPrincipal extends BorderPane implements TabComunicationListener {
