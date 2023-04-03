@@ -19,9 +19,11 @@ public class PanelPrincipalIzq extends VBox implements EventHandler<Event> {
 		getChildren().add(new Header(nombre));
 		for (OpcionPrincipal opcion : opciones) {
 			Label labelOpciones = new Label(opcion.getText());
+			labelOpciones.setMaxWidth(Double.MAX_VALUE);
 			labelOpciones.setId("label-opciones-principal");
 			getChildren().add(labelOpciones);
 		}
+		setId("vbox-principal");
 		setOnMouseDragged(this);
 		setOnMousePressed(this);
 	}
