@@ -7,6 +7,7 @@ import co.edu.uniquindio.centroimpresion.model.TipoAccion;
 import co.edu.uniquindio.centroimpresion.model.TipoEmpleado;
 import co.edu.uniquindio.centroimpresion.view.menu.PanelAcercaDe;
 import co.edu.uniquindio.centroimpresion.view.menu.PanelMenuAdd;
+import co.edu.uniquindio.centroimpresion.view.menu.PanelMenuRemove;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
@@ -57,7 +58,7 @@ public class TabPanelPrincipal extends BorderPane {
 		case AGREGAR:
 			return new PanelMenuAdd(tipoEmpleado);
 		case ELIMINAR:
-			break;
+			return new PanelMenuRemove(tipoEmpleado);
 		case IMPRIMIR:
 			break;
 		case VER:
