@@ -7,7 +7,9 @@ import co.edu.uniquindio.centroimpresion.model.TipoAccion;
 import co.edu.uniquindio.centroimpresion.model.TipoEmpleado;
 import co.edu.uniquindio.centroimpresion.view.menu.PanelAcercaDe;
 import co.edu.uniquindio.centroimpresion.view.menu.PanelMenuAdd;
+import co.edu.uniquindio.centroimpresion.view.menu.PanelMenuPrint;
 import co.edu.uniquindio.centroimpresion.view.menu.PanelMenuRemove;
+import co.edu.uniquindio.centroimpresion.view.menu.PanelMenuSee;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
@@ -33,14 +35,12 @@ public class TabPanelPrincipal extends BorderPane {
 	public void obtenerOpciones() {
 		ArrayList<TipoAccion> listaOpciones = new ArrayList<TipoAccion>(Arrays.asList(TipoAccion.values()));
 
-		System.out.println(listaOpciones);
 		if (!tipoEmpleado.puedeEliminarDocumentos() && !tipoEmpleado.puedeEliminarImpresoras()) {
 			listaOpciones.remove(TipoAccion.ELIMINAR);
 		}
 		if (!tipoEmpleado.puedeVerDocs() && !tipoEmpleado.puedeVerImpresoras()) {
 			listaOpciones.remove(TipoAccion.VER);
 		}
-		System.out.println(listaOpciones);
 		acciones = listaOpciones.toArray(new TipoAccion[listaOpciones.size()]);
 		panelesAcciones = new Pane[acciones.length];
 	}
@@ -60,11 +60,9 @@ public class TabPanelPrincipal extends BorderPane {
 		case ELIMINAR:
 			return new PanelMenuRemove(tipoEmpleado);
 		case IMPRIMIR:
-			break;
+			return new PanelMenuPrint(tipoEmpleado);
 		case VER:
-			break;
-		default:
-			break;
+			return new PanelMenuSee(tipoEmpleado);
 		}
 		Label label = new Label("Error");
 		label.setId("lbl-error");

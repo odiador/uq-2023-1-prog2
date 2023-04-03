@@ -6,14 +6,13 @@ import java.util.Arrays;
 import co.edu.uniquindio.centroimpresion.model.OpcionObjeto;
 import co.edu.uniquindio.centroimpresion.model.TipoAccion;
 import co.edu.uniquindio.centroimpresion.model.TipoEmpleado;
+import co.edu.uniquindio.centroimpresion.view.add.PanelAddDoc;
 import co.edu.uniquindio.centroimpresion.view.custom.PanelMenuOpcionObjetos;
-import co.edu.uniquindio.centroimpresion.view.remove.PanelRemoveDoc;
-import co.edu.uniquindio.centroimpresion.view.remove.PanelRemoveImp;
 
-public class PanelMenuRemove extends PanelMenuOpcionObjetos {
+public class PanelMenuSee extends PanelMenuOpcionObjetos {
 
-	public PanelMenuRemove(TipoEmpleado tipoEmpleado) {
-		super(TipoAccion.ELIMINAR, tipoEmpleado);
+	public PanelMenuSee(TipoEmpleado tipoEmpleado) {
+		super(TipoAccion.VER, tipoEmpleado);
 	}
 
 	public OpcionObjeto[] generarOpciones(TipoEmpleado tipoEmpleado) {
@@ -21,10 +20,10 @@ public class PanelMenuRemove extends PanelMenuOpcionObjetos {
 		listaOpciones.remove(OpcionObjeto.DOCUMENTO_ESPEFICO);
 		listaOpciones.remove(OpcionObjeto.IMPRESORA_CARTUCHO);
 		listaOpciones.remove(OpcionObjeto.IMPRESORA_LASER);
-		if (!tipoEmpleado.puedeEliminarDocumentos()) {
+		if (!tipoEmpleado.puedeVerDocs()) {
 			listaOpciones.remove(OpcionObjeto.DOCUMENTO);
 		}
-		if (!tipoEmpleado.puedeEliminarImpresoras()) {
+		if (!tipoEmpleado.puedeVerImpresoras()) {
 			listaOpciones.remove(OpcionObjeto.IMPRESORA);
 		}
 		return listaOpciones.toArray(new OpcionObjeto[listaOpciones.size()]);
@@ -32,7 +31,7 @@ public class PanelMenuRemove extends PanelMenuOpcionObjetos {
 
 	@Override
 	public void btnDocPresionado() {
-		setCenter(new PanelRemoveDoc(this));
+		setCenter(new PanelAddDoc(this));
 	}
 
 	@Override
@@ -49,7 +48,7 @@ public class PanelMenuRemove extends PanelMenuOpcionObjetos {
 
 	@Override
 	public void btnImpPresionado() {
-		setCenter(new PanelRemoveImp(this));
+
 	}
 
 }

@@ -7,32 +7,29 @@ import co.edu.uniquindio.centroimpresion.model.OpcionObjeto;
 import co.edu.uniquindio.centroimpresion.model.TipoAccion;
 import co.edu.uniquindio.centroimpresion.model.TipoEmpleado;
 import co.edu.uniquindio.centroimpresion.view.custom.PanelMenuOpcionObjetos;
-import co.edu.uniquindio.centroimpresion.view.remove.PanelRemoveDoc;
-import co.edu.uniquindio.centroimpresion.view.remove.PanelRemoveImp;
+import co.edu.uniquindio.centroimpresion.view.print.PanelPrintDoc;
+import co.edu.uniquindio.centroimpresion.view.print.PanelPrintEspDoc;
 
-public class PanelMenuRemove extends PanelMenuOpcionObjetos {
+public class PanelMenuPrint extends PanelMenuOpcionObjetos {
 
-	public PanelMenuRemove(TipoEmpleado tipoEmpleado) {
-		super(TipoAccion.ELIMINAR, tipoEmpleado);
+	public PanelMenuPrint(TipoEmpleado tipoEmpleado) {
+		super(TipoAccion.IMPRIMIR, tipoEmpleado);
 	}
 
 	public OpcionObjeto[] generarOpciones(TipoEmpleado tipoEmpleado) {
 		ArrayList<OpcionObjeto> listaOpciones = new ArrayList<OpcionObjeto>(Arrays.asList(OpcionObjeto.values()));
-		listaOpciones.remove(OpcionObjeto.DOCUMENTO_ESPEFICO);
+		listaOpciones.remove(OpcionObjeto.IMPRESORA);
 		listaOpciones.remove(OpcionObjeto.IMPRESORA_CARTUCHO);
 		listaOpciones.remove(OpcionObjeto.IMPRESORA_LASER);
-		if (!tipoEmpleado.puedeEliminarDocumentos()) {
-			listaOpciones.remove(OpcionObjeto.DOCUMENTO);
-		}
-		if (!tipoEmpleado.puedeEliminarImpresoras()) {
-			listaOpciones.remove(OpcionObjeto.IMPRESORA);
+		if (!tipoEmpleado.puedeImprimirDocEspecifico()) {
+			listaOpciones.remove(OpcionObjeto.DOCUMENTO_ESPEFICO);
 		}
 		return listaOpciones.toArray(new OpcionObjeto[listaOpciones.size()]);
 	}
 
 	@Override
 	public void btnDocPresionado() {
-		setCenter(new PanelRemoveDoc(this));
+		setCenter(new PanelPrintDoc(this));
 	}
 
 	@Override
@@ -45,11 +42,11 @@ public class PanelMenuRemove extends PanelMenuOpcionObjetos {
 
 	@Override
 	public void btnDocEspPresionado() {
+		setCenter(new PanelPrintEspDoc(this));
 	}
 
 	@Override
 	public void btnImpPresionado() {
-		setCenter(new PanelRemoveImp(this));
 	}
 
 }
