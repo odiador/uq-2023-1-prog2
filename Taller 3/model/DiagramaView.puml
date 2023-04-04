@@ -25,16 +25,19 @@ class TabPanelPrincipal{
 class PanelAcercaDe {
 
 }
-class PanelAdd {
+class PanelMenuAdd {
 
 }
-class PanelRemove {
+class PanelMenuRemove {
 
 }
-class PanelImprimir {
+class PanelMenuPrint {
 
 }
-class PanelVer {
+class PanelMenuSee {
+
+}
+abstract class PanelMenuOpcionObjetos <<abstract>> {
 
 }
 
@@ -66,10 +69,10 @@ PanelPrincipalIzq --> Header : 1
 
 'Asociaciones del panel de pestañas
 TabPanelPrincipal --> PanelAcercaDe : 0..1
-TabPanelPrincipal --> PanelAdd : 0..1
-TabPanelPrincipal --> PanelRemove : 0..1
-TabPanelPrincipal --> PanelImprimir : 0..1
-TabPanelPrincipal --> PanelVer : 0..1
+TabPanelPrincipal --> PanelMenuAdd : 0..1
+TabPanelPrincipal --> PanelMenuRemove : 0..1
+TabPanelPrincipal --> PanelMenuPrint : 0..1
+TabPanelPrincipal --> PanelMenuSee : 0..1
 
 'Herencia de clases de javafx
 TabPanelPrincipal --|> BorderPane
@@ -77,11 +80,11 @@ PanelPrincipal --|> BorderPane
 PanelPrincipalIzq --|> VBox
 Header --|> BorderPane
 
-PanelAcercaDe --|> BorderPane
-PanelVer --|> BorderPane
-PanelAdd --|> BorderPane
-PanelRemove --|> BorderPane
-PanelImprimir --|> BorderPane
+PanelAcercaDe --|> PanelMenuOpcionObjetos
+PanelMenuSee --|> PanelMenuOpcionObjetos
+PanelMenuAdd --|> PanelMenuOpcionObjetos
+PanelMenuRemove --|> PanelMenuOpcionObjetos
+PanelMenuPrint --|> PanelMenuOpcionObjetos
 
 
 'Comunicacion entre paneles
