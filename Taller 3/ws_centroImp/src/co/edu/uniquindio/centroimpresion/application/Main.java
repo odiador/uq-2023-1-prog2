@@ -10,7 +10,7 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			PanelPrincipal root = new PanelPrincipal("Juan Manuel Amador Roa", TipoEmpleado.GERENTE);
+			PanelPrincipal root = new PanelPrincipal("Juan Manuel Amador Roa", TipoEmpleado.ADMINISTRADOR);
 			Scene scene = new Scene(root, 1100, 700);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
