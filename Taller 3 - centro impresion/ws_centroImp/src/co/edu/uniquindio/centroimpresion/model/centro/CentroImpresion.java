@@ -2,9 +2,11 @@ package co.edu.uniquindio.centroimpresion.model.centro;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
-import java.util.TreeSet;
 
 import co.edu.uniquindio.centroimpresion.exceptions.CentroImpresionException;
 import co.edu.uniquindio.centroimpresion.exceptions.TipoCentroException;
@@ -15,7 +17,7 @@ public class CentroImpresion implements Serializable {
 	 */
 	private static final long serialVersionUID = -2839899210301744900L;
 	private final Set<Impresora> listaImpresoras = new HashSet<Impresora>();
-	private final TreeSet<Documento> listaDocumentos = new TreeSet<Documento>();
+	private final List<Documento> listaDocumentos = new ArrayList<Documento>();
 
 	public CentroImpresion() {
 	}
@@ -25,7 +27,7 @@ public class CentroImpresion implements Serializable {
 		Documento documento = new Documento(code, titulo, prioridad, contenido, LocalDateTime.now());
 		if (!listaDocumentos.add(documento))
 			throw new CentroImpresionException(TipoCentroException.ADD, Documento.class);
-
+		Collections.sort(listaDocumentos);
 	}
 
 	public void agregarImpresoraCartucho(String code, String marca, EstadoImpresora estado, boolean esAColor,
@@ -65,6 +67,7 @@ public class CentroImpresion implements Serializable {
 	public void deleteDocumento(String code) throws CentroImpresionException {
 		if (!listaDocumentos.remove(buscarDocumento(code)))
 			throw new CentroImpresionException(TipoCentroException.REMOVE, Documento.class);
+		Collections.sort(listaDocumentos);
 	}
 
 	public void deleteImpresora(String code) throws CentroImpresionException {
@@ -74,9 +77,10 @@ public class CentroImpresion implements Serializable {
 
 	public void actualizarImpresora(Impresora impresora) throws CentroImpresionException {
 
-		if (listaImpresoras.remove(impresora))
+		if (listaImpresoras.remove(impresora)) {
 			listaImpresoras.add(impresora);
-
+			Collections.sort(listaDocumentos);
+		}
 		throw new CentroImpresionException(TipoCentroException.UPDATE, Impresora.class);
 	}
 
