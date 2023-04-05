@@ -3,8 +3,8 @@ package co.edu.uniquindio.centroimpresion.view.principal;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import co.edu.uniquindio.centroimpresion.model.TipoAccion;
-import co.edu.uniquindio.centroimpresion.model.TipoEmpleado;
+import co.edu.uniquindio.centroimpresion.model.centro.TipoAccion;
+import co.edu.uniquindio.centroimpresion.model.centro.TipoEmpleado;
 import co.edu.uniquindio.centroimpresion.view.menu.PanelAcercaDe;
 import co.edu.uniquindio.centroimpresion.view.menu.PanelMenuAdd;
 import co.edu.uniquindio.centroimpresion.view.menu.PanelMenuPrint;

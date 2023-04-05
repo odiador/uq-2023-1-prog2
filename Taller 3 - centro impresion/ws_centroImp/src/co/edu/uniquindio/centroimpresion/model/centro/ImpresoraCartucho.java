@@ -1,4 +1,4 @@
-package co.edu.uniquindio.centroimpresion.model;
+package co.edu.uniquindio.centroimpresion.model.centro;
 
 public class ImpresoraCartucho extends Impresora {
 

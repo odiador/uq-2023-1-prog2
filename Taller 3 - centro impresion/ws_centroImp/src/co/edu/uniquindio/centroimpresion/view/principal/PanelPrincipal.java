@@ -1,7 +1,7 @@
 package co.edu.uniquindio.centroimpresion.view.principal;
 
-import co.edu.uniquindio.centroimpresion.model.TipoAccion;
-import co.edu.uniquindio.centroimpresion.model.TipoEmpleado;
+import co.edu.uniquindio.centroimpresion.model.centro.TipoAccion;
+import co.edu.uniquindio.centroimpresion.model.centro.TipoEmpleado;
 import javafx.scene.layout.BorderPane;
 
 public class PanelPrincipal extends BorderPane implements TabComunicationListener {

@@ -1,4 +1,4 @@
-package co.edu.uniquindio.centroimpresion.model;
+package co.edu.uniquindio.centroimpresion.model.centro;
 
 public enum TipoEmpleado {
 	ADMINISTRADOR("Administrador", true, true, true, true, true, true), SUPERVISOR("Supervisor", false, true, false,

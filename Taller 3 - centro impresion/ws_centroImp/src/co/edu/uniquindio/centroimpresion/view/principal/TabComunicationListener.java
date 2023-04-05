@@ -1,6 +1,6 @@
 package co.edu.uniquindio.centroimpresion.view.principal;
 
-import co.edu.uniquindio.centroimpresion.model.TipoAccion;
+import co.edu.uniquindio.centroimpresion.model.centro.TipoAccion;
 
 public interface TabComunicationListener {
 	/**

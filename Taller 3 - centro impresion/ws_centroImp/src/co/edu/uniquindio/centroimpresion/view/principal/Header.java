@@ -1,6 +1,6 @@
 package co.edu.uniquindio.centroimpresion.view.principal;
 
-import co.edu.uniquindio.centroimpresion.model.TipoEmpleado;
+import co.edu.uniquindio.centroimpresion.model.centro.TipoEmpleado;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
