@@ -50,4 +50,34 @@ public class CtrlAgregarDocumento {
 			return recordsDir;
 		return new File(System.getProperty("user.home"));
 	}
+
+	/**
+	 * Le quita la extension a un archivo haciendo uso de stringbuilders
+	 *
+	 * @param nombre
+	 * @return
+	 */
+	public static String quitarExtension(String nombre) {
+		// crea un nuevo stringbuioder con el nombre del documento
+		StringBuilder sb = new StringBuilder(nombre);
+		// se voltea la cadena para que encuentre el primer . al reves
+		sb.reverse();
+		// busca el indice en el que se encuentra el .
+		int indice = sb.indexOf(".");
+		// si no encuentra el . que se retorne la cadena original
+		if (indice < 0)
+			return sb.reverse().toString();
+		// encuentra el indice del que se parte para eliminar
+		int numero = sb.length() - indice - 1;
+		// vuelve al estado originial la cadena
+		sb.reverse();
+		try {
+			// elimina parte de la cadena, puede haber un error aqui
+			sb.delete(numero, sb.length());
+		} catch (StringIndexOutOfBoundsException e) {
+			// que siga si pasa este error
+		}
+		return sb.toString();
+	}
+
 }
