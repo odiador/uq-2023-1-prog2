@@ -90,17 +90,20 @@ public class CtrlAgregarDocumento {
 	 * @return null si el archivo no se puede leer
 	 * @throws FileNotFoundException
 	 */
-	public static Documento obtenerDocumentoArchivo(String code, File archivo, int prioridad)
-			throws FileNotFoundException {
+	public static Documento obtenerDocumentoArchivo(String code, File archivo, int prioridad) {
 		if (!archivo.canRead()) {
 			return null;
 		}
-		Scanner asdasda = new Scanner(new FileInputStream(archivo));
 		String contenido = "";
-		while (asdasda.hasNextLine())
-			contenido += asdasda.nextLine();
+		try {
+			Scanner conexionArchivo = new Scanner(new FileInputStream(archivo));
+			while (conexionArchivo.hasNextLine())
+				contenido += conexionArchivo.nextLine();
 
-		asdasda.close();
+			conexionArchivo.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
 		return new Documento(code, quitarExtension(archivo.getName()), prioridad, contenido, LocalDateTime.now());
 	}
 }
