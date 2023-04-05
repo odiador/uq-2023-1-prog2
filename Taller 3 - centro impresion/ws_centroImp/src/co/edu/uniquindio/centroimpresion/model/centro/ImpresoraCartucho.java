@@ -2,7 +2,7 @@ package co.edu.uniquindio.centroimpresion.model.centro;
 
 public class ImpresoraCartucho extends Impresora {
 
-	private double desgasteCartucho;
+	private final double desgasteCartucho;
 	private double capacidadCartucho;
 	private double nivelCartucho;
 
@@ -30,10 +30,6 @@ public class ImpresoraCartucho extends Impresora {
 		return desgasteCartucho;
 	}
 
-	public void setDesgasteCartucho(double desgasteCartucho) {
-		this.desgasteCartucho = desgasteCartucho;
-	}
-
 	public double getCapacidadCartucho() {
 		return capacidadCartucho;
 	}
@@ -43,13 +39,17 @@ public class ImpresoraCartucho extends Impresora {
 	}
 
 	@Override
+	public boolean exists() {
+		return super.exists() && capacidadCartucho >= 0 && desgasteCartucho > 0 && nivelCartucho >= 0;
+	}
+
+	@Override
 	public boolean imprimirDocumento() {
 		return false;
 	}
 
 	@Override
 	public boolean imprimirDocumento(Documento documento) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
