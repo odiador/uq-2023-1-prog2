@@ -17,7 +17,7 @@ public class PanelPrincipalIzq extends VBox implements EventHandler<Event> {
 
 	public PanelPrincipalIzq(String nombre, TipoEmpleado tipoEmpleado) {
 		this.tipoEmpleado = tipoEmpleado;
-		getChildren().add(new Header(nombre));
+		getChildren().add(new Header(nombre, tipoEmpleado));
 		initComp();
 		setFillWidth(true);
 		setId("vbox-principal");
