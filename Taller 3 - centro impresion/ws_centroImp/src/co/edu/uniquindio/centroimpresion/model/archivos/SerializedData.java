@@ -1,9 +1,11 @@
-package co.edu.uniquindio.centroimpresion.model.centro;
+package co.edu.uniquindio.centroimpresion.model.archivos;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+
+import co.edu.uniquindio.centroimpresion.model.centro.CentroImpresion;
 
 public class SerializedData {
 	private static final String RUTA = "src/co/edu/uniquindio/centroimpresion/model/carpeta.txt";
