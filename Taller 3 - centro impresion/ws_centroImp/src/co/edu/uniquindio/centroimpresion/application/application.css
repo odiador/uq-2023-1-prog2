@@ -34,16 +34,19 @@
 	-fx-background-color: red;
 }
 #header{
+	-fx-alignment: center;
 	-fx-pref-height: 200.0;
 }
 #lbl-error {
-	-fx-background-color: red
+	-fx-background-color: red;
+}
+#centered-box {
+	-fx-alignment: center;
 }
 #boton-opcion {
 	-fx-ellipsis-string: "";
 	-fx-alignment: center;
 	-fx-font-size: 25.0;
-	-fx-alignment: center;
 	-fx-background-color: red;
 	-fx-font-weight: bold;
 	-fx-pref-height: 40.0;
