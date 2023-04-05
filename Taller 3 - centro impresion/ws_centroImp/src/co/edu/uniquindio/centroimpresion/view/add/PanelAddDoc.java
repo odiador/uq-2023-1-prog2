@@ -6,7 +6,7 @@ import co.edu.uniquindio.centroimpresion.exceptions.CentroImpresionException;
 import co.edu.uniquindio.centroimpresion.exceptions.TextIsEmptyException;
 import co.edu.uniquindio.centroimpresion.exceptions.DocumentoEnProcesoException;
 import co.edu.uniquindio.centroimpresion.exceptions.NoSePuedeLeerException;
-import co.edu.uniquindio.centroimpresion.exceptions.PrioridadFueraRangoException;
+import co.edu.uniquindio.centroimpresion.exceptions.FueraRangoException;
 import co.edu.uniquindio.centroimpresion.view.custom.PanelConVolver;
 import co.edu.uniquindio.centroimpresion.view.custom.PanelMenuOpcionObjetos;
 import javafx.beans.value.ChangeListener;
@@ -94,7 +94,7 @@ public class PanelAddDoc extends PanelConVolver implements EventHandler<Event> {
 				new Alert(AlertType.ERROR, "Ya se encuentra un documento con tal código").show();
 			} catch (NoSePuedeLeerException e) {
 				new Alert(AlertType.ERROR, "El archivo no se puede leer").show();
-			} catch (PrioridadFueraRangoException e) {
+			} catch (FueraRangoException e) {
 				new Alert(AlertType.WARNING, "La prioridad debe de estar entre 0 y 10").show();
 			} catch (TextIsEmptyException e) {
 				new Alert(AlertType.WARNING, "El código está vacío").show();
