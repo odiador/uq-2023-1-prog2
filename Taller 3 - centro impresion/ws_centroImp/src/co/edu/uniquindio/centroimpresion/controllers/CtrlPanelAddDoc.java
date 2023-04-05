@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 import co.edu.uniquindio.centroimpresion.exceptions.ArchivoNoObtenidoException;
 import co.edu.uniquindio.centroimpresion.exceptions.CentroImpresionException;
-import co.edu.uniquindio.centroimpresion.exceptions.CodigoIsEmptyException;
+import co.edu.uniquindio.centroimpresion.exceptions.TextIsEmptyException;
 import co.edu.uniquindio.centroimpresion.exceptions.DocumentoEnProcesoException;
 import co.edu.uniquindio.centroimpresion.exceptions.NoSePuedeLeerException;
 import co.edu.uniquindio.centroimpresion.exceptions.PrioridadFueraRangoException;
@@ -30,11 +30,11 @@ public class CtrlPanelAddDoc {
 	 * @throws ArchivoNoObtenidoException
 	 * @throws NoSePuedeLeerException
 	 * @throws PrioridadFueraRangoException
-	 * @throws CodigoIsEmptyException
+	 * @throws TextIsEmptyException
 	 */
 	public static Documento pedirDocumento(String textoCodigo, String textoPrioridad)
 			throws DocumentoEnProcesoException, ArchivoNoObtenidoException, NoSePuedeLeerException,
-			PrioridadFueraRangoException, CodigoIsEmptyException {
+			PrioridadFueraRangoException, TextIsEmptyException {
 		if (seEstaPidiendo)
 			throw new DocumentoEnProcesoException();
 		seEstaPidiendo = true;
@@ -51,10 +51,10 @@ public class CtrlPanelAddDoc {
 		return documento;
 	}
 
-	private static void throwIfEmpty(String textoCodigo) throws CodigoIsEmptyException {
+	private static void throwIfEmpty(String textoCodigo) throws TextIsEmptyException {
 		if (textoCodigo.isEmpty()) {
 			seEstaPidiendo = false;
-			throw new CodigoIsEmptyException();
+			throw new TextIsEmptyException("codigo");
 		}
 	}
 
@@ -136,11 +136,11 @@ public class CtrlPanelAddDoc {
 	 * @throws CentroImpresionException
 	 * @throws NoSePuedeLeerException
 	 * @throws PrioridadFueraRangoException
-	 * @throws CodigoIsEmptyException
+	 * @throws TextIsEmptyException
 	 */
 	public static void agregarDocumento(String textoCodigo, String textoPrioridad)
 			throws DocumentoEnProcesoException, ArchivoNoObtenidoException, CentroImpresionException,
-			NoSePuedeLeerException, PrioridadFueraRangoException, CodigoIsEmptyException {
+			NoSePuedeLeerException, PrioridadFueraRangoException, TextIsEmptyException {
 
 		throwifDocExist(textoCodigo);
 		Documento doc = pedirDocumento(textoCodigo, textoPrioridad);

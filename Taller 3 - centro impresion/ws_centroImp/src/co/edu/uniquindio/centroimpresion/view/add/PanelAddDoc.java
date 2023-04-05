@@ -3,7 +3,7 @@ package co.edu.uniquindio.centroimpresion.view.add;
 import co.edu.uniquindio.centroimpresion.controllers.CtrlPanelAddDoc;
 import co.edu.uniquindio.centroimpresion.exceptions.ArchivoNoObtenidoException;
 import co.edu.uniquindio.centroimpresion.exceptions.CentroImpresionException;
-import co.edu.uniquindio.centroimpresion.exceptions.CodigoIsEmptyException;
+import co.edu.uniquindio.centroimpresion.exceptions.TextIsEmptyException;
 import co.edu.uniquindio.centroimpresion.exceptions.DocumentoEnProcesoException;
 import co.edu.uniquindio.centroimpresion.exceptions.NoSePuedeLeerException;
 import co.edu.uniquindio.centroimpresion.exceptions.PrioridadFueraRangoException;
@@ -96,7 +96,7 @@ public class PanelAddDoc extends PanelConVolver implements EventHandler<Event> {
 				new Alert(AlertType.ERROR, "El archivo no se puede leer").show();
 			} catch (PrioridadFueraRangoException e) {
 				new Alert(AlertType.WARNING, "La prioridad debe de estar entre 0 y 10").show();
-			} catch (CodigoIsEmptyException e) {
+			} catch (TextIsEmptyException e) {
 				new Alert(AlertType.WARNING, "El código está vacío").show();
 			}
 		}
