@@ -2,12 +2,16 @@ package co.edu.uniquindio.centroimpresion.view.add;
 
 import co.edu.uniquindio.centroimpresion.view.custom.PanelConVolver;
 import co.edu.uniquindio.centroimpresion.view.custom.PanelMenuOpcionObjetos;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-public class PanelAddDoc extends PanelConVolver {
+public class PanelAddDoc extends PanelConVolver implements EventHandler<Event> {
 	private PanelMenuOpcionObjetos panel;
 	private HBox hBox;
 	private VBox vBox;
@@ -46,11 +50,30 @@ public class PanelAddDoc extends PanelConVolver {
 		hBox.setId("centered-box");
 		vBox.getChildren().add(hBox);
 		setCenter(vBox);
+		addlisteners();
+	}
+
+	public void addlisteners() {
+		btnAgregar.setOnMouseReleased(this);
+		tfPrior.textProperty().addListener(new ChangeListener<String>() {
+			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+				if (!newValue.matches("\\d*")) {
+					tfPrior.setText(newValue.replaceAll("[^\\d]", ""));
+				}
+			}
+		});
 	}
 
 	@Override
 	public void volverPresionado() {
 		panel.initComp();
+	}
+
+	@Override
+	public void handle(Event event) {
+		super.handle(event);
+		if (event.getSource() == btnAgregar) {
+		}
 	}
 
 }
