@@ -6,6 +6,9 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.TreeSet;
 
+import co.edu.uniquindio.centroimpresion.exceptions.CentroImpresionException;
+import co.edu.uniquindio.centroimpresion.exceptions.TipoCentroException;
+
 public class CentroImpresion implements Serializable {
 	/**
 	 *
@@ -17,16 +20,21 @@ public class CentroImpresion implements Serializable {
 	public CentroImpresion() {
 	}
 
-	public boolean agregarDocumento(String code, String titulo, int prioridad, String contenido) {
+	public void agregarDocumento(String code, String titulo, int prioridad, String contenido)
+			throws CentroImpresionException {
 		Documento documento = new Documento(code, titulo, prioridad, contenido, LocalDateTime.now());
-		return listaDocumentos.add(documento);
+		if (!listaDocumentos.add(documento))
+			throw new CentroImpresionException(TipoCentroException.ADD, Documento.class);
+
 	}
 
-	public boolean agregarImpresoraCartucho(String code, String marca, EstadoImpresora estado, boolean esAColor,
-			double paginasPorMinuto, double capacidadCartucho, double desgasteCartucho) {
+	public void agregarImpresoraCartucho(String code, String marca, EstadoImpresora estado, boolean esAColor,
+			double paginasPorMinuto, double capacidadCartucho, double desgasteCartucho)
+			throws CentroImpresionException {
 		ImpresoraCartucho impresora = new ImpresoraCartucho(code, marca, estado, esAColor, paginasPorMinuto,
 				capacidadCartucho, desgasteCartucho);
-		return listaImpresoras.add(impresora);
+		if (!listaImpresoras.add(impresora))
+			throw new CentroImpresionException(TipoCentroException.ADD, ImpresoraCartucho.class);
 	}
 
 	public Documento buscarDocumento(String code) {
@@ -46,48 +54,57 @@ public class CentroImpresion implements Serializable {
 		return listaImpresoras.stream().findFirst().orElse(null);
 	}
 
-	public boolean deleteDocumento(String code) {
-		return listaDocumentos.remove(buscarDocumento(code));
+	public void deleteDocumento(String code) throws CentroImpresionException {
+		if (!listaDocumentos.remove(buscarDocumento(code)))
+			throw new CentroImpresionException(TipoCentroException.REMOVE, Documento.class);
 	}
 
-	public boolean actualizarImpresora(Impresora impresora) {
+	public void deleteImpresora(String code) throws CentroImpresionException {
+		if (!listaImpresoras.remove(buscarImpresora(code)))
+			throw new CentroImpresionException(TipoCentroException.REMOVE, Impresora.class);
+	}
+
+	public void actualizarImpresora(Impresora impresora) throws CentroImpresionException {
+
 		if (listaImpresoras.remove(impresora))
-			return listaImpresoras.add(impresora);
+			listaImpresoras.add(impresora);
 
-		return false;
+		throw new CentroImpresionException(TipoCentroException.UPDATE, Impresora.class);
 	}
 
-	public boolean imprimirDocumento() {
+	public boolean imprimirDocumento() throws CentroImpresionException {
 		Impresora impresora = obtenerPrimerElementoImpresora();
 		Documento documento = obtenerPrimerElementoDocumento();
 		if (imprimir(impresora, documento)) {
-			return actualizarImpresora(impresora);
+			actualizarImpresora(impresora);
 		}
 		return false;
 	}
 
-	private boolean imprimir(Impresora impresora, Documento documento) {
-		if (impresora == null || documento == null)
-			return false;
+	private boolean imprimir(Impresora impresora, Documento documento) throws CentroImpresionException {
+		if (impresora == null)
+			throw new CentroImpresionException(TipoCentroException.NULL, Impresora.class);
+		if (documento == null)
+			throw new CentroImpresionException(TipoCentroException.NULL, Documento.class);
 		return impresora.imprimirDocumento(documento);
 	}
 
-	public boolean imprimirDocumento(String codeImpresora) {
+	public boolean imprimirDocumento(String codeImpresora) throws CentroImpresionException {
 		Impresora impresora = buscarImpresora(codeImpresora);
 		Documento documento = obtenerPrimerElementoDocumento();
 
 		if (imprimir(impresora, documento)) {
-			return actualizarImpresora(impresora);
+			actualizarImpresora(impresora);
 		}
 		return false;
 	}
 
-	public boolean imprimirDocumento(String codeImpresora, String codeDocumento) {
+	public boolean imprimirDocumento(String codeImpresora, String codeDocumento) throws CentroImpresionException {
 		Impresora impresora = buscarImpresora(codeImpresora);
 		Documento documento = buscarDocumento(codeDocumento);
 
 		if (imprimir(impresora, documento)) {
-			return actualizarImpresora(impresora);
+			actualizarImpresora(impresora);
 		}
 		return false;
 	}

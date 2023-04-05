@@ -7,7 +7,10 @@ import java.time.LocalDateTime;
 import java.util.Scanner;
 
 import co.edu.uniquindio.centroimpresion.exceptions.ArchivoNoObtenidoException;
+import co.edu.uniquindio.centroimpresion.exceptions.CentroImpresionException;
 import co.edu.uniquindio.centroimpresion.exceptions.DocumentoEnProcesoException;
+import co.edu.uniquindio.centroimpresion.exceptions.NoSePuedeLeerException;
+import co.edu.uniquindio.centroimpresion.exceptions.PrioridadFueraRangoException;
 import co.edu.uniquindio.centroimpresion.model.archivos.FiltroExtension;
 import co.edu.uniquindio.centroimpresion.model.archivos.SerializedData;
 import co.edu.uniquindio.centroimpresion.model.centro.Documento;
@@ -23,9 +26,12 @@ public class CtrlPanelAddDoc {
 	 * @return
 	 * @throws DocumentoEnProcesoException
 	 * @throws ArchivoNoObtenidoException
+	 * @throws NoSePuedeLeerException
+	 * @throws PrioridadFueraRangoException
 	 */
 	public static Documento pedirDocumento(String textoCodigo, String textoPrioridad)
-			throws DocumentoEnProcesoException, ArchivoNoObtenidoException {
+			throws DocumentoEnProcesoException, ArchivoNoObtenidoException, NoSePuedeLeerException,
+			PrioridadFueraRangoException {
 		if (seEstaPidiendo)
 			throw new DocumentoEnProcesoException();
 		seEstaPidiendo = true;
@@ -34,10 +40,18 @@ public class CtrlPanelAddDoc {
 			prioridad = Integer.parseInt(textoPrioridad);
 		} catch (NumberFormatException e) {
 		}
+		throwCaseNotInRange(prioridad);
 		Documento documento = pedirDocumento(textoCodigo, prioridad, "Agregar Documento",
 				new FiltroExtension("Documentos de texto", "*.txt"), new FiltroExtension("Todos los archivos", "*.*"));
 		seEstaPidiendo = false;
 		return documento;
+	}
+
+	private static void throwCaseNotInRange(int prioridad) throws PrioridadFueraRangoException {
+		if (prioridad < 0 || prioridad > 10) {
+			seEstaPidiendo = false;
+			throw new PrioridadFueraRangoException();
+		}
 	}
 
 	/**
@@ -53,9 +67,10 @@ public class CtrlPanelAddDoc {
 	 * @return null si no se puede leer el documento
 	 * @throws ArchivoNoObtenidoException
 	 *             si no se pudo obtener el documento
+	 * @throws NoSePuedeLeerException
 	 */
 	public static Documento pedirDocumento(String code, int prioridad, String tituloVentana, FiltroExtension... filtros)
-			throws ArchivoNoObtenidoException {
+			throws ArchivoNoObtenidoException, NoSePuedeLeerException {
 		File file = CtrlAgregarDocumento.obtenerArchivo(tituloVentana,
 				CtrlAgregarDocumento.obtenerExtensionFiltersDeFiltroExtension(filtros));
 		if (file == null) {
@@ -73,11 +88,14 @@ public class CtrlPanelAddDoc {
 	 * @param archivo
 	 * @param prioridad
 	 * @return null si el archivo no se puede leer
+	 * @throws NoSePuedeLeerException
 	 * @throws FileNotFoundException
 	 */
-	public static Documento obtenerDocumentoArchivo(String code, File archivo, int prioridad) {
+	public static Documento obtenerDocumentoArchivo(String code, File archivo, int prioridad)
+			throws NoSePuedeLeerException {
 		if (!archivo.canRead()) {
-			return null;
+			seEstaPidiendo = false;
+			throw new NoSePuedeLeerException();
 		}
 		String contenido = "";
 		try {
@@ -96,13 +114,24 @@ public class CtrlPanelAddDoc {
 				LocalDateTime.now());
 	}
 
-	public static boolean agregarDocumento(Documento doc) {
+	/**
+	 * Agrega un documento por medio de un FileChooser, abre una ventana para
+	 * obtener el documento y luego lo intenta a gregar al centro de impresion
+	 *
+	 * @param textoCodigo
+	 * @param textoPrioridad
+	 * @throws DocumentoEnProcesoException
+	 * @throws ArchivoNoObtenidoException
+	 * @throws CentroImpresionException
+	 * @throws NoSePuedeLeerException
+	 * @throws PrioridadFueraRangoException
+	 */
+	public static void agregarDocumento(String textoCodigo, String textoPrioridad) throws DocumentoEnProcesoException,
+			ArchivoNoObtenidoException, CentroImpresionException, NoSePuedeLeerException, PrioridadFueraRangoException {
+		Documento doc = pedirDocumento(textoCodigo, textoPrioridad);
 		SerializedData data = new SerializedData();
-		boolean resultado = data.getCentroImpresion().agregarDocumento(doc.getCode(), doc.getTitulo(),
-				doc.getPrioridad(), doc.getContenido());
-		if (resultado)
-			data.updateCentroImpresion();
-		return resultado;
-
+		data.getCentroImpresion().agregarDocumento(doc.getCode(), doc.getTitulo(), doc.getPrioridad(),
+				doc.getContenido());
+		data.updateCentroImpresion();
 	}
 }
