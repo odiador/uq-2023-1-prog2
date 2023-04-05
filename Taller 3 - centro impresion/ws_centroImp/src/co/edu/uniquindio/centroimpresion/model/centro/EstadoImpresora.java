@@ -14,4 +14,13 @@ public enum EstadoImpresora implements Serializable {
 		return texto;
 	}
 
+	public static EstadoImpresora obtenerEstado(String texto) {
+		EstadoImpresora[] estados = EstadoImpresora.values();
+		for (EstadoImpresora estado : estados)
+			if (estado.getTexto().equals(texto))
+				return estado;
+
+		return null;
+	}
+
 }
