@@ -12,6 +12,7 @@ import co.edu.uniquindio.centroimpresion.exceptions.CodigoIsEmptyException;
 import co.edu.uniquindio.centroimpresion.exceptions.DocumentoEnProcesoException;
 import co.edu.uniquindio.centroimpresion.exceptions.NoSePuedeLeerException;
 import co.edu.uniquindio.centroimpresion.exceptions.PrioridadFueraRangoException;
+import co.edu.uniquindio.centroimpresion.exceptions.TipoCentroException;
 import co.edu.uniquindio.centroimpresion.model.archivos.FiltroExtension;
 import co.edu.uniquindio.centroimpresion.model.archivos.SerializedData;
 import co.edu.uniquindio.centroimpresion.model.centro.Documento;
@@ -137,12 +138,23 @@ public class CtrlPanelAddDoc {
 	 * @throws PrioridadFueraRangoException
 	 * @throws CodigoIsEmptyException
 	 */
-	public static void agregarDocumento(String textoCodigo, String textoPrioridad) throws DocumentoEnProcesoException,
-			ArchivoNoObtenidoException, CentroImpresionException, NoSePuedeLeerException, PrioridadFueraRangoException, CodigoIsEmptyException {
+	public static void agregarDocumento(String textoCodigo, String textoPrioridad)
+			throws DocumentoEnProcesoException, ArchivoNoObtenidoException, CentroImpresionException,
+			NoSePuedeLeerException, PrioridadFueraRangoException, CodigoIsEmptyException {
+
+		throwifDocExist(textoCodigo);
 		Documento doc = pedirDocumento(textoCodigo, textoPrioridad);
+
 		SerializedData data = new SerializedData();
 		data.getCentroImpresion().agregarDocumento(doc.getCode(), doc.getTitulo(), doc.getPrioridad(),
 				doc.getContenido());
 		data.updateCentroImpresion();
+	}
+
+	public static void throwifDocExist(String code) throws CentroImpresionException {
+		SerializedData data = new SerializedData();
+		if (data.getCentroImpresion().validarDocumento(code))
+			throw new CentroImpresionException(TipoCentroException.ADD, Documento.class);
+
 	}
 }
