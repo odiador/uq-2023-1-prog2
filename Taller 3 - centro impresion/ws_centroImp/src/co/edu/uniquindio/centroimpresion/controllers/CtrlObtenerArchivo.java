@@ -7,7 +7,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 
-public class CtrlAgregarDocumento {
+public class CtrlObtenerArchivo {
 
 	/**
 	 * Obtiene un archivo a traves de un file chooser (se abre una ventana de

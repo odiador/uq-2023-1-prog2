@@ -82,8 +82,8 @@ public class CtrlPanelAddDoc {
 	 */
 	public static Documento pedirDocumento(String code, int prioridad, String tituloVentana, FiltroExtension... filtros)
 			throws ArchivoNoObtenidoException, NoSePuedeLeerException {
-		File file = CtrlAgregarDocumento.obtenerArchivo(tituloVentana,
-				CtrlAgregarDocumento.obtenerExtensionFiltersDeFiltroExtension(filtros));
+		File file = CtrlObtenerArchivo.obtenerArchivo(tituloVentana,
+				CtrlObtenerArchivo.obtenerExtensionFiltersDeFiltroExtension(filtros));
 		if (file == null) {
 			seEstaPidiendo = false;
 			throw new ArchivoNoObtenidoException();
@@ -121,7 +121,7 @@ public class CtrlPanelAddDoc {
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-		return new Documento(code, CtrlAgregarDocumento.quitarExtension(archivo.getName()), prioridad, contenido,
+		return new Documento(code, CtrlObtenerArchivo.quitarExtension(archivo.getName()), prioridad, contenido,
 				LocalDateTime.now());
 	}
 
