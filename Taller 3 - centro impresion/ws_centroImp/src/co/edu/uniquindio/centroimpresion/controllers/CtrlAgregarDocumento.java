@@ -83,28 +83,6 @@ public class CtrlAgregarDocumento {
 		return sb.toString();
 	}
 
-	/**
-	 * Permite agregar un documento a partir de su código, prioridad y el título
-	 * de la ventana
-	 *
-	 * @param code
-	 *            es el código del documento
-	 * @param prioridad
-	 *            es la prioridad del documento
-	 * @param tituloVentana
-	 *            es el titulo de la ventana a abrir
-	 * @return null si no se puede leer el documento
-	 * @throws ArchivoNoObtenidoException
-	 *             si no se pudo obtener el documento
-	 */
-	public static Documento pedirDocumento(String code, int prioridad, String tituloVentana, FiltroExtension... filtros)
-			throws ArchivoNoObtenidoException {
-		File file = obtenerArchivo(tituloVentana, obtenerExtensionFiltersDeFiltroExtension(filtros));
-		if (file == null)
-			throw new ArchivoNoObtenidoException();
-		return obtenerDocumentoArchivo(code, file, prioridad);
-	}
-
 	public static FileChooser.ExtensionFilter[] obtenerExtensionFiltersDeFiltroExtension(FiltroExtension... filtros) {
 		ExtensionFilter[] arr = new FileChooser.ExtensionFilter[filtros.length];
 		for (int i = 0; i < arr.length; i++) {
@@ -112,35 +90,5 @@ public class CtrlAgregarDocumento {
 			arr[i] = new FileChooser.ExtensionFilter(filtroExtension.getNombre(), filtroExtension.getArchivosAAbrir());
 		}
 		return arr;
-	}
-
-	/**
-	 * Obtiene un documento a partir de su archivo, código y prioridad; del
-	 * archivo sale el titulo y el contenido
-	 *
-	 * @param code
-	 * @param archivo
-	 * @param prioridad
-	 * @return null si el archivo no se puede leer
-	 * @throws FileNotFoundException
-	 */
-	public static Documento obtenerDocumentoArchivo(String code, File archivo, int prioridad) {
-		if (!archivo.canRead()) {
-			return null;
-		}
-		String contenido = "";
-		try {
-			Scanner conexionArchivo = new Scanner(new FileInputStream(archivo));
-			if (conexionArchivo.hasNextLine()) {
-				contenido += conexionArchivo.nextLine();
-			}
-			while (conexionArchivo.hasNextLine())
-				contenido += "\n" + conexionArchivo.nextLine();
-
-			conexionArchivo.close();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-		return new Documento(code, quitarExtension(archivo.getName()), prioridad, contenido, LocalDateTime.now());
 	}
 }
