@@ -1,11 +1,20 @@
 package co.edu.uniquindio.centroimpresion.view.add;
 
+import co.edu.uniquindio.centroimpresion.controllers.CtrlPanelAddDoc;
+import co.edu.uniquindio.centroimpresion.exceptions.ArchivoNoObtenidoException;
+import co.edu.uniquindio.centroimpresion.exceptions.CentroImpresionException;
+import co.edu.uniquindio.centroimpresion.exceptions.CodigoIsEmptyException;
+import co.edu.uniquindio.centroimpresion.exceptions.DocumentoEnProcesoException;
+import co.edu.uniquindio.centroimpresion.exceptions.NoSePuedeLeerException;
+import co.edu.uniquindio.centroimpresion.exceptions.PrioridadFueraRangoException;
 import co.edu.uniquindio.centroimpresion.view.custom.PanelConVolver;
 import co.edu.uniquindio.centroimpresion.view.custom.PanelMenuOpcionObjetos;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.Event;
 import javafx.event.EventHandler;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
@@ -73,6 +82,23 @@ public class PanelAddDoc extends PanelConVolver implements EventHandler<Event> {
 	public void handle(Event event) {
 		super.handle(event);
 		if (event.getSource() == btnAgregar) {
+			try {
+				CtrlPanelAddDoc.agregarDocumento(tfCode.getText(), tfPrior.getText());
+				new Alert(AlertType.INFORMATION, "El documento se ha agregado con éxito(" + tfCode.getText() + ")")
+						.show();
+			} catch (ArchivoNoObtenidoException e) {
+				new Alert(AlertType.ERROR, "El archivo no pudo ser obtenido").show();
+			} catch (DocumentoEnProcesoException e) {
+				new Alert(AlertType.WARNING, "Espera a que el documento sea obtenido").show();
+			} catch (CentroImpresionException e) {
+				new Alert(AlertType.ERROR, e.getMessage()).show();
+			} catch (NoSePuedeLeerException e) {
+				new Alert(AlertType.ERROR, "El archivo no se puede leer").show();
+			} catch (PrioridadFueraRangoException e) {
+				new Alert(AlertType.WARNING, "La prioridad debe de estar entre 0 y 10").show();
+			} catch (CodigoIsEmptyException e) {
+				new Alert(AlertType.WARNING, "El código está vacío").show();
+			}
 		}
 	}
 
