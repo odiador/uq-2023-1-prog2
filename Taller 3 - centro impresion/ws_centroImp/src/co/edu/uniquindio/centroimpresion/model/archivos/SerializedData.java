@@ -56,6 +56,7 @@ public class SerializedData {
 			} catch (Exception e1) {
 			}
 		}
+		System.out.println(getCentroImpresion()); //TODO
 	}
 
 	public void updateCentroImpresion(CentroImpresion centroImpresion) {
