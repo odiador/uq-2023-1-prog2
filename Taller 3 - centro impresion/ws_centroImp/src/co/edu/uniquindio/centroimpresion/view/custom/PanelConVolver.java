@@ -15,7 +15,7 @@ public abstract class PanelConVolver extends BorderPane implements EventHandler<
 	public void initComp() {
 		label = new Label("Volver");
 		label.setOnMouseReleased(this);
-		label.setId("btn-inferior");
+		label.setId("btn");
 		setBottom(label);
 	}
 
