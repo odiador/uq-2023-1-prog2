@@ -6,8 +6,11 @@ import java.io.FileNotFoundException;
 import java.time.LocalDateTime;
 import java.util.Scanner;
 
-import co.edu.uniquindio.centroimpresion.model.Documento;
+import co.edu.uniquindio.centroimpresion.exceptions.ArchivoNoObtenidoException;
+import co.edu.uniquindio.centroimpresion.model.archivos.FiltroExtension;
+import co.edu.uniquindio.centroimpresion.model.centro.Documento;
 import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 
 public class CtrlAgregarDocumento {
@@ -81,6 +84,37 @@ public class CtrlAgregarDocumento {
 	}
 
 	/**
+	 * Permite agregar un documento a partir de su código, prioridad y el título
+	 * de la ventana
+	 *
+	 * @param code
+	 *            es el código del documento
+	 * @param prioridad
+	 *            es la prioridad del documento
+	 * @param tituloVentana
+	 *            es el titulo de la ventana a abrir
+	 * @return null si no se puede leer el documento
+	 * @throws ArchivoNoObtenidoException
+	 *             si no se pudo obtener el documento
+	 */
+	public static Documento pedirDocumento(String code, int prioridad, String tituloVentana, FiltroExtension... filtros)
+			throws ArchivoNoObtenidoException {
+		File file = obtenerArchivo(tituloVentana, obtenerExtensionFiltersDeFiltroExtension(filtros));
+		if (file == null)
+			throw new ArchivoNoObtenidoException();
+		return obtenerDocumentoArchivo(code, file, prioridad);
+	}
+
+	public static FileChooser.ExtensionFilter[] obtenerExtensionFiltersDeFiltroExtension(FiltroExtension... filtros) {
+		ExtensionFilter[] arr = new FileChooser.ExtensionFilter[filtros.length];
+		for (int i = 0; i < arr.length; i++) {
+			FiltroExtension filtroExtension = filtros[i];
+			arr[i] = new FileChooser.ExtensionFilter(filtroExtension.getNombre(), filtroExtension.getArchivosAAbrir());
+		}
+		return arr;
+	}
+
+	/**
 	 * Obtiene un documento a partir de su archivo, código y prioridad; del
 	 * archivo sale el titulo y el contenido
 	 *
@@ -97,8 +131,11 @@ public class CtrlAgregarDocumento {
 		String contenido = "";
 		try {
 			Scanner conexionArchivo = new Scanner(new FileInputStream(archivo));
-			while (conexionArchivo.hasNextLine())
+			if (conexionArchivo.hasNextLine()) {
 				contenido += conexionArchivo.nextLine();
+			}
+			while (conexionArchivo.hasNextLine())
+				contenido += "\n" + conexionArchivo.nextLine();
 
 			conexionArchivo.close();
 		} catch (FileNotFoundException e) {
