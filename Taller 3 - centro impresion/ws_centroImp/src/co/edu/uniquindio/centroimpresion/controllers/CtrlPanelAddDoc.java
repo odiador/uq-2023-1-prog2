@@ -57,8 +57,10 @@ public class CtrlPanelAddDoc {
 			throws ArchivoNoObtenidoException {
 		File file = CtrlAgregarDocumento.obtenerArchivo(tituloVentana,
 				CtrlAgregarDocumento.obtenerExtensionFiltersDeFiltroExtension(filtros));
-		if (file == null)
+		if (file == null) {
+			seEstaPidiendo = false;
 			throw new ArchivoNoObtenidoException();
+		}
 		return obtenerDocumentoArchivo(code, file, prioridad);
 	}
 
