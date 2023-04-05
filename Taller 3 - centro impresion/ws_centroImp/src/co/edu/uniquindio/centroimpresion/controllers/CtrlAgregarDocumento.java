@@ -1,14 +1,8 @@
 package co.edu.uniquindio.centroimpresion.controllers;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.time.LocalDateTime;
-import java.util.Scanner;
 
-import co.edu.uniquindio.centroimpresion.exceptions.ArchivoNoObtenidoException;
 import co.edu.uniquindio.centroimpresion.model.archivos.FiltroExtension;
-import co.edu.uniquindio.centroimpresion.model.centro.Documento;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
