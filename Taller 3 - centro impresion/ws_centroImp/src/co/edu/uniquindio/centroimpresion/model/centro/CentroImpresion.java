@@ -41,8 +41,16 @@ public class CentroImpresion implements Serializable {
 		return listaDocumentos.stream().filter(doc -> doc.getCode().equals(code)).findAny().orElse(null);
 	}
 
+	public boolean validarDocumento(String code) {
+		return buscarDocumento(code) != null;
+	}
+
 	public Impresora buscarImpresora(String code) {
 		return listaImpresoras.stream().filter(doc -> doc.getCode().equals(code)).findAny().orElse(null);
+	}
+
+	public boolean validarImpresora(String code) {
+		return buscarImpresora(code) != null;
 	}
 
 	public Documento obtenerPrimerElementoDocumento() {
