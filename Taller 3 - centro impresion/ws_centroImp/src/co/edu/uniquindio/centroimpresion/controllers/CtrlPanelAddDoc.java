@@ -33,8 +33,8 @@ public class CtrlPanelAddDoc {
 	 * @throws TextIsEmptyException
 	 */
 	public static Documento pedirDocumento(String textoCodigo, String textoPrioridad)
-			throws DocumentoEnProcesoException, ArchivoNoObtenidoException, NoSePuedeLeerException,
-			FueraRangoException, TextIsEmptyException {
+			throws DocumentoEnProcesoException, ArchivoNoObtenidoException, NoSePuedeLeerException, FueraRangoException,
+			TextIsEmptyException {
 		if (seEstaPidiendo)
 			throw new DocumentoEnProcesoException();
 		seEstaPidiendo = true;
@@ -61,7 +61,7 @@ public class CtrlPanelAddDoc {
 	private static void throwCaseNotInRange(int prioridad) throws FueraRangoException {
 		if (prioridad < 0 || prioridad > 10) {
 			seEstaPidiendo = false;
-			throw new FueraRangoException();
+			throw new FueraRangoException("La prioridad tiene que ser entre 0 y 10");
 		}
 	}
 
