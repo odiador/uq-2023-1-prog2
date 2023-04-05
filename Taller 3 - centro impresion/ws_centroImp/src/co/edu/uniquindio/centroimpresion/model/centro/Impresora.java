@@ -18,11 +18,19 @@ public abstract class Impresora implements Serializable {
 	private int paginasImpresas;
 
 	public Impresora(String code, String marca, EstadoImpresora estado, boolean esAColor, double paginasPorMinuto) {
-		this.code = code;
-		this.marca = marca;
-		this.estado = estado;
+		this(code, marca, estado);
 		this.esAColor = esAColor;
 		this.paginasPorMinuto = paginasPorMinuto;
+	}
+
+	public Impresora() {
+		code = null;
+	}
+
+	public Impresora(String code, String marca, EstadoImpresora estado) {
+		this(code);
+		this.marca = marca;
+		this.estado = estado;
 	}
 
 	public Impresora(String code) {
@@ -108,6 +116,10 @@ public abstract class Impresora implements Serializable {
 
 	public void setPaginasImpresas(int paginasImpresas) {
 		this.paginasImpresas = paginasImpresas;
+	}
+
+	public boolean exists() {
+		return code != null && marca != null && estado != null;
 	}
 
 	@Override
