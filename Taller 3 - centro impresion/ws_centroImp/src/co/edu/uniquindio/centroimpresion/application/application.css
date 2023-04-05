@@ -28,7 +28,7 @@
 
 	-fx-pref-width: 250.0;
 }
-#btn-inferior {
+#btn {
 	-fx-max-width: 100000.0;
 	-fx-alignment: center;
 	-fx-background-color: red;
