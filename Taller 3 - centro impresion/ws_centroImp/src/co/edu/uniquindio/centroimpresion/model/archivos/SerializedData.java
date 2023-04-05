@@ -8,7 +8,7 @@ import java.io.ObjectOutputStream;
 import co.edu.uniquindio.centroimpresion.model.centro.CentroImpresion;
 
 public class SerializedData {
-	private static final String RUTA = "src/co/edu/uniquindio/centroimpresion/model/carpeta.txt";
+	private static final String RUTA = "src/co/edu/uniquindio/centroimpresion/model/archivos/info.dat";
 	private CentroImpresion centroImpresion;
 
 	public SerializedData() {
