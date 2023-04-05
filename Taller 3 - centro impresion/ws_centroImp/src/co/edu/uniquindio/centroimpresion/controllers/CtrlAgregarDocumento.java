@@ -80,4 +80,27 @@ public class CtrlAgregarDocumento {
 		return sb.toString();
 	}
 
+	/**
+	 * Obtiene un documento a partir de su archivo, código y prioridad; del
+	 * archivo sale el titulo y el contenido
+	 *
+	 * @param code
+	 * @param archivo
+	 * @param prioridad
+	 * @return null si el archivo no se puede leer
+	 * @throws FileNotFoundException
+	 */
+	public static Documento obtenerDocumentoArchivo(String code, File archivo, int prioridad)
+			throws FileNotFoundException {
+		if (!archivo.canRead()) {
+			return null;
+		}
+		Scanner asdasda = new Scanner(new FileInputStream(archivo));
+		String contenido = "";
+		while (asdasda.hasNextLine())
+			contenido += asdasda.nextLine();
+
+		asdasda.close();
+		return new Documento(code, quitarExtension(archivo.getName()), prioridad, contenido, LocalDateTime.now());
+	}
 }
