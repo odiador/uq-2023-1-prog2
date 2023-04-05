@@ -118,8 +118,7 @@ public class Documento implements Comparable<Documento>, Serializable {
 
 	@Override
 	public String toString() {
-		return "Documento [code=" + code + ", titulo=" + titulo + ", prioridad=" + prioridad + ", contenido="
-				+ contenido + ", fechaAgregado=" + fechaAgregado + ", fechaImpresion=" + fechaImpresion + "]";
+		return "Documento [code=" + code + ", titulo=" + titulo + ", prioridad=" + prioridad + "]";
 	}
 
 }
