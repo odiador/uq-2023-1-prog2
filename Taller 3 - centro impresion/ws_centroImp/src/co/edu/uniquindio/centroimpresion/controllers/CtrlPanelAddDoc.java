@@ -9,6 +9,7 @@ import java.util.Scanner;
 import co.edu.uniquindio.centroimpresion.exceptions.ArchivoNoObtenidoException;
 import co.edu.uniquindio.centroimpresion.exceptions.DocumentoEnProcesoException;
 import co.edu.uniquindio.centroimpresion.model.archivos.FiltroExtension;
+import co.edu.uniquindio.centroimpresion.model.archivos.SerializedData;
 import co.edu.uniquindio.centroimpresion.model.centro.Documento;
 
 public class CtrlPanelAddDoc {
@@ -93,5 +94,15 @@ public class CtrlPanelAddDoc {
 		}
 		return new Documento(code, CtrlAgregarDocumento.quitarExtension(archivo.getName()), prioridad, contenido,
 				LocalDateTime.now());
+	}
+
+	public static boolean agregarDocumento(Documento doc) {
+		SerializedData data = new SerializedData();
+		boolean resultado = data.getCentroImpresion().agregarDocumento(doc.getCode(), doc.getTitulo(),
+				doc.getPrioridad(), doc.getContenido());
+		if (resultado)
+			data.updateCentroImpresion();
+		return resultado;
+
 	}
 }
