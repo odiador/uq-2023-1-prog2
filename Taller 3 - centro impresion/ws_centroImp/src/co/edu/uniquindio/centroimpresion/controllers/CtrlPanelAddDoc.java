@@ -8,6 +8,7 @@ import java.util.Scanner;
 
 import co.edu.uniquindio.centroimpresion.exceptions.ArchivoNoObtenidoException;
 import co.edu.uniquindio.centroimpresion.exceptions.CentroImpresionException;
+import co.edu.uniquindio.centroimpresion.exceptions.CodigoIsEmptyException;
 import co.edu.uniquindio.centroimpresion.exceptions.DocumentoEnProcesoException;
 import co.edu.uniquindio.centroimpresion.exceptions.NoSePuedeLeerException;
 import co.edu.uniquindio.centroimpresion.exceptions.PrioridadFueraRangoException;
@@ -28,10 +29,11 @@ public class CtrlPanelAddDoc {
 	 * @throws ArchivoNoObtenidoException
 	 * @throws NoSePuedeLeerException
 	 * @throws PrioridadFueraRangoException
+	 * @throws CodigoIsEmptyException
 	 */
 	public static Documento pedirDocumento(String textoCodigo, String textoPrioridad)
 			throws DocumentoEnProcesoException, ArchivoNoObtenidoException, NoSePuedeLeerException,
-			PrioridadFueraRangoException {
+			PrioridadFueraRangoException, CodigoIsEmptyException {
 		if (seEstaPidiendo)
 			throw new DocumentoEnProcesoException();
 		seEstaPidiendo = true;
@@ -40,11 +42,19 @@ public class CtrlPanelAddDoc {
 			prioridad = Integer.parseInt(textoPrioridad);
 		} catch (NumberFormatException e) {
 		}
+		throwIfEmpty(textoCodigo);
 		throwCaseNotInRange(prioridad);
 		Documento documento = pedirDocumento(textoCodigo, prioridad, "Agregar Documento",
 				new FiltroExtension("Documentos de texto", "*.txt"), new FiltroExtension("Todos los archivos", "*.*"));
 		seEstaPidiendo = false;
 		return documento;
+	}
+
+	private static void throwIfEmpty(String textoCodigo) throws CodigoIsEmptyException {
+		if (textoCodigo.isEmpty()) {
+			seEstaPidiendo = false;
+			throw new CodigoIsEmptyException();
+		}
 	}
 
 	private static void throwCaseNotInRange(int prioridad) throws PrioridadFueraRangoException {
@@ -125,9 +135,10 @@ public class CtrlPanelAddDoc {
 	 * @throws CentroImpresionException
 	 * @throws NoSePuedeLeerException
 	 * @throws PrioridadFueraRangoException
+	 * @throws CodigoIsEmptyException
 	 */
 	public static void agregarDocumento(String textoCodigo, String textoPrioridad) throws DocumentoEnProcesoException,
-			ArchivoNoObtenidoException, CentroImpresionException, NoSePuedeLeerException, PrioridadFueraRangoException {
+			ArchivoNoObtenidoException, CentroImpresionException, NoSePuedeLeerException, PrioridadFueraRangoException, CodigoIsEmptyException {
 		Documento doc = pedirDocumento(textoCodigo, textoPrioridad);
 		SerializedData data = new SerializedData();
 		data.getCentroImpresion().agregarDocumento(doc.getCode(), doc.getTitulo(), doc.getPrioridad(),
