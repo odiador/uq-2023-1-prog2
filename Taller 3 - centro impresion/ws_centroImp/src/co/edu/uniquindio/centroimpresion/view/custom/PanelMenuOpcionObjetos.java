@@ -6,7 +6,6 @@ import co.edu.uniquindio.centroimpresion.model.TipoEmpleado;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
@@ -36,7 +35,7 @@ public abstract class PanelMenuOpcionObjetos extends BorderPane implements Event
 
 	public void initComp() {
 		VBox box = new VBox();
-		box.setAlignment(Pos.CENTER);
+		box.setId("centered-box");
 		for (int i = 0; i < opciones.length; i++) {
 			Label label = new Label(opcionesString[i]);
 			label.setId("boton-opcion");
