@@ -9,13 +9,13 @@ import co.edu.uniquindio.centroimpresion.exceptions.ImpresoraException;
 
 public abstract class Impresora implements Serializable {
 
-	private final String code;
-	private String marca;
-	private EstadoImpresora estado;
-	private final TreeSet<Documento> listaDocumentos = new TreeSet<Documento>();
-	private double paginasPorMinuto;
-	private boolean esAColor;
-	private int paginasImpresas;
+	protected final String code;
+	protected String marca;
+	protected EstadoImpresora estado;
+	protected final TreeSet<Documento> listaDocumentos = new TreeSet<Documento>();
+	protected double paginasPorMinuto;
+	protected boolean esAColor;
+	protected int paginasImpresas;
 
 	public Impresora(String code, String marca, EstadoImpresora estado, boolean esAColor, double paginasPorMinuto) {
 		this(code, marca, estado);
