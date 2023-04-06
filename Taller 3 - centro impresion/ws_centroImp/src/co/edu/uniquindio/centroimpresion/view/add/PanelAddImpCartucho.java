@@ -79,7 +79,35 @@ public class PanelAddImpCartucho extends PanelConVolver {
 		agregarCase.setId("btn-case");
 		vBox.getChildren().add(agregarCase);
 		setCenter(vBox);
-		btnAgregar.setOnMouseReleased(event -> {});
+		btnAgregar.setOnMouseReleased(event -> {
+			try {
+				CtrlPanelAddImpCartucho.agregarImpresoraCartucho(tfCode.getText(), tfMarca.getText(),
+						comboEstados.getValue(), checkColor.isSelected(), juntarCadenasParaDoble(tfVel.getText(), tfVelDecimal.getText()),
+						juntarCadenasParaDoble(tfCapacidad.getText(), tfCapacidadDecimal.getText()),
+						juntarCadenasParaDoble(tfDesgaste.getText(), tfDesgasteDecimal.getText()));
+			} catch (NumberFormatException e) {
+				new Alert(AlertType.WARNING, "Solo coloca numeros en la velocidad, capacidad y desgaste").show();
+			} catch (CentroImpresionException e) {
+				new Alert(AlertType.WARNING, "Ya existe una impresora con ese código").show();
+			} catch (TextIsEmptyException e) {
+				new Alert(AlertType.WARNING, "Rellena todos los campos (" + e.getTipoTexto() + ")").show();
+			} catch (ObjectNotExists e) {
+				new Alert(AlertType.WARNING, "Rellena todos los campos (" + e.getClase().getSimpleName() + ")").show();
+			} catch (FueraRangoException e) {
+				new Alert(AlertType.WARNING, e.getMessage()).show();
+			}
+		});
+	}
+
+	private static String juntarCadenasParaDoble(String inicial, String fainal) {
+		String concatenacion = "";
+		if (inicial.isEmpty()) {
+			concatenacion += "0" + (fainal.isEmpty() ? "" : "." + fainal);
+		} else {
+			concatenacion += inicial + (fainal.isEmpty() ? "" : "." + fainal);
+		}
+
+		return concatenacion;
 	}
 
 	@Override
