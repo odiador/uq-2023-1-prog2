@@ -60,7 +60,7 @@ public class PanelAddImpCartucho extends PanelConVolver {
 		HBox.setMargin(tfDesgasteDecimal, new Insets(0, 5, 0, 10));
 		ComboBox<String> comboEstados = new ComboBox<String>();
 		CheckBox checkColor = new CheckBox();
-
+		checkColor.setSelected(true);
 		comboEstados.setItems(FXCollections.observableArrayList(EstadoImpresora.stringValues()));
 
 		comboEstados.setId("combobox");
