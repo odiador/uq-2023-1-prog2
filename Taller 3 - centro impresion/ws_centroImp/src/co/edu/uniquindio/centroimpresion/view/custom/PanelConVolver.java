@@ -17,7 +17,7 @@ public abstract class PanelConVolver extends BorderPane implements EventHandler<
 	public void initComp() {
 		label = new Label("Volver");
 		label.setOnMouseReleased(this);
-		label.setId("btn");
+		label.setId("btn-volver");
 		setBottom(label);
 	}
 
@@ -34,6 +34,15 @@ public abstract class PanelConVolver extends BorderPane implements EventHandler<
 		Label label = new Label(msg);
 		label.setId("label");
 		HBox hbox = new HBox(20, label);
+		hbox.getChildren().addAll(nodos);
+		hbox.setId("centered-box");
+		return hbox;
+	}
+
+	public static HBox generarHBox(int spacing, String msg, Node... nodos) {
+		Label label = new Label(msg);
+		label.setId("label");
+		HBox hbox = new HBox(spacing, label);
 		hbox.getChildren().addAll(nodos);
 		hbox.setId("centered-box");
 		return hbox;
