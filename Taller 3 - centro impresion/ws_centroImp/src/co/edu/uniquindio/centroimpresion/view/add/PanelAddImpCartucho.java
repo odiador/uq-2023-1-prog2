@@ -63,10 +63,13 @@ public class PanelAddImpCartucho extends PanelConVolver {
 
 		comboEstados.setItems(FXCollections.observableArrayList(EstadoImpresora.stringValues()));
 
+		comboEstados.setId("combobox");
+		checkColor.setId("checkbox");
+
 		vBox.getChildren().add(generarHBox("Escribe el código de la impresora", tfCode));
 		vBox.getChildren().add(generarHBox("Escribe la marca de la impresora", tfMarca));
 		vBox.getChildren().add(generarHBox("Elige el estado de la impresora", comboEstados));
-		vBox.getChildren().add(generarHBox("¿La impresora es a color?"));
+		vBox.getChildren().add(generarHBox("¿La impresora es a color?", checkColor));
 		vBox.getChildren().add(generarHBox(0, "Escribe la vel de la impresora (paginas por minuto)", tfVel,
 				new Label(","), tfVelDecimal));
 		vBox.getChildren().add(generarHBox(0, "Escribe la capacidad de cartucho de la impresora", tfCapacidad,
@@ -82,7 +85,8 @@ public class PanelAddImpCartucho extends PanelConVolver {
 		btnAgregar.setOnMouseReleased(event -> {
 			try {
 				CtrlPanelAddImpCartucho.agregarImpresoraCartucho(tfCode.getText(), tfMarca.getText(),
-						comboEstados.getValue(), checkColor.isSelected(), juntarCadenasParaDoble(tfVel.getText(), tfVelDecimal.getText()),
+						comboEstados.getValue(), checkColor.isSelected(),
+						juntarCadenasParaDoble(tfVel.getText(), tfVelDecimal.getText()),
 						juntarCadenasParaDoble(tfCapacidad.getText(), tfCapacidadDecimal.getText()),
 						juntarCadenasParaDoble(tfDesgaste.getText(), tfDesgasteDecimal.getText()));
 			} catch (NumberFormatException e) {
