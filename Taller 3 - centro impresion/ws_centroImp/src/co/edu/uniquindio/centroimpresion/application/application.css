@@ -7,6 +7,19 @@
 	-fx-max-width: 100000.0;
 	-fx-font-weight: bold;
 }
+#checkbox .box {
+	-fx-background-color: red;
+	-fx-pref-width: 100.0;
+}
+#checkbox:selected .mark {
+	-fx-background-color: rgb(0.0,0.0,0.0,0.0);
+}
+#checkbox:selected .box {
+	-fx-background-color: rgb(0.0,255.0,0.0);
+}
+#checkbox:indeterminate .box {
+	-fx-background-color: rgb(255.0,0.0,0.0);
+}
 #tabpane {
 }
 #label-opciones-principal:hover {
