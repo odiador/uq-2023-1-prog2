@@ -29,11 +29,31 @@
 	-fx-pref-width: 250.0;
 }
 #btn {
-	-fx-max-width: 100000.0;
+	-fx-alignment: center;
+	-fx-font-size: 20.0;
+	-fx-max-width: 1000000.0;
+	-fx-max-height: 1000000.0;
+}
+#btn-case {
+	-fx-background-color: rgb(0.0,255.0,0.0);
+	-fx-max-width: 200.0;
+	-fx-pref-height: 40.0;
+}
+#btn:hover {
+	-fx-background-color: rgb(0.0,0.0,0.0,0.2)
+}
+
+#btn:pressed {
+	-fx-background-color: rgb(0.0,0.0,0.0,0.3);
+}
+
+#btn-volver {
 	-fx-alignment: center;
 	-fx-background-color: red;
+	-fx-max-width: 1000000.0;
+	-fx-pref-height: 30.0;
 }
-#header{
+#header {
 	-fx-alignment: center;
 	-fx-pref-height: 200.0;
 }
