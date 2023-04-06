@@ -23,4 +23,12 @@ public enum EstadoImpresora implements Serializable {
 		return null;
 	}
 
+	public static String[] stringValues() {
+		EstadoImpresora[] values = EstadoImpresora.values();
+		String[] arr = new String[values.length];
+		for (int i = 0; i < arr.length; i++)
+			arr[i] = values[i].getTexto();
+		return arr;
+	}
+
 }
