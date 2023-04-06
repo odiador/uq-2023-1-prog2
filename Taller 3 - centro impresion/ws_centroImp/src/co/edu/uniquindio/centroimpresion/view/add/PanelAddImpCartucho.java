@@ -126,15 +126,6 @@ public class PanelAddImpCartucho extends PanelConVolver {
 		});
 	}
 
-	private static void convertirATextfieldNumerico(TextField tf) {
-		tf.textProperty().addListener(new ChangeListener<String>() {
-			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-				if (!newValue.matches("\\d*")) {
-					tf.setText(newValue.replaceAll("[^\\d]", ""));
-				}
-			}
-		});
-	}
 
 	private static String juntarCadenasParaDoble(String inicial, String fainal) {
 		String concatenacion = "";

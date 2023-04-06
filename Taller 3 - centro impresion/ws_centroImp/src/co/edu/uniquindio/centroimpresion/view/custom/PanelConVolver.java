@@ -1,9 +1,12 @@
 package co.edu.uniquindio.centroimpresion.view.custom;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 
@@ -46,5 +49,15 @@ public abstract class PanelConVolver extends BorderPane implements EventHandler<
 		hbox.getChildren().addAll(nodos);
 		hbox.setId("centered-box");
 		return hbox;
+	}
+
+	public static void convertirATextfieldNumerico(TextField tf) {
+		tf.textProperty().addListener(new ChangeListener<String>() {
+			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+				if (!newValue.matches("\\d*")) {
+					tf.setText(newValue.replaceAll("[^\\d]", ""));
+				}
+			}
+		});
 	}
 }
