@@ -39,6 +39,9 @@ public class PanelAddDoc extends PanelConVolver implements EventHandler<Event> {
 		tfCode = new TextField();
 		tfPrior = new TextField();
 
+		tfCode.setPromptText("Escribe un código");
+		tfPrior.setPromptText("5");
+
 		btnAgregar.setId("btn");
 		tfCode.setId("textfield");
 		tfPrior.setId("textfield");
