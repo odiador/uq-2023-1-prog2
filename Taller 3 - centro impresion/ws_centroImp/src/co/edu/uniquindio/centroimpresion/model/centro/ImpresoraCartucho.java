@@ -53,4 +53,12 @@ public class ImpresoraCartucho extends Impresora {
 		return false;
 	}
 
+	@Override
+	public String toString() {
+		return "ImpresoraCartucho [desgasteCartucho=" + desgasteCartucho + ", capacidadCartucho=" + capacidadCartucho
+				+ ", nivelCartucho=" + nivelCartucho + ", code=" + code + ", marca=" + marca + ", estado=" + estado
+				+ ", listaDocumentos=" + listaDocumentos + ", paginasPorMinuto=" + paginasPorMinuto + ", esAColor="
+				+ esAColor + ", paginasImpresas=" + paginasImpresas + "]";
+	}
+
 }
