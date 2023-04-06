@@ -3,10 +3,10 @@ package co.edu.uniquindio.centroimpresion.view.add;
 import co.edu.uniquindio.centroimpresion.controllers.CtrlPanelAddDoc;
 import co.edu.uniquindio.centroimpresion.exceptions.ArchivoNoObtenidoException;
 import co.edu.uniquindio.centroimpresion.exceptions.CentroImpresionException;
-import co.edu.uniquindio.centroimpresion.exceptions.TextIsEmptyException;
 import co.edu.uniquindio.centroimpresion.exceptions.DocumentoEnProcesoException;
-import co.edu.uniquindio.centroimpresion.exceptions.NoSePuedeLeerException;
 import co.edu.uniquindio.centroimpresion.exceptions.FueraRangoException;
+import co.edu.uniquindio.centroimpresion.exceptions.NoSePuedeLeerException;
+import co.edu.uniquindio.centroimpresion.exceptions.TextIsEmptyException;
 import co.edu.uniquindio.centroimpresion.view.custom.PanelConVolver;
 import co.edu.uniquindio.centroimpresion.view.custom.PanelMenuOpcionObjetos;
 import javafx.beans.value.ChangeListener;
@@ -17,12 +17,11 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 
 public class PanelAddDoc extends PanelConVolver implements EventHandler<Event> {
 	private PanelMenuOpcionObjetos panel;
-	private HBox hBox;
 	private VBox vBox;
 	private Label btnAgregar;
 	private TextField tfCode, tfPrior;
@@ -34,30 +33,23 @@ public class PanelAddDoc extends PanelConVolver implements EventHandler<Event> {
 
 	public void initComp() {
 		super.initComp();
-
 		vBox = new VBox(20);
+		vBox.setId("centered-box");
 		btnAgregar = new Label("Agregar archivo");
-		btnAgregar.setId("");
 		tfCode = new TextField();
 		tfPrior = new TextField();
-		Label labelEscribe = new Label("Escribe el código del documento");
 
-		labelEscribe.setId("label");
-		vBox.setId("centered-box");
+		btnAgregar.setId("btn");
+		tfCode.setId("textfield");
+		tfPrior.setId("textfield");
 
-		hBox = new HBox(20, labelEscribe, tfCode);
-		hBox.setId("centered-box");
-		vBox.getChildren().add(hBox);
+		vBox.getChildren().add(generarHBox("Escribe el código del documento", tfCode));
+		vBox.getChildren().add(generarHBox("Escribe la prioridad del documento", tfPrior));
 
-		labelEscribe = new Label("Escribe la prioridad del documento");
-		labelEscribe.setId("label");
-		hBox = new HBox(20, labelEscribe, tfPrior);
-		hBox.setId("centered-box");
-		vBox.getChildren().add(hBox);
+		BorderPane agregarCase = new BorderPane(btnAgregar);
 
-		hBox = new HBox(20, btnAgregar);
-		hBox.setId("centered-box");
-		vBox.getChildren().add(hBox);
+		agregarCase.setId("btn-case");
+		vBox.getChildren().add(agregarCase);
 		setCenter(vBox);
 		addlisteners();
 	}
