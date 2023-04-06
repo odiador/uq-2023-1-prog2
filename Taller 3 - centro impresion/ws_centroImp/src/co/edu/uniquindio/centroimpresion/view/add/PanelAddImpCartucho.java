@@ -126,7 +126,6 @@ public class PanelAddImpCartucho extends PanelConVolver {
 		});
 	}
 
-
 	private static String juntarCadenasParaDoble(String inicial, String fainal) {
 		String concatenacion = "";
 		if (inicial.isEmpty()) {
