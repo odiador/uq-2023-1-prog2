@@ -26,6 +26,8 @@ public class PanelAddImpCartucho extends PanelConVolver {
 	private Label btnAgregar;
 	private TextField tfCode, tfMarca, tfVel, tfCapacidad, tfDesgaste, tfVelDecimal, tfCapacidadDecimal,
 			tfDesgasteDecimal;
+	private CheckBox checkColor;
+	private ComboBox<String> comboEstados;
 
 	public PanelAddImpCartucho(PanelMenuOpcionObjetos panel) {
 		this.panel = panel;
@@ -44,6 +46,15 @@ public class PanelAddImpCartucho extends PanelConVolver {
 		tfDesgasteDecimal = new TextField();
 		btnAgregar = new Label("Agregar Impresora");
 
+		tfCode.setPromptText("Escribe un código");
+		tfMarca.setPromptText("Escribe una marca");
+		tfVel.setPromptText("Escribe un numero");
+		tfVelDecimal.setPromptText("Escribe un decimal (PPM)");
+		tfCapacidad.setPromptText("Escribe una capacidad");
+		tfCapacidadDecimal.setPromptText("Escribe un decimal (ml)");
+		tfDesgaste.setPromptText("Escribe un numero");
+		tfDesgasteDecimal.setPromptText("Escribe un decimal (ml)");
+
 		vBox.setId("centered-box");
 		tfCode.setId("textfield");
 		tfMarca.setId("textfield");
@@ -58,8 +69,8 @@ public class PanelAddImpCartucho extends PanelConVolver {
 		HBox.setMargin(tfCapacidadDecimal, new Insets(0, 5, 0, 10));
 		HBox.setMargin(tfDesgaste, new Insets(10, 10, 10, 10));
 		HBox.setMargin(tfDesgasteDecimal, new Insets(0, 5, 0, 10));
-		ComboBox<String> comboEstados = new ComboBox<String>();
-		CheckBox checkColor = new CheckBox();
+		comboEstados = new ComboBox<String>();
+		checkColor = new CheckBox();
 		checkColor.setSelected(true);
 		comboEstados.setItems(FXCollections.observableArrayList(EstadoImpresora.stringValues()));
 
@@ -82,6 +93,10 @@ public class PanelAddImpCartucho extends PanelConVolver {
 		agregarCase.setId("btn-case");
 		vBox.getChildren().add(agregarCase);
 		setCenter(vBox);
+		addListeners();
+	}
+
+	private void addListeners() {
 		btnAgregar.setOnMouseReleased(event -> {
 			try {
 				CtrlPanelAddImpCartucho.agregarImpresoraCartucho(tfCode.getText(), tfMarca.getText(),
