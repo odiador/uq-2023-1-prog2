@@ -8,6 +8,8 @@ import co.edu.uniquindio.centroimpresion.exceptions.TextIsEmptyException;
 import co.edu.uniquindio.centroimpresion.model.centro.EstadoImpresora;
 import co.edu.uniquindio.centroimpresion.view.custom.PanelConVolver;
 import co.edu.uniquindio.centroimpresion.view.custom.PanelMenuOpcionObjetos;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
 import javafx.scene.control.Alert;
@@ -97,6 +99,12 @@ public class PanelAddImpCartucho extends PanelConVolver {
 	}
 
 	private void addListeners() {
+		convertirATextfieldNumerico(tfVel);
+		convertirATextfieldNumerico(tfVelDecimal);
+		convertirATextfieldNumerico(tfCapacidad);
+		convertirATextfieldNumerico(tfCapacidadDecimal);
+		convertirATextfieldNumerico(tfDesgaste);
+		convertirATextfieldNumerico(tfDesgasteDecimal);
 		btnAgregar.setOnMouseReleased(event -> {
 			try {
 				CtrlPanelAddImpCartucho.agregarImpresoraCartucho(tfCode.getText(), tfMarca.getText(),
@@ -114,6 +122,16 @@ public class PanelAddImpCartucho extends PanelConVolver {
 				new Alert(AlertType.WARNING, "Rellena todos los campos (" + e.getClase().getSimpleName() + ")").show();
 			} catch (FueraRangoException e) {
 				new Alert(AlertType.WARNING, e.getMessage()).show();
+			}
+		});
+	}
+
+	private static void convertirATextfieldNumerico(TextField tf) {
+		tf.textProperty().addListener(new ChangeListener<String>() {
+			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+				if (!newValue.matches("\\d*")) {
+					tf.setText(newValue.replaceAll("[^\\d]", ""));
+				}
 			}
 		});
 	}
