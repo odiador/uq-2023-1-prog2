@@ -2,6 +2,10 @@ package co.edu.uniquindio.centroimpresion.model.centro;
 
 public class ImpresoraCartucho extends Impresora {
 
+	/**
+	 *
+	 */
+	private static final long serialVersionUID = -616372429177701679L;
 	private final double desgasteCartucho;
 	private double capacidadCartucho;
 	private double nivelCartucho;

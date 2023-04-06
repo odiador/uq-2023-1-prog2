@@ -4,6 +4,10 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 public class Documento implements Comparable<Documento>, Serializable {
+	/**
+	 *
+	 */
+	private static final long serialVersionUID = -1693757473754531044L;
 	private final String code;
 	private String titulo;
 	private int prioridad;

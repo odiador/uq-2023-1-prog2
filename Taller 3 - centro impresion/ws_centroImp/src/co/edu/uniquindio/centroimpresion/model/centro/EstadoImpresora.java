@@ -1,8 +1,6 @@
 package co.edu.uniquindio.centroimpresion.model.centro;
 
-import java.io.Serializable;
-
-public enum EstadoImpresora implements Serializable {
+public enum EstadoImpresora {
 	ACTIVO("Activo"), INACTIVO("Inactivo"), DESCONECTADO("Desconectado"), MANTENIMIENTO("En Mantenimiento");
 	private String texto;
 

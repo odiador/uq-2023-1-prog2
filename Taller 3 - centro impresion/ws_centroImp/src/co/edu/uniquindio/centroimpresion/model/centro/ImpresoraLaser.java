@@ -2,6 +2,10 @@ package co.edu.uniquindio.centroimpresion.model.centro;
 
 public class ImpresoraLaser extends Impresora {
 
+	/**
+	 *
+	 */
+	private static final long serialVersionUID = 2336828568323072760L;
 	private int duracionToner;
 	private int nivelToner;
 

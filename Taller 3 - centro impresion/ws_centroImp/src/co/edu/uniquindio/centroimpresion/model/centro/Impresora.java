@@ -9,6 +9,10 @@ import co.edu.uniquindio.centroimpresion.exceptions.ImpresoraException;
 
 public abstract class Impresora implements Serializable {
 
+	/**
+	 *
+	 */
+	private static final long serialVersionUID = 5292404516001955132L;
 	protected final String code;
 	protected String marca;
 	protected EstadoImpresora estado;
