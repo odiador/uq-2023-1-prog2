@@ -15,7 +15,6 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.Event;
 import javafx.event.EventHandler;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
@@ -23,7 +22,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 
 public class PanelAddDoc extends PanelConVolver implements EventHandler<Event> {
 	private PanelMenuOpcionObjetos panel;
@@ -90,7 +88,7 @@ public class PanelAddDoc extends PanelConVolver implements EventHandler<Event> {
 								+ "¿Deseas ver el documento?",
 						ButtonType.CANCEL, ButtonType.OK).showAndWait().orElse(null);
 				if (button == ButtonType.OK)
-					abrirDocumento(documentoAgregado, 1100, 800);
+					PanelDoc.abrirDocumento(documentoAgregado, 1100, 800);
 
 			} catch (ArchivoNoObtenidoException e) {
 				new Alert(AlertType.ERROR, "El archivo no pudo ser obtenido").show();
@@ -101,7 +99,7 @@ public class PanelAddDoc extends PanelConVolver implements EventHandler<Event> {
 						"Ya se encuentra un documento con tal código\n" + "¿Deseas ver el documento?", ButtonType.OK,
 						ButtonType.CANCEL).showAndWait().orElse(null);
 				if (buttonType == ButtonType.OK)
-					abrirDocumento((Documento) e.getSource(), 1100, 800);
+					PanelDoc.abrirDocumento((Documento) e.getSource(), 1100, 800);
 
 			} catch (NoSePuedeLeerException e) {
 				new Alert(AlertType.ERROR, "El archivo no se puede leer").show();
@@ -112,13 +110,6 @@ public class PanelAddDoc extends PanelConVolver implements EventHandler<Event> {
 			}
 		}
 
-	}
-
-	public static void abrirDocumento(Documento documento, double width, double height) {
-		Scene scene = new Scene(new PanelDoc(documento), width, height);
-		Stage s = new Stage();
-		s.setScene(scene);
-		s.show();
 	}
 
 }
