@@ -138,7 +138,7 @@ public class CtrlPanelAddDoc {
 	 * @throws FueraRangoException
 	 * @throws TextIsEmptyException
 	 */
-	public static void agregarDocumento(String textoCodigo, String textoPrioridad)
+	public static Documento agregarDocumento(String textoCodigo, String textoPrioridad)
 			throws DocumentoEnProcesoException, ArchivoNoObtenidoException, CentroImpresionException,
 			NoSePuedeLeerException, FueraRangoException, TextIsEmptyException {
 
@@ -146,15 +146,16 @@ public class CtrlPanelAddDoc {
 		Documento doc = pedirDocumento(textoCodigo, textoPrioridad);
 
 		SerializedData data = new SerializedData();
-		data.getCentroImpresion().agregarDocumento(doc.getCode(), doc.getTitulo(), doc.getPrioridad(),
-				doc.getContenido());
+		data.getCentroImpresion().agregarDocumento(doc);
 		data.updateCentroImpresion();
+		return doc;
 	}
 
 	public static void throwifDocExist(String code) throws CentroImpresionException {
 		SerializedData data = new SerializedData();
-		if (data.getCentroImpresion().validarDocumento(code))
-			throw new CentroImpresionException(TipoCentroException.ADD, Documento.class);
+		Documento documento = data.getCentroImpresion().buscarDocumento(code);
+		if (documento != null)
+			throw new CentroImpresionException(TipoCentroException.ADD, documento);
 
 	}
 }
