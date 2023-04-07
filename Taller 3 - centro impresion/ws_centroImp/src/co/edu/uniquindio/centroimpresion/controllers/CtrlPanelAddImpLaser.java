@@ -12,11 +12,10 @@ import co.edu.uniquindio.centroimpresion.model.centro.ImpresoraLaser;
 public class CtrlPanelAddImpLaser {
 
 	public static void agregarImpresoraLaser(String code, String marca, String estadoString, boolean esAColor,
-			String paginasPorMinutoString, String capacidadCartuchoString, String desgasteCartuchoString)
-			throws CentroImpresionException, TextIsEmptyException, ObjectNotExists, NumberFormatException,
-			FueraRangoException {
+			String paginasPorMinutoString, String duracionTonerString) throws CentroImpresionException,
+			TextIsEmptyException, ObjectNotExists, NumberFormatException, FueraRangoException {
 		ImpresoraLaser impresoraLaser = obtenerImpresoraLaser(code, marca, estadoString, esAColor,
-				paginasPorMinutoString, capacidadCartuchoString, desgasteCartuchoString);
+				paginasPorMinutoString, duracionTonerString);
 		SerializedData data = new SerializedData();
 		if (impresoraLaser.exists()) {
 			data.getCentroImpresion().agregarImpresoraLaser(impresoraLaser.getCode(), impresoraLaser.getMarca(),
@@ -42,14 +41,13 @@ public class CtrlPanelAddImpLaser {
 	 * @throws FueraRangoException
 	 */
 	public static ImpresoraLaser obtenerImpresoraLaser(String code, String marca, String estadoString, boolean esAColor,
-			String paginasPorMinutoString, String duracionTonerString, String desgasteCartuchoString)
+			String paginasPorMinutoString, String duracionTonerString)
 			throws TextIsEmptyException, ObjectNotExists, NumberFormatException, FueraRangoException {
 		throwIfEmpty(code, "codigo");
 		throwIfEmpty(marca, "marca");
 		throwIfNull(estadoString);
 		throwIfEmpty(estadoString, "estado");
 		throwIfEmpty(paginasPorMinutoString, "paginas por minuto");
-		throwIfEmpty(desgasteCartuchoString, "descaste de cartucho");
 
 		EstadoImpresora estadoImpresora = EstadoImpresora.obtenerEstadoImpresora(estadoString);
 		double paginasPorMinuto = Impresora.obtenerPagPerMinute(paginasPorMinutoString);
