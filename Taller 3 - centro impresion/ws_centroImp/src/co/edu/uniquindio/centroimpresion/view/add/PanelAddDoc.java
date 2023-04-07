@@ -99,7 +99,12 @@ public class PanelAddDoc extends PanelConVolver implements EventHandler<Event> {
 			} catch (DocumentoEnProcesoException e) {
 				new Alert(AlertType.WARNING, "Espera a que el documento sea obtenido").show();
 			} catch (CentroImpresionException e) {
-				new Alert(AlertType.ERROR, "Ya se encuentra un documento con tal código").show();
+				ButtonType buttonType = new Alert(AlertType.WARNING,
+						"Ya se encuentra un documento con tal código\n" + "¿Deseas ver el documento?", ButtonType.OK,
+						ButtonType.CANCEL).showAndWait().orElse(null);
+				if (buttonType == ButtonType.OK)
+					abrirDocumento((Documento) e.getSource(), 1100, 800);
+
 			} catch (NoSePuedeLeerException e) {
 				new Alert(AlertType.ERROR, "El archivo no se puede leer").show();
 			} catch (FueraRangoException e) {
