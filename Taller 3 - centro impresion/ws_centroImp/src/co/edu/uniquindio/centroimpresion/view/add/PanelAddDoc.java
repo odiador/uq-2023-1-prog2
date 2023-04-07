@@ -1,7 +1,5 @@
 package co.edu.uniquindio.centroimpresion.view.add;
 
-import java.util.Optional;
-
 import co.edu.uniquindio.centroimpresion.controllers.CtrlPanelAddDoc;
 import co.edu.uniquindio.centroimpresion.exceptions.ArchivoNoObtenidoException;
 import co.edu.uniquindio.centroimpresion.exceptions.CentroImpresionException;
@@ -19,8 +17,8 @@ import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
