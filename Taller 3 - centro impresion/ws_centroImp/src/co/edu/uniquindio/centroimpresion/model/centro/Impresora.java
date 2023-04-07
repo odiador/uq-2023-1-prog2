@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.TreeSet;
 
+import co.edu.uniquindio.centroimpresion.exceptions.FueraRangoException;
 import co.edu.uniquindio.centroimpresion.exceptions.ImpresoraException;
 
 public abstract class Impresora implements Serializable {
@@ -132,6 +133,14 @@ public abstract class Impresora implements Serializable {
 		int result = 1;
 		result = prime * result + ((code == null) ? 0 : code.hashCode());
 		return result;
+	}
+
+	public static double obtenerPagPerMinute(String paginasPorMinutoString)
+			throws FueraRangoException, NumberFormatException {
+		double paginasPorMinuto = Double.parseDouble(paginasPorMinutoString);
+		if (paginasPorMinuto <= 0)
+			throw new FueraRangoException("Las paginas por minuto tienen que ser mayor a 0");
+		return paginasPorMinuto;
 	}
 
 	@Override

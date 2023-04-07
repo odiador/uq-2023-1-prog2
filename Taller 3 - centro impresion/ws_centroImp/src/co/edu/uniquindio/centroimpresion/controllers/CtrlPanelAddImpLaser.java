@@ -6,6 +6,7 @@ import co.edu.uniquindio.centroimpresion.exceptions.ObjectNotExists;
 import co.edu.uniquindio.centroimpresion.exceptions.TextIsEmptyException;
 import co.edu.uniquindio.centroimpresion.model.archivos.SerializedData;
 import co.edu.uniquindio.centroimpresion.model.centro.EstadoImpresora;
+import co.edu.uniquindio.centroimpresion.model.centro.Impresora;
 import co.edu.uniquindio.centroimpresion.model.centro.ImpresoraLaser;
 
 public class CtrlPanelAddImpLaser {
@@ -51,7 +52,7 @@ public class CtrlPanelAddImpLaser {
 		throwIfEmpty(desgasteCartuchoString, "descaste de cartucho");
 
 		EstadoImpresora estadoImpresora = EstadoImpresora.obtenerEstadoImpresora(estadoString);
-		double paginasPorMinuto = obtenerPagPerMinute(paginasPorMinutoString);
+		double paginasPorMinuto = Impresora.obtenerPagPerMinute(paginasPorMinutoString);
 		int duracionToner = obtenerDuracionToner(duracionTonerString);
 
 		ImpresoraLaser impresoraCartucho = new ImpresoraLaser(code, marca, estadoImpresora, esAColor, paginasPorMinuto,
@@ -76,14 +77,6 @@ public class CtrlPanelAddImpLaser {
 	private static void throwIfEmpty(String texto, String tipo) throws TextIsEmptyException {
 		if (texto.isEmpty())
 			throw new TextIsEmptyException(tipo);
-	}
-
-	public static double obtenerPagPerMinute(String paginasPorMinutoString)
-			throws FueraRangoException, NumberFormatException {
-		double paginasPorMinuto = Double.parseDouble(paginasPorMinutoString);
-		if (paginasPorMinuto <= 0)
-			throw new FueraRangoException("Las paginas por minuto tienen que ser mayor a 0");
-		return paginasPorMinuto;
 	}
 
 }
