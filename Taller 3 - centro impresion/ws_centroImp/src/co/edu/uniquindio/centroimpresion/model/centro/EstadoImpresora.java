@@ -1,5 +1,7 @@
 package co.edu.uniquindio.centroimpresion.model.centro;
 
+import co.edu.uniquindio.centroimpresion.exceptions.ObjectNotExists;
+
 public enum EstadoImpresora {
 	ACTIVO("Activo"), INACTIVO("Inactivo"), DESCONECTADO("Desconectado"), MANTENIMIENTO("En Mantenimiento");
 	private String texto;
@@ -27,6 +29,13 @@ public enum EstadoImpresora {
 		for (int i = 0; i < arr.length; i++)
 			arr[i] = values[i].getTexto();
 		return arr;
+	}
+
+	public static EstadoImpresora obtenerEstadoImpresora(String estadoString) throws ObjectNotExists {
+		EstadoImpresora estadoImpresora = EstadoImpresora.obtenerEstado(estadoString);
+		if (estadoImpresora == null)
+			throw new ObjectNotExists(EstadoImpresora.class);
+		return estadoImpresora;
 	}
 
 }

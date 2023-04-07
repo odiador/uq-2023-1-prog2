@@ -50,7 +50,7 @@ public class CtrlPanelAddImpLaser {
 		throwIfEmpty(paginasPorMinutoString, "paginas por minuto");
 		throwIfEmpty(desgasteCartuchoString, "descaste de cartucho");
 
-		EstadoImpresora estadoImpresora = obtenerEstadoImpresora(estadoString);
+		EstadoImpresora estadoImpresora = EstadoImpresora.obtenerEstadoImpresora(estadoString);
 		double paginasPorMinuto = obtenerPagPerMinute(paginasPorMinutoString);
 		int duracionToner = obtenerDuracionToner(duracionTonerString);
 
@@ -78,14 +78,7 @@ public class CtrlPanelAddImpLaser {
 			throw new TextIsEmptyException(tipo);
 	}
 
-	private static EstadoImpresora obtenerEstadoImpresora(String estadoString) throws ObjectNotExists {
-		EstadoImpresora estadoImpresora = EstadoImpresora.obtenerEstado(estadoString);
-		if (estadoImpresora == null)
-			throw new ObjectNotExists(EstadoImpresora.class);
-		return estadoImpresora;
-	}
-
-	private static double obtenerPagPerMinute(String paginasPorMinutoString)
+	public static double obtenerPagPerMinute(String paginasPorMinutoString)
 			throws FueraRangoException, NumberFormatException {
 		double paginasPorMinuto = Double.parseDouble(paginasPorMinutoString);
 		if (paginasPorMinuto <= 0)
