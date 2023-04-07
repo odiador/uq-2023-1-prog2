@@ -1,5 +1,7 @@
 package co.edu.uniquindio.centroimpresion.view.add;
 
+import java.util.Optional;
+
 import co.edu.uniquindio.centroimpresion.controllers.CtrlPanelAddDoc;
 import co.edu.uniquindio.centroimpresion.exceptions.ArchivoNoObtenidoException;
 import co.edu.uniquindio.centroimpresion.exceptions.CentroImpresionException;
@@ -7,18 +9,23 @@ import co.edu.uniquindio.centroimpresion.exceptions.DocumentoEnProcesoException;
 import co.edu.uniquindio.centroimpresion.exceptions.FueraRangoException;
 import co.edu.uniquindio.centroimpresion.exceptions.NoSePuedeLeerException;
 import co.edu.uniquindio.centroimpresion.exceptions.TextIsEmptyException;
+import co.edu.uniquindio.centroimpresion.model.centro.Documento;
 import co.edu.uniquindio.centroimpresion.view.custom.PanelConVolver;
 import co.edu.uniquindio.centroimpresion.view.custom.PanelMenuOpcionObjetos;
+import co.edu.uniquindio.centroimpresion.view.see.PanelDoc;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.Event;
 import javafx.event.EventHandler;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 public class PanelAddDoc extends PanelConVolver implements EventHandler<Event> {
 	private PanelMenuOpcionObjetos panel;
@@ -78,9 +85,15 @@ public class PanelAddDoc extends PanelConVolver implements EventHandler<Event> {
 		super.handle(event);
 		if (event.getSource() == btnAgregar) {
 			try {
-				CtrlPanelAddDoc.agregarDocumento(tfCode.getText(), tfPrior.getText());
-				new Alert(AlertType.INFORMATION, "El documento se ha agregado con éxito(" + tfCode.getText() + ")")
-						.show();
+
+				Documento documentoAgregado = CtrlPanelAddDoc.agregarDocumento(tfCode.getText(), tfPrior.getText());
+				ButtonType button = new Alert(AlertType.INFORMATION,
+						"El documento se ha agregado con éxito (" + tfCode.getText() + ")" + "\n"
+								+ "¿Deseas ver el documento?",
+						ButtonType.CANCEL, ButtonType.OK).showAndWait().orElse(null);
+				if (button == ButtonType.OK)
+					abrirDocumento(documentoAgregado, 1100, 800);
+
 			} catch (ArchivoNoObtenidoException e) {
 				new Alert(AlertType.ERROR, "El archivo no pudo ser obtenido").show();
 			} catch (DocumentoEnProcesoException e) {
@@ -95,6 +108,14 @@ public class PanelAddDoc extends PanelConVolver implements EventHandler<Event> {
 				new Alert(AlertType.WARNING, "El código está vacío").show();
 			}
 		}
+
+	}
+
+	public static void abrirDocumento(Documento documento, double width, double height) {
+		Scene scene = new Scene(new PanelDoc(documento), width, height);
+		Stage s = new Stage();
+		s.setScene(scene);
+		s.show();
 	}
 
 }
