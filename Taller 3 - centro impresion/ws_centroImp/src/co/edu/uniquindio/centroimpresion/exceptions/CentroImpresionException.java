@@ -3,19 +3,19 @@ package co.edu.uniquindio.centroimpresion.exceptions;
 public class CentroImpresionException extends Exception {
 
 	private TipoCentroException tipoException;
-	private Class<?> clase;
+	private Object source;
 
-	public CentroImpresionException(TipoCentroException tipoException, Class<?> clase) {
-		super(tipoException.getMsg() + " (" + clase.getSimpleName() + ")");
-		this.tipoException = tipoException;
-	}
-
-	public Class<?> getClase() {
-		return clase;
+	public CentroImpresionException(TipoCentroException tipoException, Object source) {
+		super(tipoException.getMsg() + " (" + source.getClass().getSimpleName() + ")");
+		this.source = source;
 	}
 
 	public TipoCentroException getTipoException() {
 		return tipoException;
+	}
+
+	public Object getSource() {
+		return source;
 	}
 
 }

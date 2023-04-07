@@ -22,11 +22,20 @@ public class CentroImpresion implements Serializable {
 	public CentroImpresion() {
 	}
 
+	public void agregarDocumento(String code, String titulo, int prioridad, String contenido,
+			LocalDateTime fechaAgregado) throws CentroImpresionException {
+		agregarDocumento(new Documento(code, titulo, prioridad, contenido, fechaAgregado));
+	}
+
 	public void agregarDocumento(String code, String titulo, int prioridad, String contenido)
 			throws CentroImpresionException {
-		Documento documento = new Documento(code, titulo, prioridad, contenido, LocalDateTime.now());
+		agregarDocumento(code, titulo, prioridad, contenido, LocalDateTime.now());
+
+	}
+
+	public void agregarDocumento(Documento documento) throws CentroImpresionException {
 		if (!listaDocumentos.add(documento))
-			throw new CentroImpresionException(TipoCentroException.ADD, Documento.class);
+			throw new CentroImpresionException(TipoCentroException.ADD, documento);
 		Collections.sort(listaDocumentos);
 	}
 
@@ -36,7 +45,7 @@ public class CentroImpresion implements Serializable {
 		ImpresoraCartucho impresora = new ImpresoraCartucho(code, marca, estado, esAColor, paginasPorMinuto,
 				capacidadCartucho, desgasteCartucho);
 		if (!listaImpresoras.add(impresora))
-			throw new CentroImpresionException(TipoCentroException.ADD, ImpresoraCartucho.class);
+			throw new CentroImpresionException(TipoCentroException.ADD, impresora);
 	}
 
 	public Documento buscarDocumento(String code) {
@@ -81,7 +90,7 @@ public class CentroImpresion implements Serializable {
 			listaImpresoras.add(impresora);
 			Collections.sort(listaDocumentos);
 		}
-		throw new CentroImpresionException(TipoCentroException.UPDATE, Impresora.class);
+		throw new CentroImpresionException(TipoCentroException.UPDATE, impresora);
 	}
 
 	public boolean imprimirDocumento() throws CentroImpresionException {
@@ -95,9 +104,9 @@ public class CentroImpresion implements Serializable {
 
 	private boolean imprimir(Impresora impresora, Documento documento) throws CentroImpresionException {
 		if (impresora == null)
-			throw new CentroImpresionException(TipoCentroException.NULL, Impresora.class);
+			throw new CentroImpresionException(TipoCentroException.NULL, impresora);
 		if (documento == null)
-			throw new CentroImpresionException(TipoCentroException.NULL, Documento.class);
+			throw new CentroImpresionException(TipoCentroException.NULL, documento);
 		return impresora.imprimirDocumento(documento);
 	}
 
@@ -130,7 +139,7 @@ public class CentroImpresion implements Serializable {
 			double paginasPorMinuto, int duracionToner) throws CentroImpresionException {
 		ImpresoraLaser impresora = new ImpresoraLaser(code, marca, estado, esAColor, paginasPorMinuto, duracionToner);
 		if (!listaImpresoras.add(impresora))
-			throw new CentroImpresionException(TipoCentroException.ADD, ImpresoraLaser.class);
+			throw new CentroImpresionException(TipoCentroException.ADD, impresora);
 	}
 
 }
