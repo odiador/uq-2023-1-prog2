@@ -60,4 +60,15 @@ public abstract class PanelConVolver extends BorderPane implements EventHandler<
 			}
 		});
 	}
+
+	public static String juntarCadenasParaDoble(String inicial, String fainal) {
+		String concatenacion = "";
+		if (inicial.isEmpty()) {
+			concatenacion += "0" + (fainal.isEmpty() ? "" : "." + fainal);
+		} else {
+			concatenacion += inicial + (fainal.isEmpty() ? "" : "." + fainal);
+		}
+
+		return concatenacion;
+	}
 }

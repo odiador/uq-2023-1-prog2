@@ -124,17 +124,6 @@ public class PanelAddImpCartucho extends PanelConVolver {
 		});
 	}
 
-	private static String juntarCadenasParaDoble(String inicial, String fainal) {
-		String concatenacion = "";
-		if (inicial.isEmpty()) {
-			concatenacion += "0" + (fainal.isEmpty() ? "" : "." + fainal);
-		} else {
-			concatenacion += inicial + (fainal.isEmpty() ? "" : "." + fainal);
-		}
-
-		return concatenacion;
-	}
-
 	@Override
 	public void volverPresionado() {
 		panel.initComp();
