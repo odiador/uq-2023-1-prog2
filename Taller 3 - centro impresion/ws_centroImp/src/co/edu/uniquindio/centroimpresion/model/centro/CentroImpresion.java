@@ -126,4 +126,11 @@ public class CentroImpresion implements Serializable {
 		return "CentroImpresion [listaImpresoras=" + listaImpresoras + ", listaDocumentos=" + listaDocumentos + "]";
 	}
 
+	public void agregarImpresoraLaser(String code, String marca, EstadoImpresora estado, boolean esAColor,
+			double paginasPorMinuto, int duracionToner) throws CentroImpresionException {
+		ImpresoraLaser impresora = new ImpresoraLaser(code, marca, estado, esAColor, paginasPorMinuto, duracionToner);
+		if (!listaImpresoras.add(impresora))
+			throw new CentroImpresionException(TipoCentroException.ADD, ImpresoraLaser.class);
+	}
+
 }
