@@ -64,7 +64,7 @@ public class CtrlPanelAddImpLaser {
 
 		int duracionToner = Integer.parseInt(duracionTonerString);
 		if (duracionToner <= 0)
-			throw new FueraRangoException("El desgaste tiene que ser mayor que 0");
+			throw new FueraRangoException("La duración tiene que ser mayor o igual a 0");
 		return duracionToner;
 	}
 
