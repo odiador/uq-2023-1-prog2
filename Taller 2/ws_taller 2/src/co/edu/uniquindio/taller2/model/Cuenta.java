@@ -62,7 +62,7 @@ public abstract class Cuenta {
 	/**
 	 * Extrae mensualmente una comisión y luego agrega los intereses a la cuenta
 	 *
-	 * @throws CuentaException
+	 * @throws CuentaException en caso de que no se pueda extraer la comisión
 	 */
 	public void extractoMensual() throws CuentaException {
 		retirarDinero(getComisionMensual());
