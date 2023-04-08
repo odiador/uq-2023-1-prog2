@@ -60,7 +60,7 @@ public abstract class Cuenta {
 	}
 
 	/**
-	 * Extrae mensualmente una comisi�n y luego agrega los intereses a la cuenta
+	 * Extrae mensualmente una comisión y luego agrega los intereses a la cuenta
 	 *
 	 * @throws CuentaException
 	 */
