@@ -25,17 +25,16 @@ public class CuentaAhorros extends Cuenta {
 	}
 
 	@Override
-	public void consignarDinero(float saldo) {
+	public void consignarDinero(float saldo) throws CuentaException {
+		throwIfNotActive("No se pudo consignar el dinero (cuenta no activa)");
 		super.consignarDinero(saldo);
 	}
 
 	/**
 	 * Muestra un error en caso de que no est� activa la cuenta
 	 *
-	 * @param msg
-	 *            es el mensaje de error
-	 * @throws CuentaException
-	 *             si no esta activa
+	 * @param msg es el mensaje de error
+	 * @throws CuentaException si no esta activa
 	 */
 	public void throwIfNotActive(String msg) throws CuentaException {
 		if (!estaActiva())
@@ -57,8 +56,8 @@ public class CuentaAhorros extends Cuenta {
 
 	@Override
 	public String imprimir() {
-		return String.format("CuentaAhorros [saldo=%s, comisionMensual=%s, numTransacciones=%s]", Util.darFormatoDinero(getSaldo()),
-				getComisionMensual(), getNumTransacciones());
+		return String.format("CuentaAhorros [saldo=%s, comisionMensual=%s, numTransacciones=%s]",
+				Util.darFormatoDinero(getSaldo()), getComisionMensual(), getNumTransacciones());
 	}
 
 	@Override

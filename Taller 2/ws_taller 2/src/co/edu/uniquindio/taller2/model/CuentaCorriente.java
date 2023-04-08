@@ -36,7 +36,7 @@ public class CuentaCorriente extends Cuenta {
 	}
 
 	@Override
-	public void consignarDinero(float saldo) {
+	public void consignarDinero(float saldo) throws CuentaException {
 		if (haySobregiro()) {
 			if (getSobregiro() >= saldo) {
 				setSobregiro(getSobregiro() - saldo);
