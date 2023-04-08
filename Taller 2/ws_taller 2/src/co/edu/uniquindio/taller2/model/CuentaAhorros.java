@@ -33,7 +33,7 @@ public class CuentaAhorros extends Cuenta {
 	 * @throws CuentaException
 	 */
 	public void activarCuenta(float saldoAAgregar) throws CuentaException {
-		setSaldo(getSaldo() + saldoAAgregar);
+		super.consignarDinero(saldoAAgregar);
 		if (!estaActiva()) {
 			float faltante = 10000f - getSaldo();
 			throw new CuentaException(
