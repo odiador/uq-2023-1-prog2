@@ -24,6 +24,23 @@ public class CuentaAhorros extends Cuenta {
 		return getSaldo() >= 10000f;
 	}
 
+	/**
+	 * Intenta activar la cuenta agregandole un saldo, si la cuenta queda sin el
+	 * saldo suficiente para la activación, la cuenta no se activa y muestra un
+	 * error
+	 * 
+	 * @param saldoAAgregar
+	 * @throws CuentaException
+	 */
+	public void activarCuenta(float saldoAAgregar) throws CuentaException {
+		setSaldo(getSaldo() + saldoAAgregar);
+		if (!estaActiva()) {
+			float faltante = 10000f - getSaldo();
+			throw new CuentaException(
+					"La cuenta no fue activada, hace falta saldo (" + Util.darFormatoDinero(faltante) + ")");
+		}
+	}
+
 	@Override
 	public void consignarDinero(float saldo) throws CuentaException {
 		throwIfNotActive("No se pudo consignar el dinero (cuenta no activa)");
