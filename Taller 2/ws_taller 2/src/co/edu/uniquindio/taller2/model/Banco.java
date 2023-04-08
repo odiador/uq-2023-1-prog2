@@ -26,17 +26,17 @@ public class Banco {
 	}
 
 	/**
-	 * Es el constructor de la clase Banco sin par醡etros
+	 * Es el constructor de la clase Banco sin par谩metros
 	 */
 	public Banco() {
 	}
 
 	/**
-	 * Busca una cuenta a partir de su c骴igo {@code code}, muestra un null en
+	 * Busca una cuenta a partir de su c锟絛igo {@code code}, muestra un null en
 	 * caso de que no se encuentre
 	 *
 	 * @param codigo
-	 *            es el c骴igo
+	 *            es el c锟絛igo
 	 * @return
 	 */
 	public Cuenta buscarCuenta(String codigo) {
@@ -45,11 +45,11 @@ public class Banco {
 	}
 
 	/**
-	 * Busca una cuenta a partir de su c骴igo {@code codigo} y si no se
+	 * Busca una cuenta a partir de su c锟絛igo {@code codigo} y si no se
 	 * encuentra muestra un error
 	 *
 	 * @param codigo
-	 *            es el c骴igo
+	 *            es el c贸digo
 	 * @return la cuenta
 	 * @throws CuentaException
 	 *             en caso de que no se encuentre la cuenta
@@ -67,7 +67,7 @@ public class Banco {
 	 * caso de que ya exista
 	 *
 	 * @param codigo
-	 *            es el c骴igo
+	 *            es el c贸digo
 	 * @param saldo
 	 *            es el saldo de la cuenta
 	 * @param tasaAnual
@@ -87,7 +87,7 @@ public class Banco {
 	 * caso de que ya exista
 	 *
 	 * @param codigo
-	 *            es el c骴igo
+	 *            es el c贸digo
 	 * @param saldo
 	 *            es el saldo de la cuenta
 	 * @param tasaAnual
@@ -103,11 +103,11 @@ public class Banco {
 	}
 
 	/**
-	 * Elimina una cuenta a partir de su c骴igo {@code codigo}, muestra un error
+	 * Elimina una cuenta a partir de su c锟絛igo {@code codigo}, muestra un error
 	 * en caso de que no se encuentre la cuenta
 	 *
 	 * @param codigo
-	 *            es el c骴igo
+	 *            es el c锟絛igo
 	 * @throws CuentaException
 	 *             en caso de que no se encuentre la cuenta
 	 */
@@ -134,11 +134,11 @@ public class Banco {
 	}
 
 	/**
-	 * Consigna un dinero a una cuenta que se encuentra a partir del c骴igo
+	 * Consigna un dinero a una cuenta que se encuentra a partir del c锟絛igo
 	 * {@code codigo}
 	 *
 	 * @param codigo
-	 *            es el c骴igo
+	 *            es el c锟絛igo
 	 * @param dinero
 	 *            es el dinero a consignar
 	 * @throws CuentaException
@@ -151,11 +151,11 @@ public class Banco {
 	}
 
 	/**
-	 * Retira un dinero a una cuenta que se encuentra a partir del c骴igo
+	 * Retira un dinero a una cuenta que se encuentra a partir del c锟絛igo
 	 * {@code codigo}
 	 *
 	 * @param codigo
-	 *            es el c骴igo
+	 *            es el c贸digo
 	 * @param dinero
 	 *            es el dinero a retirar
 	 * @throws CuentaException
@@ -171,7 +171,7 @@ public class Banco {
 	 * Calcula los intereses de una cuenta a partir de su codigo
 	 *
 	 * @param codigo
-	 *            es el c骴igo
+	 *            es el c贸digo
 	 * @throws CuentaException
 	 *             en caso de que no se encuentre la cuenta
 	 */
@@ -185,7 +185,7 @@ public class Banco {
 	 * Extrae el interes mensual de una cuenta a partir de su codigo
 	 *
 	 * @param codigo
-	 *            es el c骴igo
+	 *            es el c贸digo
 	 * @throws CuentaException
 	 *             en caso de que no se encuentre la cuenta
 	 */
@@ -199,7 +199,7 @@ public class Banco {
 	 * Imprime una cuenta a partir de su codigo
 	 *
 	 * @param codigo
-	 *            es el c骴igo
+	 *            es el c贸digo
 	 * @throws CuentaException
 	 *             en caso de que no se encuentre la cuenta
 	 * @return la cuenta en String
@@ -213,7 +213,7 @@ public class Banco {
 	 * Determina si una cuenta de ahorros esta activa a partir de su codigo
 	 *
 	 * @param codigo
-	 *            es el c骴igo
+	 *            es el c贸digo
 	 * @return true si esta activa
 	 * @throws CuentaException
 	 *             en caso de que no se encuentre la cuenta
@@ -228,10 +228,10 @@ public class Banco {
 	}
 
 	/**
-	 * Obtiene el sobregiro de una cuenta corriente a partir de su c骴igo
+	 * Obtiene el sobregiro de una cuenta corriente a partir de su c锟絛igo
 	 *
 	 * @param codigo
-	 *            es el c骴igo
+	 *            es el c贸digo
 	 * @return el sobregiro
 	 * @throws CuentaException
 	 *             en caso de que no se encuentre la cuenta o si la cuenta no es
@@ -256,10 +256,10 @@ public class Banco {
 	}
 
 	/**
-	 * Determina si una cuenta existe o no a partir de su c骴igo {@code codigo}
+	 * Determina si una cuenta existe o no a partir de su c锟絛igo {@code codigo}
 	 *
 	 * @param codigo
-	 *            es el c骴igo
+	 *            es el c贸digo
 	 * @return true si se encuentra la cuentas
 	 */
 	public boolean validarCuenta(String codigo) {
@@ -285,7 +285,7 @@ public class Banco {
 	}
 
 	/**
-	 * Obtiene la direcci髇 del banco
+	 * Obtiene la direcci贸n del banco
 	 *
 	 * @return
 	 */
@@ -294,7 +294,7 @@ public class Banco {
 	}
 
 	/**
-	 * Cambia la direcci髇 del banco
+	 * Cambia la direcci贸n del banco
 	 *
 	 * @param direccion
 	 */
@@ -303,7 +303,7 @@ public class Banco {
 	}
 
 	/**
-	 * Obtiene el c骴igo del banco
+	 * Obtiene el c贸digo del banco
 	 *
 	 * @return
 	 */
@@ -312,7 +312,7 @@ public class Banco {
 	}
 
 	/**
-	 * Cambia el c骴igo del banco
+	 * Cambia el c贸digo del banco
 	 *
 	 * @param codigo
 	 */

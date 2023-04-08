@@ -16,7 +16,7 @@ public class CuentaAhorros extends Cuenta {
 	}
 
 	/**
-	 * Determina si la cuenta de ahorros est� activa o no
+	 * Determina si la cuenta de ahorros está activa o no
 	 *
 	 * @return true si el saldo es mayor o igual a 10000
 	 */
@@ -31,7 +31,7 @@ public class CuentaAhorros extends Cuenta {
 	}
 
 	/**
-	 * Muestra un error en caso de que no est� activa la cuenta
+	 * Muestra un error en caso de que no esté activa la cuenta
 	 *
 	 * @param msg es el mensaje de error
 	 * @throws CuentaException si no esta activa
