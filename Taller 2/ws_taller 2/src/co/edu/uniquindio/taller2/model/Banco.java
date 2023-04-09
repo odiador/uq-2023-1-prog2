@@ -32,11 +32,10 @@ public class Banco {
 	}
 
 	/**
-	 * Busca una cuenta a partir de su c�digo {@code code}, muestra un null en
-	 * caso de que no se encuentre
+	 * Busca una cuenta a partir de su c�digo {@code code}, muestra un null en caso
+	 * de que no se encuentre
 	 *
-	 * @param codigo
-	 *            es el c�digo
+	 * @param codigo es el c�digo
 	 * @return
 	 */
 	public Cuenta buscarCuenta(String codigo) {
@@ -45,14 +44,12 @@ public class Banco {
 	}
 
 	/**
-	 * Busca una cuenta a partir de su c�digo {@code codigo} y si no se
-	 * encuentra muestra un error
+	 * Busca una cuenta a partir de su c�digo {@code codigo} y si no se encuentra
+	 * muestra un error
 	 *
-	 * @param codigo
-	 *            es el código
+	 * @param codigo es el código
 	 * @return la cuenta
-	 * @throws CuentaException
-	 *             en caso de que no se encuentre la cuenta
+	 * @throws CuentaException en caso de que no se encuentre la cuenta
 	 */
 	private Cuenta buscarCuentaOError(String codigo) throws CuentaException {
 		Cuenta cuentaEncontrada = buscarCuenta(codigo);
@@ -63,17 +60,13 @@ public class Banco {
 	}
 
 	/**
-	 * Agrega una cuenta de ahorros a la lista de cuentas, muestra un error en
-	 * caso de que ya exista
+	 * Agrega una cuenta de ahorros a la lista de cuentas, muestra un error en caso
+	 * de que ya exista
 	 *
-	 * @param codigo
-	 *            es el código
-	 * @param saldo
-	 *            es el saldo de la cuenta
-	 * @param tasaAnual
-	 *            es la tasa anual de la cuenta
-	 * @throws CuentaException
-	 *             en caso de que si se encuentre la cuenta
+	 * @param codigo    es el código
+	 * @param saldo     es el saldo de la cuenta
+	 * @param tasaAnual es la tasa anual de la cuenta
+	 * @throws CuentaException en caso de que si se encuentre la cuenta
 	 */
 	public void agregarCuentaAhorros(String codigo, float saldo, float tasaAnual) throws CuentaException {
 		if (validarCuenta(codigo)) {
@@ -83,17 +76,13 @@ public class Banco {
 	}
 
 	/**
-	 * Agrega una cuenta corriente a la lista de cuentas, muestra un error en
-	 * caso de que ya exista
+	 * Agrega una cuenta corriente a la lista de cuentas, muestra un error en caso
+	 * de que ya exista
 	 *
-	 * @param codigo
-	 *            es el código
-	 * @param saldo
-	 *            es el saldo de la cuenta
-	 * @param tasaAnual
-	 *            es la tasa anual de la cuenta
-	 * @throws CuentaException
-	 *             en caso de que si se encuentre la cuenta
+	 * @param codigo    es el código
+	 * @param saldo     es el saldo de la cuenta
+	 * @param tasaAnual es la tasa anual de la cuenta
+	 * @throws CuentaException en caso de que si se encuentre la cuenta
 	 */
 	public void agregarCuentaCorriente(String codigo, float saldo, float tasaAnual) throws CuentaException {
 		if (validarCuenta(codigo)) {
@@ -103,13 +92,11 @@ public class Banco {
 	}
 
 	/**
-	 * Elimina una cuenta a partir de su c�digo {@code codigo}, muestra un error
-	 * en caso de que no se encuentre la cuenta
+	 * Elimina una cuenta a partir de su c�digo {@code codigo}, muestra un error en
+	 * caso de que no se encuentre la cuenta
 	 *
-	 * @param codigo
-	 *            es el c�digo
-	 * @throws CuentaException
-	 *             en caso de que no se encuentre la cuenta
+	 * @param codigo es el c�digo
+	 * @throws CuentaException en caso de que no se encuentre la cuenta
 	 */
 	public void eliminarCuenta(String codigo) throws CuentaException {
 		Cuenta cuenta = buscarCuenta(codigo);
@@ -123,8 +110,7 @@ public class Banco {
 	/**
 	 * Actualiza una cuenta a una nueva version de ella {@code cuenta}
 	 *
-	 * @param cuenta
-	 *            es la cuenta a actualizar
+	 * @param cuenta es la cuenta a actualizar
 	 */
 	public void actualizarCuenta(Cuenta cuenta) {
 		Cuenta cuentaEncontrada = buscarCuenta(cuenta.getCodigo());
@@ -137,12 +123,9 @@ public class Banco {
 	 * Consigna un dinero a una cuenta que se encuentra a partir del c�digo
 	 * {@code codigo}
 	 *
-	 * @param codigo
-	 *            es el c�digo
-	 * @param dinero
-	 *            es el dinero a consignar
-	 * @throws CuentaException
-	 *             en caso de que no se encuentre la cuenta
+	 * @param codigo es el c�digo
+	 * @param dinero es el dinero a consignar
+	 * @throws CuentaException en caso de que no se encuentre la cuenta
 	 */
 	public void consignarDineroCuenta(String codigo, float dinero) throws CuentaException {
 		Cuenta cuentaEncontrada = buscarCuentaOError(codigo);
@@ -154,12 +137,9 @@ public class Banco {
 	 * Retira un dinero a una cuenta que se encuentra a partir del c�digo
 	 * {@code codigo}
 	 *
-	 * @param codigo
-	 *            es el código
-	 * @param dinero
-	 *            es el dinero a retirar
-	 * @throws CuentaException
-	 *             en caso de que no se encuentre la cuenta
+	 * @param codigo es el código
+	 * @param dinero es el dinero a retirar
+	 * @throws CuentaException en caso de que no se encuentre la cuenta
 	 */
 	public void retirarDineroCuenta(String codigo, float dinero) throws CuentaException {
 		Cuenta cuentaEncontrada = buscarCuentaOError(codigo);
@@ -168,12 +148,30 @@ public class Banco {
 	}
 
 	/**
+	 * Activa una cuenta de ahorros a partir de su codigo {@code codigo} y su saldo
+	 * a agregar {@code dineroAAgregar}
+	 * 
+	 * @param codigo         es el código
+	 * @param dineroAAgregar es el dinero a agregar
+	 * @throws CuentaException en caso de que no se encuentre la cuenta o en caso de
+	 *                         que no sea de ahorros la cuenta encontrada
+	 */
+	public void activarCuentaAhorrros(String codigo, float dineroAAgregar) throws CuentaException {
+		Cuenta cuentaEncontrada = buscarCuentaOError(codigo);
+		if (!cuentaEncontrada.getClass().equals(CuentaAhorros.class)) {
+			throw new CuentaException("La cuenta tiene que ser de ahorros");
+		}
+
+		CuentaAhorros cuentaEncontradaAhorros = (CuentaAhorros) cuentaEncontrada;
+		cuentaEncontradaAhorros.activarCuenta(dineroAAgregar);
+		actualizarCuenta(cuentaEncontradaAhorros);
+	}
+
+	/**
 	 * Calcula los intereses de una cuenta a partir de su codigo
 	 *
-	 * @param codigo
-	 *            es el código
-	 * @throws CuentaException
-	 *             en caso de que no se encuentre la cuenta
+	 * @param codigo es el código
+	 * @throws CuentaException en caso de que no se encuentre la cuenta
 	 */
 	public void calcularInteresesCuenta(String codigo) throws CuentaException {
 		Cuenta cuentaEncontrada = buscarCuentaOError(codigo);
@@ -184,10 +182,8 @@ public class Banco {
 	/**
 	 * Extrae el interes mensual de una cuenta a partir de su codigo
 	 *
-	 * @param codigo
-	 *            es el código
-	 * @throws CuentaException
-	 *             en caso de que no se encuentre la cuenta
+	 * @param codigo es el código
+	 * @throws CuentaException en caso de que no se encuentre la cuenta
 	 */
 	public void extraerMensualCuenta(String codigo) throws CuentaException {
 		Cuenta cuentaEncontrada = buscarCuentaOError(codigo);
@@ -198,10 +194,8 @@ public class Banco {
 	/**
 	 * Imprime una cuenta a partir de su codigo
 	 *
-	 * @param codigo
-	 *            es el código
-	 * @throws CuentaException
-	 *             en caso de que no se encuentre la cuenta
+	 * @param codigo es el código
+	 * @throws CuentaException en caso de que no se encuentre la cuenta
 	 * @return la cuenta en String
 	 */
 	public String imprimirCuenta(String codigo) throws CuentaException {
@@ -212,11 +206,9 @@ public class Banco {
 	/**
 	 * Determina si una cuenta de ahorros esta activa a partir de su codigo
 	 *
-	 * @param codigo
-	 *            es el código
+	 * @param codigo es el código
 	 * @return true si esta activa
-	 * @throws CuentaException
-	 *             en caso de que no se encuentre la cuenta
+	 * @throws CuentaException en caso de que no se encuentre la cuenta
 	 */
 	public boolean estaActivaCuenta(String codigo) throws CuentaException {
 		Cuenta cuentaEncontrada = buscarCuentaOError(codigo);
@@ -230,12 +222,10 @@ public class Banco {
 	/**
 	 * Obtiene el sobregiro de una cuenta corriente a partir de su c�digo
 	 *
-	 * @param codigo
-	 *            es el código
+	 * @param codigo es el código
 	 * @return el sobregiro
-	 * @throws CuentaException
-	 *             en caso de que no se encuentre la cuenta o si la cuenta no es
-	 *             corriente
+	 * @throws CuentaException en caso de que no se encuentre la cuenta o si la
+	 *                         cuenta no es corriente
 	 */
 	public float obtenerSobregiroCuenta(String codigo) throws CuentaException {
 		Cuenta cuentaEncontrada = buscarCuentaOError(codigo);
@@ -258,8 +248,7 @@ public class Banco {
 	/**
 	 * Determina si una cuenta existe o no a partir de su c�digo {@code codigo}
 	 *
-	 * @param codigo
-	 *            es el código
+	 * @param codigo es el código
 	 * @return true si se encuentra la cuentas
 	 */
 	public boolean validarCuenta(String codigo) {
