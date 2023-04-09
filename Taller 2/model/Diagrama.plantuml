@@ -16,6 +16,7 @@ class Banco {
     +validarCuenta(codigo: String) : boolean
     +consignarDineroCuenta(codigo: String, dinero: float) : void
     +retirarDineroCuenta(codigo: String, dinero: float) : void
+    +activarCuentaAhorros(codigo: String, saldoAAgregar: float) : void
     +calcularInteresesCuenta(codigo: String) : void
     +extraerMensualCuenta(codigo: String) : void
     +imprimirCuenta(codigo: String) : void
@@ -49,6 +50,7 @@ class CuentaAhorros {
     +consignarDinero(saldo: float) : void
     +retirarDinero(saldo: float) : void
     +extractoMensual() : void
+    +activarCuenta(saldoAAgregar: float) : void
     +imprimir() : String
 }
 class CuentaCorriente {
