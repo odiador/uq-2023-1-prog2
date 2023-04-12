@@ -39,12 +39,12 @@ public class PanelAddImpCartucho extends PanelConVolver {
 
 		tfCode.setPromptText("Escribe un codigo");
 		tfMarca.setPromptText("Escribe una marca");
-		tfVel.setPromptText("Escribe un numero");
-		tfVelDecimal.setPromptText("Escribe un decimal (PPM)");
-		tfCapacidad.setPromptText("Escribe una capacidad");
-		tfCapacidadDecimal.setPromptText("Escribe un decimal (ml)");
-		tfDesgaste.setPromptText("Escribe un numero");
-		tfDesgasteDecimal.setPromptText("Escribe un decimal (ml)");
+		tfVel.setPromptText("0");
+		tfVelDecimal.setPromptText("0 (PPM)");
+		tfCapacidad.setPromptText("0");
+		tfCapacidadDecimal.setPromptText("0 (ml)");
+		tfDesgaste.setPromptText("0");
+		tfDesgasteDecimal.setPromptText("0 (ml)");
 
 		vBox.setId("centered-box");
 		tfCode.setId("textfield");
