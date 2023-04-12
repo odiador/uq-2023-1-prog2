@@ -67,13 +67,13 @@ public class PanelAddImpLaser extends PanelConVolver {
 		comboEstados.setId("combobox");
 		checkColor.setId("checkbox");
 
-		vBox.getChildren().add(generarHBox("Escribe el codigo de la impresora", tfCode));
-		vBox.getChildren().add(generarHBox("Escribe la marca de la impresora", tfMarca));
-		vBox.getChildren().add(generarHBox("Elige el estado de la impresora", comboEstados));
-		vBox.getChildren().add(generarHBox("¿La impresora es a color?", checkColor));
-		vBox.getChildren().add(generarHBox(0, "Escribe la vel de la impresora (paginas por minuto)", tfVel,
+		vBox.getChildren().add(Utility.generarHBox("Escribe el codigo de la impresora", tfCode));
+		vBox.getChildren().add(Utility.generarHBox("Escribe la marca de la impresora", tfMarca));
+		vBox.getChildren().add(Utility.generarHBox("Elige el estado de la impresora", comboEstados));
+		vBox.getChildren().add(Utility.generarHBox("¿La impresora es a color?", checkColor));
+		vBox.getChildren().add(Utility.generarHBox(0, "Escribe la vel de la impresora (paginas por minuto)", tfVel,
 				new Label(","), tfVelDecimal));
-		vBox.getChildren().add(generarHBox("Escribe la duracion del toner de la impresora", tfDuracion));
+		vBox.getChildren().add(Utility.generarHBox("Escribe la duracion del toner de la impresora", tfDuracion));
 
 		BorderPane agregarCase = new BorderPane(btnAgregar);
 
@@ -90,7 +90,7 @@ public class PanelAddImpLaser extends PanelConVolver {
 		btnAgregar.setOnMouseReleased(event -> {
 			try {
 				CtrlPanelAddImpLaser.agregarImpresoraLaser(tfCode.getText(), tfMarca.getText(), comboEstados.getValue(),
-						checkColor.isSelected(), juntarCadenasParaDoble(tfVel.getText(), tfVelDecimal.getText()),
+						checkColor.isSelected(), Utility.juntarCadenasParaDoble(tfVel.getText(), tfVelDecimal.getText()),
 						tfDuracion.getText());
 			} catch (NumberFormatException e) {
 				new Alert(AlertType.WARNING, "Rellena todos los campos").show();

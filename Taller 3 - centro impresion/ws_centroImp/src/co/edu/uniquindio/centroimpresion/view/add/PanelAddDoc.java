@@ -32,8 +32,8 @@ public class PanelAddDoc extends PanelConVolver {
 		tfCode.setId("textfield");
 		tfPrior.setId("textfield");
 
-		vBox.getChildren().add(generarHBox("Escribe el código del documento", tfCode));
-		vBox.getChildren().add(generarHBox("Escribe la prioridad del documento", tfPrior));
+		vBox.getChildren().add(Utility.generarHBox("Escribe el código del documento", tfCode));
+		vBox.getChildren().add(Utility.generarHBox("Escribe la prioridad del documento", tfPrior));
 
 
 		agregarCase.setId("btn-case");
