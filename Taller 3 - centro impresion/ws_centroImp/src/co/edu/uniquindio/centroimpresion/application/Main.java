@@ -15,6 +15,7 @@ public class Main extends Application {
 			EscenaMenu scene = EscenaMenu.obtenerEscenaJm(primaryStage);
 			css = getClass().getResource("application.css");
 			scene.getStylesheets().add(css.toExternalForm());
+			primaryStage.setTitle("Centro de Impresion - Amador");
 			primaryStage.setScene(scene);
 			primaryStage.show();
 		} catch (Exception e) {
