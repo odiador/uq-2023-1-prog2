@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.time.LocalDateTime;
 import java.util.Scanner;
 
+import co.edu.uniquindio.centroimpresion.application.Main;
 import co.edu.uniquindio.centroimpresion.exceptions.ArchivoNoObtenidoException;
 import co.edu.uniquindio.centroimpresion.exceptions.CentroImpresionException;
 import co.edu.uniquindio.centroimpresion.exceptions.TextIsEmptyException;
@@ -16,9 +17,11 @@ import co.edu.uniquindio.centroimpresion.exceptions.TipoCentroException;
 import co.edu.uniquindio.centroimpresion.model.archivos.FiltroExtension;
 import co.edu.uniquindio.centroimpresion.model.archivos.SerializedData;
 import co.edu.uniquindio.centroimpresion.model.centro.Documento;
+import co.edu.uniquindio.centroimpresion.model.scenes.EscenaVerDoc;
 import co.edu.uniquindio.centroimpresion.view.see.PanelDoc;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.stage.Stage;
 import javafx.scene.control.Alert.AlertType;
 
 public class CtrlPanelAddDoc {
@@ -151,15 +154,18 @@ public class CtrlPanelAddDoc {
 		return doc;
 	}
 
-	public static void agregarDocumento(String textoCodigo, String textoPrioridad) {
+	public static void agregarDocumento(Stage stage, String textoCodigo, String textoPrioridad) {
 		try {
 			Documento documentoAgregado = CtrlPanelAddDoc.obtenerDocArchivoThrow(textoCodigo, textoPrioridad);
 			Alert alertaExito = new Alert(AlertType.INFORMATION,
 					"El documento se ha agregado con éxito (" + textoCodigo + ")" + "\n" + "¿Deseas ver el documento?",
 					ButtonType.CANCEL, ButtonType.OK);
 			ButtonType button = alertaExito.showAndWait().orElse(null);
-			if (button == ButtonType.OK)
-				PanelDoc.abrirDocumento(documentoAgregado, 1100, 800);
+			if (button == ButtonType.OK) {
+				EscenaVerDoc escenaVerDoc = new EscenaVerDoc(stage, stage.getScene(), documentoAgregado, 800, 600);
+				escenaVerDoc.getStylesheets().add(Main.css.toExternalForm());
+				stage.setScene(escenaVerDoc);
+			}
 
 		} catch (ArchivoNoObtenidoException e) {
 			new Alert(AlertType.ERROR, "El archivo no pudo ser obtenido").show();
@@ -169,9 +175,12 @@ public class CtrlPanelAddDoc {
 			ButtonType buttonType = new Alert(AlertType.WARNING,
 					"Ya se encuentra un documento con tal código\n" + "¿Deseas ver el documento?", ButtonType.OK,
 					ButtonType.CANCEL).showAndWait().orElse(null);
-			if (buttonType == ButtonType.OK)
-				PanelDoc.abrirDocumento((Documento) e.getSource(), 1100, 800);
-
+			if (buttonType == ButtonType.OK) {
+				EscenaVerDoc escenaVerDoc = new EscenaVerDoc(stage, stage.getScene(), (Documento) e.getSource(), 800,
+						600);
+				escenaVerDoc.getStylesheets().add(Main.css.toExternalForm());
+				stage.setScene(escenaVerDoc);
+			}
 		} catch (NoSePuedeLeerException e) {
 			new Alert(AlertType.ERROR, "El archivo no se puede leer").show();
 		} catch (FueraRangoException e) {
