@@ -42,14 +42,14 @@ public class PanelAddDoc extends PanelConVolver implements EventHandler<Event> {
 		tfCode = new TextField();
 		tfPrior = new TextField();
 
-		tfCode.setPromptText("Escribe un código");
+		tfCode.setPromptText("Escribe un cÃ³digo");
 		tfPrior.setPromptText("5");
 
 		btnAgregar.setId("btn");
 		tfCode.setId("textfield");
 		tfPrior.setId("textfield");
 
-		vBox.getChildren().add(generarHBox("Escribe el código del documento", tfCode));
+		vBox.getChildren().add(generarHBox("Escribe el cÃ³digo del documento", tfCode));
 		vBox.getChildren().add(generarHBox("Escribe la prioridad del documento", tfPrior));
 
 		BorderPane agregarCase = new BorderPane(btnAgregar);
@@ -84,8 +84,8 @@ public class PanelAddDoc extends PanelConVolver implements EventHandler<Event> {
 
 				Documento documentoAgregado = CtrlPanelAddDoc.agregarDocumento(tfCode.getText(), tfPrior.getText());
 				ButtonType button = new Alert(AlertType.INFORMATION,
-						"El documento se ha agregado con éxito (" + tfCode.getText() + ")" + "\n"
-								+ "¿Deseas ver el documento?",
+						"El documento se ha agregado con Ã©xito (" + tfCode.getText() + ")" + "\n"
+								+ "Â¿Deseas ver el documento?",
 						ButtonType.CANCEL, ButtonType.OK).showAndWait().orElse(null);
 				if (button == ButtonType.OK)
 					PanelDoc.abrirDocumento(documentoAgregado, 1100, 800);
@@ -96,7 +96,7 @@ public class PanelAddDoc extends PanelConVolver implements EventHandler<Event> {
 				new Alert(AlertType.WARNING, "Espera a que el documento sea obtenido").show();
 			} catch (CentroImpresionException e) {
 				ButtonType buttonType = new Alert(AlertType.WARNING,
-						"Ya se encuentra un documento con tal código\n" + "¿Deseas ver el documento?", ButtonType.OK,
+						"Ya se encuentra un documento con tal cÃ³digo\n" + "Â¿Deseas ver el documento?", ButtonType.OK,
 						ButtonType.CANCEL).showAndWait().orElse(null);
 				if (buttonType == ButtonType.OK)
 					PanelDoc.abrirDocumento((Documento) e.getSource(), 1100, 800);
@@ -106,7 +106,7 @@ public class PanelAddDoc extends PanelConVolver implements EventHandler<Event> {
 			} catch (FueraRangoException e) {
 				new Alert(AlertType.WARNING, "La prioridad debe de estar entre 0 y 10").show();
 			} catch (TextIsEmptyException e) {
-				new Alert(AlertType.WARNING, "El código está vacío").show();
+				new Alert(AlertType.WARNING, "El cÃ³digo estÃ¡ vacÃ­o").show();
 			}
 		}
 
