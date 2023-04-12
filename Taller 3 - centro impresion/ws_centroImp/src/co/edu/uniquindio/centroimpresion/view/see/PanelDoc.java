@@ -23,15 +23,9 @@ public class PanelDoc extends VBox {
 		Label prioridad = new Label(String.valueOf(documento.getPrioridad()));
 		Label contenido = new Label(documento.getContenido());
 		LocalDateTime momentoAgregado = documento.getFechaAgregado();
-		Label fechaAgregado = new Label(momentoAgregado.format(DateTimeFormatter.ofPattern("HH:mm:ss, dd:MM:yy")));
+		Label fechaAgregado = new Label(momentoAgregado.format(DateTimeFormatter.ofPattern("HH:mm:ss, dd/MM/yy")));
 		Label yaFueImpreso = new Label(documento.getFechaImpresion() != null ? "Si" : "No");
 		getChildren().addAll(codigo, titulo, prioridad, contenido, fechaAgregado, yaFueImpreso);
 	}
 
-	public static void abrirDocumento(Documento documento, double width, double height) {
-		Scene scene = new Scene(new PanelDoc(documento), width, height);
-		Stage s = new Stage();
-		s.setScene(scene);
-		s.show();
-	}
 }
