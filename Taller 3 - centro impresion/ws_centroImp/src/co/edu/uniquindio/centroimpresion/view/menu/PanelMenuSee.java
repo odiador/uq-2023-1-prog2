@@ -6,7 +6,6 @@ import java.util.Arrays;
 import co.edu.uniquindio.centroimpresion.model.centro.OpcionObjeto;
 import co.edu.uniquindio.centroimpresion.model.centro.TipoAccion;
 import co.edu.uniquindio.centroimpresion.model.centro.TipoEmpleado;
-import co.edu.uniquindio.centroimpresion.view.add.PanelAddDoc;
 import co.edu.uniquindio.centroimpresion.view.custom.PanelMenuOpcionObjetos;
 
 public class PanelMenuSee extends PanelMenuOpcionObjetos {
