@@ -16,6 +16,10 @@ import co.edu.uniquindio.centroimpresion.exceptions.TipoCentroException;
 import co.edu.uniquindio.centroimpresion.model.archivos.FiltroExtension;
 import co.edu.uniquindio.centroimpresion.model.archivos.SerializedData;
 import co.edu.uniquindio.centroimpresion.model.centro.Documento;
+import co.edu.uniquindio.centroimpresion.view.see.PanelDoc;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Alert.AlertType;
 
 public class CtrlPanelAddDoc {
 	public static boolean seEstaPidiendo = false;
@@ -66,18 +70,14 @@ public class CtrlPanelAddDoc {
 	}
 
 	/**
-	 * Permite agregar un documento a partir de su código, prioridad y el título
-	 * de la ventana
+	 * Permite agregar un documento a partir de su cï¿½digo, prioridad y el tï¿½tulo de
+	 * la ventana
 	 *
-	 * @param code
-	 *            es el código del documento
-	 * @param prioridad
-	 *            es la prioridad del documento
-	 * @param tituloVentana
-	 *            es el titulo de la ventana a abrir
+	 * @param code          es el cï¿½digo del documento
+	 * @param prioridad     es la prioridad del documento
+	 * @param tituloVentana es el titulo de la ventana a abrir
 	 * @return null si no se puede leer el documento
-	 * @throws ArchivoNoObtenidoException
-	 *             si no se pudo obtener el documento
+	 * @throws ArchivoNoObtenidoException si no se pudo obtener el documento
 	 * @throws NoSePuedeLeerException
 	 */
 	public static Documento pedirDocumento(String code, int prioridad, String tituloVentana, FiltroExtension... filtros)
@@ -92,8 +92,8 @@ public class CtrlPanelAddDoc {
 	}
 
 	/**
-	 * Obtiene un documento a partir de su archivo, código y prioridad; del
-	 * archivo sale el titulo y el contenido
+	 * Obtiene un documento a partir de su archivo, cï¿½digo y prioridad; del archivo
+	 * sale el titulo y el contenido
 	 *
 	 * @param code
 	 * @param archivo
@@ -138,7 +138,7 @@ public class CtrlPanelAddDoc {
 	 * @throws FueraRangoException
 	 * @throws TextIsEmptyException
 	 */
-	public static Documento agregarDocumento(String textoCodigo, String textoPrioridad)
+	public static Documento obtenerDocArchivoThrow(String textoCodigo, String textoPrioridad)
 			throws DocumentoEnProcesoException, ArchivoNoObtenidoException, CentroImpresionException,
 			NoSePuedeLeerException, FueraRangoException, TextIsEmptyException {
 
@@ -151,6 +151,43 @@ public class CtrlPanelAddDoc {
 		return doc;
 	}
 
+	public static void agregarDocumento(String textoCodigo, String textoPrioridad) {
+		try {
+			Documento documentoAgregado = CtrlPanelAddDoc.obtenerDocArchivoThrow(textoCodigo, textoPrioridad);
+			Alert alertaExito = new Alert(AlertType.INFORMATION,
+					"El documento se ha agregado con Ã©xito (" + textoCodigo + ")" + "\n" + "Â¿Deseas ver el documento?",
+					ButtonType.CANCEL, ButtonType.OK);
+			ButtonType button = alertaExito.showAndWait().orElse(null);
+			if (button == ButtonType.OK)
+				PanelDoc.abrirDocumento(documentoAgregado, 1100, 800);
+
+		} catch (ArchivoNoObtenidoException e) {
+			new Alert(AlertType.ERROR, "El archivo no pudo ser obtenido").show();
+		} catch (DocumentoEnProcesoException e) {
+			new Alert(AlertType.WARNING, "Espera a que el documento sea obtenido").show();
+		} catch (CentroImpresionException e) {
+			ButtonType buttonType = new Alert(AlertType.WARNING,
+					"Ya se encuentra un documento con tal cÃ³digo\n" + "Â¿Deseas ver el documento?", ButtonType.OK,
+					ButtonType.CANCEL).showAndWait().orElse(null);
+			if (buttonType == ButtonType.OK)
+				PanelDoc.abrirDocumento((Documento) e.getSource(), 1100, 800);
+
+		} catch (NoSePuedeLeerException e) {
+			new Alert(AlertType.ERROR, "El archivo no se puede leer").show();
+		} catch (FueraRangoException e) {
+			new Alert(AlertType.WARNING, "La prioridad debe de estar entre 0 y 10").show();
+		} catch (TextIsEmptyException e) {
+			new Alert(AlertType.WARNING, "El cÃ³digo estÃ¡ vacÃ­o").show();
+		}
+	}
+
+	/**
+	 * Muestra un error en caso de que el documento exxista en el centro de
+	 * impresion
+	 * 
+	 * @param code
+	 * @throws CentroImpresionException
+	 */
 	public static void throwifDocExist(String code) throws CentroImpresionException {
 		SerializedData data = new SerializedData();
 		Documento documento = data.getCentroImpresion().buscarDocumento(code);
