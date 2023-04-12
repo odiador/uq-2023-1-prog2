@@ -86,7 +86,7 @@ public class CtrlPanelAddImpCartucho {
 			throws TextIsEmptyException, ObjectNotExists, NumberFormatException, FueraRangoException {
 		throwIfEmpty(code, "codigo");
 		throwIfEmpty(marca, "marca");
-		throwIfNull(estadoString);
+		throwIfNull(estadoString, "Elige un estado de impresora");
 		throwIfEmpty(estadoString, "estado");
 		throwIfEmpty(paginasPorMinutoString, "paginas por minuto");
 		throwIfEmpty(capacidadCartuchoString, "capacidad de cartucho");
@@ -102,9 +102,9 @@ public class CtrlPanelAddImpCartucho {
 		return impresoraCartucho;
 	}
 
-	private static void throwIfNull(String estadoString) throws TextIsEmptyException {
+	private static void throwIfNull(String estadoString, String msg) throws TextIsEmptyException {
 		if (estadoString == null)
-			throw new TextIsEmptyException("Elige un estado de impresora");
+			throw new TextIsEmptyException(msg);
 	}
 
 	private static void throwIfEmpty(String texto, String tipo) throws TextIsEmptyException {
