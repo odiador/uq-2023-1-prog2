@@ -84,15 +84,15 @@ public class CtrlPanelAddImpCartucho {
 			boolean esAColor, String paginasPorMinutoString, String capacidadCartuchoString,
 			String desgasteCartuchoString)
 			throws TextIsEmptyException, ObjectNotExists, NumberFormatException, FueraRangoException {
-		throwIfEmpty(code, "codigo");
-		throwIfEmpty(marca, "marca");
-		throwIfNull(estadoString, "Elige un estado de impresora");
-		throwIfEmpty(estadoString, "estado");
-		throwIfEmpty(paginasPorMinutoString, "paginas por minuto");
-		throwIfEmpty(capacidadCartuchoString, "capacidad de cartucho");
-		throwIfEmpty(desgasteCartuchoString, "descaste de cartucho");
+		Utility.throwIfEmpty(code, "codigo");
+		Utility.throwIfEmpty(marca, "marca");
+		Utility.throwIfNull(estadoString, "Elige un estado de impresora");
+		Utility.throwIfEmpty(estadoString, "estado");
+		Utility.throwIfEmpty(paginasPorMinutoString, "paginas por minuto");
+		Utility.throwIfEmpty(capacidadCartuchoString, "capacidad de cartucho");
+		Utility.throwIfEmpty(desgasteCartuchoString, "descaste de cartucho");
 
-		EstadoImpresora estadoImpresora = obtenerEstadoImpresora(estadoString);
+		EstadoImpresora estadoImpresora = EstadoImpresora.obtenerEstadoThrows(estadoString);
 		double paginasPorMinuto = obtenerPagPerMinute(paginasPorMinutoString);
 		double capacidadCartucho = obtenerCapacidad(capacidadCartuchoString);
 		double desgasteCartucho = obtenerDesgaste(desgasteCartuchoString);
@@ -100,23 +100,6 @@ public class CtrlPanelAddImpCartucho {
 		ImpresoraCartucho impresoraCartucho = new ImpresoraCartucho(code, marca, estadoImpresora, esAColor,
 				paginasPorMinuto, capacidadCartucho, desgasteCartucho);
 		return impresoraCartucho;
-	}
-
-	private static void throwIfNull(String estadoString, String msg) throws TextIsEmptyException {
-		if (estadoString == null)
-			throw new TextIsEmptyException(msg);
-	}
-
-	private static void throwIfEmpty(String texto, String tipo) throws TextIsEmptyException {
-		if (texto.isEmpty())
-			throw new TextIsEmptyException(tipo);
-	}
-
-	private static EstadoImpresora obtenerEstadoImpresora(String estadoString) throws ObjectNotExists {
-		EstadoImpresora estadoImpresora = EstadoImpresora.obtenerEstado(estadoString);
-		if (estadoImpresora == null)
-			throw new ObjectNotExists(EstadoImpresora.class);
-		return estadoImpresora;
 	}
 
 	private static double obtenerDesgaste(String desgasteString) throws FueraRangoException, NumberFormatException {

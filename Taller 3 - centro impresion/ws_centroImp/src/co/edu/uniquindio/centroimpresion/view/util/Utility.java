@@ -1,5 +1,6 @@
 package co.edu.uniquindio.centroimpresion.view.util;
 
+import co.edu.uniquindio.centroimpresion.exceptions.TextIsEmptyException;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.Node;
@@ -46,6 +47,16 @@ public class Utility {
 		}
 	
 		return concatenacion;
+	}
+
+	public static void throwIfEmpty(String texto, String tipo) throws TextIsEmptyException {
+		if (texto.isEmpty())
+			throw new TextIsEmptyException(tipo);
+	}
+
+	public static void throwIfNull(String estadoString, String msg) throws TextIsEmptyException {
+		if (estadoString == null)
+			throw new TextIsEmptyException(msg);
 	}
 
 }

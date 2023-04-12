@@ -14,6 +14,13 @@ public enum EstadoImpresora {
 		return texto;
 	}
 
+	public static EstadoImpresora obtenerEstadoThrows(String estadoString) throws ObjectNotExists {
+		EstadoImpresora estadoImpresora = obtenerEstado(estadoString);
+		if (estadoImpresora == null)
+			throw new ObjectNotExists(EstadoImpresora.class);
+		return estadoImpresora;
+	}
+
 	public static EstadoImpresora obtenerEstado(String texto) {
 		EstadoImpresora[] estados = EstadoImpresora.values();
 		for (EstadoImpresora estado : estados)
