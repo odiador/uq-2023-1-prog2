@@ -9,20 +9,19 @@ import java.util.Scanner;
 import co.edu.uniquindio.centroimpresion.application.Main;
 import co.edu.uniquindio.centroimpresion.exceptions.ArchivoNoObtenidoException;
 import co.edu.uniquindio.centroimpresion.exceptions.CentroImpresionException;
-import co.edu.uniquindio.centroimpresion.exceptions.TextIsEmptyException;
 import co.edu.uniquindio.centroimpresion.exceptions.DocumentoEnProcesoException;
-import co.edu.uniquindio.centroimpresion.exceptions.NoSePuedeLeerException;
 import co.edu.uniquindio.centroimpresion.exceptions.FueraRangoException;
+import co.edu.uniquindio.centroimpresion.exceptions.NoSePuedeLeerException;
+import co.edu.uniquindio.centroimpresion.exceptions.TextIsEmptyException;
 import co.edu.uniquindio.centroimpresion.exceptions.TipoCentroException;
 import co.edu.uniquindio.centroimpresion.model.archivos.FiltroExtension;
 import co.edu.uniquindio.centroimpresion.model.archivos.SerializedData;
 import co.edu.uniquindio.centroimpresion.model.centro.Documento;
 import co.edu.uniquindio.centroimpresion.model.scenes.EscenaVerDoc;
-import co.edu.uniquindio.centroimpresion.view.see.PanelDoc;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
-import javafx.scene.control.Alert.AlertType;
 
 public class CtrlPanelAddDoc {
 	public static boolean seEstaPidiendo = false;
