@@ -9,6 +9,7 @@ public class EscenaMenu extends Scene {
 
 	public EscenaMenu(Stage stage, String name, TipoEmpleado tipoEmpleado) {
 		super(new PanelPrincipal(stage, name, tipoEmpleado), 1200, 800);
+
 	}
 
 	public static EscenaMenu obtenerEscenaJm(Stage stage) {
