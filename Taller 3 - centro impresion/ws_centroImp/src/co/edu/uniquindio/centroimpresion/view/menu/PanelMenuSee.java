@@ -31,7 +31,6 @@ public class PanelMenuSee extends PanelMenuOpcionObjetos {
 
 	@Override
 	public void btnDocPresionado() {
-		setCenter(new PanelAddDoc(this));
 	}
 
 	@Override
