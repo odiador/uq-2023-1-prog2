@@ -13,14 +13,17 @@ import co.edu.uniquindio.centroimpresion.view.menu.PanelMenuSee;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 public class TabPanelPrincipal extends BorderPane {
 
 	private TipoAccion[] acciones;
 	private Pane[] panelesAcciones;
 	private TipoEmpleado tipoEmpleado;
+	private Stage stage;
 
-	public TabPanelPrincipal(TipoEmpleado tipoEmpleado) {
+	public TabPanelPrincipal(Stage stage, TipoEmpleado tipoEmpleado) {
+		this.stage = stage;
 		this.tipoEmpleado = tipoEmpleado;
 		initComp();
 	}
@@ -56,7 +59,7 @@ public class TabPanelPrincipal extends BorderPane {
 		case ACERCA_DE:
 			return new PanelAcercaDe();
 		case AGREGAR:
-			return new PanelMenuAdd(tipoEmpleado);
+			return new PanelMenuAdd(stage, tipoEmpleado);
 		case ELIMINAR:
 			return new PanelMenuRemove(tipoEmpleado);
 		case IMPRIMIR:

@@ -14,14 +14,13 @@ public class PanelPrincipal extends BorderPane implements TabComunicationListene
 	private Stage stage;
 
 	/**
-	 * Es el constructor del Panel principal, este contiene su panel izquierdo y
-	 * su panel de pesta�as
-	 * @param stage 
+	 * Es el constructor del Panel principal, este contiene su panel izquierdo y su
+	 * panel de pesta�as
+	 * 
+	 * @param stage
 	 *
-	 * @param nombre
-	 *            es el nombre de perfil del empleado
-	 * @param opciones
-	 *            son las opciones que tiene el empleado de elegir
+	 * @param nombre   es el nombre de perfil del empleado
+	 * @param opciones son las opciones que tiene el empleado de elegir
 	 */
 	public PanelPrincipal(Stage stage, String nombre, TipoEmpleado tipoEmpleado) {
 		this.stage = stage;
@@ -37,7 +36,7 @@ public class PanelPrincipal extends BorderPane implements TabComunicationListene
 	 */
 	public void initComp() {
 		panelIzq = new PanelPrincipalIzq(nombre, tipoEmpleado);
-		tabPane = new TabPanelPrincipal(tipoEmpleado);
+		tabPane = new TabPanelPrincipal(stage, tipoEmpleado);
 		setLeft(panelIzq);
 		panelIzq.addTabComunicationListener(this);
 		setCenter(tabPane);

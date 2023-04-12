@@ -8,11 +8,14 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 public class PanelAddDoc extends PanelConVolver {
 	private PanelMenuOpcionObjetos panel;
+	private Stage stage;
 
-	public PanelAddDoc(PanelMenuOpcionObjetos panel) {
+	public PanelAddDoc(Stage stage, PanelMenuOpcionObjetos panel) {
+		this.stage = stage;
 		this.panel = panel;
 	}
 
@@ -35,12 +38,12 @@ public class PanelAddDoc extends PanelConVolver {
 		vBox.getChildren().add(Utility.generarHBox("Escribe el código del documento", tfCode));
 		vBox.getChildren().add(Utility.generarHBox("Escribe la prioridad del documento", tfPrior));
 
-
 		agregarCase.setId("btn-case");
 		vBox.getChildren().add(agregarCase);
 		setCenter(vBox);
 		Utility.setAsNumberTextfield(tfPrior);
-		btnAgregar.setOnMouseReleased(evento -> CtrlPanelAddDoc.agregarDocumento(tfCode.getText(), tfPrior.getText()));
+		btnAgregar.setOnMouseReleased(
+				evento -> CtrlPanelAddDoc.agregarDocumento(stage, tfCode.getText(), tfPrior.getText()));
 	}
 
 	@Override

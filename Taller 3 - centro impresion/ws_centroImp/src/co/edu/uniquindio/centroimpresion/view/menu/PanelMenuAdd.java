@@ -10,11 +10,15 @@ import co.edu.uniquindio.centroimpresion.view.add.PanelAddDoc;
 import co.edu.uniquindio.centroimpresion.view.add.PanelAddImpCartucho;
 import co.edu.uniquindio.centroimpresion.view.add.PanelAddImpLaser;
 import co.edu.uniquindio.centroimpresion.view.custom.PanelMenuOpcionObjetos;
+import javafx.stage.Stage;
 
 public class PanelMenuAdd extends PanelMenuOpcionObjetos {
 
-	public PanelMenuAdd(TipoEmpleado tipoEmpleado) {
+	private Stage stage;
+
+	public PanelMenuAdd(Stage stage,TipoEmpleado tipoEmpleado) {
 		super(TipoAccion.AGREGAR, tipoEmpleado);
+		this.stage = stage;
 	}
 
 	public OpcionObjeto[] generarOpciones(TipoEmpleado tipoEmpleado) {
@@ -30,7 +34,7 @@ public class PanelMenuAdd extends PanelMenuOpcionObjetos {
 
 	@Override
 	public void btnDocPresionado() {
-		setCenter(new PanelAddDoc(this));
+		setCenter(new PanelAddDoc(stage,this));
 	}
 
 	@Override
