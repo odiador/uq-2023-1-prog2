@@ -37,7 +37,7 @@
 
 #vbox-principal {
 	-fx-background-color: linear-gradient(from 0.0% 0.0% to 0.0% 120.0%,
-		#5b87ee 50.0%,
+		#5b87ee 25.0%,
 		black 100.0%
 	);
 	-fx-border-width: 10.0px;
@@ -67,9 +67,16 @@
 
 #btn-volver {
 	-fx-alignment: center;
-	-fx-background-color: red;
 	-fx-max-width: 1000000.0;
 	-fx-pref-height: 30.0;
+	-fx-background-color: rgb(30.0,91.0,232.0);
+}
+
+#btn-volver:hover {
+	-fx-background-color: rgb(21.0,75.0,220.0);
+}
+#btn-volver:pressed {
+	-fx-background-color: rgb(17.0,62.0,167.0);
 }
 #header {
 	-fx-alignment: center;
@@ -85,10 +92,18 @@
 	-fx-ellipsis-string: "";
 	-fx-alignment: center;
 	-fx-font-size: 25.0;
-	-fx-background-color: red;
+	-fx-background-color: rgb(30.0,91.0,232.0);
 	-fx-font-weight: bold;
 	-fx-pref-height: 40.0;
 	-fx-pref-width: 300.0;
 	-fx-arc-width: 3.0;
 	-fx-fit-to-width: true;
+}
+
+
+#boton-opcion:hover {
+	-fx-background-color: rgb(21.0,75.0,220.0);
+}
+#boton-opcion:pressed {
+	-fx-background-color: rgb(17.0,62.0,167.0);
 }
