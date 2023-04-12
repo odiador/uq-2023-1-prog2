@@ -3,6 +3,7 @@ package co.edu.uniquindio.centroimpresion.view.principal;
 import co.edu.uniquindio.centroimpresion.model.centro.TipoAccion;
 import co.edu.uniquindio.centroimpresion.model.centro.TipoEmpleado;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 
 public class PanelPrincipal extends BorderPane implements TabComunicationListener {
 
@@ -10,17 +11,20 @@ public class PanelPrincipal extends BorderPane implements TabComunicationListene
 	private TabPanelPrincipal tabPane;
 	private String nombre;
 	private TipoEmpleado tipoEmpleado;
+	private Stage stage;
 
 	/**
 	 * Es el constructor del Panel principal, este contiene su panel izquierdo y
-	 * su panel de pestañas
+	 * su panel de pestaï¿½as
+	 * @param stage 
 	 *
 	 * @param nombre
 	 *            es el nombre de perfil del empleado
 	 * @param opciones
 	 *            son las opciones que tiene el empleado de elegir
 	 */
-	public PanelPrincipal(String nombre, TipoEmpleado tipoEmpleado) {
+	public PanelPrincipal(Stage stage, String nombre, TipoEmpleado tipoEmpleado) {
+		this.stage = stage;
 		this.nombre = nombre;
 		this.tipoEmpleado = tipoEmpleado;
 
@@ -28,7 +32,7 @@ public class PanelPrincipal extends BorderPane implements TabComunicationListene
 	}
 
 	/**
-	 * Inicializa los componentes del panel principal y directamente también los
+	 * Inicializa los componentes del panel principal y directamente tambiï¿½n los
 	 * agrega
 	 */
 	public void initComp() {
