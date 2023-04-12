@@ -1,16 +1,11 @@
 package co.edu.uniquindio.centroimpresion.view.custom;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 
-public abstract class PanelConVolver extends BorderPane implements EventHandler<Event> {
+public abstract class PanelConVolver extends BorderPane {
 	private Label label;
 
 	public PanelConVolver() {
@@ -19,19 +14,12 @@ public abstract class PanelConVolver extends BorderPane implements EventHandler<
 
 	public void initComp() {
 		label = new Label("Volver");
-		label.setOnMouseReleased(this);
+		label.setOnMouseReleased(evento -> volverPresionado());
 		label.setId("btn-volver");
 		setBottom(label);
 	}
 
 	public abstract void volverPresionado();
-
-	@Override
-	public void handle(Event event) {
-		if (event.getSource() == label) {
-			volverPresionado();
-		}
-	}
 
 	public static HBox generarHBox(String msg, Node... nodos) {
 		Label label = new Label(msg);
