@@ -7,6 +7,9 @@ import co.edu.uniquindio.centroimpresion.exceptions.TextIsEmptyException;
 import co.edu.uniquindio.centroimpresion.model.archivos.SerializedData;
 import co.edu.uniquindio.centroimpresion.model.centro.EstadoImpresora;
 import co.edu.uniquindio.centroimpresion.model.centro.ImpresoraCartucho;
+import co.edu.uniquindio.centroimpresion.view.util.Utility;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 
 public class CtrlPanelAddImpCartucho {
 
@@ -25,7 +28,7 @@ public class CtrlPanelAddImpCartucho {
 	 * @throws NumberFormatException
 	 * @throws FueraRangoException
 	 */
-	public static void agregarImpresoraCartucho(String code, String marca, String estadoString, boolean esAColor,
+	public static void agregarImpresoraCartuchoThrows(String code, String marca, String estadoString, boolean esAColor,
 			String paginasPorMinutoString, String capacidadCartuchoString, String desgasteCartuchoString)
 			throws CentroImpresionException, TextIsEmptyException, ObjectNotExists, NumberFormatException,
 			FueraRangoException {
@@ -38,6 +41,27 @@ public class CtrlPanelAddImpCartucho {
 					impresoraCartucho.getPaginasPorMinuto(), impresoraCartucho.getCapacidadCartucho(),
 					impresoraCartucho.getCapacidadCartucho());
 			data.updateCentroImpresion();
+		}
+	}
+
+	public static void agregarImpresoraCartucho(String code, String marca, String estadoString, boolean esAColor,
+			String velString, String velDecimalString, String capacidadString, String capacidadDecimalString,
+			String desgasteString, String desgasteDecimalString) {
+		try {
+			CtrlPanelAddImpCartucho.agregarImpresoraCartuchoThrows(code, marca, estadoString, esAColor,
+					Utility.juntarCadenasParaDoble(velString, velDecimalString),
+					Utility.juntarCadenasParaDoble(capacidadString, capacidadDecimalString),
+					Utility.juntarCadenasParaDoble(desgasteString, desgasteDecimalString));
+		} catch (NumberFormatException e) {
+			new Alert(AlertType.WARNING, "Solo coloca numeros en la velocidad, capacidad y desgaste").show();
+		} catch (CentroImpresionException e) {
+			new Alert(AlertType.WARNING, "Ya existe una impresora con ese codigo").show();
+		} catch (TextIsEmptyException e) {
+			new Alert(AlertType.WARNING, "Rellena todos los campos (" + e.getTipoTexto() + ")").show();
+		} catch (ObjectNotExists e) {
+			new Alert(AlertType.WARNING, "Rellena todos los campos (" + e.getClase().getSimpleName() + ")").show();
+		} catch (FueraRangoException e) {
+			new Alert(AlertType.WARNING, e.getMessage()).show();
 		}
 	}
 

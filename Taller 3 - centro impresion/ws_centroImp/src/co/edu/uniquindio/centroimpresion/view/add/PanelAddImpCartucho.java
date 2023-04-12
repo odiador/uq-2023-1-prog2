@@ -1,18 +1,12 @@
 package co.edu.uniquindio.centroimpresion.view.add;
 
 import co.edu.uniquindio.centroimpresion.controllers.CtrlPanelAddImpCartucho;
-import co.edu.uniquindio.centroimpresion.exceptions.CentroImpresionException;
-import co.edu.uniquindio.centroimpresion.exceptions.FueraRangoException;
-import co.edu.uniquindio.centroimpresion.exceptions.ObjectNotExists;
-import co.edu.uniquindio.centroimpresion.exceptions.TextIsEmptyException;
 import co.edu.uniquindio.centroimpresion.model.centro.EstadoImpresora;
 import co.edu.uniquindio.centroimpresion.view.custom.PanelConVolver;
 import co.edu.uniquindio.centroimpresion.view.custom.PanelMenuOpcionObjetos;
 import co.edu.uniquindio.centroimpresion.view.util.Utility;
 import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -23,12 +17,6 @@ import javafx.scene.layout.VBox;
 
 public class PanelAddImpCartucho extends PanelConVolver {
 	private PanelMenuOpcionObjetos panel;
-	private VBox vBox;
-	private Label btnAgregar;
-	private TextField tfCode, tfMarca, tfVel, tfCapacidad, tfDesgaste, tfVelDecimal, tfCapacidadDecimal,
-			tfDesgasteDecimal;
-	private CheckBox checkColor;
-	private ComboBox<String> comboEstados;
 
 	public PanelAddImpCartucho(PanelMenuOpcionObjetos panel) {
 		this.panel = panel;
@@ -36,16 +24,18 @@ public class PanelAddImpCartucho extends PanelConVolver {
 
 	public void initComp() {
 		super.initComp();
-		vBox = new VBox(20);
-		tfCode = new TextField();
-		tfMarca = new TextField();
-		tfVel = new TextField();
-		tfVelDecimal = new TextField();
-		tfCapacidad = new TextField();
-		tfCapacidadDecimal = new TextField();
-		tfDesgaste = new TextField();
-		tfDesgasteDecimal = new TextField();
-		btnAgregar = new Label("Agregar Impresora");
+		VBox vBox = new VBox(20);
+		TextField tfCode = new TextField();
+		TextField tfMarca = new TextField();
+		TextField tfVel = new TextField();
+		TextField tfVelDecimal = new TextField();
+		TextField tfCapacidad = new TextField();
+		TextField tfCapacidadDecimal = new TextField();
+		TextField tfDesgaste = new TextField();
+		TextField tfDesgasteDecimal = new TextField();
+		Label btnAgregar = new Label("Agregar Impresora");
+		ComboBox<String> comboEstados = new ComboBox<String>();
+		CheckBox checkColor = new CheckBox();
 
 		tfCode.setPromptText("Escribe un codigo");
 		tfMarca.setPromptText("Escribe una marca");
@@ -70,8 +60,6 @@ public class PanelAddImpCartucho extends PanelConVolver {
 		HBox.setMargin(tfCapacidadDecimal, new Insets(0, 5, 0, 10));
 		HBox.setMargin(tfDesgaste, new Insets(10, 10, 10, 10));
 		HBox.setMargin(tfDesgasteDecimal, new Insets(0, 5, 0, 10));
-		comboEstados = new ComboBox<String>();
-		checkColor = new CheckBox();
 		checkColor.setSelected(true);
 		comboEstados.setItems(FXCollections.observableArrayList(EstadoImpresora.stringValues()));
 
@@ -94,35 +82,18 @@ public class PanelAddImpCartucho extends PanelConVolver {
 		agregarCase.setId("btn-case");
 		vBox.getChildren().add(agregarCase);
 		setCenter(vBox);
-		addListeners();
-	}
 
-	private void addListeners() {
 		Utility.setAsNumberTextfield(tfVel);
 		Utility.setAsNumberTextfield(tfVelDecimal);
 		Utility.setAsNumberTextfield(tfCapacidad);
 		Utility.setAsNumberTextfield(tfCapacidadDecimal);
 		Utility.setAsNumberTextfield(tfDesgaste);
 		Utility.setAsNumberTextfield(tfDesgasteDecimal);
-		btnAgregar.setOnMouseReleased(event -> {
-			try {
-				CtrlPanelAddImpCartucho.agregarImpresoraCartucho(tfCode.getText(), tfMarca.getText(),
-						comboEstados.getValue(), checkColor.isSelected(),
-						Utility.juntarCadenasParaDoble(tfVel.getText(), tfVelDecimal.getText()),
-						Utility.juntarCadenasParaDoble(tfCapacidad.getText(), tfCapacidadDecimal.getText()),
-						Utility.juntarCadenasParaDoble(tfDesgaste.getText(), tfDesgasteDecimal.getText()));
-			} catch (NumberFormatException e) {
-				new Alert(AlertType.WARNING, "Solo coloca numeros en la velocidad, capacidad y desgaste").show();
-			} catch (CentroImpresionException e) {
-				new Alert(AlertType.WARNING, "Ya existe una impresora con ese codigo").show();
-			} catch (TextIsEmptyException e) {
-				new Alert(AlertType.WARNING, "Rellena todos los campos (" + e.getTipoTexto() + ")").show();
-			} catch (ObjectNotExists e) {
-				new Alert(AlertType.WARNING, "Rellena todos los campos (" + e.getClase().getSimpleName() + ")").show();
-			} catch (FueraRangoException e) {
-				new Alert(AlertType.WARNING, e.getMessage()).show();
-			}
-		});
+
+		btnAgregar.setOnMouseReleased(event -> CtrlPanelAddImpCartucho.agregarImpresoraCartucho(tfCode.getText(),
+				tfMarca.getText(), comboEstados.getValue(), checkColor.isSelected(), tfVel.getText(),
+				tfVelDecimal.getText(), tfCapacidad.getText(), tfCapacidadDecimal.getText(), tfDesgaste.getText(),
+				tfDesgasteDecimal.getText()));
 	}
 
 	@Override
