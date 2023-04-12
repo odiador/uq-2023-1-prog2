@@ -11,8 +11,7 @@ import co.edu.uniquindio.centroimpresion.model.centro.Documento;
 import co.edu.uniquindio.centroimpresion.view.custom.PanelConVolver;
 import co.edu.uniquindio.centroimpresion.view.custom.PanelMenuOpcionObjetos;
 import co.edu.uniquindio.centroimpresion.view.see.PanelDoc;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
+import co.edu.uniquindio.centroimpresion.view.util.Utility;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
@@ -62,13 +61,7 @@ public class PanelAddDoc extends PanelConVolver implements EventHandler<Event> {
 
 	public void addlisteners() {
 		btnAgregar.setOnMouseReleased(this);
-		tfPrior.textProperty().addListener(new ChangeListener<String>() {
-			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-				if (!newValue.matches("\\d*")) {
-					tfPrior.setText(newValue.replaceAll("[^\\d]", ""));
-				}
-			}
-		});
+		Utility.setAsNumberTextfield(tfPrior);
 	}
 
 	@Override
