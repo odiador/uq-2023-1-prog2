@@ -8,6 +8,7 @@ import co.edu.uniquindio.centroimpresion.exceptions.TextIsEmptyException;
 import co.edu.uniquindio.centroimpresion.model.centro.EstadoImpresora;
 import co.edu.uniquindio.centroimpresion.view.custom.PanelConVolver;
 import co.edu.uniquindio.centroimpresion.view.custom.PanelMenuOpcionObjetos;
+import co.edu.uniquindio.centroimpresion.view.util.Utility;
 import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
 import javafx.scene.control.Alert;
@@ -46,7 +47,7 @@ public class PanelAddImpCartucho extends PanelConVolver {
 		tfDesgasteDecimal = new TextField();
 		btnAgregar = new Label("Agregar Impresora");
 
-		tfCode.setPromptText("Escribe un código");
+		tfCode.setPromptText("Escribe un codigo");
 		tfMarca.setPromptText("Escribe una marca");
 		tfVel.setPromptText("Escribe un numero");
 		tfVelDecimal.setPromptText("Escribe un decimal (PPM)");
@@ -77,10 +78,10 @@ public class PanelAddImpCartucho extends PanelConVolver {
 		comboEstados.setId("combobox");
 		checkColor.setId("checkbox");
 
-		vBox.getChildren().add(generarHBox("Escribe el código de la impresora", tfCode));
+		vBox.getChildren().add(generarHBox("Escribe el codigo de la impresora", tfCode));
 		vBox.getChildren().add(generarHBox("Escribe la marca de la impresora", tfMarca));
 		vBox.getChildren().add(generarHBox("Elige el estado de la impresora", comboEstados));
-		vBox.getChildren().add(generarHBox("¿La impresora es a color?", checkColor));
+		vBox.getChildren().add(generarHBox("Â¿La impresora es a color?", checkColor));
 		vBox.getChildren().add(generarHBox(0, "Escribe la vel de la impresora (paginas por minuto)", tfVel,
 				new Label(","), tfVelDecimal));
 		vBox.getChildren().add(generarHBox(0, "Escribe la capacidad de cartucho de la impresora", tfCapacidad,
@@ -97,12 +98,12 @@ public class PanelAddImpCartucho extends PanelConVolver {
 	}
 
 	private void addListeners() {
-		convertirATextfieldNumerico(tfVel);
-		convertirATextfieldNumerico(tfVelDecimal);
-		convertirATextfieldNumerico(tfCapacidad);
-		convertirATextfieldNumerico(tfCapacidadDecimal);
-		convertirATextfieldNumerico(tfDesgaste);
-		convertirATextfieldNumerico(tfDesgasteDecimal);
+		Utility.setAsNumberTextfield(tfVel);
+		Utility.setAsNumberTextfield(tfVelDecimal);
+		Utility.setAsNumberTextfield(tfCapacidad);
+		Utility.setAsNumberTextfield(tfCapacidadDecimal);
+		Utility.setAsNumberTextfield(tfDesgaste);
+		Utility.setAsNumberTextfield(tfDesgasteDecimal);
 		btnAgregar.setOnMouseReleased(event -> {
 			try {
 				CtrlPanelAddImpCartucho.agregarImpresoraCartucho(tfCode.getText(), tfMarca.getText(),
@@ -113,7 +114,7 @@ public class PanelAddImpCartucho extends PanelConVolver {
 			} catch (NumberFormatException e) {
 				new Alert(AlertType.WARNING, "Solo coloca numeros en la velocidad, capacidad y desgaste").show();
 			} catch (CentroImpresionException e) {
-				new Alert(AlertType.WARNING, "Ya existe una impresora con ese código").show();
+				new Alert(AlertType.WARNING, "Ya existe una impresora con ese codigo").show();
 			} catch (TextIsEmptyException e) {
 				new Alert(AlertType.WARNING, "Rellena todos los campos (" + e.getTipoTexto() + ")").show();
 			} catch (ObjectNotExists e) {

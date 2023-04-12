@@ -8,6 +8,7 @@ import co.edu.uniquindio.centroimpresion.exceptions.TextIsEmptyException;
 import co.edu.uniquindio.centroimpresion.model.centro.EstadoImpresora;
 import co.edu.uniquindio.centroimpresion.view.custom.PanelConVolver;
 import co.edu.uniquindio.centroimpresion.view.custom.PanelMenuOpcionObjetos;
+import co.edu.uniquindio.centroimpresion.view.util.Utility;
 import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
 import javafx.scene.control.Alert;
@@ -43,11 +44,11 @@ public class PanelAddImpLaser extends PanelConVolver {
 		tfDuracion = new TextField();
 		btnAgregar = new Label("Agregar Impresora");
 
-		tfCode.setPromptText("Escribe un código");
+		tfCode.setPromptText("Escribe un codigo");
 		tfMarca.setPromptText("Escribe una marca");
-		tfVel.setPromptText("Escribe un numero");
-		tfVelDecimal.setPromptText("Escribe un decimal (PPM)");
-		tfDuracion.setPromptText("Escribe la duración del tóner");
+		tfVel.setPromptText("0");
+		tfVelDecimal.setPromptText("0 PPM");
+		tfDuracion.setPromptText("0 unidades");
 
 		vBox.setId("centered-box");
 		tfCode.setId("textfield");
@@ -66,13 +67,13 @@ public class PanelAddImpLaser extends PanelConVolver {
 		comboEstados.setId("combobox");
 		checkColor.setId("checkbox");
 
-		vBox.getChildren().add(generarHBox("Escribe el código de la impresora", tfCode));
+		vBox.getChildren().add(generarHBox("Escribe el codigo de la impresora", tfCode));
 		vBox.getChildren().add(generarHBox("Escribe la marca de la impresora", tfMarca));
 		vBox.getChildren().add(generarHBox("Elige el estado de la impresora", comboEstados));
-		vBox.getChildren().add(generarHBox("¿La impresora es a color?", checkColor));
+		vBox.getChildren().add(generarHBox("Â¿La impresora es a color?", checkColor));
 		vBox.getChildren().add(generarHBox(0, "Escribe la vel de la impresora (paginas por minuto)", tfVel,
 				new Label(","), tfVelDecimal));
-		vBox.getChildren().add(generarHBox("Escribe la duración del tóner de la impresora", tfDuracion));
+		vBox.getChildren().add(generarHBox("Escribe la duracion del toner de la impresora", tfDuracion));
 
 		BorderPane agregarCase = new BorderPane(btnAgregar);
 
@@ -83,9 +84,9 @@ public class PanelAddImpLaser extends PanelConVolver {
 	}
 
 	private void addListeners() {
-		convertirATextfieldNumerico(tfVel);
-		convertirATextfieldNumerico(tfVelDecimal);
-		convertirATextfieldNumerico(tfDuracion);
+		Utility.setAsNumberTextfield(tfVel);
+		Utility.setAsNumberTextfield(tfVelDecimal);
+		Utility.setAsNumberTextfield(tfDuracion);
 		btnAgregar.setOnMouseReleased(event -> {
 			try {
 				CtrlPanelAddImpLaser.agregarImpresoraLaser(tfCode.getText(), tfMarca.getText(), comboEstados.getValue(),
@@ -94,7 +95,7 @@ public class PanelAddImpLaser extends PanelConVolver {
 			} catch (NumberFormatException e) {
 				new Alert(AlertType.WARNING, "Rellena todos los campos").show();
 			} catch (CentroImpresionException e) {
-				new Alert(AlertType.WARNING, "Ya existe una impresora con ese código").show();
+				new Alert(AlertType.WARNING, "Ya existe una impresora con ese codigo").show();
 			} catch (TextIsEmptyException e) {
 				new Alert(AlertType.WARNING, "Rellena todos los campos (" + e.getTipoTexto() + ")").show();
 			} catch (ObjectNotExists e) {
