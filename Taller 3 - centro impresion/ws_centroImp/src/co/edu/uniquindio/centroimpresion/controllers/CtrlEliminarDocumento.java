@@ -15,7 +15,7 @@ public class CtrlEliminarDocumento {
 		} catch (TextIsEmptyException e) {
 			new Alert(AlertType.WARNING, "Rellena todos los campos (" + e.getTipoTexto() + ")").show();
 		} catch (CentroImpresionException e) {
-			new Alert(AlertType.WARNING, e.getMessage()).show();
+			new Alert(AlertType.ERROR, "El documento con codigo " + code + " no fue encontrado").show();
 		}
 	}
 
