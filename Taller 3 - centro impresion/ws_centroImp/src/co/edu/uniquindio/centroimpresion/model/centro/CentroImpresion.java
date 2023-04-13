@@ -88,7 +88,6 @@ public class CentroImpresion implements Serializable {
 
 		if (listaImpresoras.remove(impresora)) {
 			listaImpresoras.add(impresora);
-			Collections.sort(listaDocumentos);
 		}
 		throw new CentroImpresionException(TipoCentroException.UPDATE, impresora);
 	}
@@ -140,6 +139,14 @@ public class CentroImpresion implements Serializable {
 		ImpresoraLaser impresora = new ImpresoraLaser(code, marca, estado, esAColor, paginasPorMinuto, duracionToner);
 		if (!listaImpresoras.add(impresora))
 			throw new CentroImpresionException(TipoCentroException.ADD, impresora);
+	}
+
+	public Set<Impresora> getListaImpresoras() {
+		return listaImpresoras;
+	}
+
+	public List<Documento> getListaDocumentos() {
+		return listaDocumentos;
 	}
 
 }
