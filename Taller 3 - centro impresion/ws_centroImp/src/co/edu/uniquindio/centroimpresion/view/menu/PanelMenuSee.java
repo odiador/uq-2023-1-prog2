@@ -7,6 +7,7 @@ import co.edu.uniquindio.centroimpresion.model.centro.OpcionObjeto;
 import co.edu.uniquindio.centroimpresion.model.centro.TipoAccion;
 import co.edu.uniquindio.centroimpresion.model.centro.TipoEmpleado;
 import co.edu.uniquindio.centroimpresion.view.custom.PanelMenuOpcionObjetos;
+import co.edu.uniquindio.centroimpresion.view.see.PanelSeeDocs;
 
 public class PanelMenuSee extends PanelMenuOpcionObjetos {
 
@@ -30,6 +31,7 @@ public class PanelMenuSee extends PanelMenuOpcionObjetos {
 
 	@Override
 	public void btnDocPresionado() {
+		setCenter(new PanelSeeDocs(this));
 	}
 
 	@Override
