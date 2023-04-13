@@ -120,6 +120,10 @@ public class Documento implements Comparable<Documento>, Serializable {
 		return o.getPrioridad() - getPrioridad();
 	}
 
+	public int compareCodeTo(Documento o) {
+		return code.compareTo(o.getCode());
+	}
+
 	@Override
 	public String toString() {
 		return "Documento [code=" + code + ", titulo=" + titulo + ", prioridad=" + prioridad + "]";
