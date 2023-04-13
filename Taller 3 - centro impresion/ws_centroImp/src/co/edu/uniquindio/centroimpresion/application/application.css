@@ -7,6 +7,16 @@
 	-fx-max-width: 100000.0;
 	-fx-font-weight: bold;
 }
+
+#btn-tabla {
+	-fx-background-color: rgb(0.0,0.0,0.0,0.1);
+}
+#btn-tabla:hover {
+	-fx-background-color: rgb(0.0,0.0,0.0,0.2);
+}
+#btn-tabla:pressed {
+	-fx-background-color: rgb(0.0,0.0,0.0,0.3);
+}
 #checkbox {
 	-fx-pref-width: 100.0;
 	-fx-background-color: rgb(255.0,0.0,0.0);
