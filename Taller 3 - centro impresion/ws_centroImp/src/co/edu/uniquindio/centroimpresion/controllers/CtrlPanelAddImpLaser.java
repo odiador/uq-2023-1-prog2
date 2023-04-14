@@ -12,14 +12,14 @@ import co.edu.uniquindio.centroimpresion.model.centro.ImpresoraLaser;
 public class CtrlPanelAddImpLaser {
 
 	public static void agregarImpresoraLaser(String code, String marca, String estadoString, boolean esAColor,
-			String paginasPorMinutoString, String duracionTonerString) throws CentroImpresionException,
+			String letrasPorSegundoString, String duracionTonerString) throws CentroImpresionException,
 			TextIsEmptyException, ObjectNotExists, NumberFormatException, FueraRangoException {
 		ImpresoraLaser impresoraLaser = obtenerImpresoraLaser(code, marca, estadoString, esAColor,
-				paginasPorMinutoString, duracionTonerString);
+				letrasPorSegundoString, duracionTonerString);
 		SerializedData data = new SerializedData();
 		if (impresoraLaser.exists()) {
 			data.getCentroImpresion().agregarImpresoraLaser(impresoraLaser.getCode(), impresoraLaser.getMarca(),
-					impresoraLaser.getEstado(), impresoraLaser.isEsAColor(), impresoraLaser.getPaginasPorMinuto(),
+					impresoraLaser.getEstado(), impresoraLaser.isEsAColor(), impresoraLaser.getLetrasPorSegundo(),
 					impresoraLaser.getDuracionToner());
 			data.updateCentroImpresion();
 		}
@@ -31,7 +31,7 @@ public class CtrlPanelAddImpLaser {
 	 * @param marca
 	 * @param estadoString
 	 * @param esAColor
-	 * @param paginasPorMinutoString
+	 * @param letrasPorSegundo
 	 * @param capacidadCartuchoString
 	 * @param desgasteCartuchoString
 	 * @return
@@ -41,16 +41,16 @@ public class CtrlPanelAddImpLaser {
 	 * @throws FueraRangoException
 	 */
 	public static ImpresoraLaser obtenerImpresoraLaser(String code, String marca, String estadoString, boolean esAColor,
-			String paginasPorMinutoString, String duracionTonerString)
+			String letrasPorSegundo, String duracionTonerString)
 			throws TextIsEmptyException, ObjectNotExists, NumberFormatException, FueraRangoException {
 		throwIfEmpty(code, "codigo");
 		throwIfEmpty(marca, "marca");
 		throwIfNull(estadoString);
 		throwIfEmpty(estadoString, "estado");
-		throwIfEmpty(paginasPorMinutoString, "paginas por minuto");
+		throwIfEmpty(letrasPorSegundo, "letras por segundo");
 
 		EstadoImpresora estadoImpresora = EstadoImpresora.obtenerEstadoImpresora(estadoString);
-		double paginasPorMinuto = Impresora.obtenerPagPerMinute(paginasPorMinutoString);
+		double paginasPorMinuto = Impresora.obtenerLetrasPorSegundo(letrasPorSegundo);
 		int duracionToner = obtenerDuracionToner(duracionTonerString);
 
 		ImpresoraLaser impresoraCartucho = new ImpresoraLaser(code, marca, estadoImpresora, esAColor, paginasPorMinuto,
@@ -63,7 +63,7 @@ public class CtrlPanelAddImpLaser {
 
 		int duracionToner = Integer.parseInt(duracionTonerString);
 		if (duracionToner <= 0)
-			throw new FueraRangoException("La duración tiene que ser mayor o igual a 0");
+			throw new FueraRangoException("La duraciï¿½n tiene que ser mayor o igual a 0");
 		return duracionToner;
 	}
 

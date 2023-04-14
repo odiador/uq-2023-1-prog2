@@ -65,7 +65,7 @@ public class ImpresoraCartucho extends Impresora {
 	public String toString() {
 		return "ImpresoraCartucho [desgasteCartucho=" + desgasteCartucho + ", capacidadCartucho=" + capacidadCartucho
 				+ ", nivelCartucho=" + nivelCartucho + ", code=" + code + ", marca=" + marca + ", estado=" + estado
-				+ ", listaDocumentos=" + listaDocumentos + ", paginasPorMinuto=" + paginasPorMinuto + ", esAColor="
+				+ ", listaDocumentos=" + listaDocumentos + ", letrasPorSegundo=" + letrasPorSegundo + ", esAColor="
 				+ esAColor + ", paginasImpresas=" + paginasImpresas + "]";
 	}
 

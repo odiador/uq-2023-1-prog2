@@ -40,11 +40,11 @@ public class PanelAddImpCartucho extends PanelConVolver {
 		tfCode.setPromptText("Escribe un codigo");
 		tfMarca.setPromptText("Escribe una marca");
 		tfVel.setPromptText("0");
-		tfVelDecimal.setPromptText("0 (PPM)");
+		tfVelDecimal.setPromptText("0 letras/s");
 		tfCapacidad.setPromptText("0");
-		tfCapacidadDecimal.setPromptText("0 (ml)");
+		tfCapacidadDecimal.setPromptText("0 ml");
 		tfDesgaste.setPromptText("0");
-		tfDesgasteDecimal.setPromptText("0 (ml)");
+		tfDesgasteDecimal.setPromptText("0 ml");
 
 		vBox.setId("centered-box");
 		tfCode.setId("textfield");
@@ -70,7 +70,7 @@ public class PanelAddImpCartucho extends PanelConVolver {
 		vBox.getChildren().add(Utility.generarHBox("Escribe la marca de la impresora", tfMarca));
 		vBox.getChildren().add(Utility.generarHBox("Elige el estado de la impresora", comboEstados));
 		vBox.getChildren().add(Utility.generarHBox("¿La impresora es a color?", checkColor));
-		vBox.getChildren().add(Utility.generarHBox(0, "Escribe la vel de la impresora (paginas por minuto)", tfVel,
+		vBox.getChildren().add(Utility.generarHBox(0, "Escribe la vel de la impresora (letras por segundo)", tfVel,
 				new Label(","), tfVelDecimal));
 		vBox.getChildren().add(Utility.generarHBox(0, "Escribe la capacidad de cartucho de la impresora", tfCapacidad,
 				new Label(","), tfCapacidadDecimal));

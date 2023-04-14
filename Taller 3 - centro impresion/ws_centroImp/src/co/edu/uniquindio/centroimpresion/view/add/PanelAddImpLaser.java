@@ -47,7 +47,7 @@ public class PanelAddImpLaser extends PanelConVolver {
 		tfCode.setPromptText("Escribe un codigo");
 		tfMarca.setPromptText("Escribe una marca");
 		tfVel.setPromptText("0");
-		tfVelDecimal.setPromptText("0 PPM");
+		tfVelDecimal.setPromptText("0 letras/s");
 		tfDuracion.setPromptText("0 unidades");
 
 		vBox.setId("centered-box");
@@ -71,7 +71,7 @@ public class PanelAddImpLaser extends PanelConVolver {
 		vBox.getChildren().add(Utility.generarHBox("Escribe la marca de la impresora", tfMarca));
 		vBox.getChildren().add(Utility.generarHBox("Elige el estado de la impresora", comboEstados));
 		vBox.getChildren().add(Utility.generarHBox("¿La impresora es a color?", checkColor));
-		vBox.getChildren().add(Utility.generarHBox(0, "Escribe la vel de la impresora (paginas por minuto)", tfVel,
+		vBox.getChildren().add(Utility.generarHBox(0, "Escribe la vel de la impresora (letras por segundo)", tfVel,
 				new Label(","), tfVelDecimal));
 		vBox.getChildren().add(Utility.generarHBox("Escribe la duracion del toner de la impresora", tfDuracion));
 
@@ -90,8 +90,8 @@ public class PanelAddImpLaser extends PanelConVolver {
 		btnAgregar.setOnMouseReleased(event -> {
 			try {
 				CtrlPanelAddImpLaser.agregarImpresoraLaser(tfCode.getText(), tfMarca.getText(), comboEstados.getValue(),
-						checkColor.isSelected(), Utility.juntarCadenasParaDoble(tfVel.getText(), tfVelDecimal.getText()),
-						tfDuracion.getText());
+						checkColor.isSelected(),
+						Utility.juntarCadenasParaDoble(tfVel.getText(), tfVelDecimal.getText()), tfDuracion.getText());
 			} catch (NumberFormatException e) {
 				new Alert(AlertType.WARNING, "Rellena todos los campos").show();
 			} catch (CentroImpresionException e) {

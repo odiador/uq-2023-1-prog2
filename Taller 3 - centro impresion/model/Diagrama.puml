@@ -24,25 +24,23 @@ enum EstadoImpresora <<enumeration>> {
 }
 
 abstract class Impresora <<abstract>> {
-    -code : String
-    -marca : String
-    -paginasPorMinuto : double
-    -esAColor : boolean
-    -paginasImpresas : int
+    #code : String
+    #marca : String
+    #letrasPorSegundo : double
+    #esAColor : boolean
+    #paginasImpresas : int
     +estaActiva() : boolean
     +agregarDocumento(code: String, titulo: String, prioridad: int, contenido: String): void
     +eliminarDocumento(code: String) : void
     +buscarDocumento(code: String) : Documento
-    +<i>imprimirDocumento() : void
-    +<i>imprimirDocumento(code: String) : void
-    -throwIfNotActive() : void
+    +<i>imprimirDocumento(momento: LocalDateTime, documento: Documento) : void
 }
 class ImpresoraLaser {
     -nivelToner : int
     -duracionToner : int
     +recargarToner() : void
     +imprimirDocumento() : void
-    +imprimirDocumento(code: String) : void
+    +imprimirDocumento(momento: LocalDateTime, documento: Documento) : void
 }
 
 class ImpresoraCartucho {
@@ -50,8 +48,7 @@ class ImpresoraCartucho {
     -nivelCartucho : double
     -desgasteCartucho : double
     +recargarCartucho() :void
-    +imprimirDocumento() : void
-    +imprimirDocumento(code: String) : void
+    +imprimirDocumento() : void+imprimirDocumento(momento: LocalDateTime, documento: Documento) : void
 }
 
 class Documento {

@@ -38,7 +38,7 @@ public class CtrlPanelAddImpCartucho {
 		if (impresoraCartucho.exists()) {
 			data.getCentroImpresion().agregarImpresoraCartucho(impresoraCartucho.getCode(),
 					impresoraCartucho.getMarca(), impresoraCartucho.getEstado(), impresoraCartucho.isEsAColor(),
-					impresoraCartucho.getPaginasPorMinuto(), impresoraCartucho.getCapacidadCartucho(),
+					impresoraCartucho.getLetrasPorSegundo(), impresoraCartucho.getCapacidadCartucho(),
 					impresoraCartucho.getCapacidadCartucho());
 			data.updateCentroImpresion();
 		}

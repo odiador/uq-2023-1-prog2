@@ -19,14 +19,14 @@ public abstract class Impresora implements Serializable {
 	protected String marca;
 	protected EstadoImpresora estado;
 	protected final TreeSet<Documento> listaDocumentos = new TreeSet<Documento>();
-	protected double paginasPorMinuto;
+	protected double letrasPorSegundo;
 	protected boolean esAColor;
 	protected int paginasImpresas;
 
-	public Impresora(String code, String marca, EstadoImpresora estado, boolean esAColor, double paginasPorMinuto) {
+	public Impresora(String code, String marca, EstadoImpresora estado, boolean esAColor, double letrasPorSegundo) {
 		this(code, marca, estado);
 		this.esAColor = esAColor;
-		this.paginasPorMinuto = paginasPorMinuto;
+		this.letrasPorSegundo = letrasPorSegundo;
 	}
 
 	public Impresora() {
@@ -107,16 +107,12 @@ public abstract class Impresora implements Serializable {
 		return listaDocumentos;
 	}
 
-	public double obtenerMilisegundosImpresion() {
-		return getPaginasPorMinuto();
+	public double getLetrasPorSegundo() {
+		return letrasPorSegundo;
 	}
 
-	public double getPaginasPorMinuto() {
-		return paginasPorMinuto;
-	}
-
-	public void setPaginasPorMinuto(double paginasPorMinuto) {
-		this.paginasPorMinuto = paginasPorMinuto;
+	public void setLetrasPorSegundo(double letrasPorSegundo) {
+		this.letrasPorSegundo = letrasPorSegundo;
 	}
 
 	public boolean isEsAColor() {
@@ -147,11 +143,11 @@ public abstract class Impresora implements Serializable {
 		return result;
 	}
 
-	public static double obtenerPagPerMinute(String paginasPorMinutoString)
+	public static double obtenerLetrasPorSegundo(String paginasPorMinutoString)
 			throws FueraRangoException, NumberFormatException {
 		double paginasPorMinuto = Double.parseDouble(paginasPorMinutoString);
 		if (paginasPorMinuto <= 0)
-			throw new FueraRangoException("Las paginas por minuto tienen que ser mayor a 0");
+			throw new FueraRangoException("Las letras por segundo tienen que ser mayor a 0");
 		return paginasPorMinuto;
 	}
 
@@ -175,7 +171,7 @@ public abstract class Impresora implements Serializable {
 	@Override
 	public String toString() {
 		return "Impresora [code=" + code + ", marca=" + marca + ", estado=" + estado + ", listaDocumentos="
-				+ listaDocumentos + ", paginasPorMinuto=" + paginasPorMinuto + ", esAColor=" + esAColor
+				+ listaDocumentos + ", letrasPorSegundo=" + letrasPorSegundo + ", esAColor=" + esAColor
 				+ ", paginasImpresas=" + paginasImpresas + "]";
 	}
 

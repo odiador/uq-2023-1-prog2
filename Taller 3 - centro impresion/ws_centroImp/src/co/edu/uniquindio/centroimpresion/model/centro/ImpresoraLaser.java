@@ -13,9 +13,9 @@ public class ImpresoraLaser extends Impresora {
 	private final int duracionToner;
 	private int nivelToner;
 
-	public ImpresoraLaser(String code, String marca, EstadoImpresora estado, boolean esAColor, double paginasPorMinuto,
+	public ImpresoraLaser(String code, String marca, EstadoImpresora estado, boolean esAColor, double letrasPorSegundo,
 			int duracionToner) {
-		super(code, marca, estado, esAColor, paginasPorMinuto);
+		super(code, marca, estado, esAColor, letrasPorSegundo);
 		this.duracionToner = duracionToner;
 		recargarToner();
 	}
@@ -47,6 +47,14 @@ public class ImpresoraLaser extends Impresora {
 		bajarNivelToner();
 		documento.setFechaImpresion(dateTime);
 		getListaDocumentos().add(documento);
+	}
+
+	@Override
+	public String toString() {
+		return String.format(
+				"ImpresoraLaser [code=%s, marca=%s, estado=%s, listaDocumentos=%s, letrasPorSegundo=%s, esAColor=%s, paginasImpresas=%s, duracionToner=%s, nivelToner=%s]",
+				code, marca, estado, listaDocumentos, letrasPorSegundo, esAColor, paginasImpresas, duracionToner,
+				nivelToner);
 	}
 
 }

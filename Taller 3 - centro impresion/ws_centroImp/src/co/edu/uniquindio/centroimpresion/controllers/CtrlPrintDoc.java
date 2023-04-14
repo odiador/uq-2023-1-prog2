@@ -24,8 +24,7 @@ public class CtrlPrintDoc {
 	public static void imprimirPrimerDocumento(Stage stage) {
 		try {
 			Relacion<Impresora, Documento> relacion = imprimirPrimerDocumentoThrows();
-			mostrarPanelImpresion(stage, relacion.obtenerCampo2(),
-					relacion.obtenerCampo1().obtenerMilisegundosImpresion());
+			mostrarPanelImpresion(stage, relacion.obtenerCampo2(), relacion.obtenerCampo1().getLetrasPorSegundo());
 		} catch (CentroImpresionException | NoHayCapacidadException | NoHayColaImpresionException e) {
 			new Alert(AlertType.WARNING, e.getMessage()).show();
 		}
