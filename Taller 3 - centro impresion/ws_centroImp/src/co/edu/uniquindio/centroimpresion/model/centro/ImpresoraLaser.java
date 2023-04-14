@@ -17,6 +17,7 @@ public class ImpresoraLaser extends Impresora {
 			int duracionToner) {
 		super(code, marca, estado, esAColor, paginasPorMinuto);
 		this.duracionToner = duracionToner;
+		recargarToner();
 	}
 
 	public int getDuracionToner() {

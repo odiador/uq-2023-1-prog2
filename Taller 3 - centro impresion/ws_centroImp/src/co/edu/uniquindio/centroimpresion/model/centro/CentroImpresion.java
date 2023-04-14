@@ -87,26 +87,26 @@ public class CentroImpresion implements Serializable {
 
 	public void actualizarImpresora(Impresora impresora) throws CentroImpresionException {
 
-		if (listaImpresoras.remove(impresora)) {
-			listaImpresoras.add(impresora);
-		}
-		throw new CentroImpresionException(TipoCentroException.UPDATE, impresora);
+		if (!listaImpresoras.remove(impresora))
+			throw new CentroImpresionException(TipoCentroException.UPDATE, impresora);
+		listaImpresoras.add(impresora);
+
 	}
 
-	public Documento imprimirDocumento() throws CentroImpresionException, NoHayCapacidadException {
+	public Relacion<Impresora, Documento> imprimirDocumento() throws CentroImpresionException, NoHayCapacidadException {
 		Impresora impresora = obtenerPrimerElementoImpresora();
 		Documento documento = obtenerPrimerElementoDocumento();
 		imprimir(impresora, documento);
 		actualizarImpresora(impresora);
 		actualizarDocumento(documento);
-		return documento;
+		return new Relacion<>(impresora, documento);
 	}
 
 	private void actualizarDocumento(Documento documento) throws CentroImpresionException {
-		if (listaDocumentos.remove(documento)) {
-			listaDocumentos.add(documento);
-		}
-		throw new CentroImpresionException(TipoCentroException.UPDATE, documento);
+		if (!listaDocumentos.remove(documento))
+			throw new CentroImpresionException(TipoCentroException.UPDATE, documento);
+		listaDocumentos.add(documento);
+
 	}
 
 	private void imprimir(Impresora impresora, Documento documento)
