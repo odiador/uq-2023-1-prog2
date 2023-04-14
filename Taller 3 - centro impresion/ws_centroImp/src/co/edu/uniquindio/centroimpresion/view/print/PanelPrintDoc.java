@@ -1,6 +1,6 @@
 package co.edu.uniquindio.centroimpresion.view.print;
 
-import co.edu.uniquindio.centroimpresion.controllers.ControlPrintDoc;
+import co.edu.uniquindio.centroimpresion.controllers.CtrlPrintDoc;
 import co.edu.uniquindio.centroimpresion.view.custom.PanelConVolver;
 import co.edu.uniquindio.centroimpresion.view.custom.PanelMenuOpcionObjetos;
 import javafx.scene.control.Label;
@@ -27,7 +27,7 @@ public class PanelPrintDoc extends PanelConVolver {
 		btnImprimir.setId("btn");
 		btnImprimirCase.setId("btn-case");
 
-		btnImprimir.setOnMouseReleased(evt -> ControlPrintDoc.imprimirPrimerDocumento(stage));
+		btnImprimir.setOnMouseReleased(evt -> CtrlPrintDoc.imprimirPrimerDocumento(stage));
 		vbox.getChildren().add(btnImprimirCase);
 		setCenter(vbox);
 	}

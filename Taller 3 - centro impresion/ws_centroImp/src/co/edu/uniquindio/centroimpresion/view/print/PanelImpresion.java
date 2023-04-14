@@ -1,6 +1,6 @@
 package co.edu.uniquindio.centroimpresion.view.print;
 
-import co.edu.uniquindio.centroimpresion.controllers.ControlPrintDoc;
+import co.edu.uniquindio.centroimpresion.controllers.CtrlPrintDoc;
 import co.edu.uniquindio.centroimpresion.model.centro.Documento;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.BorderPane;
@@ -19,7 +19,7 @@ public class PanelImpresion extends BorderPane {
 		TextArea textoContenido = new TextArea();
 		textoContenido.setEditable(false);
 		setCenter(textoContenido);
-		new Thread(ControlPrintDoc.generarTareaImpresion(doc.getContenido(), letrasSeg,
+		new Thread(CtrlPrintDoc.generarTareaImpresion(doc.getContenido(), letrasSeg,
 				caracter -> textoContenido.appendText(caracter + ""))).start();
 	}
 }

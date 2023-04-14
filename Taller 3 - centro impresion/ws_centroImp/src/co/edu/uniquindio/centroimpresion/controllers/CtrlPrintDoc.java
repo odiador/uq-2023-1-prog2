@@ -19,7 +19,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-public class ControlPrintDoc {
+public class CtrlPrintDoc {
 
 	public static void imprimirPrimerDocumento(Stage stage) {
 		try {
