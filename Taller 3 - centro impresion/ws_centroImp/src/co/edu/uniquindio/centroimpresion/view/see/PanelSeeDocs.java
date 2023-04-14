@@ -35,6 +35,8 @@ public class PanelSeeDocs extends PanelConVolver {
 		colFechaImpreso.setCellValueFactory(CtrlSeeDocs.obtenerCallbackFechaImpresion());
 		colContenido.setCellFactory(CtrlSeeDocs.obtenerCallbackContenido());
 
+		tableView.setRowFactory(CtrlSeeDocs.obtenerDisenioFilas());
+
 		tableView.getColumns().add(colCodigo);
 		tableView.getColumns().add(colPrioridad);
 		tableView.getColumns().add(colTitulo);
@@ -44,7 +46,6 @@ public class PanelSeeDocs extends PanelConVolver {
 
 		SerializedData data = new SerializedData();
 		List<Documento> listaDocumentos = data.getCentroImpresion().getListaDocumentos();
-		listaDocumentos.sort(Documento::compareCodeTo);
 		tableView.setItems(FXCollections.observableArrayList(listaDocumentos));
 		setCenter(tableView);
 	}

@@ -11,6 +11,8 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.TableColumn.CellDataFeatures;
+import javafx.scene.control.TableRow;
+import javafx.scene.control.TableView;
 import javafx.util.Callback;
 
 public class CtrlSeeDocs {
@@ -61,6 +63,30 @@ public class CtrlSeeDocs {
 			return new ReadOnlyStringWrapper(
 					fechaImpresion != null ? fechaImpresion.format(DateTimeFormatter.ofPattern("HH:mm:ss, dd/MM/yy"))
 							: "N/A");
+		};
+	}
+
+	public static Callback<TableView<Documento>, TableRow<Documento>> obtenerDisenioFilas() {
+		return arg0 -> {
+			return new TableRow<Documento>() {
+				@Override
+				protected void updateItem(Documento item, boolean empty) {
+					super.updateItem(item, empty);
+					if (item == null) {
+						setStyle("");
+						return;
+					}
+					if (isSelected()) {
+						setStyle("");
+						return;
+					}
+					if (item.getFechaImpresion() != null)
+						setStyle("-fx-background-color: #babaff;");
+					else
+						setStyle("");
+	
+				}
+			};
 		};
 	}
 }
