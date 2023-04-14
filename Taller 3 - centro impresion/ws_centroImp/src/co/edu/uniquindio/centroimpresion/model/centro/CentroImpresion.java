@@ -8,6 +8,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import co.edu.uniquindio.centroimpresion.exceptions.CentroImpresionException;
 import co.edu.uniquindio.centroimpresion.exceptions.NoHayCapacidadException;
@@ -162,6 +163,16 @@ public class CentroImpresion implements Serializable {
 
 	public Set<Impresora> getListaImpresoras() {
 		return listaImpresoras;
+	}
+
+	public HashSet<ImpresoraLaser> getListaImpresorasLaser() {
+		return listaImpresoras.stream().filter(impresora -> impresora instanceof ImpresoraLaser)
+				.map(impresora -> (ImpresoraLaser) impresora).collect(Collectors.toCollection(HashSet::new));
+	}
+
+	public HashSet<ImpresoraCartucho> getListaImpresorasCartucho() {
+		return listaImpresoras.stream().filter(impresora -> impresora instanceof ImpresoraCartucho)
+				.map(impresora -> (ImpresoraCartucho) impresora).collect(Collectors.toCollection(HashSet::new));
 	}
 
 	public List<Documento> getListaDocumentos() {
