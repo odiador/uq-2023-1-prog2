@@ -1,4 +1,4 @@
-package co.edu.uniquindio.agentatelefonica.application;
+package co.edu.uniquindio.agentatelefonica.p2.application;
 	
 import javafx.application.Application;
 import javafx.stage.Stage;
