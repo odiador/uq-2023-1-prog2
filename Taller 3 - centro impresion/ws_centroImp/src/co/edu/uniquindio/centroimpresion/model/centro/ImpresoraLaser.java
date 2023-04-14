@@ -2,7 +2,7 @@ package co.edu.uniquindio.centroimpresion.model.centro;
 
 import java.time.LocalDateTime;
 
-import co.edu.uniquindio.centroimpresion.exceptions.NoHayCapacidadException;
+import co.edu.uniquindio.centroimpresion.exceptions.ImpresoraException;
 
 public class ImpresoraLaser extends Impresora {
 
@@ -32,9 +32,9 @@ public class ImpresoraLaser extends Impresora {
 		this.nivelToner = nivelToner;
 	}
 
-	public void bajarNivelToner() throws NoHayCapacidadException {
+	public void bajarNivelToner() throws ImpresoraException {
 		if (nivelToner <= 0)
-			throw new NoHayCapacidadException();
+			throw new ImpresoraException("No hay suficiente capacidad en la impresora");
 		setNivelToner(nivelToner - 1);
 	}
 
@@ -43,17 +43,19 @@ public class ImpresoraLaser extends Impresora {
 	}
 
 	@Override
-	public void imprimirDocumento(LocalDateTime dateTime, Documento documento) throws NoHayCapacidadException {
+	public void imprimirDocumento(LocalDateTime dateTime, Documento documento) throws ImpresoraException {
+		throwIfNotActive();
 		bajarNivelToner();
 		documento.setFechaImpresion(dateTime);
 		getListaDocumentos().add(documento);
+		documentosImpresos++;
 	}
 
 	@Override
 	public String toString() {
 		return String.format(
-				"ImpresoraLaser [code=%s, marca=%s, estado=%s, listaDocumentos=%s, letrasPorSegundo=%s, esAColor=%s, paginasImpresas=%s, duracionToner=%s, nivelToner=%s]",
-				code, marca, estado, listaDocumentos, letrasPorSegundo, esAColor, paginasImpresas, duracionToner,
+				"ImpresoraLaser [code=%s, marca=%s, estado=%s, listaDocumentos=%s, letrasPorSegundo=%s, esAColor=%s, documentosImpresos=%s, duracionToner=%s, nivelToner=%s]",
+				code, marca, estado, listaDocumentos, letrasPorSegundo, esAColor, documentosImpresos, duracionToner,
 				nivelToner);
 	}
 

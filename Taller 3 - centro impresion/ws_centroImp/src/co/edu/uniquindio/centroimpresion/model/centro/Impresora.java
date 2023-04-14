@@ -7,7 +7,6 @@ import java.util.TreeSet;
 
 import co.edu.uniquindio.centroimpresion.exceptions.FueraRangoException;
 import co.edu.uniquindio.centroimpresion.exceptions.ImpresoraException;
-import co.edu.uniquindio.centroimpresion.exceptions.NoHayCapacidadException;
 
 public abstract class Impresora implements Serializable {
 
@@ -21,7 +20,7 @@ public abstract class Impresora implements Serializable {
 	protected final TreeSet<Documento> listaDocumentos = new TreeSet<Documento>();
 	protected double letrasPorSegundo;
 	protected boolean esAColor;
-	protected int paginasImpresas;
+	protected int documentosImpresos;
 
 	public Impresora(String code, String marca, EstadoImpresora estado, boolean esAColor, double letrasPorSegundo) {
 		this(code, marca, estado);
@@ -69,15 +68,15 @@ public abstract class Impresora implements Serializable {
 
 	public void actualizarDocumento(Documento doc) throws ImpresoraException {
 		deleteDocumento(doc.getCode());
-		addDocumento(code, marca, paginasImpresas, code, null);
+		addDocumento(code, marca, documentosImpresos, code, null);
 	}
 
-	private void throwIfNotActive() throws ImpresoraException {
+	protected void throwIfNotActive() throws ImpresoraException {
 		if (!estaActiva())
 			throw new ImpresoraException("La impresora no esta activa");
 	}
 
-	public abstract void imprimirDocumento(LocalDateTime dateTime, Documento documento) throws NoHayCapacidadException;
+	public abstract void imprimirDocumento(LocalDateTime dateTime, Documento documento) throws ImpresoraException;
 
 	public String getCode() {
 		return code;
@@ -124,11 +123,11 @@ public abstract class Impresora implements Serializable {
 	}
 
 	public int getPaginasImpresas() {
-		return paginasImpresas;
+		return documentosImpresos;
 	}
 
 	public void setPaginasImpresas(int paginasImpresas) {
-		this.paginasImpresas = paginasImpresas;
+		this.documentosImpresos = paginasImpresas;
 	}
 
 	public boolean exists() {
@@ -172,7 +171,7 @@ public abstract class Impresora implements Serializable {
 	public String toString() {
 		return "Impresora [code=" + code + ", marca=" + marca + ", estado=" + estado + ", listaDocumentos="
 				+ listaDocumentos + ", letrasPorSegundo=" + letrasPorSegundo + ", esAColor=" + esAColor
-				+ ", paginasImpresas=" + paginasImpresas + "]";
+				+ ", paginasImpresas=" + documentosImpresos + "]";
 	}
 
 }

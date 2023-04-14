@@ -2,7 +2,7 @@ package co.edu.uniquindio.centroimpresion.model.centro;
 
 import java.time.LocalDateTime;
 
-import co.edu.uniquindio.centroimpresion.exceptions.NoHayCapacidadException;
+import co.edu.uniquindio.centroimpresion.exceptions.ImpresoraException;
 
 public class ImpresoraCartucho extends Impresora {
 
@@ -42,10 +42,10 @@ public class ImpresoraCartucho extends Impresora {
 		return capacidadCartucho;
 	}
 
-	public void bajarNivelCartucho() throws NoHayCapacidadException {
+	public void bajarNivelCartucho() throws ImpresoraException {
 		double resultado = capacidadCartucho - desgasteCartucho;
 		if (resultado < 0)
-			throw new NoHayCapacidadException();
+			throw new ImpresoraException("No hay suficiente capacidad en la impresora");
 		setNivelCartucho(resultado);
 	}
 
@@ -55,10 +55,12 @@ public class ImpresoraCartucho extends Impresora {
 	}
 
 	@Override
-	public void imprimirDocumento(LocalDateTime dateTime, Documento documento) throws NoHayCapacidadException {
+	public void imprimirDocumento(LocalDateTime dateTime, Documento documento) throws ImpresoraException {
+		throwIfNotActive();
 		bajarNivelCartucho();
 		documento.setFechaImpresion(dateTime);
 		getListaDocumentos().add(documento);
+		documentosImpresos++;
 	}
 
 	@Override
@@ -66,7 +68,7 @@ public class ImpresoraCartucho extends Impresora {
 		return "ImpresoraCartucho [desgasteCartucho=" + desgasteCartucho + ", capacidadCartucho=" + capacidadCartucho
 				+ ", nivelCartucho=" + nivelCartucho + ", code=" + code + ", marca=" + marca + ", estado=" + estado
 				+ ", listaDocumentos=" + listaDocumentos + ", letrasPorSegundo=" + letrasPorSegundo + ", esAColor="
-				+ esAColor + ", paginasImpresas=" + paginasImpresas + "]";
+				+ esAColor + ", documentosImpresos=" + documentosImpresos + "]";
 	}
 
 }

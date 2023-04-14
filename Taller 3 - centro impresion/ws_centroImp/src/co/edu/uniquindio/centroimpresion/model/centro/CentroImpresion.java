@@ -11,7 +11,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import co.edu.uniquindio.centroimpresion.exceptions.CentroImpresionException;
-import co.edu.uniquindio.centroimpresion.exceptions.NoHayCapacidadException;
+import co.edu.uniquindio.centroimpresion.exceptions.ImpresoraException;
 import co.edu.uniquindio.centroimpresion.exceptions.NoHayColaImpresionException;
 import co.edu.uniquindio.centroimpresion.exceptions.TipoCentroException;
 
@@ -106,7 +106,7 @@ public class CentroImpresion implements Serializable {
 	}
 
 	public Relacion<Impresora, Documento> imprimirDocumento()
-			throws CentroImpresionException, NoHayCapacidadException, NoHayColaImpresionException {
+			throws CentroImpresionException, NoHayColaImpresionException, ImpresoraException {
 		Impresora impresora = obtenerPrimerElementoImpresora();
 		Documento documento = obtenerPrimerElementoDocumentoCola();
 		imprimir(impresora, documento);
@@ -124,7 +124,7 @@ public class CentroImpresion implements Serializable {
 	}
 
 	private void imprimir(Impresora impresora, Documento documento)
-			throws CentroImpresionException, NoHayCapacidadException {
+			throws CentroImpresionException, ImpresoraException {
 		if (impresora == null)
 			throw new CentroImpresionException(TipoCentroException.NULL, impresora);
 		if (documento == null)
@@ -132,7 +132,7 @@ public class CentroImpresion implements Serializable {
 		impresora.imprimirDocumento(LocalDateTime.now(), documento);
 	}
 
-	public void imprimirDocumento(String codeImpresora) throws CentroImpresionException, NoHayCapacidadException {
+	public void imprimirDocumento(String codeImpresora) throws CentroImpresionException, ImpresoraException {
 		Impresora impresora = buscarImpresora(codeImpresora);
 		Documento documento = obtenerPrimerElementoDocumento();
 
@@ -141,7 +141,7 @@ public class CentroImpresion implements Serializable {
 	}
 
 	public void imprimirDocumento(String codeImpresora, String codeDocumento)
-			throws CentroImpresionException, NoHayCapacidadException {
+			throws CentroImpresionException, ImpresoraException {
 		Impresora impresora = buscarImpresora(codeImpresora);
 		Documento documento = buscarDocumento(codeDocumento);
 

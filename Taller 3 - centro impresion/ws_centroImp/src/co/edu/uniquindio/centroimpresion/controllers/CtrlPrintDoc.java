@@ -2,7 +2,7 @@ package co.edu.uniquindio.centroimpresion.controllers;
 
 import co.edu.uniquindio.centroimpresion.application.Main;
 import co.edu.uniquindio.centroimpresion.exceptions.CentroImpresionException;
-import co.edu.uniquindio.centroimpresion.exceptions.NoHayCapacidadException;
+import co.edu.uniquindio.centroimpresion.exceptions.ImpresoraException;
 import co.edu.uniquindio.centroimpresion.exceptions.NoHayColaImpresionException;
 import co.edu.uniquindio.centroimpresion.model.archivos.SerializedData;
 import co.edu.uniquindio.centroimpresion.model.centro.Documento;
@@ -25,7 +25,7 @@ public class CtrlPrintDoc {
 		try {
 			Relacion<Impresora, Documento> relacion = imprimirPrimerDocumentoThrows();
 			mostrarPanelImpresion(stage, relacion.obtenerCampo2(), relacion.obtenerCampo1().getLetrasPorSegundo());
-		} catch (CentroImpresionException | NoHayCapacidadException | NoHayColaImpresionException e) {
+		} catch (CentroImpresionException | NoHayColaImpresionException | ImpresoraException e) {
 			new Alert(AlertType.WARNING, e.getMessage()).show();
 		}
 	}
@@ -39,7 +39,7 @@ public class CtrlPrintDoc {
 	}
 
 	public static Relacion<Impresora, Documento> imprimirPrimerDocumentoThrows()
-			throws CentroImpresionException, NoHayCapacidadException, NoHayColaImpresionException {
+			throws CentroImpresionException, NoHayColaImpresionException, ImpresoraException {
 		SerializedData data = new SerializedData();
 		Relacion<Impresora, Documento> relacion = data.getCentroImpresion().imprimirDocumento();
 		data.updateCentroImpresion();
