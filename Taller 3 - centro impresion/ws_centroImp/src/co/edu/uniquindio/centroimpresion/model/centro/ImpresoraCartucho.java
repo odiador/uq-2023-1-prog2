@@ -55,11 +55,10 @@ public class ImpresoraCartucho extends Impresora {
 	}
 
 	@Override
-	public double imprimirDocumento(LocalDateTime dateTime, Documento documento) throws NoHayCapacidadException {
+	public void imprimirDocumento(LocalDateTime dateTime, Documento documento) throws NoHayCapacidadException {
 		bajarNivelCartucho();
 		documento.setFechaImpresion(dateTime);
 		getListaDocumentos().add(documento);
-		return obtenerMilisegundosImpresion();
 	}
 
 	@Override

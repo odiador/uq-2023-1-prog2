@@ -93,13 +93,13 @@ public class CentroImpresion implements Serializable {
 		throw new CentroImpresionException(TipoCentroException.UPDATE, impresora);
 	}
 
-	public double imprimirDocumento() throws CentroImpresionException, NoHayCapacidadException {
+	public Documento imprimirDocumento() throws CentroImpresionException, NoHayCapacidadException {
 		Impresora impresora = obtenerPrimerElementoImpresora();
 		Documento documento = obtenerPrimerElementoDocumento();
-		double tiempoImpresion = imprimir(impresora, documento);
+		imprimir(impresora, documento);
 		actualizarImpresora(impresora);
 		actualizarDocumento(documento);
-		return tiempoImpresion;
+		return documento;
 	}
 
 	private void actualizarDocumento(Documento documento) throws CentroImpresionException {
@@ -109,13 +109,13 @@ public class CentroImpresion implements Serializable {
 		throw new CentroImpresionException(TipoCentroException.UPDATE, documento);
 	}
 
-	private double imprimir(Impresora impresora, Documento documento)
+	private void imprimir(Impresora impresora, Documento documento)
 			throws CentroImpresionException, NoHayCapacidadException {
 		if (impresora == null)
 			throw new CentroImpresionException(TipoCentroException.NULL, impresora);
 		if (documento == null)
 			throw new CentroImpresionException(TipoCentroException.NULL, documento);
-		return impresora.imprimirDocumento(LocalDateTime.now(), documento);
+		impresora.imprimirDocumento(LocalDateTime.now(), documento);
 	}
 
 	public void imprimirDocumento(String codeImpresora) throws CentroImpresionException, NoHayCapacidadException {

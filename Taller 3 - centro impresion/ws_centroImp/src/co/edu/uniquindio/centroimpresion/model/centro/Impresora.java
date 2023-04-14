@@ -77,7 +77,7 @@ public abstract class Impresora implements Serializable {
 			throw new ImpresoraException("La impresora no esta activa");
 	}
 
-	public abstract double imprimirDocumento(LocalDateTime dateTime, Documento documento)
+	public abstract void imprimirDocumento(LocalDateTime dateTime, Documento documento)
 			throws NoHayCapacidadException;
 
 	public String getCode() {

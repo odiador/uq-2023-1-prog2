@@ -42,11 +42,10 @@ public class ImpresoraLaser extends Impresora {
 	}
 
 	@Override
-	public double imprimirDocumento(LocalDateTime dateTime, Documento documento) throws NoHayCapacidadException {
+	public void imprimirDocumento(LocalDateTime dateTime, Documento documento) throws NoHayCapacidadException {
 		bajarNivelToner();
 		documento.setFechaImpresion(dateTime);
 		getListaDocumentos().add(documento);
-		return obtenerMilisegundosImpresion();
 	}
 
 }
