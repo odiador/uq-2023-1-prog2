@@ -48,7 +48,7 @@ public class CtrlPrintDoc {
 
 	public static Task<Void> generarTareaImpresion(String contenido, double letrasSeg,
 			PuedeAgregarCaracter puedeAgregarCaracter) {
-		double letrasMiliseg = letrasSeg / 1000;
+		double letrasMiliseg = 1000 / letrasSeg;
 		return new Task<Void>() {
 
 			@Override
