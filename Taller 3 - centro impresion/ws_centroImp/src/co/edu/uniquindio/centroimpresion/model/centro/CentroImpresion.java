@@ -6,10 +6,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import co.edu.uniquindio.centroimpresion.exceptions.CentroImpresionException;
 import co.edu.uniquindio.centroimpresion.exceptions.NoHayCapacidadException;
+import co.edu.uniquindio.centroimpresion.exceptions.NoHayColaImpresionException;
 import co.edu.uniquindio.centroimpresion.exceptions.TipoCentroException;
 
 public class CentroImpresion implements Serializable {
@@ -67,7 +69,16 @@ public class CentroImpresion implements Serializable {
 
 	public Documento obtenerPrimerElementoDocumento() {
 		return listaDocumentos.stream().findFirst().orElse(null);
+	}
 
+	public Documento obtenerPrimerElementoDocumentoCola() throws NoHayColaImpresionException {
+		Optional<Documento> findFirst = listaDocumentos.stream().filter(documento -> !documento.fueImpreso())
+				.findFirst();
+		Documento documento = findFirst.orElse(null);
+		if (documento == null)
+			throw new NoHayColaImpresionException();
+
+		return documento;
 	}
 
 	public Impresora obtenerPrimerElementoImpresora() {
@@ -93,9 +104,10 @@ public class CentroImpresion implements Serializable {
 
 	}
 
-	public Relacion<Impresora, Documento> imprimirDocumento() throws CentroImpresionException, NoHayCapacidadException {
+	public Relacion<Impresora, Documento> imprimirDocumento()
+			throws CentroImpresionException, NoHayCapacidadException, NoHayColaImpresionException {
 		Impresora impresora = obtenerPrimerElementoImpresora();
-		Documento documento = obtenerPrimerElementoDocumento();
+		Documento documento = obtenerPrimerElementoDocumentoCola();
 		imprimir(impresora, documento);
 		actualizarImpresora(impresora);
 		actualizarDocumento(documento);
@@ -106,6 +118,7 @@ public class CentroImpresion implements Serializable {
 		if (!listaDocumentos.remove(documento))
 			throw new CentroImpresionException(TipoCentroException.UPDATE, documento);
 		listaDocumentos.add(documento);
+		Collections.sort(listaDocumentos);
 
 	}
 

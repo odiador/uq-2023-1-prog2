@@ -42,7 +42,7 @@ public class Documento implements Comparable<Documento>, Serializable {
 		return 1;
 	}
 
-	public boolean estadoImpresion() {
+	public boolean fueImpreso() {
 		return fechaImpresion != null;
 	}
 
