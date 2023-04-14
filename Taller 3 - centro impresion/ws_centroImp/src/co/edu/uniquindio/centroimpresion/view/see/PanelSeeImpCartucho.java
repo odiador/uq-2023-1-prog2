@@ -46,8 +46,8 @@ public class PanelSeeImpCartucho extends PanelConVolver {
 		tabla.getColumns().add(colCantidad);
 
 		colCodigo.setCellValueFactory(CtrlSeeImpCartucho.obtenerCallbackCode());
-		colMarca.setCellValueFactory(CtrlSeeImpCartucho.obtenerCallbackCode());
-		colEstado.setCellValueFactory(CtrlSeeImpCartucho.obtenerCallbackCode());
+		colMarca.setCellValueFactory(CtrlSeeImpCartucho.obtenerCallbackMarca());
+		colEstado.setCellValueFactory(CtrlSeeImpCartucho.obtenerCallbackEstado());
 		colColor.setCellValueFactory(CtrlSeeImpCartucho.obtenerCallbackEsAColor());
 		colVelocidad.setCellValueFactory(CtrlSeeImpCartucho.obtenerCallbackVelocidad());
 		colCapacidad.setCellValueFactory(CtrlSeeImpCartucho.obtenerCallbackCapacidad());

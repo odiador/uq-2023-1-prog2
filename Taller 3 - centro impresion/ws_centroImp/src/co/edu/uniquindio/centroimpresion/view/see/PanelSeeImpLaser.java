@@ -40,8 +40,8 @@ public class PanelSeeImpLaser extends PanelConVolver {
 		tabla.getColumns().add(colCantidad);
 
 		colCodigo.setCellValueFactory(CtrlSeeImpLaser.obtenerCallbackCode());
-		colMarca.setCellValueFactory(CtrlSeeImpLaser.obtenerCallbackCode());
-		colEstado.setCellValueFactory(CtrlSeeImpLaser.obtenerCallbackCode());
+		colMarca.setCellValueFactory(CtrlSeeImpLaser.obtenerCallbackMarca());
+		colEstado.setCellValueFactory(CtrlSeeImpLaser.obtenerCallbackEstado());
 		colColor.setCellValueFactory(CtrlSeeImpLaser.obtenerCallbackEsAColor());
 		colVelocidad.setCellValueFactory(CtrlSeeImpLaser.obtenerCallbackVelocidad());
 		colDuracion.setCellValueFactory(CtrlSeeImpLaser.obtenerCallbackDuracionToner());
