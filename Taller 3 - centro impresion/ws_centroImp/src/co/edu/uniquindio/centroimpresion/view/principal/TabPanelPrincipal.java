@@ -63,7 +63,7 @@ public class TabPanelPrincipal extends BorderPane {
 		case ELIMINAR:
 			return new PanelMenuRemove(tipoEmpleado);
 		case IMPRIMIR:
-			return new PanelMenuPrint(tipoEmpleado);
+			return new PanelMenuPrint(tipoEmpleado, stage);
 		case VER:
 			return new PanelMenuSee(tipoEmpleado);
 		}

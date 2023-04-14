@@ -9,11 +9,15 @@ import co.edu.uniquindio.centroimpresion.model.centro.TipoEmpleado;
 import co.edu.uniquindio.centroimpresion.view.custom.PanelMenuOpcionObjetos;
 import co.edu.uniquindio.centroimpresion.view.print.PanelPrintDoc;
 import co.edu.uniquindio.centroimpresion.view.print.PanelPrintEspDoc;
+import javafx.stage.Stage;
 
 public class PanelMenuPrint extends PanelMenuOpcionObjetos {
 
-	public PanelMenuPrint(TipoEmpleado tipoEmpleado) {
+	private Stage stage;
+
+	public PanelMenuPrint(TipoEmpleado tipoEmpleado, Stage stage) {
 		super(TipoAccion.IMPRIMIR, tipoEmpleado);
+		this.stage = stage;
 	}
 
 	public OpcionObjeto[] generarOpciones(TipoEmpleado tipoEmpleado) {
@@ -29,7 +33,7 @@ public class PanelMenuPrint extends PanelMenuOpcionObjetos {
 
 	@Override
 	public void btnDocPresionado() {
-		setCenter(new PanelPrintDoc(this));
+		setCenter(new PanelPrintDoc(this, stage));
 	}
 
 	@Override
