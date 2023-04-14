@@ -7,6 +7,7 @@ import java.util.TreeSet;
 
 import co.edu.uniquindio.centroimpresion.exceptions.FueraRangoException;
 import co.edu.uniquindio.centroimpresion.exceptions.ImpresoraException;
+import co.edu.uniquindio.centroimpresion.exceptions.NoHayCapacidadException;
 
 public abstract class Impresora implements Serializable {
 
@@ -44,9 +45,13 @@ public abstract class Impresora implements Serializable {
 
 	public void addDocumento(String code, String titulo, int prioridad, String contenido, LocalDateTime fechaAgregado)
 			throws ImpresoraException {
+		addDocumento(new Documento(code, titulo, prioridad, contenido, fechaAgregado));
+	}
+
+	public void addDocumento(Documento doc) throws ImpresoraException {
 		throwIfNotActive();
 
-		if (!getListaDocumentos().add(new Documento(code, titulo, prioridad, contenido, fechaAgregado)))
+		if (!getListaDocumentos().add(doc))
 			throw new ImpresoraException("El documento ya existe");
 	}
 
@@ -62,14 +67,18 @@ public abstract class Impresora implements Serializable {
 			throw new ImpresoraException("El documento no existe");
 	}
 
+	public void actualizarDocumento(Documento doc) throws ImpresoraException {
+		deleteDocumento(doc.getCode());
+		addDocumento(code, marca, paginasImpresas, code, null);
+	}
+
 	private void throwIfNotActive() throws ImpresoraException {
 		if (!estaActiva())
 			throw new ImpresoraException("La impresora no esta activa");
 	}
 
-	public abstract boolean imprimirDocumento();
-
-	public abstract boolean imprimirDocumento(Documento documento);
+	public abstract double imprimirDocumento(LocalDateTime dateTime, Documento documento)
+			throws NoHayCapacidadException;
 
 	public String getCode() {
 		return code;
@@ -97,6 +106,10 @@ public abstract class Impresora implements Serializable {
 
 	public Set<Documento> getListaDocumentos() {
 		return listaDocumentos;
+	}
+
+	public double obtenerMilisegundosImpresion() {
+		return getPaginasPorMinuto() * 60000d;
 	}
 
 	public double getPaginasPorMinuto() {

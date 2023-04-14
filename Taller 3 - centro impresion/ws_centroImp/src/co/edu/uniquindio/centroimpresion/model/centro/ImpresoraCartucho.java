@@ -1,5 +1,9 @@
 package co.edu.uniquindio.centroimpresion.model.centro;
 
+import java.time.LocalDateTime;
+
+import co.edu.uniquindio.centroimpresion.exceptions.NoHayCapacidadException;
+
 public class ImpresoraCartucho extends Impresora {
 
 	/**
@@ -7,7 +11,7 @@ public class ImpresoraCartucho extends Impresora {
 	 */
 	private static final long serialVersionUID = -616372429177701679L;
 	private final double desgasteCartucho;
-	private double capacidadCartucho;
+	private final double capacidadCartucho;
 	private double nivelCartucho;
 
 	public ImpresoraCartucho(String code, String marca, EstadoImpresora estado, boolean esAColor,
@@ -38,8 +42,11 @@ public class ImpresoraCartucho extends Impresora {
 		return capacidadCartucho;
 	}
 
-	public void setCapacidadCartucho(double capacidadCartucho) {
-		this.capacidadCartucho = capacidadCartucho;
+	public void bajarNivelCartucho() throws NoHayCapacidadException {
+		double resultado = capacidadCartucho - desgasteCartucho;
+		if (resultado < 0)
+			throw new NoHayCapacidadException();
+		setNivelCartucho(resultado);
 	}
 
 	@Override
@@ -48,13 +55,11 @@ public class ImpresoraCartucho extends Impresora {
 	}
 
 	@Override
-	public boolean imprimirDocumento() {
-		return false;
-	}
-
-	@Override
-	public boolean imprimirDocumento(Documento documento) {
-		return false;
+	public double imprimirDocumento(LocalDateTime dateTime, Documento documento) throws NoHayCapacidadException {
+		bajarNivelCartucho();
+		documento.setFechaImpresion(dateTime);
+		getListaDocumentos().add(documento);
+		return obtenerMilisegundosImpresion();
 	}
 
 	@Override

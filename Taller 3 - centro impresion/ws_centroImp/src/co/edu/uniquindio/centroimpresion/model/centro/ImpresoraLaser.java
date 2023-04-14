@@ -1,12 +1,16 @@
 package co.edu.uniquindio.centroimpresion.model.centro;
 
+import java.time.LocalDateTime;
+
+import co.edu.uniquindio.centroimpresion.exceptions.NoHayCapacidadException;
+
 public class ImpresoraLaser extends Impresora {
 
 	/**
 	 *
 	 */
 	private static final long serialVersionUID = 2336828568323072760L;
-	private int duracionToner;
+	private final int duracionToner;
 	private int nivelToner;
 
 	public ImpresoraLaser(String code, String marca, EstadoImpresora estado, boolean esAColor, double paginasPorMinuto,
@@ -19,10 +23,6 @@ public class ImpresoraLaser extends Impresora {
 		return duracionToner;
 	}
 
-	public void setDuracionToner(int duracionToner) {
-		this.duracionToner = duracionToner;
-	}
-
 	public int getNivelToner() {
 		return nivelToner;
 	}
@@ -31,19 +31,22 @@ public class ImpresoraLaser extends Impresora {
 		this.nivelToner = nivelToner;
 	}
 
+	public void bajarNivelToner() throws NoHayCapacidadException {
+		if (nivelToner <= 0)
+			throw new NoHayCapacidadException();
+		setNivelToner(nivelToner - 1);
+	}
+
 	public void recargarToner() {
 		setNivelToner(getDuracionToner());
 	}
 
 	@Override
-	public boolean imprimirDocumento() {
-		return false;
-	}
-
-	@Override
-	public boolean imprimirDocumento(Documento documento) {
-		// TODO Auto-generated method stub
-		return false;
+	public double imprimirDocumento(LocalDateTime dateTime, Documento documento) throws NoHayCapacidadException {
+		bajarNivelToner();
+		documento.setFechaImpresion(dateTime);
+		getListaDocumentos().add(documento);
+		return obtenerMilisegundosImpresion();
 	}
 
 }

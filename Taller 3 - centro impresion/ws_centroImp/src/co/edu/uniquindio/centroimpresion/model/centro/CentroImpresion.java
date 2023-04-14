@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Set;
 
 import co.edu.uniquindio.centroimpresion.exceptions.CentroImpresionException;
+import co.edu.uniquindio.centroimpresion.exceptions.NoHayCapacidadException;
 import co.edu.uniquindio.centroimpresion.exceptions.TipoCentroException;
 
 public class CentroImpresion implements Serializable {
@@ -92,41 +93,46 @@ public class CentroImpresion implements Serializable {
 		throw new CentroImpresionException(TipoCentroException.UPDATE, impresora);
 	}
 
-	public boolean imprimirDocumento() throws CentroImpresionException {
+	public double imprimirDocumento() throws CentroImpresionException, NoHayCapacidadException {
 		Impresora impresora = obtenerPrimerElementoImpresora();
 		Documento documento = obtenerPrimerElementoDocumento();
-		if (imprimir(impresora, documento)) {
-			actualizarImpresora(impresora);
-		}
-		return false;
+		double tiempoImpresion = imprimir(impresora, documento);
+		actualizarImpresora(impresora);
+		actualizarDocumento(documento);
+		return tiempoImpresion;
 	}
 
-	private boolean imprimir(Impresora impresora, Documento documento) throws CentroImpresionException {
+	private void actualizarDocumento(Documento documento) throws CentroImpresionException {
+		if (listaDocumentos.remove(documento)) {
+			listaDocumentos.add(documento);
+		}
+		throw new CentroImpresionException(TipoCentroException.UPDATE, documento);
+	}
+
+	private double imprimir(Impresora impresora, Documento documento)
+			throws CentroImpresionException, NoHayCapacidadException {
 		if (impresora == null)
 			throw new CentroImpresionException(TipoCentroException.NULL, impresora);
 		if (documento == null)
 			throw new CentroImpresionException(TipoCentroException.NULL, documento);
-		return impresora.imprimirDocumento(documento);
+		return impresora.imprimirDocumento(LocalDateTime.now(), documento);
 	}
 
-	public boolean imprimirDocumento(String codeImpresora) throws CentroImpresionException {
+	public void imprimirDocumento(String codeImpresora) throws CentroImpresionException, NoHayCapacidadException {
 		Impresora impresora = buscarImpresora(codeImpresora);
 		Documento documento = obtenerPrimerElementoDocumento();
 
-		if (imprimir(impresora, documento)) {
-			actualizarImpresora(impresora);
-		}
-		return false;
+		imprimir(impresora, documento);
+		actualizarImpresora(impresora);
 	}
 
-	public boolean imprimirDocumento(String codeImpresora, String codeDocumento) throws CentroImpresionException {
+	public void imprimirDocumento(String codeImpresora, String codeDocumento)
+			throws CentroImpresionException, NoHayCapacidadException {
 		Impresora impresora = buscarImpresora(codeImpresora);
 		Documento documento = buscarDocumento(codeDocumento);
 
-		if (imprimir(impresora, documento)) {
-			actualizarImpresora(impresora);
-		}
-		return false;
+		imprimir(impresora, documento);
+		actualizarImpresora(impresora);
 	}
 
 	@Override
