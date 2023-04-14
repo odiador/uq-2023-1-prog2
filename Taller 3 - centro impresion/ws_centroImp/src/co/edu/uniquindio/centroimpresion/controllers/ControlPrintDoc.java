@@ -9,11 +9,15 @@ import co.edu.uniquindio.centroimpresion.model.centro.Documento;
 import co.edu.uniquindio.centroimpresion.model.centro.Impresora;
 import co.edu.uniquindio.centroimpresion.model.centro.Relacion;
 import co.edu.uniquindio.centroimpresion.model.scenes.EscenaImpresion;
-import co.edu.uniquindio.centroimpresion.view.see.PanelImpresionVolver;
+import co.edu.uniquindio.centroimpresion.view.print.PanelImpresionVolver;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.concurrent.Task;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 public class ControlPrintDoc {
 
@@ -41,6 +45,31 @@ public class ControlPrintDoc {
 		Relacion<Impresora, Documento> relacion = data.getCentroImpresion().imprimirDocumento();
 		data.updateCentroImpresion();
 		return relacion;
+	}
+
+	public static Task<Void> generarTareaImpresion(String contenido, double letrasSeg,
+			PuedeAgregarCaracter puedeAgregarCaracter) {
+		double letrasMiliseg = letrasSeg / 1000;
+		return new Task<Void>() {
+
+			@Override
+			protected Void call() throws Exception {
+				Timeline timeline = new Timeline();
+				for (int i = 0; i < contenido.length(); i++) {
+					final int indice = i;
+					KeyFrame key = new KeyFrame(Duration.millis(i * letrasMiliseg),
+							evt -> puedeAgregarCaracter.agregarCaracter(contenido.charAt(indice)));
+					timeline.getKeyFrames().add(key);
+				}
+				timeline.play();
+				return null;
+			}
+		};
+
+	}
+
+	public static interface PuedeAgregarCaracter {
+		public void agregarCaracter(char caracter);
 	}
 
 }
