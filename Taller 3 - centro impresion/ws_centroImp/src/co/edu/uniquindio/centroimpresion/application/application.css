@@ -7,6 +7,27 @@
 	-fx-max-width: 100000.0;
 	-fx-font-weight: bold;
 }
+#tabla-true {
+	-fx-background-color: #baffba;
+	-fx-text-fill: black;
+}
+
+#tabla-true:selected {
+    -fx-background-color: #00a600;
+    -fx-text-background-color: white;
+}
+
+#tabla-false {
+	-fx-background-color: #ffbaff;
+	-fx-text-fill: black;
+}
+
+#tabla-false:selected {
+    -fx-background-color: #930093;
+    -fx-text-background-color: white;
+    -fx-border-color: black;
+    -fx-border-width: 1.0;
+}
 
 #btn-tabla {
 	-fx-background-color: rgb(0.0,0.0,0.0,0.1);
