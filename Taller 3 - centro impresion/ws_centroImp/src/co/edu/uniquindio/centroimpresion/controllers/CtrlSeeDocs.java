@@ -81,9 +81,9 @@ public class CtrlSeeDocs {
 						return;
 					}
 					if (item.getFechaImpresion() != null)
-						setStyle("-fx-background-color: #babaff;");
+						setId("tabla-true");
 					else
-						setStyle("");
+						setId("tabla-false");
 	
 				}
 			};
