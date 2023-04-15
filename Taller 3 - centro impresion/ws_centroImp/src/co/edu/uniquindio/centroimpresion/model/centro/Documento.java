@@ -120,6 +120,14 @@ public class Documento implements Comparable<Documento>, Serializable {
 		return o.getPrioridad() - getPrioridad();
 	}
 
+	public int compareByImpresionTo(Documento o) {
+		if (fueImpreso() == o.fueImpreso())
+			return 0;
+		if (fueImpreso())
+			return 1;
+		return -1;
+	}
+
 	public int compareCodeTo(Documento o) {
 		return code.compareTo(o.getCode());
 	}
