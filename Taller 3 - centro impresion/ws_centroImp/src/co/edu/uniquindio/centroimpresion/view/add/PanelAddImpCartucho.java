@@ -90,6 +90,10 @@ public class PanelAddImpCartucho extends PanelConVolver {
 		Utility.setAsNumberTextfield(tfDesgaste);
 		Utility.setAsNumberTextfield(tfDesgasteDecimal);
 
+		Utility.setMaximumTextLength(tfCapacidadDecimal, 2);
+		Utility.setMaximumTextLength(tfDesgasteDecimal, 2);
+		Utility.setMaximumTextLength(tfVelDecimal, 2);
+
 		btnAgregar.setOnMouseReleased(event -> CtrlPanelAddImpCartucho.agregarImpresoraCartucho(tfCode.getText(),
 				tfMarca.getText(), comboEstados.getValue(), checkColor.isSelected(), tfVel.getText(),
 				tfVelDecimal.getText(), tfCapacidad.getText(), tfCapacidadDecimal.getText(), tfDesgaste.getText(),
