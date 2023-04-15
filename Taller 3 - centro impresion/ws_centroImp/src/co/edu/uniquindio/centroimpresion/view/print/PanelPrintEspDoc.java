@@ -8,6 +8,7 @@ public class PanelPrintEspDoc extends PanelConVolver {
 
 	public PanelPrintEspDoc(PanelMenuOpcionObjetos panel) {
 		this.panel = panel;
+		initComp();
 	}
 
 	@Override

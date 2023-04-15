@@ -16,10 +16,11 @@ public class PanelSeeImpCartucho extends PanelConVolver {
 
 	public PanelSeeImpCartucho(PanelMenuOpcionObjetos panel) {
 		this.panel = panel;
-		initComponents();
+		initComp();
 	}
 
-	private void initComponents() {
+	public void initComp() {
+		super.initComp();
 
 		TableView<ImpresoraCartucho> tabla = new TableView<ImpresoraCartucho>();
 		TableColumn<ImpresoraCartucho, String> colCodigo = new TableColumn<ImpresoraCartucho, String>("Codigo");
@@ -32,8 +33,7 @@ public class PanelSeeImpCartucho extends PanelConVolver {
 		TableColumn<ImpresoraCartucho, String> colNivel = new TableColumn<ImpresoraCartucho, String>("Nivel Cartucho");
 		TableColumn<ImpresoraCartucho, String> colDesgaste = new TableColumn<ImpresoraCartucho, String>(
 				"Desgaste Cartucho");
-		TableColumn<ImpresoraCartucho, String> colCantidad = new TableColumn<ImpresoraCartucho, String>(
-				"Veces usada");
+		TableColumn<ImpresoraCartucho, String> colCantidad = new TableColumn<ImpresoraCartucho, String>("Veces usada");
 
 		tabla.getColumns().add(colCodigo);
 		tabla.getColumns().add(colMarca);

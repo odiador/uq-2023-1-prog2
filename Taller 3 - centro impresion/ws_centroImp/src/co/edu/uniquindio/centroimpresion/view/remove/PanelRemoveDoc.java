@@ -14,10 +14,12 @@ public class PanelRemoveDoc extends PanelConVolver {
 
 	public PanelRemoveDoc(PanelMenuOpcionObjetos panel) {
 		this.panel = panel;
-		initComponents();
+		initComp();
 	}
 
-	public void initComponents() {
+	public void initComp() {
+		super.initComp();
+
 		VBox vBox = new VBox(30);
 		Label bEliminar = new Label("Eliminar Documento");
 		TextField tfCode = new TextField();

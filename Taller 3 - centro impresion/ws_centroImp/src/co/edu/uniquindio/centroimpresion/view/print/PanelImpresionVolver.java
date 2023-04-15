@@ -12,6 +12,7 @@ public class PanelImpresionVolver extends PanelConVolver {
 	public PanelImpresionVolver(Documento doc, double duracion, Stage stage, Scene escenaAnterior) {
 		this.stage = stage;
 		this.escenaAnterior = escenaAnterior;
+		initComp();
 		setCenter(new PanelImpresion(doc, duracion));
 	}
 

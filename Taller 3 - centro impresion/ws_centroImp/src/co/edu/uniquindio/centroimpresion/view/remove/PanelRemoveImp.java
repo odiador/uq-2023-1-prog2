@@ -8,6 +8,7 @@ public class PanelRemoveImp extends PanelConVolver {
 
 	public PanelRemoveImp(PanelMenuOpcionObjetos panel) {
 		this.panel = panel;
+		initComp();
 	}
 
 	@Override

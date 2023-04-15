@@ -16,10 +16,10 @@ public class PanelSeeImpLaser extends PanelConVolver {
 
 	public PanelSeeImpLaser(PanelMenuOpcionObjetos panel) {
 		this.panel = panel;
-		initComponents();
+		initComp();
 	}
 
-	private void initComponents() {
+	public void initComp() {
 		TableView<ImpresoraLaser> tabla = new TableView<ImpresoraLaser>();
 		TableColumn<ImpresoraLaser, String> colCodigo = new TableColumn<ImpresoraLaser, String>("Codigo");
 		TableColumn<ImpresoraLaser, String> colMarca = new TableColumn<ImpresoraLaser, String>("Marca");

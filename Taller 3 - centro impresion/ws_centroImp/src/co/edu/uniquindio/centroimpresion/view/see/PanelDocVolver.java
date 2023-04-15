@@ -14,10 +14,11 @@ public class PanelDocVolver extends PanelConVolver {
 		this.documento = documento;
 		this.stage = stage;
 		this.scene = scene;
-		initComponents();
+		initComp();
 	}
 
-	public void initComponents() {
+	public void initComp() {
+		super.initComp();
 		setCenter(new PanelDoc(documento));
 	}
 

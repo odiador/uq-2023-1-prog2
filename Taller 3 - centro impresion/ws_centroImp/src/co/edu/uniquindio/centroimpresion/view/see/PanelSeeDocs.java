@@ -13,10 +13,11 @@ public class PanelSeeDocs extends PanelConVolver {
 
 	public PanelSeeDocs(PanelMenuOpcionObjetos panel) {
 		this.panel = panel;
-		initComponents();
+		initComp();
 	}
 
-	public void initComponents() {
+	public void initComp() {
+		super.initComp();
 		TableView<Documento> tableView = new TableView<Documento>();
 		TableColumn<Documento, String> colPrioridad = new TableColumn<Documento, String>("Prioridad");
 		TableColumn<Documento, String> colCodigo = new TableColumn<Documento, String>("Codigo");

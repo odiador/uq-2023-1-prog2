@@ -31,11 +31,13 @@ public class PanelAddImpLaser extends PanelConVolver {
 
 	public PanelAddImpLaser(PanelMenuOpcionObjetos panel) {
 		this.panel = panel;
+		initComp();
 	}
 
 	@Override
 	public void initComp() {
 		super.initComp();
+
 		vBox = new VBox(20);
 		tfCode = new TextField();
 		tfMarca = new TextField();

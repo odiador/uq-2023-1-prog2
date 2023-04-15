@@ -17,6 +17,7 @@ public class PanelAddDoc extends PanelConVolver {
 	public PanelAddDoc(Stage stage, PanelMenuOpcionObjetos panel) {
 		this.stage = stage;
 		this.panel = panel;
+		initComp();
 	}
 
 	public void initComp() {

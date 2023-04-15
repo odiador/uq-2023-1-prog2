@@ -6,7 +6,6 @@ import javafx.scene.layout.BorderPane;
 public abstract class PanelConVolver extends BorderPane {
 
 	public PanelConVolver() {
-		initComp();
 	}
 
 	public void initComp() {
