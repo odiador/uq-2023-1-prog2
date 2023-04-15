@@ -28,7 +28,7 @@ public class CtrlPrintDoc {
 	private static void imprimirPrimerDocumento(Stage stage) {
 		try {
 			Relacion<Impresora, Documento> relacion = imprimirPrimerDocumentoThrows();
-			mostrarPanelImpresion(stage, relacion.obtenerCampo2(), relacion.obtenerCampo1().getLetrasPorSegundo());
+			mostrarPanelImpresion(stage, relacion);
 		} catch (CentroImpresionException | NoHayColaImpresionException | ImpresoraException e) {
 			new Alert(AlertType.WARNING, e.getMessage()).show();
 		}
@@ -41,15 +41,15 @@ public class CtrlPrintDoc {
 		}
 		try {
 			Relacion<Impresora, Documento> relacion = imprimirDocumentoThrows(codigoImpresora);
-			mostrarPanelImpresion(stage, relacion.obtenerCampo2(), relacion.obtenerCampo1().getLetrasPorSegundo());
+			mostrarPanelImpresion(stage, relacion);
 		} catch (CentroImpresionException | NoHayColaImpresionException | ImpresoraException e) {
 			new Alert(AlertType.WARNING, e.getMessage()).show();
 		}
 	}
 
-	static void mostrarPanelImpresion(Stage stage, Documento documento, double tiempo) {
+	static void mostrarPanelImpresion(Stage stage, Relacion<Impresora, Documento> relacion) {
 		Scene escenaAnterior = stage.getScene();
-		Scene escenaNueva = new EscenaImpresion(new PanelImpresionVolver(documento, tiempo, stage, escenaAnterior),
+		Scene escenaNueva = new EscenaImpresion(new PanelImpresionVolver(relacion, stage, escenaAnterior),
 				stage, escenaAnterior);
 		escenaNueva.getStylesheets().add(Main.css.toExternalForm());
 		stage.setScene(escenaNueva);
@@ -85,6 +85,8 @@ public class CtrlPrintDoc {
 							evt -> puedeAgregarCaracter.agregarCaracter(contenido.charAt(indice)));
 					timeline.getKeyFrames().add(key);
 				}
+				timeline.setOnFinished(
+						evt -> new Alert(AlertType.CONFIRMATION, "La impresion ha sido finalizada").show());
 				timeline.play();
 				return null;
 			}

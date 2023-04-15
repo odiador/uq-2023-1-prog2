@@ -20,8 +20,7 @@ public class CtrlPrintEspDoc {
 	public static void imprimirDocumento(Stage stage, String codigoImpresora, String codigoDocumento) {
 		try {
 			Relacion<Impresora, Documento> relacion = imprimirDocumentoThrows(codigoImpresora, codigoDocumento);
-			CtrlPrintDoc.mostrarPanelImpresion(stage, relacion.obtenerCampo2(),
-					relacion.obtenerCampo1().getLetrasPorSegundo());
+			CtrlPrintDoc.mostrarPanelImpresion(stage, relacion);
 		} catch (CentroImpresionException | NoHayColaImpresionException | ImpresoraException | TextIsEmptyException e) {
 			new Alert(AlertType.WARNING, e.getMessage()).show();
 		}
