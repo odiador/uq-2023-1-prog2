@@ -6,16 +6,11 @@ public class CentroImpresionException extends Exception {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private TipoCentroException tipoException;
 	private Object source;
 
-	public CentroImpresionException(TipoCentroException tipoException, Object source) {
-		super(tipoException.getMsg() + " (" + source.getClass().getSimpleName() + ")");
+	public CentroImpresionException(String msg, Object source) {
+		super(msg);
 		this.source = source;
-	}
-
-	public TipoCentroException getTipoException() {
-		return tipoException;
 	}
 
 	public Object getSource() {

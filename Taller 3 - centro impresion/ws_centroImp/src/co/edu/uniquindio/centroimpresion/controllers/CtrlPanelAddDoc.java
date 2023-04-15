@@ -13,7 +13,6 @@ import co.edu.uniquindio.centroimpresion.exceptions.DocumentoEnProcesoException;
 import co.edu.uniquindio.centroimpresion.exceptions.FueraRangoException;
 import co.edu.uniquindio.centroimpresion.exceptions.NoSePuedeLeerException;
 import co.edu.uniquindio.centroimpresion.exceptions.TextIsEmptyException;
-import co.edu.uniquindio.centroimpresion.exceptions.TipoCentroException;
 import co.edu.uniquindio.centroimpresion.model.archivos.FiltroExtension;
 import co.edu.uniquindio.centroimpresion.model.archivos.SerializedData;
 import co.edu.uniquindio.centroimpresion.model.centro.Documento;
@@ -200,7 +199,7 @@ public class CtrlPanelAddDoc {
 		SerializedData data = new SerializedData();
 		Documento documento = data.getCentroImpresion().buscarDocumento(code);
 		if (documento != null)
-			throw new CentroImpresionException(TipoCentroException.ADD, documento);
+			throw new CentroImpresionException("El documento ya existe", documento);
 
 	}
 }

@@ -12,7 +12,6 @@ import java.util.stream.Collectors;
 import co.edu.uniquindio.centroimpresion.exceptions.CentroImpresionException;
 import co.edu.uniquindio.centroimpresion.exceptions.ImpresoraException;
 import co.edu.uniquindio.centroimpresion.exceptions.NoHayColaImpresionException;
-import co.edu.uniquindio.centroimpresion.exceptions.TipoCentroException;
 
 public class CentroImpresion implements Serializable {
 	/**
@@ -39,7 +38,7 @@ public class CentroImpresion implements Serializable {
 
 	public void agregarDocumento(Documento documento) throws CentroImpresionException {
 		if (!listaDocumentos.add(documento))
-			throw new CentroImpresionException(TipoCentroException.ADD, documento);
+			throw new CentroImpresionException("El documento ya existe", documento);
 		Collections.sort(listaDocumentos);
 	}
 
@@ -49,7 +48,7 @@ public class CentroImpresion implements Serializable {
 		ImpresoraCartucho impresora = new ImpresoraCartucho(code, marca, estado, esAColor, paginasPorMinuto,
 				capacidadCartucho, desgasteCartucho);
 		if (!listaImpresoras.add(impresora))
-			throw new CentroImpresionException(TipoCentroException.ADD, impresora);
+			throw new CentroImpresionException("La impresora ya existe", impresora);
 	}
 
 	public Documento buscarDocumento(String code) {
@@ -87,19 +86,19 @@ public class CentroImpresion implements Serializable {
 
 	public void deleteDocumento(String code) throws CentroImpresionException {
 		if (!listaDocumentos.remove(buscarDocumento(code)))
-			throw new CentroImpresionException(TipoCentroException.REMOVE, Documento.class);
+			throw new CentroImpresionException("El documento no fue encontrado", Documento.class);
 		Collections.sort(listaDocumentos);
 	}
 
 	public void deleteImpresora(String code) throws CentroImpresionException {
 		if (!listaImpresoras.remove(buscarImpresora(code)))
-			throw new CentroImpresionException(TipoCentroException.REMOVE, Impresora.class);
+			throw new CentroImpresionException("La impresora no fue encontrada", Impresora.class);
 	}
 
 	public void actualizarImpresora(Impresora impresora) throws CentroImpresionException {
 
 		if (!listaImpresoras.remove(impresora))
-			throw new CentroImpresionException(TipoCentroException.UPDATE, impresora);
+			throw new CentroImpresionException("La impresora no fue encontrada", impresora);
 		listaImpresoras.add(impresora);
 
 	}
@@ -126,9 +125,9 @@ public class CentroImpresion implements Serializable {
 	private void imprimir(Impresora impresora, Documento documento)
 			throws CentroImpresionException, ImpresoraException {
 		if (impresora == null)
-			throw new CentroImpresionException(TipoCentroException.NULL, Impresora.class);
+			throw new CentroImpresionException("La impresora no fue encontrada", Impresora.class);
 		if (documento == null)
-			throw new CentroImpresionException(TipoCentroException.NULL, Documento.class);
+			throw new CentroImpresionException("El documento no fue encontrada", new Documento());
 		impresora.imprimirDocumento(LocalDateTime.now(), documento);
 	}
 
@@ -159,7 +158,7 @@ public class CentroImpresion implements Serializable {
 			double paginasPorMinuto, int duracionToner) throws CentroImpresionException {
 		ImpresoraLaser impresora = new ImpresoraLaser(code, marca, estado, esAColor, paginasPorMinuto, duracionToner);
 		if (!listaImpresoras.add(impresora))
-			throw new CentroImpresionException(TipoCentroException.ADD, impresora);
+			throw new CentroImpresionException("La impresora ya existe", impresora);
 	}
 
 	public Set<Impresora> getListaImpresoras() {
