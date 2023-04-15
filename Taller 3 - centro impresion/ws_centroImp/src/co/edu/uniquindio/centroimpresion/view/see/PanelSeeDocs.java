@@ -1,9 +1,6 @@
 package co.edu.uniquindio.centroimpresion.view.see;
 
-import java.util.List;
-
 import co.edu.uniquindio.centroimpresion.controllers.CtrlSeeDocs;
-import co.edu.uniquindio.centroimpresion.model.archivos.SerializedData;
 import co.edu.uniquindio.centroimpresion.model.centro.Documento;
 import co.edu.uniquindio.centroimpresion.view.custom.PanelConVolver;
 import co.edu.uniquindio.centroimpresion.view.custom.PanelMenuOpcionObjetos;
@@ -44,9 +41,7 @@ public class PanelSeeDocs extends PanelConVolver {
 		tableView.getColumns().add(colFechaImpreso);
 		tableView.getColumns().add(colContenido);
 
-		SerializedData data = new SerializedData();
-		List<Documento> listaDocumentos = data.getCentroImpresion().getListaDocumentos();
-		tableView.setItems(FXCollections.observableArrayList(listaDocumentos));
+		tableView.setItems(FXCollections.observableArrayList(CtrlSeeDocs.obtenerListaTabla()));
 		setCenter(tableView);
 	}
 

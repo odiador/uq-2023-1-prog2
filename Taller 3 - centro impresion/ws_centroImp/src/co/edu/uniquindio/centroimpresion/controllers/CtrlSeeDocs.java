@@ -2,14 +2,16 @@ package co.edu.uniquindio.centroimpresion.controllers;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
+import co.edu.uniquindio.centroimpresion.model.archivos.SerializedData;
 import co.edu.uniquindio.centroimpresion.model.centro.Documento;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
@@ -84,9 +86,13 @@ public class CtrlSeeDocs {
 						setId("tabla-true");
 					else
 						setId("tabla-false");
-	
+
 				}
 			};
 		};
+	}
+
+	public static ArrayList<Documento> obtenerListaTabla() {
+		return new SerializedData().getCentroImpresion().obtenerListaOrdenadaTabla();
 	}
 }
