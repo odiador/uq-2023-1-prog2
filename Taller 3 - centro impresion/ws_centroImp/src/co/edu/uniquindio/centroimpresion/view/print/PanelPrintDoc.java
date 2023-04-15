@@ -21,14 +21,20 @@ public class PanelPrintDoc extends PanelConVolver {
 	public void initComponents() {
 		VBox vbox = new VBox(30);
 		Label btnImprimir = new Label("Imprimir");
+		Label btnVerCola = new Label("Ver cola");
 		BorderPane btnImprimirCase = new BorderPane(btnImprimir);
+		BorderPane btnVerColaCase = new BorderPane(btnVerCola);
 
 		vbox.setId("centered-box");
+		btnVerCola.setId("btn");
 		btnImprimir.setId("btn");
 		btnImprimirCase.setId("btn-case");
+		btnVerColaCase.setId("btn-case");
 
 		btnImprimir.setOnMouseReleased(evt -> CtrlPrintDoc.imprimirPrimerDocumento(stage));
+		btnVerCola.setOnMouseReleased(evt -> CtrlPrintDoc.verPrimerDocumento(stage));
 		vbox.getChildren().add(btnImprimirCase);
+		vbox.getChildren().add(btnVerColaCase);
 		setCenter(vbox);
 	}
 
