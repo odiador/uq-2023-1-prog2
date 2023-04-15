@@ -103,16 +103,34 @@ public class CentroImpresion implements Serializable {
 
 	}
 
+	public Relacion<Impresora, Documento> imprimirDocumentoSoloDoc(String codeDocumento)
+			throws CentroImpresionException, NoHayColaImpresionException, ImpresoraException {
+		Impresora impresora = obtenerPrimerElementoImpresora();
+		Documento documento = buscarDocumento(codeDocumento);
+		return imprimir(impresora, documento);
+	}
+
 	public Relacion<Impresora, Documento> imprimirDocumento()
 			throws CentroImpresionException, NoHayColaImpresionException, ImpresoraException {
 		Impresora impresora = obtenerPrimerElementoImpresora();
 		Documento documento = obtenerPrimerElementoDocumento();
-		imprimir(impresora, documento);
-		actualizarImpresora(impresora);
+		return imprimir(impresora, documento);
+	}
 
-		actualizarListas(documento);
+	public Relacion<Impresora, Documento> imprimirDocumento(String codeImpresora)
+			throws CentroImpresionException, ImpresoraException, NoHayColaImpresionException {
+		Impresora impresora = buscarImpresora(codeImpresora);
+		Documento documento = obtenerPrimerElementoDocumento();
 
-		return new Relacion<>(impresora, documento);
+		return imprimir(impresora, documento);
+	}
+
+	public Relacion<Impresora, Documento> imprimirDocumento(String codeImpresora, String codeDocumento)
+			throws CentroImpresionException, ImpresoraException {
+		Impresora impresora = buscarImpresora(codeImpresora);
+		Documento documento = buscarDocumento(codeDocumento);
+
+		return imprimir(impresora, documento);
 	}
 
 	private void actualizarListas(Documento documento) {
@@ -122,31 +140,17 @@ public class CentroImpresion implements Serializable {
 		}
 	}
 
-	private void imprimir(Impresora impresora, Documento documento)
+	private Relacion<Impresora, Documento> imprimir(Impresora impresora, Documento documento)
 			throws CentroImpresionException, ImpresoraException {
 		if (impresora == null)
 			throw new CentroImpresionException("La impresora no fue encontrada", Impresora.class);
 		if (documento == null)
 			throw new CentroImpresionException("El documento no fue encontrada", new Documento());
 		impresora.imprimirDocumento(LocalDateTime.now(), documento);
-	}
-
-	public void imprimirDocumento(String codeImpresora)
-			throws CentroImpresionException, ImpresoraException, NoHayColaImpresionException {
-		Impresora impresora = buscarImpresora(codeImpresora);
-		Documento documento = obtenerPrimerElementoDocumento();
-
-		imprimir(impresora, documento);
 		actualizarImpresora(impresora);
-	}
+		actualizarListas(documento);
 
-	public void imprimirDocumento(String codeImpresora, String codeDocumento)
-			throws CentroImpresionException, ImpresoraException {
-		Impresora impresora = buscarImpresora(codeImpresora);
-		Documento documento = buscarDocumento(codeDocumento);
-
-		imprimir(impresora, documento);
-		actualizarImpresora(impresora);
+		return new Relacion<>(impresora, documento);
 	}
 
 	@Override
