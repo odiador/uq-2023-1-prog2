@@ -8,7 +8,7 @@ public class TextIsEmptyException extends Exception {
 	private String tipoTexto;
 
 	public TextIsEmptyException(String tipoTexto) {
-		super(tipoTexto);
+		super("El dato " + tipoTexto + " esta vacio/a");
 		this.tipoTexto = tipoTexto;
 
 	}

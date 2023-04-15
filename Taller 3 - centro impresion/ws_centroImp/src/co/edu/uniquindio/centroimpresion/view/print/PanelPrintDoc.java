@@ -15,10 +15,12 @@ public class PanelPrintDoc extends PanelConVolver {
 	public PanelPrintDoc(PanelMenuOpcionObjetos panel, Stage stage) {
 		this.panel = panel;
 		this.stage = stage;
-		initComponents();
+		initComp();
 	}
 
-	public void initComponents() {
+	public void initComp() {
+		super.initComp();
+
 		VBox vbox = new VBox(30);
 		Label btnImprimir = new Label("Imprimir");
 		Label btnVerCola = new Label("Ver cola");
@@ -31,7 +33,7 @@ public class PanelPrintDoc extends PanelConVolver {
 		btnImprimirCase.setId("btn-case");
 		btnVerColaCase.setId("btn-case");
 
-		btnImprimir.setOnMouseReleased(evt -> CtrlPrintDoc.imprimirPrimerDocumento(stage));
+		btnImprimir.setOnMouseReleased(evt -> CtrlPrintDoc.irAPedirImpresora(panel, this, stage));
 		btnVerCola.setOnMouseReleased(evt -> CtrlPrintDoc.verPrimerDocumento(stage));
 		vbox.getChildren().add(btnImprimirCase);
 		vbox.getChildren().add(btnVerColaCase);

@@ -10,7 +10,10 @@ import co.edu.uniquindio.centroimpresion.model.centro.Impresora;
 import co.edu.uniquindio.centroimpresion.model.centro.Relacion;
 import co.edu.uniquindio.centroimpresion.model.scenes.EscenaImpresion;
 import co.edu.uniquindio.centroimpresion.model.scenes.EscenaVerDoc;
+import co.edu.uniquindio.centroimpresion.view.custom.PanelMenuOpcionObjetos;
 import co.edu.uniquindio.centroimpresion.view.print.PanelImpresionVolver;
+import co.edu.uniquindio.centroimpresion.view.print.PanelPrintDoc;
+import co.edu.uniquindio.centroimpresion.view.print.PanelPrintPedirImpresora;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.concurrent.Task;
@@ -22,7 +25,7 @@ import javafx.util.Duration;
 
 public class CtrlPrintDoc {
 
-	public static void imprimirPrimerDocumento(Stage stage) {
+	private static void imprimirPrimerDocumento(Stage stage) {
 		try {
 			Relacion<Impresora, Documento> relacion = imprimirPrimerDocumentoThrows();
 			mostrarPanelImpresion(stage, relacion.obtenerCampo2(), relacion.obtenerCampo1().getLetrasPorSegundo());
@@ -31,7 +34,20 @@ public class CtrlPrintDoc {
 		}
 	}
 
-	private static void mostrarPanelImpresion(Stage stage, Documento documento, double tiempo) {
+	public static void imprimirDocumentoConCodigo(String codigoImpresora, Stage stage) {
+		if (codigoImpresora.isEmpty()) {
+			imprimirPrimerDocumento(stage);
+			return;
+		}
+		try {
+			Relacion<Impresora, Documento> relacion = imprimirDocumentoThrows(codigoImpresora);
+			mostrarPanelImpresion(stage, relacion.obtenerCampo2(), relacion.obtenerCampo1().getLetrasPorSegundo());
+		} catch (CentroImpresionException | NoHayColaImpresionException | ImpresoraException e) {
+			new Alert(AlertType.WARNING, e.getMessage()).show();
+		}
+	}
+
+	static void mostrarPanelImpresion(Stage stage, Documento documento, double tiempo) {
 		Scene escenaAnterior = stage.getScene();
 		Scene escenaNueva = new EscenaImpresion(new PanelImpresionVolver(documento, tiempo, stage, escenaAnterior),
 				stage, escenaAnterior);
@@ -39,10 +55,18 @@ public class CtrlPrintDoc {
 		stage.setScene(escenaNueva);
 	}
 
-	public static Relacion<Impresora, Documento> imprimirPrimerDocumentoThrows()
+	private static Relacion<Impresora, Documento> imprimirPrimerDocumentoThrows()
 			throws CentroImpresionException, NoHayColaImpresionException, ImpresoraException {
 		SerializedData data = new SerializedData();
 		Relacion<Impresora, Documento> relacion = data.getCentroImpresion().imprimirDocumento();
+		data.updateCentroImpresion();
+		return relacion;
+	}
+
+	private static Relacion<Impresora, Documento> imprimirDocumentoThrows(String codeImpresora)
+			throws CentroImpresionException, NoHayColaImpresionException, ImpresoraException {
+		SerializedData data = new SerializedData();
+		Relacion<Impresora, Documento> relacion = data.getCentroImpresion().imprimirDocumento(codeImpresora);
 		data.updateCentroImpresion();
 		return relacion;
 	}
@@ -79,6 +103,10 @@ public class CtrlPrintDoc {
 		} catch (NoHayColaImpresionException e) {
 			new Alert(AlertType.ERROR, e.getMessage()).show();
 		}
+	}
+
+	public static void irAPedirImpresora(PanelMenuOpcionObjetos panel, PanelPrintDoc panelImprimirMain, Stage stage) {
+		panel.setCenter(new PanelPrintPedirImpresora(panel, panelImprimirMain, stage));
 	}
 
 	public static interface PuedeAgregarCaracter {
