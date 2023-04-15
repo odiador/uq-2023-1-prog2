@@ -14,7 +14,7 @@
 
 #tabla-true:selected {
     -fx-background-color: #00a600;
-    -fx-text-background-color: white;
+    -fx-text-fill: white;
 }
 
 #tabla-false {
@@ -24,9 +24,7 @@
 
 #tabla-false:selected {
     -fx-background-color: #a60000;
-    -fx-text-background-color: white;
-    -fx-border-color: black;
-    -fx-border-width: 1.0;
+    -fx-text-fill: white;
 }
 
 #btn-tabla {
