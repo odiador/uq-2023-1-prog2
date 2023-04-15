@@ -46,7 +46,7 @@ public class PanelMenuPrint extends PanelMenuOpcionObjetos {
 
 	@Override
 	public void btnDocEspPresionado() {
-		setCenter(new PanelPrintEspDoc(this));
+		setCenter(new PanelPrintEspDoc(this, stage));
 	}
 
 	@Override

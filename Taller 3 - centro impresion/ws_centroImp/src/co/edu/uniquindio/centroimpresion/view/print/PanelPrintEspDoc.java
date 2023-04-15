@@ -1,17 +1,21 @@
 package co.edu.uniquindio.centroimpresion.view.print;
 
 import co.edu.uniquindio.centroimpresion.controllers.CtrlPrintDoc;
+import co.edu.uniquindio.centroimpresion.controllers.CtrlPrintEspDoc;
 import co.edu.uniquindio.centroimpresion.view.custom.PanelConVolver;
 import co.edu.uniquindio.centroimpresion.view.custom.PanelMenuOpcionObjetos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 public class PanelPrintEspDoc extends PanelConVolver {
 	private PanelMenuOpcionObjetos panel;
+	private Stage stage;
 
-	public PanelPrintEspDoc(PanelMenuOpcionObjetos panel) {
+	public PanelPrintEspDoc(PanelMenuOpcionObjetos panel,Stage stage) {
 		this.panel = panel;
+		this.stage = stage;
 		initComp();
 	}
 
@@ -30,7 +34,7 @@ public class PanelPrintEspDoc extends PanelConVolver {
 		btnImprimirCase.setId("btn-case");
 		btnVerColaCase.setId("btn-case");
 
-		btnImprimir.setOnMouseReleased(evt -> CtrlPrintDoc.irAPedirImpresora(panel, this, stage));
+		btnImprimir.setOnMouseReleased(evt -> CtrlPrintEspDoc.irAPedirDatos(panel, this, stage));
 		btnVerCola.setOnMouseReleased(evt -> CtrlPrintDoc.verPrimerDocumento(stage));
 		vbox.getChildren().add(btnImprimirCase);
 		vbox.getChildren().add(btnVerColaCase);

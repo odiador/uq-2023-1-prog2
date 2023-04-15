@@ -8,6 +8,9 @@ import co.edu.uniquindio.centroimpresion.model.archivos.SerializedData;
 import co.edu.uniquindio.centroimpresion.model.centro.Documento;
 import co.edu.uniquindio.centroimpresion.model.centro.Impresora;
 import co.edu.uniquindio.centroimpresion.model.centro.Relacion;
+import co.edu.uniquindio.centroimpresion.view.custom.PanelMenuOpcionObjetos;
+import co.edu.uniquindio.centroimpresion.view.print.PanelImprimirEspDatos;
+import co.edu.uniquindio.centroimpresion.view.print.PanelPrintEspDoc;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
@@ -24,7 +27,8 @@ public class CtrlPrintEspDoc {
 		}
 	}
 
-	private static Relacion<Impresora, Documento> imprimirDocumentoThrows(String codigoImpresora, String codigoDocumento)
+	private static Relacion<Impresora, Documento> imprimirDocumentoThrows(String codigoImpresora,
+			String codigoDocumento)
 			throws TextIsEmptyException, CentroImpresionException, NoHayColaImpresionException, ImpresoraException {
 		if (codigoDocumento.isEmpty())
 			throw new TextIsEmptyException("codigo del documento");
@@ -44,6 +48,10 @@ public class CtrlPrintEspDoc {
 		Relacion<Impresora, Documento> relacion = data.getCentroImpresion().imprimirDocumentoSoloDoc(codigoDocumento);
 		data.updateCentroImpresion();
 		return relacion;
+	}
+
+	public static void irAPedirDatos(PanelMenuOpcionObjetos panel, PanelPrintEspDoc panelPrintEspDoc, Stage stage) {
+		panel.setCenter(new PanelImprimirEspDatos(panel, panelPrintEspDoc, stage));
 	}
 
 }
