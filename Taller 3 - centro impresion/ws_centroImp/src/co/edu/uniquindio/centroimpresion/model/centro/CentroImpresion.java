@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -22,6 +21,7 @@ public class CentroImpresion implements Serializable {
 	private static final long serialVersionUID = -2839899210301744900L;
 	private final Set<Impresora> listaImpresoras = new HashSet<Impresora>();
 	private final List<Documento> listaDocumentos = new ArrayList<Documento>();
+	private final List<Documento> listaDocumentosImpresos = new ArrayList<Documento>();
 
 	public CentroImpresion() {
 	}
@@ -68,18 +68,17 @@ public class CentroImpresion implements Serializable {
 		return buscarImpresora(code) != null;
 	}
 
-	public Documento obtenerPrimerElementoDocumento() {
-		return listaDocumentos.stream().findFirst().orElse(null);
+	public Documento obtenerPrimerElementoDocumento() throws NoHayColaImpresionException {
+		return getListaDocumentos().stream().findFirst().orElseThrow(NoHayColaImpresionException::new);
 	}
 
-	public Documento obtenerPrimerElementoDocumentoCola() throws NoHayColaImpresionException {
-		Optional<Documento> findFirst = listaDocumentos.stream().filter(documento -> !documento.fueImpreso())
-				.findFirst();
-		Documento documento = findFirst.orElse(null);
-		if (documento == null)
-			throw new NoHayColaImpresionException();
-
-		return documento;
+	public ArrayList<Documento> obtenerListaOrdenadaTabla() {
+		// Clona la lista de documentos pero no la asigna directamente a otra pera
+		// evitar problemas
+		List<Documento> listaDocumentos = this.listaDocumentos.stream()
+				.collect(Collectors.toCollection(ArrayList::new));
+		listaDocumentos.addAll(listaDocumentosImpresos);
+		return listaDocumentos.stream().collect(Collectors.toCollection(ArrayList::new));
 	}
 
 	public Impresora obtenerPrimerElementoImpresora() {
@@ -108,31 +107,33 @@ public class CentroImpresion implements Serializable {
 	public Relacion<Impresora, Documento> imprimirDocumento()
 			throws CentroImpresionException, NoHayColaImpresionException, ImpresoraException {
 		Impresora impresora = obtenerPrimerElementoImpresora();
-		Documento documento = obtenerPrimerElementoDocumentoCola();
+		Documento documento = obtenerPrimerElementoDocumento();
 		imprimir(impresora, documento);
 		actualizarImpresora(impresora);
-		actualizarDocumento(documento);
+
+		actualizarListas(documento);
+
 		return new Relacion<>(impresora, documento);
 	}
 
-	private void actualizarDocumento(Documento documento) throws CentroImpresionException {
-		if (!listaDocumentos.remove(documento))
-			throw new CentroImpresionException(TipoCentroException.UPDATE, documento);
-		listaDocumentos.add(documento);
-		Collections.sort(listaDocumentos);
-
+	private void actualizarListas(Documento documento) {
+		if (listaDocumentos.remove(buscarDocumento(documento.getCode()))) {
+			listaDocumentosImpresos.add(documento);
+			Collections.sort(listaDocumentosImpresos);
+		}
 	}
 
 	private void imprimir(Impresora impresora, Documento documento)
 			throws CentroImpresionException, ImpresoraException {
 		if (impresora == null)
-			throw new CentroImpresionException(TipoCentroException.NULL, impresora);
+			throw new CentroImpresionException(TipoCentroException.NULL, Impresora.class);
 		if (documento == null)
-			throw new CentroImpresionException(TipoCentroException.NULL, documento);
+			throw new CentroImpresionException(TipoCentroException.NULL, Documento.class);
 		impresora.imprimirDocumento(LocalDateTime.now(), documento);
 	}
 
-	public void imprimirDocumento(String codeImpresora) throws CentroImpresionException, ImpresoraException {
+	public void imprimirDocumento(String codeImpresora)
+			throws CentroImpresionException, ImpresoraException, NoHayColaImpresionException {
 		Impresora impresora = buscarImpresora(codeImpresora);
 		Documento documento = obtenerPrimerElementoDocumento();
 
