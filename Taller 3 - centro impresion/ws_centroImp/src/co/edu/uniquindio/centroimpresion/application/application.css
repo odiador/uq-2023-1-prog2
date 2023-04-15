@@ -23,7 +23,7 @@
 }
 
 #tabla-false:selected {
-    -fx-background-color: #930093;
+    -fx-background-color: #a60000;
     -fx-text-background-color: white;
     -fx-border-color: black;
     -fx-border-width: 1.0;
