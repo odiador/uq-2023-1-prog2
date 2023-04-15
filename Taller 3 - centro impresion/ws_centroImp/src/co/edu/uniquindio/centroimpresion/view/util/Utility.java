@@ -23,7 +23,7 @@ public class Utility {
 				if (!newValue.matches("\\d*")) {
 					tf.setText(newValue.replaceAll("[^\\d]", ""));
 					final ContextMenu menu = new ContextMenu();
-					menu.getItems().add(new MenuItem("Este campo solo\npuede tener numeros"));
+					menu.getItems().add(new MenuItem("Este campo solo puede tener numeros"));
 					menu.show(tf, Side.BOTTOM, 0, 0);
 
 					Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), evento -> {
