@@ -9,6 +9,7 @@ import co.edu.uniquindio.centroimpresion.model.centro.Documento;
 import co.edu.uniquindio.centroimpresion.model.centro.Impresora;
 import co.edu.uniquindio.centroimpresion.model.centro.Relacion;
 import co.edu.uniquindio.centroimpresion.model.scenes.EscenaImpresion;
+import co.edu.uniquindio.centroimpresion.model.scenes.EscenaVerDoc;
 import co.edu.uniquindio.centroimpresion.view.print.PanelImpresionVolver;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -64,7 +65,20 @@ public class CtrlPrintDoc {
 				return null;
 			}
 		};
+	}
 
+	public static void verPrimerDocumento(Stage stage) {
+		Scene escenaAnterior = stage.getScene();
+		SerializedData data = new SerializedData();
+		Documento documento;
+		try {
+			documento = data.getCentroImpresion().obtenerPrimerElementoDocumento();
+			EscenaVerDoc escenaVerDoc = new EscenaVerDoc(stage, escenaAnterior, documento, 1000, 800);
+			escenaVerDoc.getStylesheets().add(Main.css.toExternalForm());
+			stage.setScene(escenaVerDoc);
+		} catch (NoHayColaImpresionException e) {
+			new Alert(AlertType.ERROR, e.getMessage()).show();
+		}
 	}
 
 	public static interface PuedeAgregarCaracter {
