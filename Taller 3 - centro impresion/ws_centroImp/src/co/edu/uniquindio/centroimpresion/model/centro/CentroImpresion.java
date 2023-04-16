@@ -214,4 +214,13 @@ public class CentroImpresion implements Serializable {
 		listaImpresoras.set(indiceImpresora, impresora2);
 	}
 
+	public void cambiarEstadoImpresora(String code, EstadoImpresora estadoImpresora) throws CentroImpresionException {
+		Impresora impresora = buscarImpresora(code);
+		if (impresora == null)
+			throw new CentroImpresionException("La impresora no fue encontrada", Impresora.class);
+		impresora.setEstado(estadoImpresora);
+		actualizarImpresora(impresora);
+
+	}
+
 }
