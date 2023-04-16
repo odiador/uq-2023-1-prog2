@@ -14,4 +14,9 @@ public class Boton extends BorderPane {
 		setId("btn-case");
 		setCenter(label);
 	}
+
+	public Boton(String text, EventHandler<? super MouseEvent> listener, String id) {
+		this(text, listener);
+		setId(id);
+	}
 }

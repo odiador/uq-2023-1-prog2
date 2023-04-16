@@ -8,7 +8,7 @@ public abstract class PanelConVolver extends BorderPane {
 	}
 
 	public void initComp() {
-		setBottom(new Boton("Volver", evento -> volverPresionado()));
+		setBottom(new Boton("Volver", evento -> volverPresionado(), "btn-volver"));
 	}
 
 	public abstract void volverPresionado();
