@@ -108,11 +108,11 @@ public class CentroImpresion implements Serializable {
 	}
 
 	public void actualizarImpresora(Impresora impresora) throws CentroImpresionException {
-
-		if (!listaImpresoras.remove(impresora))
+		int index = listaImpresoras.indexOf(buscarImpresora(impresora.getCode()));
+		if (index == -1)
 			throw new CentroImpresionException("La impresora no fue encontrada", impresora);
-		listaImpresoras.add(impresora);
 
+		listaImpresoras.set(index, impresora);
 	}
 
 	public Relacion<Impresora, Documento> imprimirDocumentoSoloDoc(String codeDocumento)
