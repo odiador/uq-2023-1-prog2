@@ -8,14 +8,18 @@ import co.edu.uniquindio.centroimpresion.model.centro.ImpresoraCartucho;
 import co.edu.uniquindio.centroimpresion.view.custom.PanelConVolver;
 import co.edu.uniquindio.centroimpresion.view.menu.PanelMenuSee;
 import javafx.collections.FXCollections;
+import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.stage.Stage;
 
 public class PanelSeeImpCartucho extends PanelConVolver {
 	private PanelMenuSee panel;
+	private Stage stage;
 
-	public PanelSeeImpCartucho(PanelMenuSee panelMenuSee) {
+	public PanelSeeImpCartucho(PanelMenuSee panelMenuSee, Stage stage) {
 		this.panel = panelMenuSee;
+		this.stage = stage;
 		initComp();
 	}
 
@@ -34,6 +38,7 @@ public class PanelSeeImpCartucho extends PanelConVolver {
 		TableColumn<ImpresoraCartucho, String> colDesgaste = new TableColumn<ImpresoraCartucho, String>(
 				"Desgaste Cartucho");
 		TableColumn<ImpresoraCartucho, String> colCantidad = new TableColumn<ImpresoraCartucho, String>("Veces usada");
+		TableColumn<ImpresoraCartucho, String> colDocs = new TableColumn<ImpresoraCartucho, String>("Ver Documentos");
 
 		tabla.getColumns().add(colCodigo);
 		tabla.getColumns().add(colMarca);
@@ -44,6 +49,7 @@ public class PanelSeeImpCartucho extends PanelConVolver {
 		tabla.getColumns().add(colNivel);
 		tabla.getColumns().add(colDesgaste);
 		tabla.getColumns().add(colCantidad);
+		tabla.getColumns().add(colDocs);
 
 		colCodigo.setCellValueFactory(CtrlSeeImpCartucho.obtenerCallbackCode());
 		colMarca.setCellValueFactory(CtrlSeeImpCartucho.obtenerCallbackMarca());
@@ -54,6 +60,10 @@ public class PanelSeeImpCartucho extends PanelConVolver {
 		colNivel.setCellValueFactory(CtrlSeeImpCartucho.obtenerCallbackNivel());
 		colDesgaste.setCellValueFactory(CtrlSeeImpCartucho.obtenerCallbackDesgaste());
 		colCantidad.setCellValueFactory(CtrlSeeImpCartucho.obtenerCallbackCantidad());
+		Scene escenaCartucho = stage.getScene();
+		colDocs.setCellFactory(CtrlSeeImpCartucho.obtenerCallbackDocumentos(stage, e -> {
+			stage.setScene(escenaCartucho);
+		}));
 
 		tabla.setRowFactory(CtrlSeeImpCartucho.obtenerDisenioFilas());
 

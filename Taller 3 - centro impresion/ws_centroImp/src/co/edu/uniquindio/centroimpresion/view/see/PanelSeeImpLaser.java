@@ -8,14 +8,18 @@ import co.edu.uniquindio.centroimpresion.model.centro.ImpresoraLaser;
 import co.edu.uniquindio.centroimpresion.view.custom.PanelConVolver;
 import co.edu.uniquindio.centroimpresion.view.menu.PanelMenuSee;
 import javafx.collections.FXCollections;
+import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.stage.Stage;
 
 public class PanelSeeImpLaser extends PanelConVolver {
 	private PanelMenuSee panel;
+	private Stage stage;
 
-	public PanelSeeImpLaser(PanelMenuSee panelMenuSee) {
+	public PanelSeeImpLaser(PanelMenuSee panelMenuSee, Stage stage) {
 		this.panel = panelMenuSee;
+		this.stage = stage;
 		initComp();
 	}
 
@@ -31,6 +35,7 @@ public class PanelSeeImpLaser extends PanelConVolver {
 		TableColumn<ImpresoraLaser, String> colDuracion = new TableColumn<ImpresoraLaser, String>("Duracion Toner");
 		TableColumn<ImpresoraLaser, String> colNivel = new TableColumn<ImpresoraLaser, String>("Nivel Toner");
 		TableColumn<ImpresoraLaser, String> colCantidad = new TableColumn<ImpresoraLaser, String>("Veces usada");
+		TableColumn<ImpresoraLaser, String> colDocs = new TableColumn<ImpresoraLaser, String>("Veces usada");
 
 		tabla.getColumns().add(colCodigo);
 		tabla.getColumns().add(colMarca);
@@ -40,6 +45,7 @@ public class PanelSeeImpLaser extends PanelConVolver {
 		tabla.getColumns().add(colDuracion);
 		tabla.getColumns().add(colNivel);
 		tabla.getColumns().add(colCantidad);
+		tabla.getColumns().add(colDocs);
 
 		colCodigo.setCellValueFactory(CtrlSeeImpLaser.obtenerCallbackCode());
 		colMarca.setCellValueFactory(CtrlSeeImpLaser.obtenerCallbackMarca());
@@ -49,7 +55,10 @@ public class PanelSeeImpLaser extends PanelConVolver {
 		colDuracion.setCellValueFactory(CtrlSeeImpLaser.obtenerCallbackDuracionToner());
 		colNivel.setCellValueFactory(CtrlSeeImpLaser.obtenerCallbackNivelToner());
 		colCantidad.setCellValueFactory(CtrlSeeImpLaser.obtenerCallbackCantidad());
-
+		Scene escenaCartucho = stage.getScene();
+		colDocs.setCellFactory(CtrlSeeImpLaser.obtenerCallbackDocumentos(stage, e -> {
+			stage.setScene(escenaCartucho);
+		}));
 		tabla.setRowFactory(CtrlSeeImpLaser.obtenerDisenioFilas());
 
 		SerializedData data = new SerializedData();

@@ -96,12 +96,12 @@ public class CtrlSeeImps {
 		};
 	}
 
-	private static void abrirDocumentosImpresora(Stage stage, EventHandler<? super MouseEvent> eventoVolver,
+	static void abrirDocumentosImpresora(Stage stage, EventHandler<? super MouseEvent> eventoVolver,
 			Impresora impresora) {
 		Set<Documento> listaDocumentos = impresora.getListaDocumentos();
 		BorderPane borderPane = new BorderPane(new PanelSeeDocs(listaDocumentos));
-		borderPane.setBottom(new Boton("Cerrar", eventoVolver, "btn-volver"));
-		Scene escena = new Scene(borderPane, 600, 400);
+		borderPane.setBottom(new Boton("Volver", eventoVolver, "btn-volver"));
+		Scene escena = new Scene(borderPane, 800, 400);
 		escena.getStylesheets().add(Main.css.toExternalForm());
 		stage.setScene(escena);
 	}

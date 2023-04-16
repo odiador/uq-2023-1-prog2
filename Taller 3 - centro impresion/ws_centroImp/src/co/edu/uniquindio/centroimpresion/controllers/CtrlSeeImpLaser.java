@@ -1,11 +1,17 @@
 package co.edu.uniquindio.centroimpresion.controllers;
 
+import co.edu.uniquindio.centroimpresion.model.centro.Impresora;
 import co.edu.uniquindio.centroimpresion.model.centro.ImpresoraLaser;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.beans.value.ObservableValue;
+import javafx.event.EventHandler;
+import javafx.scene.control.TableCell;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 
 public class CtrlSeeImpLaser {
@@ -63,6 +69,33 @@ public class CtrlSeeImpLaser {
 
 				}
 			};
+		};
+	}
+
+	public static Callback<TableColumn<ImpresoraLaser, String>, TableCell<ImpresoraLaser, String>> obtenerCallbackDocumentos(
+			Stage stage, EventHandler<? super MouseEvent> eventoVolver) {
+		return new Callback<TableColumn<ImpresoraLaser, String>, TableCell<ImpresoraLaser, String>>() {
+
+			final @Override public TableCell<ImpresoraLaser, String> call(TableColumn<ImpresoraLaser, String> param) {
+				TableCell<ImpresoraLaser, String> cell = new TableCell<ImpresoraLaser, String>() {
+
+					@Override
+					protected void updateItem(String arg0, boolean arg1) {
+						super.updateItem(arg0, arg1);
+						if (arg1) {
+							setText(null);
+						} else {
+							setId("btn-tabla");
+							Impresora impresora = getTableView().getItems().get(getIndex());
+							setOnMouseReleased(
+									evt -> CtrlSeeImps.abrirDocumentosImpresora(stage, eventoVolver, impresora));
+							setText("Ver Documentos");
+						}
+					}
+
+				};
+				return cell;
+			}
 		};
 	}
 }

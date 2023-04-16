@@ -18,7 +18,7 @@ public class PanelMenuSee extends BorderPane {
 	private TipoEmpleado tipoEmpleado;
 	private Stage stage;
 
-	public PanelMenuSee(TipoEmpleado tipoEmpleado,Stage stage) {
+	public PanelMenuSee(TipoEmpleado tipoEmpleado, Stage stage) {
 		this.tipoEmpleado = tipoEmpleado;
 		this.stage = stage;
 		initComponents();
@@ -27,7 +27,8 @@ public class PanelMenuSee extends BorderPane {
 	public void initComponents() {
 		VBox vbox = new VBox();
 		if (tipoEmpleado.puedeVerDocs()) {
-			Boton boton = new Boton("Ver Documentos en Cola", e -> setCenter(new PanelSeeDocsVolver(this)), "boton-opcion");
+			Boton boton = new Boton("Ver Documentos en Cola", e -> setCenter(new PanelSeeDocsVolver(this)),
+					"boton-opcion");
 			VBox.setMargin(boton, new Insets(20));
 			vbox.getChildren().add(boton);
 		}
@@ -38,19 +39,19 @@ public class PanelMenuSee extends BorderPane {
 			vbox.getChildren().add(boton);
 		}
 		if (tipoEmpleado.puedeVerImpresoras()) {
-			Boton boton = new Boton("Ver Impresoras", e -> setCenter(new PanelSeeImps(this, stage)),
+			Boton boton = new Boton("Ver Impresoras", e -> setCenter(new PanelSeeImps(this, stage)), "boton-opcion");
+			VBox.setMargin(boton, new Insets(20));
+			vbox.getChildren().add(boton);
+		}
+		if (tipoEmpleado.puedeVerImpresoras()) {
+			Boton boton = new Boton("Ver Impresoras Cartucho", e -> setCenter(new PanelSeeImpCartucho(this, stage)),
 					"boton-opcion");
 			VBox.setMargin(boton, new Insets(20));
 			vbox.getChildren().add(boton);
 		}
 		if (tipoEmpleado.puedeVerImpresoras()) {
-			Boton boton = new Boton("Ver Impresoras Cartucho", e -> setCenter(new PanelSeeImpCartucho(this)),
+			Boton boton = new Boton("Ver Impresoras laser", e -> setCenter(new PanelSeeImpLaser(this, stage)),
 					"boton-opcion");
-			VBox.setMargin(boton, new Insets(20));
-			vbox.getChildren().add(boton);
-		}
-		if (tipoEmpleado.puedeVerImpresoras()) {
-			Boton boton = new Boton("Ver Impresoras laser", e -> setCenter(new PanelSeeImpLaser(this)), "boton-opcion");
 			VBox.setMargin(boton, new Insets(20));
 			vbox.getChildren().add(boton);
 		}
