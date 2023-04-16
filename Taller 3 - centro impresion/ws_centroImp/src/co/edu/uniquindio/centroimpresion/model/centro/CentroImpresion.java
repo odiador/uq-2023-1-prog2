@@ -69,6 +69,11 @@ public class CentroImpresion implements Serializable {
 		return listaImpresoras.stream().filter(doc -> doc.getCode().equals(code)).findAny().orElse(null);
 	}
 
+	public Impresora buscarImpresoraThrows(String code) throws CentroImpresionException {
+		return listaImpresoras.stream().filter(doc -> doc.getCode().equals(code)).findAny()
+				.orElseThrow(() -> new CentroImpresionException("La impresora no fue encontrada", code));
+	}
+
 	public boolean validarImpresora(String code) {
 		return buscarImpresora(code) != null;
 	}
