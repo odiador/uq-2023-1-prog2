@@ -10,6 +10,7 @@ import co.edu.uniquindio.centroimpresion.view.menu.PanelMenuAdd;
 import co.edu.uniquindio.centroimpresion.view.menu.PanelMenuPrint;
 import co.edu.uniquindio.centroimpresion.view.menu.PanelMenuRemove;
 import co.edu.uniquindio.centroimpresion.view.menu.PanelMenuSee;
+import co.edu.uniquindio.centroimpresion.view.menu.PanelMenuUpdate;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
@@ -66,6 +67,10 @@ public class TabPanelPrincipal extends BorderPane {
 			return new PanelMenuPrint(tipoEmpleado, stage);
 		case VER:
 			return new PanelMenuSee(tipoEmpleado);
+		case ACTUALIZAR:
+			return new PanelMenuUpdate(tipoEmpleado);
+		default:
+			break;
 		}
 		Label label = new Label("Error");
 		label.setId("lbl-error");

@@ -1,7 +1,8 @@
 package co.edu.uniquindio.centroimpresion.model.centro;
 
 public enum TipoAccion {
-	AGREGAR("Agregar"), IMPRIMIR("Imprimir"), ELIMINAR("Eliminar"), VER("Ver"), ACERCA_DE("Acerca De");
+	AGREGAR("Agregar"), IMPRIMIR("Imprimir"), ACTUALIZAR("Actualizar"), ELIMINAR("Eliminar"), VER("Ver"),
+	ACERCA_DE("Acerca De");
 
 	private String text;
 

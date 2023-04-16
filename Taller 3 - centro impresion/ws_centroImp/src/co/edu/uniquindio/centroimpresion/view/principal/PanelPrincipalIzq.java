@@ -36,6 +36,11 @@ public class PanelPrincipalIzq extends VBox implements EventHandler<Event> {
 		labelOpcion.setOnMouseReleased(this);
 		getChildren().add(labelOpcion);
 
+		labelOpcion = new Label(TipoAccion.ACTUALIZAR.getText());
+		labelOpcion.setId("label-opciones-principal");
+		labelOpcion.setOnMouseReleased(this);
+		getChildren().add(labelOpcion);
+
 		if (tipoEmpleado.puedeEliminarDocumentos() || tipoEmpleado.puedeEliminarImpresoras()) {
 			labelOpcion = new Label(TipoAccion.ELIMINAR.getText());
 			labelOpcion.setId("label-opciones-principal");
