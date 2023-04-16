@@ -1,29 +1,33 @@
 package co.edu.uniquindio.centroimpresion.view.see;
 
+import java.util.Collection;
+
 import co.edu.uniquindio.centroimpresion.controllers.CtrlSeeDocs;
 import co.edu.uniquindio.centroimpresion.model.centro.Documento;
-import co.edu.uniquindio.centroimpresion.view.custom.PanelConVolver;
-import co.edu.uniquindio.centroimpresion.view.menu.PanelMenuSee;
 import javafx.collections.FXCollections;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.layout.BorderPane;
 
-public class PanelSeeDocs extends PanelConVolver {
-	private PanelMenuSee panel;
+public class PanelSeeDocs extends BorderPane {
 	private boolean verImpresos;
+	private Collection<Documento> listaDocs = null;
 
-	public PanelSeeDocs(PanelMenuSee panelMenuSee) {
-		this(panelMenuSee, false);
-	}
-
-	public PanelSeeDocs(PanelMenuSee panelMenuSee, boolean verImpresos) {
-		this.panel = panelMenuSee;
+	public PanelSeeDocs(boolean verImpresos, Collection<Documento> listaDocs) {
 		this.verImpresos = verImpresos;
+		this.listaDocs = listaDocs;
 		initComp();
 	}
 
+	public PanelSeeDocs(boolean verImpresos) {
+		this(verImpresos, null);
+	}
+
+	public PanelSeeDocs(Collection<Documento> listaDocs) {
+		this(false, listaDocs);
+	}
+
 	public void initComp() {
-		super.initComp();
 		TableView<Documento> tableView = new TableView<Documento>();
 		TableColumn<Documento, String> colPrioridad = new TableColumn<Documento, String>("Prioridad");
 		TableColumn<Documento, String> colCodigo = new TableColumn<Documento, String>("Codigo");
@@ -47,17 +51,13 @@ public class PanelSeeDocs extends PanelConVolver {
 		tableView.getColumns().add(colFechaAgregado);
 		tableView.getColumns().add(colFechaImpreso);
 		tableView.getColumns().add(colContenido);
-
-		if (verImpresos)
-			tableView.setItems(FXCollections.observableArrayList(CtrlSeeDocs.obtenerListaImpresos()));
+		if (listaDocs == null)
+			if (verImpresos)
+				tableView.setItems(FXCollections.observableArrayList(CtrlSeeDocs.obtenerListaImpresos()));
+			else
+				tableView.setItems(FXCollections.observableArrayList(CtrlSeeDocs.obtenerListaCola()));
 		else
-			tableView.setItems(FXCollections.observableArrayList(CtrlSeeDocs.obtenerListaCola()));
+			tableView.setItems(FXCollections.observableArrayList(listaDocs));
 		setCenter(tableView);
 	}
-
-	@Override
-	public void volverPresionado() {
-		panel.initComponents();
-	}
-
 }
