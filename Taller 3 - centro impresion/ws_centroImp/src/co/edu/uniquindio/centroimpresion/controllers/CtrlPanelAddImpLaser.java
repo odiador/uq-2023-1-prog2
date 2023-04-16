@@ -8,6 +8,8 @@ import co.edu.uniquindio.centroimpresion.model.archivos.SerializedData;
 import co.edu.uniquindio.centroimpresion.model.centro.EstadoImpresora;
 import co.edu.uniquindio.centroimpresion.model.centro.Impresora;
 import co.edu.uniquindio.centroimpresion.model.centro.ImpresoraLaser;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 
 public class CtrlPanelAddImpLaser {
 
@@ -75,6 +77,24 @@ public class CtrlPanelAddImpLaser {
 	private static void throwIfEmpty(String texto, String tipo) throws TextIsEmptyException {
 		if (texto.isEmpty())
 			throw new TextIsEmptyException(tipo);
+	}
+
+	public static void agregarImpresora(String code, String marca, String estadoString, boolean esAColor,
+			String letrasPorSegundoString, String duracionTonerString) {
+		try {
+			agregarImpresoraLaser(code, marca, estadoString, esAColor, letrasPorSegundoString,
+					duracionTonerString);
+		} catch (NumberFormatException e) {
+			new Alert(AlertType.WARNING, "Rellena todos los campos").show();
+		} catch (CentroImpresionException e) {
+			new Alert(AlertType.WARNING, "Ya existe una impresora con ese codigo").show();
+		} catch (TextIsEmptyException e) {
+			new Alert(AlertType.WARNING, "Rellena todos los campos (" + e.getTipoTexto() + ")").show();
+		} catch (ObjectNotExists e) {
+			new Alert(AlertType.WARNING, "Rellena todos los campos (" + e.getClase().getSimpleName() + ")").show();
+		} catch (FueraRangoException e) {
+			new Alert(AlertType.WARNING, e.getMessage()).show();
+		}
 	}
 
 }

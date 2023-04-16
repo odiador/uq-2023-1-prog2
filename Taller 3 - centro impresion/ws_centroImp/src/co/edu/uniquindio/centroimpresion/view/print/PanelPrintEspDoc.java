@@ -2,10 +2,9 @@ package co.edu.uniquindio.centroimpresion.view.print;
 
 import co.edu.uniquindio.centroimpresion.controllers.CtrlPrintDoc;
 import co.edu.uniquindio.centroimpresion.controllers.CtrlPrintEspDoc;
+import co.edu.uniquindio.centroimpresion.view.custom.Boton;
 import co.edu.uniquindio.centroimpresion.view.custom.PanelConVolver;
 import co.edu.uniquindio.centroimpresion.view.custom.PanelMenuOpcionObjetos;
-import javafx.scene.control.Label;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -13,7 +12,7 @@ public class PanelPrintEspDoc extends PanelConVolver {
 	private PanelMenuOpcionObjetos panel;
 	private Stage stage;
 
-	public PanelPrintEspDoc(PanelMenuOpcionObjetos panel,Stage stage) {
+	public PanelPrintEspDoc(PanelMenuOpcionObjetos panel, Stage stage) {
 		this.panel = panel;
 		this.stage = stage;
 		initComp();
@@ -23,21 +22,13 @@ public class PanelPrintEspDoc extends PanelConVolver {
 		super.initComp();
 
 		VBox vbox = new VBox(30);
-		Label btnImprimir = new Label("Imprimir");
-		Label btnVerCola = new Label("Ver cola");
-		BorderPane btnImprimirCase = new BorderPane(btnImprimir);
-		BorderPane btnVerColaCase = new BorderPane(btnVerCola);
+		Boton btnImprimir = new Boton("Imprimir", evt -> CtrlPrintEspDoc.irAPedirDatos(panel, this, stage));
+		Boton btnVerCola = new Boton("Ver cola", evt -> CtrlPrintDoc.verDocEnCola(stage));
 
 		vbox.setId("centered-box");
-		btnVerCola.setId("btn");
-		btnImprimir.setId("btn");
-		btnImprimirCase.setId("btn-case");
-		btnVerColaCase.setId("btn-case");
 
-		btnImprimir.setOnMouseReleased(evt -> CtrlPrintEspDoc.irAPedirDatos(panel, this, stage));
-		btnVerCola.setOnMouseReleased(evt -> CtrlPrintDoc.verDocEnCola(stage));
-		vbox.getChildren().add(btnImprimirCase);
-		vbox.getChildren().add(btnVerColaCase);
+		vbox.getChildren().add(btnImprimir);
+		vbox.getChildren().add(btnVerCola);
 		setCenter(vbox);
 	}
 

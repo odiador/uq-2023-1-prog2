@@ -2,6 +2,7 @@ package co.edu.uniquindio.centroimpresion.view.add;
 
 import co.edu.uniquindio.centroimpresion.controllers.CtrlPanelAddImpCartucho;
 import co.edu.uniquindio.centroimpresion.model.centro.EstadoImpresora;
+import co.edu.uniquindio.centroimpresion.view.custom.Boton;
 import co.edu.uniquindio.centroimpresion.view.custom.PanelConVolver;
 import co.edu.uniquindio.centroimpresion.view.custom.PanelMenuOpcionObjetos;
 import co.edu.uniquindio.centroimpresion.view.util.Utility;
@@ -11,7 +12,6 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
@@ -34,9 +34,13 @@ public class PanelAddImpCartucho extends PanelConVolver {
 		TextField tfCapacidadDecimal = new TextField();
 		TextField tfDesgaste = new TextField();
 		TextField tfDesgasteDecimal = new TextField();
-		Label btnAgregar = new Label("Agregar Impresora");
 		ComboBox<String> comboEstados = new ComboBox<String>();
 		CheckBox checkColor = new CheckBox();
+		Boton btnAgregar = new Boton("Agregar Impresora",
+				event -> CtrlPanelAddImpCartucho.agregarImpresoraCartucho(tfCode.getText(), tfMarca.getText(),
+						comboEstados.getValue(), checkColor.isSelected(), tfVel.getText(), tfVelDecimal.getText(),
+						tfCapacidad.getText(), tfCapacidadDecimal.getText(), tfDesgaste.getText(),
+						tfDesgasteDecimal.getText()));
 
 		tfCode.setPromptText("Escribe un codigo");
 		tfMarca.setPromptText("Escribe una marca");
@@ -53,7 +57,6 @@ public class PanelAddImpCartucho extends PanelConVolver {
 		tfVel.setId("textfield");
 		tfCapacidad.setId("textfield");
 		tfDesgaste.setId("textfield");
-		btnAgregar.setId("btn");
 
 		HBox.setMargin(tfVel, new Insets(0, 10, 0, 10));
 		HBox.setMargin(tfVelDecimal, new Insets(0, 5, 0, 10));
@@ -78,10 +81,7 @@ public class PanelAddImpCartucho extends PanelConVolver {
 		vBox.getChildren().add(Utility.generarHBox(0, "Escribe el desgaste del cartucho de la impresora", tfDesgaste,
 				new Label(","), tfDesgasteDecimal));
 
-		BorderPane agregarCase = new BorderPane(btnAgregar);
-
-		agregarCase.setId("btn-case");
-		vBox.getChildren().add(agregarCase);
+		vBox.getChildren().add(btnAgregar);
 		setCenter(vBox);
 
 		Utility.setAsNumberTextfield(tfVel);
@@ -95,10 +95,6 @@ public class PanelAddImpCartucho extends PanelConVolver {
 		Utility.setMaximumTextLength(tfDesgasteDecimal, 2);
 		Utility.setMaximumTextLength(tfVelDecimal, 2);
 
-		btnAgregar.setOnMouseReleased(event -> CtrlPanelAddImpCartucho.agregarImpresoraCartucho(tfCode.getText(),
-				tfMarca.getText(), comboEstados.getValue(), checkColor.isSelected(), tfVel.getText(),
-				tfVelDecimal.getText(), tfCapacidad.getText(), tfCapacidadDecimal.getText(), tfDesgaste.getText(),
-				tfDesgasteDecimal.getText()));
 	}
 
 	@Override

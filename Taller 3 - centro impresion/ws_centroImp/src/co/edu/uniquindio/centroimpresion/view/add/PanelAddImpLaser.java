@@ -1,33 +1,23 @@
 package co.edu.uniquindio.centroimpresion.view.add;
 
 import co.edu.uniquindio.centroimpresion.controllers.CtrlPanelAddImpLaser;
-import co.edu.uniquindio.centroimpresion.exceptions.CentroImpresionException;
-import co.edu.uniquindio.centroimpresion.exceptions.FueraRangoException;
-import co.edu.uniquindio.centroimpresion.exceptions.ObjectNotExists;
-import co.edu.uniquindio.centroimpresion.exceptions.TextIsEmptyException;
 import co.edu.uniquindio.centroimpresion.model.centro.EstadoImpresora;
+import co.edu.uniquindio.centroimpresion.view.custom.Boton;
 import co.edu.uniquindio.centroimpresion.view.custom.PanelConVolver;
 import co.edu.uniquindio.centroimpresion.view.custom.PanelMenuOpcionObjetos;
 import co.edu.uniquindio.centroimpresion.view.util.Utility;
 import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 public class PanelAddImpLaser extends PanelConVolver {
+
 	private PanelMenuOpcionObjetos panel;
-	private VBox vBox;
-	private Label btnAgregar;
-	private TextField tfCode, tfMarca, tfVel, tfVelDecimal, tfDuracion;
-	private CheckBox checkColor;
-	private ComboBox<String> comboEstados;
 
 	public PanelAddImpLaser(PanelMenuOpcionObjetos panel) {
 		this.panel = panel;
@@ -38,13 +28,19 @@ public class PanelAddImpLaser extends PanelConVolver {
 	public void initComp() {
 		super.initComp();
 
-		vBox = new VBox(20);
-		tfCode = new TextField();
-		tfMarca = new TextField();
-		tfVel = new TextField();
-		tfVelDecimal = new TextField();
-		tfDuracion = new TextField();
-		btnAgregar = new Label("Agregar Impresora");
+		VBox vBox = new VBox(20);
+		CheckBox checkColor = new CheckBox();
+		ComboBox<String> comboEstados = new ComboBox<String>();
+		TextField tfCode = new TextField();
+		TextField tfMarca = new TextField();
+		TextField tfVel = new TextField();
+		TextField tfVelDecimal = new TextField();
+		TextField tfDuracion = new TextField();
+
+		Boton btnAgregar = new Boton("Agregar Impresora",
+				event -> CtrlPanelAddImpLaser.agregarImpresora(tfCode.getText(), tfMarca.getText(),
+						comboEstados.getValue(), checkColor.isSelected(),
+						Utility.juntarCadenasParaDoble(tfVel.getText(), tfVelDecimal.getText()), tfDuracion.getText()));
 
 		tfCode.setPromptText("Escribe un codigo");
 		tfMarca.setPromptText("Escribe una marca");
@@ -57,12 +53,9 @@ public class PanelAddImpLaser extends PanelConVolver {
 		tfMarca.setId("textfield");
 		tfVel.setId("textfield");
 		tfDuracion.setId("textfield");
-		btnAgregar.setId("btn");
 
 		HBox.setMargin(tfVel, new Insets(0, 10, 0, 10));
 		HBox.setMargin(tfVelDecimal, new Insets(0, 5, 0, 10));
-		comboEstados = new ComboBox<String>();
-		checkColor = new CheckBox();
 		checkColor.setSelected(true);
 		comboEstados.setItems(FXCollections.observableArrayList(EstadoImpresora.stringValues()));
 
@@ -77,35 +70,13 @@ public class PanelAddImpLaser extends PanelConVolver {
 				new Label(","), tfVelDecimal));
 		vBox.getChildren().add(Utility.generarHBox("Escribe la duracion del toner de la impresora", tfDuracion));
 
-		BorderPane agregarCase = new BorderPane(btnAgregar);
-
-		agregarCase.setId("btn-case");
-		vBox.getChildren().add(agregarCase);
+		vBox.getChildren().add(btnAgregar);
 		setCenter(vBox);
-		addListeners();
-	}
 
-	private void addListeners() {
 		Utility.setAsNumberTextfield(tfVel);
 		Utility.setAsNumberTextfield(tfVelDecimal);
 		Utility.setAsNumberTextfield(tfDuracion);
-		btnAgregar.setOnMouseReleased(event -> {
-			try {
-				CtrlPanelAddImpLaser.agregarImpresoraLaser(tfCode.getText(), tfMarca.getText(), comboEstados.getValue(),
-						checkColor.isSelected(),
-						Utility.juntarCadenasParaDoble(tfVel.getText(), tfVelDecimal.getText()), tfDuracion.getText());
-			} catch (NumberFormatException e) {
-				new Alert(AlertType.WARNING, "Rellena todos los campos").show();
-			} catch (CentroImpresionException e) {
-				new Alert(AlertType.WARNING, "Ya existe una impresora con ese codigo").show();
-			} catch (TextIsEmptyException e) {
-				new Alert(AlertType.WARNING, "Rellena todos los campos (" + e.getTipoTexto() + ")").show();
-			} catch (ObjectNotExists e) {
-				new Alert(AlertType.WARNING, "Rellena todos los campos (" + e.getClase().getSimpleName() + ")").show();
-			} catch (FueraRangoException e) {
-				new Alert(AlertType.WARNING, e.getMessage()).show();
-			}
-		});
+
 	}
 
 	@Override

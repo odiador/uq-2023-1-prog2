@@ -37,9 +37,7 @@ public abstract class PanelMenuOpcionObjetos extends BorderPane implements Event
 		VBox box = new VBox();
 		box.setId("centered-box");
 		for (int i = 0; i < opciones.length; i++) {
-			Label label = new Label(opcionesString[i]);
-			label.setId("boton-opcion");
-			label.setOnMouseReleased(this);
+			Boton label = new Boton(opcionesString[i], this);
 			box.getChildren().add(label);
 			VBox.setMargin(label, new Insets(20));
 		}
