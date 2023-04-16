@@ -11,7 +11,6 @@ import co.edu.uniquindio.centroimpresion.model.centro.Relacion;
 import co.edu.uniquindio.centroimpresion.model.scenes.EscenaImpresion;
 import co.edu.uniquindio.centroimpresion.model.scenes.EscenaVerDoc;
 import co.edu.uniquindio.centroimpresion.view.custom.PanelMenuOpcionObjetos;
-import co.edu.uniquindio.centroimpresion.view.print.PanelImpresionVolver;
 import co.edu.uniquindio.centroimpresion.view.print.PanelPrintDoc;
 import co.edu.uniquindio.centroimpresion.view.print.PanelPrintPedirImpresora;
 import javafx.animation.Animation;
@@ -55,7 +54,7 @@ public class CtrlPrintDoc {
 
 	static void mostrarPanelImpresion(Stage stage, Relacion<Impresora, Documento> relacion) {
 		Scene escenaAnterior = stage.getScene();
-		Scene escenaNueva = new EscenaImpresion(new PanelImpresionVolver(relacion, stage, escenaAnterior), stage,
+		Scene escenaNueva = new EscenaImpresion(relacion, stage,
 				escenaAnterior);
 		escenaNueva.getStylesheets().add(Main.css.toExternalForm());
 		stage.setScene(escenaNueva);
