@@ -99,7 +99,8 @@ public class Utility {
 			throw new TextIsEmptyException(msg);
 	}
 
-	public static double obtenerDoublelimitarMayorCero(String desgasteString) throws FueraRangoException, NumberFormatException {
+	public static double obtenerDoublelimitarMayorCero(String desgasteString)
+			throws FueraRangoException, NumberFormatException {
 		double desgasteCartucho = Double.parseDouble(desgasteString);
 		if (desgasteCartucho <= 0)
 			throw new FueraRangoException("El desgaste tiene que ser mayor que 0");
@@ -108,11 +109,28 @@ public class Utility {
 
 	public static int obtenerIntlimitarMayorCero(String duracionTonerString)
 			throws FueraRangoException, NumberFormatException {
-	
+
 		int duracionToner = Integer.parseInt(duracionTonerString);
 		if (duracionToner <= 0)
 			throw new FueraRangoException("La duraci�n tiene que ser mayor o igual a 0");
 		return duracionToner;
 	}
 
+	public static int obtenerParteEnteraDouble(double numDoble) {
+		return new Double(numDoble).intValue();
+	}
+
+	public static int obtenerDecimalesDouble(double numDoble) {
+		int cantidadDecimales = obtenerCantDecimales(numDoble);
+		double potenciaDecimales = (int) Math.pow(10, cantidadDecimales);
+		int numSinDecimales = (int) (numDoble * potenciaDecimales);
+		int decimales = (int) (numSinDecimales % potenciaDecimales);
+		return decimales;
+	}
+
+	private static int obtenerCantDecimales(double numDoble) {
+		String cadenaNum = numDoble + "";
+		String[] split = cadenaNum.replace('.', ',').split(",");
+		return split[1].length();
+	}
 }

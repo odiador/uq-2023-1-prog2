@@ -69,10 +69,10 @@ public class CtrlPanelAddImpLaser {
 		Utility.throwIfEmpty(letrasPorSegundo, "letras por segundo");
 
 		EstadoImpresora estadoImpresora = EstadoImpresora.obtenerEstadoImpresora(estadoString);
-		double paginasPorMinuto = Utility.obtenerDoublelimitarMayorCero(letrasPorSegundo);
+		double letrasSeg = Utility.obtenerDoublelimitarMayorCero(letrasPorSegundo);
 		int duracionToner = Utility.obtenerIntlimitarMayorCero(duracionTonerString);
 
-		ImpresoraLaser impresoraCartucho = new ImpresoraLaser(code, marca, estadoImpresora, esAColor, paginasPorMinuto,
+		ImpresoraLaser impresoraCartucho = new ImpresoraLaser(code, marca, estadoImpresora, esAColor, letrasSeg,
 				duracionToner);
 		return impresoraCartucho;
 	}

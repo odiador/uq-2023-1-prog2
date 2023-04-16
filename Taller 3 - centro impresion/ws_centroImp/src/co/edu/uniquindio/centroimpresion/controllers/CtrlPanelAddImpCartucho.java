@@ -18,7 +18,7 @@ public class CtrlPanelAddImpCartucho {
 	 * @param marca
 	 * @param estadoString
 	 * @param esAColor
-	 * @param paginasPorMinutoString
+	 * @param letrasSegString
 	 * @param capacidadCartuchoString
 	 * @param desgasteCartuchoString
 	 * @throws CentroImpresionException
@@ -28,11 +28,11 @@ public class CtrlPanelAddImpCartucho {
 	 * @throws FueraRangoException
 	 */
 	static void agregarImpresoraCartuchoThrows(String code, String marca, String estadoString, boolean esAColor,
-			String paginasPorMinutoString, String capacidadCartuchoString, String desgasteCartuchoString)
+			String letrasSegString, String capacidadCartuchoString, String desgasteCartuchoString)
 			throws CentroImpresionException, TextIsEmptyException, ObjectNotExists, NumberFormatException,
 			FueraRangoException {
 		ImpresoraCartucho impresoraCartucho = obtenerImpresoraCartucho(code, marca, estadoString, esAColor,
-				paginasPorMinutoString, capacidadCartuchoString, desgasteCartuchoString);
+				letrasSegString, capacidadCartuchoString, desgasteCartuchoString);
 		SerializedData data = new SerializedData();
 		if (impresoraCartucho.exists()) {
 			data.getCentroImpresion().agregarImpresoraCartucho(impresoraCartucho.getCode(),
@@ -71,7 +71,7 @@ public class CtrlPanelAddImpCartucho {
 	 * @param marca
 	 * @param estadoString
 	 * @param esAColor
-	 * @param paginasPorMinutoString
+	 * @param letrasSegString
 	 * @param capacidadCartuchoString
 	 * @param desgasteCartuchoString
 	 * @return
@@ -81,23 +81,23 @@ public class CtrlPanelAddImpCartucho {
 	 * @throws FueraRangoException
 	 */
 	static ImpresoraCartucho obtenerImpresoraCartucho(String code, String marca, String estadoString, boolean esAColor,
-			String paginasPorMinutoString, String capacidadCartuchoString, String desgasteCartuchoString)
+			String letrasSegString, String capacidadCartuchoString, String desgasteCartuchoString)
 			throws TextIsEmptyException, ObjectNotExists, NumberFormatException, FueraRangoException {
 		Utility.throwIfEmpty(code, "codigo");
 		Utility.throwIfEmpty(marca, "marca");
 		Utility.throwIfNull(estadoString, "Elige un estado de impresora");
 		Utility.throwIfEmpty(estadoString, "estado");
-		Utility.throwIfEmpty(paginasPorMinutoString, "paginas por minuto");
+		Utility.throwIfEmpty(letrasSegString, "letras por segundo");
 		Utility.throwIfEmpty(capacidadCartuchoString, "capacidad de cartucho");
-		Utility.throwIfEmpty(desgasteCartuchoString, "descaste de cartucho");
+		Utility.throwIfEmpty(desgasteCartuchoString, "desgaste de cartucho");
 
 		EstadoImpresora estadoImpresora = EstadoImpresora.obtenerEstadoThrows(estadoString);
-		double paginasPorMinuto = Utility.obtenerDoublelimitarMayorCero(paginasPorMinutoString);
+		double letrasSeg = Utility.obtenerDoublelimitarMayorCero(letrasSegString);
 		double capacidadCartucho = Utility.obtenerDoublelimitarMayorCero(capacidadCartuchoString);
 		double desgasteCartucho = Utility.obtenerDoublelimitarMayorCero(desgasteCartuchoString);
 
-		ImpresoraCartucho impresoraCartucho = new ImpresoraCartucho(code, marca, estadoImpresora, esAColor,
-				paginasPorMinuto, capacidadCartucho, desgasteCartucho);
+		ImpresoraCartucho impresoraCartucho = new ImpresoraCartucho(code, marca, estadoImpresora, esAColor, letrasSeg,
+				capacidadCartucho, desgasteCartucho);
 		return impresoraCartucho;
 	}
 }

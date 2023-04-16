@@ -3,6 +3,7 @@ package co.edu.uniquindio.centroimpresion.view.menu;
 import co.edu.uniquindio.centroimpresion.model.centro.TipoEmpleado;
 import co.edu.uniquindio.centroimpresion.view.custom.Boton;
 import co.edu.uniquindio.centroimpresion.view.herramientas.PanelActualizarDoc;
+import co.edu.uniquindio.centroimpresion.view.herramientas.PanelActualizarImpresora;
 import co.edu.uniquindio.centroimpresion.view.herramientas.PanelCambiarEstado;
 import co.edu.uniquindio.centroimpresion.view.herramientas.PanelRellenarImp;
 import co.edu.uniquindio.centroimpresion.view.herramientas.PanelSeleccionarImp;
@@ -30,8 +31,16 @@ public class PanelMenuUpdate extends BorderPane {
 
 		VBox.setMargin(botonRecargar, new Insets(20));
 
+		if (tipoEmpleado.puedeActualizarImpresora()) {
+			Boton botonActualizar = new Boton("Actualizar Impresora", e -> {
+				setCenter(new PanelActualizarImpresora(this));
+			}, "boton-opcion");
+
+			vbox.getChildren().add(botonActualizar);
+			VBox.setMargin(botonActualizar, new Insets(20));
+		}
 		if (tipoEmpleado.puedeActualizarDocumento()) {
-			Boton botonActualizar = new Boton("Actualizar Doc", e -> {
+			Boton botonActualizar = new Boton("Actualizar Documento", e -> {
 				setCenter(new PanelActualizarDoc(this));
 			}, "boton-opcion");
 

@@ -12,8 +12,6 @@ import co.edu.uniquindio.centroimpresion.exceptions.CentroImpresionException;
 import co.edu.uniquindio.centroimpresion.exceptions.ImpresoraException;
 import co.edu.uniquindio.centroimpresion.exceptions.NoHayColaImpresionException;
 import co.edu.uniquindio.centroimpresion.exceptions.ObjectNotExists;
-import co.edu.uniquindio.centroimpresion.exceptions.TextIsEmptyException;
-import co.edu.uniquindio.centroimpresion.view.util.Utility;
 
 public class CentroImpresion implements Serializable {
 	/**
@@ -69,12 +67,6 @@ public class CentroImpresion implements Serializable {
 
 	public Impresora buscarImpresora(String code) {
 		return listaImpresoras.stream().filter(doc -> doc.getCode().equals(code)).findAny().orElse(null);
-	}
-
-	public boolean buscarImpresoraEsLaser(String code) throws TextIsEmptyException {
-		Impresora impresoraEncontrada = buscarImpresora(code);
-		Utility.throwIfNull(impresoraEncontrada, "codigo");
-		return impresoraEncontrada instanceof ImpresoraLaser;
 	}
 
 	public boolean validarImpresora(String code) {

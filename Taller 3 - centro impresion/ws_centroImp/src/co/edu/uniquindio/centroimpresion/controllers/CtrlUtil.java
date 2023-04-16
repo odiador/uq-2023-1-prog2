@@ -8,11 +8,55 @@ import co.edu.uniquindio.centroimpresion.exceptions.ObjectNotExists;
 import co.edu.uniquindio.centroimpresion.exceptions.TextIsEmptyException;
 import co.edu.uniquindio.centroimpresion.model.centro.Documento;
 import co.edu.uniquindio.centroimpresion.model.centro.EstadoImpresora;
+import co.edu.uniquindio.centroimpresion.model.centro.Impresora;
+import co.edu.uniquindio.centroimpresion.model.centro.ImpresoraCartucho;
+import co.edu.uniquindio.centroimpresion.model.centro.ImpresoraLaser;
+import co.edu.uniquindio.centroimpresion.view.custom.Boton;
+import co.edu.uniquindio.centroimpresion.view.herramientas.PanelUpdateImpCartucho;
+import co.edu.uniquindio.centroimpresion.view.herramientas.PanelUpdateImpLaser;
+import co.edu.uniquindio.centroimpresion.view.menu.PanelMenuUpdate;
 import co.edu.uniquindio.centroimpresion.view.util.Utility;
+import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
 
 public class CtrlUtil {
+
+	public static void irAActualizarImpresora(PanelMenuUpdate panelMenuUpdate, String text,
+			EventHandler<? super MouseEvent> eventoVolver) {
+		try {
+			actualizarImpresoraThrows(panelMenuUpdate, text, eventoVolver);
+		} catch (CentroImpresionException | TextIsEmptyException e) {
+			new Alert(AlertType.WARNING, e.getMessage()).show();
+		}
+	}
+
+	private static void actualizarImpresoraThrows(PanelMenuUpdate panelMenuUpdate, String code,
+			EventHandler<? super MouseEvent> eventoVolver) throws CentroImpresionException, TextIsEmptyException {
+		SerializedData data = new SerializedData();
+		Impresora impresora = data.getCentroImpresion().buscarImpresora(code);
+		if (impresora instanceof ImpresoraLaser)
+			irAActualizarImpresoraLaser(panelMenuUpdate, (ImpresoraLaser) impresora, eventoVolver);
+		if (impresora instanceof ImpresoraCartucho)
+			irAActualizarImpresoraCartucho(panelMenuUpdate, (ImpresoraCartucho) impresora, eventoVolver);
+	}
+
+	private static void irAActualizarImpresoraLaser(PanelMenuUpdate panelMenuUpdate, ImpresoraLaser impresora,
+			EventHandler<? super MouseEvent> eventoVolver) {
+		BorderPane pane = new BorderPane(new PanelUpdateImpLaser(impresora));
+		pane.setBottom(new Boton("Volver", eventoVolver, "btn-volver"));
+		panelMenuUpdate.setCenter(pane);
+	}
+
+	private static void irAActualizarImpresoraCartucho(PanelMenuUpdate panelMenuUpdate, ImpresoraCartucho impresora,
+			EventHandler<? super MouseEvent> eventoVolver) {
+		BorderPane pane = new BorderPane(new PanelUpdateImpCartucho(impresora));
+		pane.setBottom(new Boton("Volver", eventoVolver, "btn-volver"));
+
+		panelMenuUpdate.setCenter(pane);
+	}
 
 	public static void recargarImpresora(String code) {
 		SerializedData data = new SerializedData();
@@ -98,4 +142,5 @@ public class CtrlUtil {
 		data.getCentroImpresion().cambiarEstadoImpresora(code, estadoImpresora);
 		data.updateCentroImpresion();
 	}
+
 }
