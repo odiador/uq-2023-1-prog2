@@ -8,8 +8,8 @@
 	-fx-font-weight: bold;
 }
 #impresion {
-    -gradient-base: red;
-    -fx-text-fill: linear-gradient(to right, -gradient-base, black);
+    -gradient-base: blue;
+    -fx-text-fill: linear-gradient(to bottom, -gradient-base, black);
 }
 #tabla-true {
 	-fx-background-color: #baffba;
@@ -67,11 +67,15 @@
 #label-opciones-principal:pressed {
 	-fx-background-color: rgb(0.0,0.0,0.0,0.3);
 }
-
+#header-text {
+	-fx-text-fill: white;
+	-fx-font-weight: bold;
+	-fx-text-fill: #4eff4e;
+}
 #vbox-principal {
-	-fx-background-color: linear-gradient(from 0.0% 0.0% to 0.0% 120.0%,
-		#5b87ee 25.0%,
-		black 100.0%
+	-fx-background-color: linear-gradient(from 0.0% 0.0% to 0.0% 100.0%,
+		#3333ff 50.0%,
+		#020106 150.0%
 	);
 	-fx-border-width: 10.0px;
 	-fx-border-style: solid inside;

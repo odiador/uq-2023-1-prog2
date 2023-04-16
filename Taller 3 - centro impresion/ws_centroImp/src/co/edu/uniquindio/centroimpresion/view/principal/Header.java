@@ -23,11 +23,16 @@ public class Header extends BorderPane {
 	}
 
 	/**
-	 * Inicializa los componentes del panel y directamente también los agrega
+	 * Inicializa los componentes del panel y directamente tambiï¿½n los agrega
 	 */
 	private void initComp() {
 		lblNombre = new Label(nombre);
 		lblEmpleado = new Label(tipoEmpleado.getText());
+
+		lblNombre.setId("header-text");
+		lblEmpleado.setId("header-text");
+
+		lblEmpleado.setStyle("-fx-font-size: 25;");
 		setId("header");
 		VBox vbox = new VBox(lblNombre, lblEmpleado);
 		vbox.setId("centered-box");
