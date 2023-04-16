@@ -62,7 +62,7 @@ public enum TipoEmpleado {
 		return puedeSeleccionarImpresora;
 	}
 
-	public boolean puedePuedeActualizarDocumento() {
+	public boolean puedeActualizarDocumento() {
 		return puedePuedeActualizarDocumento;
 	}
 }

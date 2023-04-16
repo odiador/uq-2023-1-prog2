@@ -20,6 +20,8 @@ public class PanelSeeImpLaser extends PanelConVolver {
 	}
 
 	public void initComp() {
+		super.initComp();
+
 		TableView<ImpresoraLaser> tabla = new TableView<ImpresoraLaser>();
 		TableColumn<ImpresoraLaser, String> colCodigo = new TableColumn<ImpresoraLaser, String>("Codigo");
 		TableColumn<ImpresoraLaser, String> colMarca = new TableColumn<ImpresoraLaser, String>("Marca");
