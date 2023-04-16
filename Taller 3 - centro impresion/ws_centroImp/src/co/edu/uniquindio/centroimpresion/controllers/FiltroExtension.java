@@ -1,4 +1,4 @@
-package co.edu.uniquindio.centroimpresion.model.archivos;
+package co.edu.uniquindio.centroimpresion.controllers;
 
 public class FiltroExtension {
 	private String nombre;

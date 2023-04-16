@@ -3,7 +3,7 @@ package co.edu.uniquindio.centroimpresion.view.see;
 import java.util.HashSet;
 
 import co.edu.uniquindio.centroimpresion.controllers.CtrlSeeImpLaser;
-import co.edu.uniquindio.centroimpresion.model.archivos.SerializedData;
+import co.edu.uniquindio.centroimpresion.controllers.SerializedData;
 import co.edu.uniquindio.centroimpresion.model.centro.ImpresoraLaser;
 import co.edu.uniquindio.centroimpresion.view.custom.PanelConVolver;
 import co.edu.uniquindio.centroimpresion.view.menu.PanelMenuSee;

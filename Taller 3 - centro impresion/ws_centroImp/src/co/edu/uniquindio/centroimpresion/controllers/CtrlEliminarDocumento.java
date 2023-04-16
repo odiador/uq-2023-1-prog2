@@ -2,7 +2,6 @@ package co.edu.uniquindio.centroimpresion.controllers;
 
 import co.edu.uniquindio.centroimpresion.exceptions.CentroImpresionException;
 import co.edu.uniquindio.centroimpresion.exceptions.TextIsEmptyException;
-import co.edu.uniquindio.centroimpresion.model.archivos.SerializedData;
 import co.edu.uniquindio.centroimpresion.view.util.Utility;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;

@@ -2,7 +2,6 @@ package co.edu.uniquindio.centroimpresion.controllers;
 
 import java.io.File;
 
-import co.edu.uniquindio.centroimpresion.model.archivos.FiltroExtension;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;

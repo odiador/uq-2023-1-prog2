@@ -4,7 +4,6 @@ import co.edu.uniquindio.centroimpresion.exceptions.CentroImpresionException;
 import co.edu.uniquindio.centroimpresion.exceptions.ImpresoraException;
 import co.edu.uniquindio.centroimpresion.exceptions.NoHayColaImpresionException;
 import co.edu.uniquindio.centroimpresion.exceptions.TextIsEmptyException;
-import co.edu.uniquindio.centroimpresion.model.archivos.SerializedData;
 import co.edu.uniquindio.centroimpresion.model.centro.Documento;
 import co.edu.uniquindio.centroimpresion.model.centro.Impresora;
 import co.edu.uniquindio.centroimpresion.model.centro.Relacion;

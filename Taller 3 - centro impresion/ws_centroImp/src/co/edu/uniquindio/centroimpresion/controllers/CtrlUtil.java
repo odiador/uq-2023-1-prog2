@@ -6,8 +6,6 @@ import co.edu.uniquindio.centroimpresion.exceptions.FueraRangoException;
 import co.edu.uniquindio.centroimpresion.exceptions.NoSePuedeLeerException;
 import co.edu.uniquindio.centroimpresion.exceptions.ObjectNotExists;
 import co.edu.uniquindio.centroimpresion.exceptions.TextIsEmptyException;
-import co.edu.uniquindio.centroimpresion.model.archivos.FiltroExtension;
-import co.edu.uniquindio.centroimpresion.model.archivos.SerializedData;
 import co.edu.uniquindio.centroimpresion.model.centro.Documento;
 import co.edu.uniquindio.centroimpresion.model.centro.EstadoImpresora;
 import co.edu.uniquindio.centroimpresion.view.util.Utility;

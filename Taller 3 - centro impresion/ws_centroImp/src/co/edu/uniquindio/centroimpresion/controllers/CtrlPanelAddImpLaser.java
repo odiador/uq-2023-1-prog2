@@ -4,7 +4,6 @@ import co.edu.uniquindio.centroimpresion.exceptions.CentroImpresionException;
 import co.edu.uniquindio.centroimpresion.exceptions.FueraRangoException;
 import co.edu.uniquindio.centroimpresion.exceptions.ObjectNotExists;
 import co.edu.uniquindio.centroimpresion.exceptions.TextIsEmptyException;
-import co.edu.uniquindio.centroimpresion.model.archivos.SerializedData;
 import co.edu.uniquindio.centroimpresion.model.centro.EstadoImpresora;
 import co.edu.uniquindio.centroimpresion.model.centro.ImpresoraLaser;
 import co.edu.uniquindio.centroimpresion.view.util.Utility;
