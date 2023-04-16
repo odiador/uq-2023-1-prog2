@@ -5,6 +5,7 @@ import co.edu.uniquindio.centroimpresion.view.custom.Boton;
 import co.edu.uniquindio.centroimpresion.view.herramientas.PanelActualizarDoc;
 import co.edu.uniquindio.centroimpresion.view.herramientas.PanelCambiarEstado;
 import co.edu.uniquindio.centroimpresion.view.herramientas.PanelRellenarImp;
+import co.edu.uniquindio.centroimpresion.view.herramientas.PanelSeleccionarImp;
 import javafx.geometry.Insets;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
@@ -39,7 +40,7 @@ public class PanelMenuUpdate extends BorderPane {
 		}
 		if (tipoEmpleado.puedeSeleccionarImpresora()) {
 			Boton botonSeleccionar = new Boton("Seleccionar Impresora", e -> {
-				setCenter(new PanelActualizarDoc(this));
+				setCenter(new PanelSeleccionarImp(this));
 			}, "boton-opcion");
 			vbox.getChildren().add(botonSeleccionar);
 			VBox.setMargin(botonSeleccionar, new Insets(20));
