@@ -12,7 +12,6 @@ import co.edu.uniquindio.centroimpresion.exceptions.CentroImpresionException;
 import co.edu.uniquindio.centroimpresion.exceptions.ImpresoraException;
 import co.edu.uniquindio.centroimpresion.exceptions.NoHayColaImpresionException;
 import co.edu.uniquindio.centroimpresion.exceptions.ObjectNotExists;
-import co.edu.uniquindio.centroimpresion.exceptions.TextIsEmptyException;
 
 public class CentroImpresion implements Serializable {
 	/**
@@ -84,6 +83,7 @@ public class CentroImpresion implements Serializable {
 		List<Documento> listaDocumentos = this.listaDocumentos.stream()
 				.collect(Collectors.toCollection(ArrayList::new));
 		listaDocumentos.addAll(listaDocumentosImpresos);
+
 		return listaDocumentos.stream().collect(Collectors.toCollection(ArrayList::new));
 	}
 

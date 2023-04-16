@@ -9,7 +9,6 @@ import java.util.Scanner;
 import co.edu.uniquindio.centroimpresion.application.Main;
 import co.edu.uniquindio.centroimpresion.exceptions.ArchivoNoObtenidoException;
 import co.edu.uniquindio.centroimpresion.exceptions.CentroImpresionException;
-import co.edu.uniquindio.centroimpresion.exceptions.DocumentoEnProcesoException;
 import co.edu.uniquindio.centroimpresion.exceptions.FueraRangoException;
 import co.edu.uniquindio.centroimpresion.exceptions.NoSePuedeLeerException;
 import co.edu.uniquindio.centroimpresion.exceptions.TextIsEmptyException;
@@ -23,7 +22,6 @@ import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
 
 public class CtrlPanelAddDoc {
-	public static boolean seEstaPidiendo = false;
 
 	/**
 	 * Obtiene un documento del panel
@@ -38,11 +36,7 @@ public class CtrlPanelAddDoc {
 	 * @throws TextIsEmptyException
 	 */
 	public static Documento pedirDocumento(String textoCodigo, String textoPrioridad)
-			throws DocumentoEnProcesoException, ArchivoNoObtenidoException, NoSePuedeLeerException, FueraRangoException,
-			TextIsEmptyException {
-		if (seEstaPidiendo)
-			throw new DocumentoEnProcesoException();
-		seEstaPidiendo = true;
+			throws ArchivoNoObtenidoException, NoSePuedeLeerException, FueraRangoException, TextIsEmptyException {
 		int prioridad = 5;
 		try {
 			prioridad = Integer.parseInt(textoPrioridad);
@@ -52,20 +46,17 @@ public class CtrlPanelAddDoc {
 		throwCaseNotInRange(prioridad);
 		Documento documento = pedirDocumento(textoCodigo, prioridad, "Agregar Documento",
 				new FiltroExtension("Documentos de texto", "*.txt"), new FiltroExtension("Todos los archivos", "*.*"));
-		seEstaPidiendo = false;
 		return documento;
 	}
 
 	private static void throwIfEmpty(String textoCodigo) throws TextIsEmptyException {
 		if (textoCodigo.isEmpty()) {
-			seEstaPidiendo = false;
 			throw new TextIsEmptyException("codigo");
 		}
 	}
 
 	public static void throwCaseNotInRange(int prioridad) throws FueraRangoException {
 		if (prioridad < 0 || prioridad > 10) {
-			seEstaPidiendo = false;
 			throw new FueraRangoException("La prioridad tiene que ser entre 0 y 10");
 		}
 	}
@@ -86,7 +77,6 @@ public class CtrlPanelAddDoc {
 		File file = CtrlObtenerArchivo.obtenerArchivo(tituloVentana,
 				CtrlObtenerArchivo.obtenerExtensionFiltersDeFiltroExtension(filtros));
 		if (file == null) {
-			seEstaPidiendo = false;
 			throw new ArchivoNoObtenidoException();
 		}
 		return obtenerDocumentoArchivo(code, file, prioridad);
@@ -106,7 +96,6 @@ public class CtrlPanelAddDoc {
 	public static Documento obtenerDocumentoArchivo(String code, File archivo, int prioridad)
 			throws NoSePuedeLeerException {
 		if (!archivo.canRead()) {
-			seEstaPidiendo = false;
 			throw new NoSePuedeLeerException();
 		}
 		String contenido = "";
@@ -140,8 +129,8 @@ public class CtrlPanelAddDoc {
 	 * @throws TextIsEmptyException
 	 */
 	public static Documento obtenerDocArchivoThrow(String textoCodigo, String textoPrioridad)
-			throws DocumentoEnProcesoException, ArchivoNoObtenidoException, CentroImpresionException,
-			NoSePuedeLeerException, FueraRangoException, TextIsEmptyException {
+			throws ArchivoNoObtenidoException, CentroImpresionException, NoSePuedeLeerException, FueraRangoException,
+			TextIsEmptyException {
 
 		throwifDocExist(textoCodigo);
 		Documento doc = pedirDocumento(textoCodigo, textoPrioridad);
@@ -167,8 +156,6 @@ public class CtrlPanelAddDoc {
 
 		} catch (ArchivoNoObtenidoException e) {
 			new Alert(AlertType.ERROR, "El archivo no pudo ser obtenido").show();
-		} catch (DocumentoEnProcesoException e) {
-			new Alert(AlertType.WARNING, "Espera a que el documento sea obtenido").show();
 		} catch (CentroImpresionException e) {
 			ButtonType buttonType = new Alert(AlertType.WARNING,
 					"Ya se encuentra un documento con tal código\n" + "¿Deseas ver el documento?", ButtonType.OK,
