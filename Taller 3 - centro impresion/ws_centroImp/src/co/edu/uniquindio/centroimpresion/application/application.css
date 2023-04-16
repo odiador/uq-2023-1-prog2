@@ -7,6 +7,10 @@
 	-fx-max-width: 100000.0;
 	-fx-font-weight: bold;
 }
+#impresion {
+    -gradient-base: red;
+    -fx-text-fill: linear-gradient(to right, -gradient-base, black);
+}
 #tabla-true {
 	-fx-background-color: #baffba;
 	-fx-text-fill: black;
