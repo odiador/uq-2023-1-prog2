@@ -1,6 +1,7 @@
 package co.edu.uniquindio.centroimpresion.view.util;
 
 import co.edu.uniquindio.centroimpresion.exceptions.TextIsEmptyException;
+import co.edu.uniquindio.centroimpresion.model.centro.EstadoImpresora;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.beans.value.ChangeListener;
@@ -90,6 +91,11 @@ public class Utility {
 
 	public static void throwIfNull(String estadoString, String msg) throws TextIsEmptyException {
 		if (estadoString == null)
+			throw new TextIsEmptyException(msg);
+	}
+
+	public static void throwIfNull(Object obj, String msg) throws TextIsEmptyException {
+		if (obj == null)
 			throw new TextIsEmptyException(msg);
 	}
 

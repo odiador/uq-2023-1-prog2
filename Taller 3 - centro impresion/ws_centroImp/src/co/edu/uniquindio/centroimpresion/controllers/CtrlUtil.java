@@ -15,6 +15,7 @@ import co.edu.uniquindio.centroimpresion.exceptions.TextIsEmptyException;
 import co.edu.uniquindio.centroimpresion.model.archivos.FiltroExtension;
 import co.edu.uniquindio.centroimpresion.model.archivos.SerializedData;
 import co.edu.uniquindio.centroimpresion.model.centro.Documento;
+import co.edu.uniquindio.centroimpresion.model.centro.EstadoImpresora;
 import co.edu.uniquindio.centroimpresion.view.util.Utility;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -109,5 +110,26 @@ public class CtrlUtil {
 		} catch (CentroImpresionException e) {
 			new Alert(AlertType.WARNING, e.getMessage());
 		}
+	}
+
+	public static void cambiarEstadoImpresora(String code, String estado) {
+		try {
+			cambiarEstadoImpresoraThrpws(code, estado);
+		} catch (TextIsEmptyException | CentroImpresionException e) {
+			new Alert(AlertType.WARNING, e.getMessage()).show();
+		}
+	}
+
+	public static void cambiarEstadoImpresoraThrpws(String code, String estado)
+			throws TextIsEmptyException, CentroImpresionException {
+		Utility.throwIfEmpty(code, "codigo");
+		Utility.throwIfNull(estado, "estado");
+		EstadoImpresora estadoImpresora = EstadoImpresora.obtenerEstado(estado);
+
+		Utility.throwIfNull(estadoImpresora, "estado");
+
+		SerializedData data = new SerializedData();
+		data.getCentroImpresion().cambiarEstadoImpresora(code, estadoImpresora);
+		data.updateCentroImpresion();
 	}
 }
