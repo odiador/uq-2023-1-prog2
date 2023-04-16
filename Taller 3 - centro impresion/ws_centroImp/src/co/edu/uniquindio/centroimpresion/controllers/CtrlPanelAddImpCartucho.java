@@ -28,7 +28,7 @@ public class CtrlPanelAddImpCartucho {
 	 * @throws NumberFormatException
 	 * @throws FueraRangoException
 	 */
-	public static void agregarImpresoraCartuchoThrows(String code, String marca, String estadoString, boolean esAColor,
+	static void agregarImpresoraCartuchoThrows(String code, String marca, String estadoString, boolean esAColor,
 			String paginasPorMinutoString, String capacidadCartuchoString, String desgasteCartuchoString)
 			throws CentroImpresionException, TextIsEmptyException, ObjectNotExists, NumberFormatException,
 			FueraRangoException {
@@ -81,9 +81,8 @@ public class CtrlPanelAddImpCartucho {
 	 * @throws NumberFormatException
 	 * @throws FueraRangoException
 	 */
-	public static ImpresoraCartucho obtenerImpresoraCartucho(String code, String marca, String estadoString,
-			boolean esAColor, String paginasPorMinutoString, String capacidadCartuchoString,
-			String desgasteCartuchoString)
+	static ImpresoraCartucho obtenerImpresoraCartucho(String code, String marca, String estadoString, boolean esAColor,
+			String paginasPorMinutoString, String capacidadCartuchoString, String desgasteCartuchoString)
 			throws TextIsEmptyException, ObjectNotExists, NumberFormatException, FueraRangoException {
 		Utility.throwIfEmpty(code, "codigo");
 		Utility.throwIfEmpty(marca, "marca");
@@ -94,35 +93,12 @@ public class CtrlPanelAddImpCartucho {
 		Utility.throwIfEmpty(desgasteCartuchoString, "descaste de cartucho");
 
 		EstadoImpresora estadoImpresora = EstadoImpresora.obtenerEstadoThrows(estadoString);
-		double paginasPorMinuto = obtenerPagPerMinute(paginasPorMinutoString);
-		double capacidadCartucho = obtenerCapacidad(capacidadCartuchoString);
-		double desgasteCartucho = obtenerDesgaste(desgasteCartuchoString);
+		double paginasPorMinuto = Utility.obtenerDoublelimitarMayorCero(paginasPorMinutoString);
+		double capacidadCartucho = Utility.obtenerDoublelimitarMayorCero(capacidadCartuchoString);
+		double desgasteCartucho = Utility.obtenerDoublelimitarMayorCero(desgasteCartuchoString);
 
 		ImpresoraCartucho impresoraCartucho = new ImpresoraCartucho(code, marca, estadoImpresora, esAColor,
 				paginasPorMinuto, capacidadCartucho, desgasteCartucho);
 		return impresoraCartucho;
 	}
-
-	private static double obtenerDesgaste(String desgasteString) throws FueraRangoException, NumberFormatException {
-		double desgasteCartucho = Double.parseDouble(desgasteString);
-		if (desgasteCartucho <= 0)
-			throw new FueraRangoException("El desgaste tiene que ser mayor que 0");
-		return desgasteCartucho;
-	}
-
-	private static double obtenerPagPerMinute(String paginasPorMinutoString)
-			throws FueraRangoException, NumberFormatException {
-		double paginasPorMinuto = Double.parseDouble(paginasPorMinutoString);
-		if (paginasPorMinuto <= 0)
-			throw new FueraRangoException("Las paginas por minuto tienen que ser mayor a 0");
-		return paginasPorMinuto;
-	}
-
-	private static double obtenerCapacidad(String capacidadString) throws FueraRangoException, NumberFormatException {
-		double capacidadCartucho = Double.parseDouble(capacidadString);
-		if (capacidadCartucho <= 0)
-			throw new FueraRangoException("Las capacidad tiene que ser mayor a 0");
-		return capacidadCartucho;
-	}
-
 }

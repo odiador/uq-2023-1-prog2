@@ -34,7 +34,7 @@ public class CtrlObtenerArchivo {
 	 *
 	 * @return
 	 */
-	public static File obtenerRutaPrincipal() {
+	private static File obtenerRutaPrincipal() {
 		String property = System.getProperty("user.home");
 		File recordsDir = new File(property, "Desktop");
 		if (recordsDir.exists())

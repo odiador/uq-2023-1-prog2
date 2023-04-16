@@ -18,6 +18,14 @@ import javafx.scene.control.TableView;
 import javafx.util.Callback;
 
 public class CtrlSeeDocs {
+	public static ArrayList<Documento> obtenerListaCola() {
+		return (ArrayList<Documento>) new SerializedData().getCentroImpresion().getListaDocumentos();
+	}
+
+	public static ArrayList<Documento> obtenerListaImpresos() {
+		return (ArrayList<Documento>) new SerializedData().getCentroImpresion().getListaDocumentosImpresos();
+	}
+
 	public static Callback<TableColumn<Documento, String>, TableCell<Documento, String>> obtenerCallbackContenido() {
 		return new Callback<TableColumn<Documento, String>, TableCell<Documento, String>>() {
 
@@ -92,11 +100,4 @@ public class CtrlSeeDocs {
 		};
 	}
 
-	public static ArrayList<Documento> obtenerListaCola() {
-		return (ArrayList<Documento>) new SerializedData().getCentroImpresion().getListaDocumentos();
-	}
-
-	public static ArrayList<Documento> obtenerListaImpresos() {
-		return (ArrayList<Documento>) new SerializedData().getCentroImpresion().getListaDocumentosImpresos();
-	}
 }

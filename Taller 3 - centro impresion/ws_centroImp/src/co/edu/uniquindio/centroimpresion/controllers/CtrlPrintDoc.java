@@ -30,6 +30,32 @@ import javafx.util.Duration;
 
 public class CtrlPrintDoc {
 
+	public static void verDocEnCola(Stage stage) {
+		Scene escenaAnterior = stage.getScene();
+		SerializedData data = new SerializedData();
+		Documento documento;
+		try {
+			documento = data.getCentroImpresion().obtenerPrimerElementoDocumento();
+			EscenaVerDoc escenaVerDoc = new EscenaVerDoc(stage, escenaAnterior, documento, 1000, 800);
+			escenaVerDoc.getStylesheets().add(Main.css.toExternalForm());
+			stage.setScene(escenaVerDoc);
+		} catch (NoHayColaImpresionException e) {
+			new Alert(AlertType.WARNING, e.getMessage()).show();
+		}
+	}
+
+	public static void irAPedirImpresora(PanelMenuOpcionObjetos panel, PanelPrintDoc panelImprimirMain, Stage stage) {
+		panel.setCenter(new PanelPrintPedirImpresora(panel, panelImprimirMain, stage));
+	}
+
+	public static interface PuedeAgregarCaracter {
+		public void agregarCaracter(char caracter);
+	}
+
+	public static interface ImpresionTerminada {
+		public void impresionTerminada();
+	}
+
 	private static void imprimirPrimerDocumento(Stage stage) {
 		try {
 			Relacion<Impresora, Documento> relacion = imprimirPrimerDocumentoThrows();
@@ -54,8 +80,7 @@ public class CtrlPrintDoc {
 
 	static void mostrarPanelImpresion(Stage stage, Relacion<Impresora, Documento> relacion) {
 		Scene escenaAnterior = stage.getScene();
-		Scene escenaNueva = new EscenaImpresion(relacion, stage,
-				escenaAnterior);
+		Scene escenaNueva = new EscenaImpresion(relacion, stage, escenaAnterior);
 		escenaNueva.getStylesheets().add(Main.css.toExternalForm());
 		stage.setScene(escenaNueva);
 	}
@@ -99,32 +124,6 @@ public class CtrlPrintDoc {
 				return null;
 			}
 		};
-	}
-
-	public static void verDocEnCola(Stage stage) {
-		Scene escenaAnterior = stage.getScene();
-		SerializedData data = new SerializedData();
-		Documento documento;
-		try {
-			documento = data.getCentroImpresion().obtenerPrimerElementoDocumento();
-			EscenaVerDoc escenaVerDoc = new EscenaVerDoc(stage, escenaAnterior, documento, 1000, 800);
-			escenaVerDoc.getStylesheets().add(Main.css.toExternalForm());
-			stage.setScene(escenaVerDoc);
-		} catch (NoHayColaImpresionException e) {
-			new Alert(AlertType.WARNING, e.getMessage()).show();
-		}
-	}
-
-	public static void irAPedirImpresora(PanelMenuOpcionObjetos panel, PanelPrintDoc panelImprimirMain, Stage stage) {
-		panel.setCenter(new PanelPrintPedirImpresora(panel, panelImprimirMain, stage));
-	}
-
-	public static interface PuedeAgregarCaracter {
-		public void agregarCaracter(char caracter);
-	}
-
-	public static interface ImpresionTerminada {
-		public void impresionTerminada();
 	}
 
 	public static ChangeListener<? super Color> generarGradianteRgb(TextArea textoContenido) {

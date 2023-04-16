@@ -1,5 +1,6 @@
 package co.edu.uniquindio.centroimpresion.view.util;
 
+import co.edu.uniquindio.centroimpresion.exceptions.FueraRangoException;
 import co.edu.uniquindio.centroimpresion.exceptions.TextIsEmptyException;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -96,6 +97,22 @@ public class Utility {
 	public static void throwIfNull(Object obj, String msg) throws TextIsEmptyException {
 		if (obj == null)
 			throw new TextIsEmptyException(msg);
+	}
+
+	public static double obtenerDoublelimitarMayorCero(String desgasteString) throws FueraRangoException, NumberFormatException {
+		double desgasteCartucho = Double.parseDouble(desgasteString);
+		if (desgasteCartucho <= 0)
+			throw new FueraRangoException("El desgaste tiene que ser mayor que 0");
+		return desgasteCartucho;
+	}
+
+	public static int obtenerIntlimitarMayorCero(String duracionTonerString)
+			throws FueraRangoException, NumberFormatException {
+	
+		int duracionToner = Integer.parseInt(duracionTonerString);
+		if (duracionToner <= 0)
+			throw new FueraRangoException("La duraci�n tiene que ser mayor o igual a 0");
+		return duracionToner;
 	}
 
 }

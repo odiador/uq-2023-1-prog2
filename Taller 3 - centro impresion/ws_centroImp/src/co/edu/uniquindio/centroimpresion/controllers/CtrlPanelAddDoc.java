@@ -23,124 +23,6 @@ import javafx.stage.Stage;
 
 public class CtrlPanelAddDoc {
 
-	/**
-	 * Obtiene un documento del panel
-	 *
-	 * @param textoCodigo
-	 * @param textoPrioridad
-	 * @return
-	 * @throws DocumentoEnProcesoException
-	 * @throws ArchivoNoObtenidoException
-	 * @throws NoSePuedeLeerException
-	 * @throws FueraRangoException
-	 * @throws TextIsEmptyException
-	 */
-	public static Documento pedirDocumento(String textoCodigo, String textoPrioridad)
-			throws ArchivoNoObtenidoException, NoSePuedeLeerException, FueraRangoException, TextIsEmptyException {
-		int prioridad = 5;
-		try {
-			prioridad = Integer.parseInt(textoPrioridad);
-		} catch (NumberFormatException e) {
-		}
-		throwIfEmpty(textoCodigo);
-		throwCaseNotInRange(prioridad);
-		Documento documento = pedirDocumento(textoCodigo, prioridad, "Agregar Documento",
-				new FiltroExtension("Documentos de texto", "*.txt"), new FiltroExtension("Todos los archivos", "*.*"));
-		return documento;
-	}
-
-	private static void throwIfEmpty(String textoCodigo) throws TextIsEmptyException {
-		if (textoCodigo.isEmpty()) {
-			throw new TextIsEmptyException("codigo");
-		}
-	}
-
-	public static void throwCaseNotInRange(int prioridad) throws FueraRangoException {
-		if (prioridad < 0 || prioridad > 10) {
-			throw new FueraRangoException("La prioridad tiene que ser entre 0 y 10");
-		}
-	}
-
-	/**
-	 * Permite agregar un documento a partir de su c�digo, prioridad y el t�tulo de
-	 * la ventana
-	 *
-	 * @param code          es el c�digo del documento
-	 * @param prioridad     es la prioridad del documento
-	 * @param tituloVentana es el titulo de la ventana a abrir
-	 * @return null si no se puede leer el documento
-	 * @throws ArchivoNoObtenidoException si no se pudo obtener el documento
-	 * @throws NoSePuedeLeerException
-	 */
-	public static Documento pedirDocumento(String code, int prioridad, String tituloVentana, FiltroExtension... filtros)
-			throws ArchivoNoObtenidoException, NoSePuedeLeerException {
-		File file = CtrlObtenerArchivo.obtenerArchivo(tituloVentana,
-				CtrlObtenerArchivo.obtenerExtensionFiltersDeFiltroExtension(filtros));
-		if (file == null) {
-			throw new ArchivoNoObtenidoException();
-		}
-		return obtenerDocumentoArchivo(code, file, prioridad);
-	}
-
-	/**
-	 * Obtiene un documento a partir de su archivo, c�digo y prioridad; del archivo
-	 * sale el titulo y el contenido
-	 *
-	 * @param code
-	 * @param archivo
-	 * @param prioridad
-	 * @return null si el archivo no se puede leer
-	 * @throws NoSePuedeLeerException
-	 * @throws FileNotFoundException
-	 */
-	public static Documento obtenerDocumentoArchivo(String code, File archivo, int prioridad)
-			throws NoSePuedeLeerException {
-		if (!archivo.canRead()) {
-			throw new NoSePuedeLeerException();
-		}
-		String contenido = "";
-		try {
-			Scanner conexionArchivo = new Scanner(new FileInputStream(archivo));
-			if (conexionArchivo.hasNextLine()) {
-				contenido += conexionArchivo.nextLine();
-			}
-			while (conexionArchivo.hasNextLine())
-				contenido += "\n" + conexionArchivo.nextLine();
-
-			conexionArchivo.close();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-		return new Documento(code, CtrlObtenerArchivo.quitarExtension(archivo.getName()), prioridad, contenido,
-				LocalDateTime.now());
-	}
-
-	/**
-	 * Agrega un documento por medio de un FileChooser, abre una ventana para
-	 * obtener el documento y luego lo intenta a gregar al centro de impresion
-	 *
-	 * @param textoCodigo
-	 * @param textoPrioridad
-	 * @throws DocumentoEnProcesoException
-	 * @throws ArchivoNoObtenidoException
-	 * @throws CentroImpresionException
-	 * @throws NoSePuedeLeerException
-	 * @throws FueraRangoException
-	 * @throws TextIsEmptyException
-	 */
-	public static Documento obtenerDocArchivoThrow(String textoCodigo, String textoPrioridad)
-			throws ArchivoNoObtenidoException, CentroImpresionException, NoSePuedeLeerException, FueraRangoException,
-			TextIsEmptyException {
-
-		throwifDocExist(textoCodigo);
-		Documento doc = pedirDocumento(textoCodigo, textoPrioridad);
-
-		SerializedData data = new SerializedData();
-		data.getCentroImpresion().agregarDocumento(doc);
-		data.updateCentroImpresion();
-		return doc;
-	}
-
 	public static void agregarDocumento(Stage stage, String textoCodigo, String textoPrioridad) {
 		try {
 			Documento documentoAgregado = CtrlPanelAddDoc.obtenerDocArchivoThrow(textoCodigo, textoPrioridad);
@@ -176,17 +58,134 @@ public class CtrlPanelAddDoc {
 	}
 
 	/**
+	 * Obtiene un documento del panel
+	 *
+	 * @param textoCodigo
+	 * @param textoPrioridad
+	 * @return
+	 * @throws DocumentoEnProcesoException
+	 * @throws ArchivoNoObtenidoException
+	 * @throws NoSePuedeLeerException
+	 * @throws FueraRangoException
+	 * @throws TextIsEmptyException
+	 */
+	private static Documento pedirDocumento(String textoCodigo, String textoPrioridad)
+			throws ArchivoNoObtenidoException, NoSePuedeLeerException, FueraRangoException, TextIsEmptyException {
+		int prioridad = 5;
+		try {
+			prioridad = Integer.parseInt(textoPrioridad);
+		} catch (NumberFormatException e) {
+		}
+		throwIfEmpty(textoCodigo);
+		throwCaseNotInRange(prioridad);
+		Documento documento = pedirDocumento(textoCodigo, prioridad, "Agregar Documento",
+				new FiltroExtension("Documentos de texto", "*.txt"), new FiltroExtension("Todos los archivos", "*.*"));
+		return documento;
+	}
+
+	static void throwIfEmpty(String textoCodigo) throws TextIsEmptyException {
+		if (textoCodigo.isEmpty()) {
+			throw new TextIsEmptyException("codigo");
+		}
+	}
+
+	static void throwCaseNotInRange(int prioridad) throws FueraRangoException {
+		if (prioridad < 0 || prioridad > 10) {
+			throw new FueraRangoException("La prioridad tiene que ser entre 0 y 10");
+		}
+	}
+
+	/**
+	 * Permite agregar un documento a partir de su c�digo, prioridad y el t�tulo de
+	 * la ventana
+	 *
+	 * @param code          es el c�digo del documento
+	 * @param prioridad     es la prioridad del documento
+	 * @param tituloVentana es el titulo de la ventana a abrir
+	 * @return null si no se puede leer el documento
+	 * @throws ArchivoNoObtenidoException si no se pudo obtener el documento
+	 * @throws NoSePuedeLeerException
+	 */
+	static Documento pedirDocumento(String code, int prioridad, String tituloVentana, FiltroExtension... filtros)
+			throws ArchivoNoObtenidoException, NoSePuedeLeerException {
+		File file = CtrlObtenerArchivo.obtenerArchivo(tituloVentana,
+				CtrlObtenerArchivo.obtenerExtensionFiltersDeFiltroExtension(filtros));
+		if (file == null) {
+			throw new ArchivoNoObtenidoException();
+		}
+		return obtenerDocumentoArchivo(code, file, prioridad);
+	}
+
+	/**
+	 * Obtiene un documento a partir de su archivo, c�digo y prioridad; del archivo
+	 * sale el titulo y el contenido
+	 *
+	 * @param code
+	 * @param archivo
+	 * @param prioridad
+	 * @return null si el archivo no se puede leer
+	 * @throws NoSePuedeLeerException
+	 * @throws FileNotFoundException
+	 */
+	private static Documento obtenerDocumentoArchivo(String code, File archivo, int prioridad)
+			throws NoSePuedeLeerException {
+		if (!archivo.canRead()) {
+			throw new NoSePuedeLeerException();
+		}
+		String contenido = "";
+		try {
+			Scanner conexionArchivo = new Scanner(new FileInputStream(archivo));
+			if (conexionArchivo.hasNextLine()) {
+				contenido += conexionArchivo.nextLine();
+			}
+			while (conexionArchivo.hasNextLine())
+				contenido += "\n" + conexionArchivo.nextLine();
+
+			conexionArchivo.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		return new Documento(code, CtrlObtenerArchivo.quitarExtension(archivo.getName()), prioridad, contenido,
+				LocalDateTime.now());
+	}
+
+	/**
+	 * Agrega un documento por medio de un FileChooser, abre una ventana para
+	 * obtener el documento y luego lo intenta a gregar al centro de impresion
+	 *
+	 * @param textoCodigo
+	 * @param textoPrioridad
+	 * @throws DocumentoEnProcesoException
+	 * @throws ArchivoNoObtenidoException
+	 * @throws CentroImpresionException
+	 * @throws NoSePuedeLeerException
+	 * @throws FueraRangoException
+	 * @throws TextIsEmptyException
+	 */
+	private static Documento obtenerDocArchivoThrow(String textoCodigo, String textoPrioridad)
+			throws ArchivoNoObtenidoException, CentroImpresionException, NoSePuedeLeerException, FueraRangoException,
+			TextIsEmptyException {
+
+		throwifDocExist(textoCodigo);
+		Documento doc = pedirDocumento(textoCodigo, textoPrioridad);
+
+		SerializedData data = new SerializedData();
+		data.getCentroImpresion().agregarDocumento(doc);
+		data.updateCentroImpresion();
+		return doc;
+	}
+
+	/**
 	 * Muestra un error en caso de que el documento exxista en el centro de
 	 * impresion
 	 * 
 	 * @param code
 	 * @throws CentroImpresionException
 	 */
-	public static void throwifDocExist(String code) throws CentroImpresionException {
+	private static void throwifDocExist(String code) throws CentroImpresionException {
 		SerializedData data = new SerializedData();
-		Documento documento = data.getCentroImpresion().buscarDocumento(code);
-		if (documento != null)
-			throw new CentroImpresionException("El documento ya existe", documento);
+		if (data.getCentroImpresion().validarDocumento(code))
+			throw new CentroImpresionException("El documento ya existe", code);
 
 	}
 }

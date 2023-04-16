@@ -1,11 +1,5 @@
 package co.edu.uniquindio.centroimpresion.controllers;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.time.LocalDateTime;
-import java.util.Scanner;
-
 import co.edu.uniquindio.centroimpresion.exceptions.ArchivoNoObtenidoException;
 import co.edu.uniquindio.centroimpresion.exceptions.CentroImpresionException;
 import co.edu.uniquindio.centroimpresion.exceptions.FueraRangoException;
@@ -27,6 +21,7 @@ public class CtrlUtil {
 		try {
 			data.getCentroImpresion().recargarImpresora(code);
 			data.updateCentroImpresion();
+			new Alert(AlertType.CONFIRMATION, "La impresora con codigo " + code + " ha sido recargada").show();
 		} catch (CentroImpresionException e) {
 			new Alert(AlertType.WARNING, e.getMessage()).show();
 		}
@@ -37,6 +32,7 @@ public class CtrlUtil {
 		try {
 			data.getCentroImpresion().seleccionarImpresora(code);
 			data.updateCentroImpresion();
+			new Alert(AlertType.CONFIRMATION, "La impresora con codigo " + code + " ha sido seleccionada").show();
 		} catch (CentroImpresionException e) {
 			new Alert(AlertType.WARNING, e.getMessage()).show();
 		}
@@ -45,15 +41,26 @@ public class CtrlUtil {
 	public static void actualizarDocumento(String code, String prioridadString, boolean editarContenido) {
 		try {
 			actualizarDocumentoThrows(code, prioridadString, editarContenido);
+			new Alert(AlertType.CONFIRMATION, "El documento con codigo " + code + " ha sido actualizado").show();
 		} catch (TextIsEmptyException | FueraRangoException | ArchivoNoObtenidoException | NoSePuedeLeerException
-				| ObjectNotExists e) {
+				| ObjectNotExists | CentroImpresionException e) {
 			new Alert(AlertType.WARNING, e.getMessage()).show();
 		}
 	}
 
-	public static void actualizarDocumentoThrows(String code, String prioridadString, boolean editarContenido)
+	public static void cambiarEstadoImpresora(String code, String estado) {
+		try {
+			cambiarEstadoImpresoraThrows(code, estado);
+			new Alert(AlertType.CONFIRMATION, "La impresora con codigo " + code + " ahora tiene estado " + estado)
+					.show();
+		} catch (TextIsEmptyException | CentroImpresionException e) {
+			new Alert(AlertType.WARNING, e.getMessage()).show();
+		}
+	}
+
+	private static void actualizarDocumentoThrows(String code, String prioridadString, boolean editarContenido)
 			throws TextIsEmptyException, FueraRangoException, ArchivoNoObtenidoException, NoSePuedeLeerException,
-			ObjectNotExists {
+			ObjectNotExists, CentroImpresionException {
 		Utility.throwIfEmpty(code, "codigo");
 		int prioridad = 5;
 		try {
@@ -75,52 +82,13 @@ public class CtrlUtil {
 		}
 	}
 
-	public static Documento pedirDocumento(String code, int prioridad, String tituloVentana, FiltroExtension... filtros)
-			throws ArchivoNoObtenidoException, NoSePuedeLeerException {
-		File file = CtrlObtenerArchivo.obtenerArchivo(tituloVentana,
-				CtrlObtenerArchivo.obtenerExtensionFiltersDeFiltroExtension(filtros));
-		if (file == null) {
-			throw new ArchivoNoObtenidoException();
-		}
-		if (!file.canRead()) {
-			throw new NoSePuedeLeerException();
-		}
-		String contenido = "";
-		try {
-			Scanner conexionArchivo = new Scanner(new FileInputStream(file));
-			if (conexionArchivo.hasNextLine()) {
-				contenido += conexionArchivo.nextLine();
-			}
-			while (conexionArchivo.hasNextLine())
-				contenido += "\n" + conexionArchivo.nextLine();
-
-			conexionArchivo.close();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-		return new Documento(code, CtrlObtenerArchivo.quitarExtension(file.getName()), prioridad, contenido,
-				LocalDateTime.now());
-	}
-
-	private static void actualizarDocumento(Documento doc) {
+	private static void actualizarDocumento(Documento doc) throws CentroImpresionException {
 		SerializedData data = new SerializedData();
-		try {
-			data.getCentroImpresion().actualizarDocumento(doc);
-			data.updateCentroImpresion();
-		} catch (CentroImpresionException e) {
-			new Alert(AlertType.WARNING, e.getMessage());
-		}
+		data.getCentroImpresion().actualizarDocumento(doc);
+		data.updateCentroImpresion();
 	}
 
-	public static void cambiarEstadoImpresora(String code, String estado) {
-		try {
-			cambiarEstadoImpresoraThrpws(code, estado);
-		} catch (TextIsEmptyException | CentroImpresionException e) {
-			new Alert(AlertType.WARNING, e.getMessage()).show();
-		}
-	}
-
-	public static void cambiarEstadoImpresoraThrpws(String code, String estado)
+	private static void cambiarEstadoImpresoraThrows(String code, String estado)
 			throws TextIsEmptyException, CentroImpresionException {
 		Utility.throwIfEmpty(code, "codigo");
 		Utility.throwIfNull(estado, "estado");
