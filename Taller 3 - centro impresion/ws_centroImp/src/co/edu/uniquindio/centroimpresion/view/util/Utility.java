@@ -1,7 +1,6 @@
 package co.edu.uniquindio.centroimpresion.view.util;
 
 import co.edu.uniquindio.centroimpresion.exceptions.TextIsEmptyException;
-import co.edu.uniquindio.centroimpresion.model.centro.EstadoImpresora;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.beans.value.ChangeListener;

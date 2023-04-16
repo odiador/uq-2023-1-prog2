@@ -2,8 +2,8 @@ package co.edu.uniquindio.centroimpresion.model.centro;
 
 public enum OpcionObjeto {
 
-	DOCUMENTO("Documento"), DOCUMENTO_ESPEFICO("Documento Específico"), IMPRESORA_LASER(
-			"Impresora Laser"), IMPRESORA_CARTUCHO("Impresora Cartucho"), IMPRESORA("Impresora");
+	DOCUMENTO("Documento"), DOCUMENTO_ESPEFICO("Documento Especï¿½fico"), IMPRESORA_LASER("Impresora Laser"),
+	IMPRESORA_CARTUCHO("Impresora Cartucho"), IMPRESORA("Impresora");
 
 	private String text;
 
@@ -13,5 +13,15 @@ public enum OpcionObjeto {
 
 	public String getText() {
 		return text;
+	}
+
+	public static OpcionObjeto obtenerOpcion(String text) {
+		OpcionObjeto[] values = OpcionObjeto.values();
+		for (OpcionObjeto opcionObjeto : values) {
+			if (opcionObjeto.getText().equals(text)) {
+				return opcionObjeto;
+			}
+		}
+		return null;
 	}
 }

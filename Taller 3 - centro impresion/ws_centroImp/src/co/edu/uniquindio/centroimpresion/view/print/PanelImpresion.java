@@ -24,14 +24,15 @@ public class PanelImpresion extends BorderPane {
 		TextArea textoContenido = new TextArea();
 		textoContenido.setId("impresion");
 		textoContenido.setEditable(false);
-		if (!relacion.obtenerCampo1().isEsAColor()) {
-			textoContenido.setStyle("-fx-text-fill: rgb(255.0,255.0,255.0);");
-		}
+
 		ObjectProperty<Color> baseColor = new SimpleObjectProperty<>();
 		Timeline timeline = null;
+
 		if (relacion.obtenerCampo1().isEsAColor()) {
 			baseColor.addListener(CtrlPrintDoc.generarGradianteRgb(textoContenido));
 			timeline = CtrlPrintDoc.generarTimelineRGB(baseColor);
+		} else {
+			textoContenido.setStyle("-fx-text-fill: rgb(0.0, 0.0, 0.0);");
 
 		}
 		setCenter(textoContenido);

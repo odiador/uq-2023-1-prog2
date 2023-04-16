@@ -84,6 +84,7 @@ public class CtrlPanelAddImpLaser {
 		try {
 			agregarImpresoraLaser(code, marca, estadoString, esAColor, letrasPorSegundoString,
 					duracionTonerString);
+			new Alert(AlertType.CONFIRMATION, "La impresora ha sido agregada con éxito").show();
 		} catch (NumberFormatException e) {
 			new Alert(AlertType.WARNING, "Rellena todos los campos").show();
 		} catch (CentroImpresionException e) {

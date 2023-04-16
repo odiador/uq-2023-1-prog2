@@ -16,7 +16,7 @@ public class PanelMenuAdd extends PanelMenuOpcionObjetos {
 
 	private Stage stage;
 
-	public PanelMenuAdd(Stage stage,TipoEmpleado tipoEmpleado) {
+	public PanelMenuAdd(Stage stage, TipoEmpleado tipoEmpleado) {
 		super(TipoAccion.AGREGAR, tipoEmpleado);
 		this.stage = stage;
 	}
@@ -34,7 +34,7 @@ public class PanelMenuAdd extends PanelMenuOpcionObjetos {
 
 	@Override
 	public void btnDocPresionado() {
-		setCenter(new PanelAddDoc(stage,this));
+		setCenter(new PanelAddDoc(stage, this));
 	}
 
 	@Override

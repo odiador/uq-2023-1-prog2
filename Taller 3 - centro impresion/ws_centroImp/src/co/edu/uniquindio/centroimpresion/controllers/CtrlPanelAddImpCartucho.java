@@ -52,6 +52,7 @@ public class CtrlPanelAddImpCartucho {
 					Utility.juntarCadenasParaDoble(velString, velDecimalString),
 					Utility.juntarCadenasParaDoble(capacidadString, capacidadDecimalString),
 					Utility.juntarCadenasParaDoble(desgasteString, desgasteDecimalString));
+			new Alert(AlertType.CONFIRMATION, "La impresora ha sido agregada con éxito").show();
 		} catch (NumberFormatException e) {
 			new Alert(AlertType.WARNING, "Solo coloca numeros en la velocidad, capacidad y desgaste").show();
 		} catch (CentroImpresionException e) {

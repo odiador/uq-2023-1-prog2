@@ -12,8 +12,8 @@ import javafx.scene.layout.VBox;
 
 public abstract class PanelMenuOpcionObjetos extends BorderPane implements EventHandler<Event> {
 
-	private OpcionObjeto[] opciones;
 	private String[] opcionesString;
+	private OpcionObjeto[] opciones;
 	private TipoAccion accion;
 
 	public PanelMenuOpcionObjetos(TipoAccion accion, TipoEmpleado tipoEmpleado) {
@@ -88,11 +88,4 @@ public abstract class PanelMenuOpcionObjetos extends BorderPane implements Event
 
 	}
 
-	public OpcionObjeto[] getOpciones() {
-		return opciones;
-	}
-
-	public void setOpciones(OpcionObjeto[] opciones) {
-		this.opciones = opciones;
-	}
 }
