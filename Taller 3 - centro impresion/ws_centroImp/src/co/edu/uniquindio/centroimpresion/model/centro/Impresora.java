@@ -73,7 +73,7 @@ public abstract class Impresora implements Serializable {
 
 	protected void throwIfNotActive() throws ImpresoraException {
 		if (!estaActiva())
-			throw new ImpresoraException("La impresora no esta activa");
+			throw new ImpresoraException("La impresora no esta activa (Estado: " + estado.getTexto() + ")");
 	}
 
 	public abstract void imprimirDocumento(LocalDateTime dateTime, Documento documento) throws ImpresoraException;
