@@ -12,6 +12,8 @@ import co.edu.uniquindio.centroimpresion.exceptions.CentroImpresionException;
 import co.edu.uniquindio.centroimpresion.exceptions.ImpresoraException;
 import co.edu.uniquindio.centroimpresion.exceptions.NoHayColaImpresionException;
 import co.edu.uniquindio.centroimpresion.exceptions.ObjectNotExists;
+import co.edu.uniquindio.centroimpresion.exceptions.TextIsEmptyException;
+import co.edu.uniquindio.centroimpresion.view.util.Utility;
 
 public class CentroImpresion implements Serializable {
 	/**
@@ -69,22 +71,18 @@ public class CentroImpresion implements Serializable {
 		return listaImpresoras.stream().filter(doc -> doc.getCode().equals(code)).findAny().orElse(null);
 	}
 
+	public boolean buscarImpresoraEsLaser(String code) throws TextIsEmptyException {
+		Impresora impresoraEncontrada = buscarImpresora(code);
+		Utility.throwIfNull(impresoraEncontrada, "codigo");
+		return impresoraEncontrada instanceof ImpresoraLaser;
+	}
+
 	public boolean validarImpresora(String code) {
 		return buscarImpresora(code) != null;
 	}
 
 	public Documento obtenerPrimerElementoDocumento() throws NoHayColaImpresionException {
 		return getListaDocumentos().stream().findFirst().orElseThrow(NoHayColaImpresionException::new);
-	}
-
-	public ArrayList<Documento> obtenerListaOrdenadaTabla() {
-		// Clona la lista de documentos pero no la asigna directamente a otra pera
-		// evitar problemas
-		List<Documento> listaDocumentos = this.listaDocumentos.stream()
-				.collect(Collectors.toCollection(ArrayList::new));
-		listaDocumentos.addAll(listaDocumentosImpresos);
-
-		return listaDocumentos.stream().collect(Collectors.toCollection(ArrayList::new));
 	}
 
 	public Impresora obtenerPrimerElementoImpresora() {

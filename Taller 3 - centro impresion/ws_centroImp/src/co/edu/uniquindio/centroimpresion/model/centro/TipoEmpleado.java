@@ -1,9 +1,9 @@
 package co.edu.uniquindio.centroimpresion.model.centro;
 
 public enum TipoEmpleado {
-	ADMINISTRADOR("Administrador", true, true, true, true, true, true, true, true),
-	SUPERVISOR("Supervisor", false, true, false, true, true, true, false, true),
-	TRABAJADOR("Trabajador", false, false, false, false, false, false, false, false);
+	ADMINISTRADOR("Administrador", true, true, true, true, true, true, true, true, true),
+	SUPERVISOR("Supervisor", false, true, false, true, true, true, false, true, true),
+	TRABAJADOR("Trabajador", false, false, false, false, false, false, false, false, false);
 
 	private boolean puedeAgregarImpresora;
 	private boolean puedeEliminarDocumentos;
@@ -14,11 +14,12 @@ public enum TipoEmpleado {
 	private String text;
 	private boolean puedeSeleccionarImpresora;
 	private boolean puedePuedeActualizarDocumento;
+	private boolean puedeActualizarImpresora;
 
 	private TipoEmpleado(String text, boolean puedeAgregarImpresora, boolean puedeEliminarDocumentos,
 			boolean puedeEliminarImpresoras, boolean puedeVerImpresoras, boolean puedeVerDocs,
 			boolean puedeImprimirDocEsprcifico, boolean puedePuedeActualizarDocumento,
-			boolean puedeSeleccionarImpresora) {
+			boolean puedeSeleccionarImpresora, boolean puedeActualizarImpresora) {
 		this.text = text;
 		this.puedeAgregarImpresora = puedeAgregarImpresora;
 		this.puedeEliminarDocumentos = puedeEliminarDocumentos;
@@ -28,6 +29,7 @@ public enum TipoEmpleado {
 		this.puedeImprimirDocEsprcifico = puedeImprimirDocEsprcifico;
 		this.puedePuedeActualizarDocumento = puedePuedeActualizarDocumento;
 		this.puedeSeleccionarImpresora = puedeSeleccionarImpresora;
+		this.puedeActualizarImpresora = puedeActualizarImpresora;
 	}
 
 	public String getText() {
@@ -64,5 +66,9 @@ public enum TipoEmpleado {
 
 	public boolean puedeActualizarDocumento() {
 		return puedePuedeActualizarDocumento;
+	}
+
+	public boolean puedeActualizarImpresora() {
+		return puedeActualizarImpresora;
 	}
 }
