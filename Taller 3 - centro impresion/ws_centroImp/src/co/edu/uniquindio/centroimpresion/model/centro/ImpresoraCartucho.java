@@ -71,4 +71,9 @@ public class ImpresoraCartucho extends Impresora {
 				+ esAColor + ", documentosImpresos=" + documentosImpresos + "]";
 	}
 
+	@Override
+	protected void recargar() {
+		recargarCartucho();
+	}
+
 }

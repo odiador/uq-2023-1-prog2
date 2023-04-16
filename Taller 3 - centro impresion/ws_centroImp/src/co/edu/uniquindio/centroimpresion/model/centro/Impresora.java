@@ -174,4 +174,6 @@ public abstract class Impresora implements Serializable {
 				+ ", paginasImpresas=" + documentosImpresos + "]";
 	}
 
+	protected abstract void recargar();
+
 }

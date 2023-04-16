@@ -59,4 +59,9 @@ public class ImpresoraLaser extends Impresora {
 				nivelToner);
 	}
 
+	@Override
+	protected void recargar() {
+		recargarToner();
+	}
+
 }
