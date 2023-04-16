@@ -63,7 +63,7 @@ public class CtrlPanelAddDoc {
 		}
 	}
 
-	private static void throwCaseNotInRange(int prioridad) throws FueraRangoException {
+	public static void throwCaseNotInRange(int prioridad) throws FueraRangoException {
 		if (prioridad < 0 || prioridad > 10) {
 			seEstaPidiendo = false;
 			throw new FueraRangoException("La prioridad tiene que ser entre 0 y 10");

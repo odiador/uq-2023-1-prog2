@@ -34,7 +34,7 @@ public class PanelPrintDoc extends PanelConVolver {
 		btnVerColaCase.setId("btn-case");
 
 		btnImprimir.setOnMouseReleased(evt -> CtrlPrintDoc.irAPedirImpresora(panel, this, stage));
-		btnVerCola.setOnMouseReleased(evt -> CtrlPrintDoc.verPrimerDocumento(stage));
+		btnVerCola.setOnMouseReleased(evt -> CtrlPrintDoc.verDocEnCola(stage));
 		vbox.getChildren().add(btnImprimirCase);
 		vbox.getChildren().add(btnVerColaCase);
 		setCenter(vbox);

@@ -14,12 +14,18 @@ import co.edu.uniquindio.centroimpresion.view.custom.PanelMenuOpcionObjetos;
 import co.edu.uniquindio.centroimpresion.view.print.PanelImpresionVolver;
 import co.edu.uniquindio.centroimpresion.view.print.PanelPrintDoc;
 import co.edu.uniquindio.centroimpresion.view.print.PanelPrintPedirImpresora;
+import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.value.ChangeListener;
 import javafx.concurrent.Task;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.TextArea;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -49,8 +55,8 @@ public class CtrlPrintDoc {
 
 	static void mostrarPanelImpresion(Stage stage, Relacion<Impresora, Documento> relacion) {
 		Scene escenaAnterior = stage.getScene();
-		Scene escenaNueva = new EscenaImpresion(new PanelImpresionVolver(relacion, stage, escenaAnterior),
-				stage, escenaAnterior);
+		Scene escenaNueva = new EscenaImpresion(new PanelImpresionVolver(relacion, stage, escenaAnterior), stage,
+				escenaAnterior);
 		escenaNueva.getStylesheets().add(Main.css.toExternalForm());
 		stage.setScene(escenaNueva);
 	}
@@ -71,9 +77,10 @@ public class CtrlPrintDoc {
 		return relacion;
 	}
 
-	public static Task<Void> generarTareaImpresion(String contenido, double letrasSeg,
-			PuedeAgregarCaracter puedeAgregarCaracter) {
-		double letrasMiliseg = 1000 / letrasSeg;
+	public static Task<Void> generarTareaImpresion(Relacion<Impresora, Documento> relacion,
+			PuedeAgregarCaracter puedeAgregarCaracter, ImpresionTerminada impresionTerminada) {
+		double letrasMiliseg = 1000 / relacion.obtenerCampo1().getLetrasPorSegundo();
+		String contenido = relacion.obtenerCampo2().getContenido();
 		return new Task<Void>() {
 
 			@Override
@@ -85,15 +92,17 @@ public class CtrlPrintDoc {
 							evt -> puedeAgregarCaracter.agregarCaracter(contenido.charAt(indice)));
 					timeline.getKeyFrames().add(key);
 				}
-				timeline.setOnFinished(
-						evt -> new Alert(AlertType.CONFIRMATION, "La impresion ha sido finalizada").show());
+				timeline.setOnFinished(evt -> {
+					impresionTerminada.impresionTerminada();
+					new Alert(AlertType.CONFIRMATION, "La impresion ha sido finalizada").show();
+				});
 				timeline.play();
 				return null;
 			}
 		};
 	}
 
-	public static void verPrimerDocumento(Stage stage) {
+	public static void verDocEnCola(Stage stage) {
 		Scene escenaAnterior = stage.getScene();
 		SerializedData data = new SerializedData();
 		Documento documento;
@@ -103,7 +112,7 @@ public class CtrlPrintDoc {
 			escenaVerDoc.getStylesheets().add(Main.css.toExternalForm());
 			stage.setScene(escenaVerDoc);
 		} catch (NoHayColaImpresionException e) {
-			new Alert(AlertType.ERROR, e.getMessage()).show();
+			new Alert(AlertType.WARNING, e.getMessage()).show();
 		}
 	}
 
@@ -115,4 +124,28 @@ public class CtrlPrintDoc {
 		public void agregarCaracter(char caracter);
 	}
 
+	public static interface ImpresionTerminada {
+		public void impresionTerminada();
+	}
+
+	public static ChangeListener<? super Color> generarGradianteRgb(TextArea textoContenido) {
+		return (obs, oldColor, newColor) -> {
+			// %02x hace referencia al formato hexagecimal
+			textoContenido.setStyle(String.format("-gradient-base: #%02x%02x%02x; ", (int) (newColor.getRed() * 255),
+					(int) (newColor.getGreen() * 255), (int) (newColor.getBlue() * 255)));
+		};
+	}
+
+	public static Timeline generarTimelineRGB(ObjectProperty<Color> baseColor) {
+		Timeline timeline;
+		KeyValue keyValue1 = new KeyValue(baseColor, Color.MAGENTA);
+		KeyValue keyValue2 = new KeyValue(baseColor, Color.DODGERBLUE);
+		KeyFrame keyFrame1 = new KeyFrame(Duration.ZERO, keyValue1);
+		KeyFrame keyFrame2 = new KeyFrame(Duration.millis(500), keyValue2);
+		timeline = new Timeline(keyFrame1, keyFrame2);
+		timeline.setAutoReverse(true);
+		timeline.setCycleCount(Animation.INDEFINITE);
+		timeline.play();
+		return timeline;
+	}
 }
