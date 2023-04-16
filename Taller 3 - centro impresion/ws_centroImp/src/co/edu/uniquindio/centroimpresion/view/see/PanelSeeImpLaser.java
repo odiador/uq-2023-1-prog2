@@ -6,16 +6,16 @@ import co.edu.uniquindio.centroimpresion.controllers.CtrlSeeImpLaser;
 import co.edu.uniquindio.centroimpresion.model.archivos.SerializedData;
 import co.edu.uniquindio.centroimpresion.model.centro.ImpresoraLaser;
 import co.edu.uniquindio.centroimpresion.view.custom.PanelConVolver;
-import co.edu.uniquindio.centroimpresion.view.custom.PanelMenuOpcionObjetos;
+import co.edu.uniquindio.centroimpresion.view.menu.PanelMenuSee;
 import javafx.collections.FXCollections;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
 public class PanelSeeImpLaser extends PanelConVolver {
-	private PanelMenuOpcionObjetos panel;
+	private PanelMenuSee panel;
 
-	public PanelSeeImpLaser(PanelMenuOpcionObjetos panel) {
-		this.panel = panel;
+	public PanelSeeImpLaser(PanelMenuSee panelMenuSee) {
+		this.panel = panelMenuSee;
 		initComp();
 	}
 
@@ -61,7 +61,7 @@ public class PanelSeeImpLaser extends PanelConVolver {
 
 	@Override
 	public void volverPresionado() {
-		panel.initComp();
+		panel.initComponents();
 	}
 
 }

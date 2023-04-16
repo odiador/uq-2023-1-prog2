@@ -6,16 +6,16 @@ import co.edu.uniquindio.centroimpresion.controllers.CtrlSeeImpCartucho;
 import co.edu.uniquindio.centroimpresion.model.archivos.SerializedData;
 import co.edu.uniquindio.centroimpresion.model.centro.ImpresoraCartucho;
 import co.edu.uniquindio.centroimpresion.view.custom.PanelConVolver;
-import co.edu.uniquindio.centroimpresion.view.custom.PanelMenuOpcionObjetos;
+import co.edu.uniquindio.centroimpresion.view.menu.PanelMenuSee;
 import javafx.collections.FXCollections;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
 public class PanelSeeImpCartucho extends PanelConVolver {
-	private PanelMenuOpcionObjetos panel;
+	private PanelMenuSee panel;
 
-	public PanelSeeImpCartucho(PanelMenuOpcionObjetos panel) {
-		this.panel = panel;
+	public PanelSeeImpCartucho(PanelMenuSee panelMenuSee) {
+		this.panel = panelMenuSee;
 		initComp();
 	}
 
@@ -65,7 +65,7 @@ public class PanelSeeImpCartucho extends PanelConVolver {
 	}
 
 	public void volverPresionado() {
-		panel.initComp();
+		panel.initComponents();
 	}
 
 }

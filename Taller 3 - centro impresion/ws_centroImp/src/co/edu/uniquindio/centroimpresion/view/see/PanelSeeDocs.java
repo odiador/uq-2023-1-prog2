@@ -3,16 +3,22 @@ package co.edu.uniquindio.centroimpresion.view.see;
 import co.edu.uniquindio.centroimpresion.controllers.CtrlSeeDocs;
 import co.edu.uniquindio.centroimpresion.model.centro.Documento;
 import co.edu.uniquindio.centroimpresion.view.custom.PanelConVolver;
-import co.edu.uniquindio.centroimpresion.view.custom.PanelMenuOpcionObjetos;
+import co.edu.uniquindio.centroimpresion.view.menu.PanelMenuSee;
 import javafx.collections.FXCollections;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
 public class PanelSeeDocs extends PanelConVolver {
-	private PanelMenuOpcionObjetos panel;
+	private PanelMenuSee panel;
+	private boolean verImpresos;
 
-	public PanelSeeDocs(PanelMenuOpcionObjetos panel) {
-		this.panel = panel;
+	public PanelSeeDocs(PanelMenuSee panelMenuSee) {
+		this(panelMenuSee, false);
+	}
+
+	public PanelSeeDocs(PanelMenuSee panelMenuSee, boolean verImpresos) {
+		this.panel = panelMenuSee;
+		this.verImpresos = verImpresos;
 		initComp();
 	}
 
@@ -42,13 +48,16 @@ public class PanelSeeDocs extends PanelConVolver {
 		tableView.getColumns().add(colFechaImpreso);
 		tableView.getColumns().add(colContenido);
 
-		tableView.setItems(FXCollections.observableArrayList(CtrlSeeDocs.obtenerListaTabla()));
+		if (verImpresos)
+			tableView.setItems(FXCollections.observableArrayList(CtrlSeeDocs.obtenerListaImpresos()));
+		else
+			tableView.setItems(FXCollections.observableArrayList(CtrlSeeDocs.obtenerListaCola()));
 		setCenter(tableView);
 	}
 
 	@Override
 	public void volverPresionado() {
-		panel.initComp();
+		panel.initComponents();
 	}
 
 }

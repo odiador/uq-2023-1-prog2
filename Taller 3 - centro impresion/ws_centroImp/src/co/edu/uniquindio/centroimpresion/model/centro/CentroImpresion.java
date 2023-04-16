@@ -223,4 +223,8 @@ public class CentroImpresion implements Serializable {
 
 	}
 
+	public List<Documento> getListaDocumentosImpresos() {
+		return listaDocumentosImpresos;
+	}
+
 }

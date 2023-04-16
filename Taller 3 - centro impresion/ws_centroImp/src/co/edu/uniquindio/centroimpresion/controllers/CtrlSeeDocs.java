@@ -92,7 +92,11 @@ public class CtrlSeeDocs {
 		};
 	}
 
-	public static ArrayList<Documento> obtenerListaTabla() {
+	public static ArrayList<Documento> obtenerListaCola() {
 		return (ArrayList<Documento>) new SerializedData().getCentroImpresion().getListaDocumentos();
+	}
+
+	public static ArrayList<Documento> obtenerListaImpresos() {
+		return (ArrayList<Documento>) new SerializedData().getCentroImpresion().getListaDocumentosImpresos();
 	}
 }
