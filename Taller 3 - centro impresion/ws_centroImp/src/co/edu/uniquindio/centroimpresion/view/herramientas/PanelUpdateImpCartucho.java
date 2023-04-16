@@ -108,7 +108,7 @@ public class PanelUpdateImpCartucho extends BorderPane {
 		tfDesgaste.setText(Utility.obtenerParteEnteraDouble(impresora.getDesgasteCartucho()) + "");
 		tfDesgasteDecimal.setText(Utility.obtenerDecimalesDouble(impresora.getDesgasteCartucho()) + "");
 		comboEstados.setValue(impresora.getEstado().getTexto());
-		checkColor.setSelected(impresora.estaActiva());
+		checkColor.setSelected(impresora.esAColor());
 
 	}
 }

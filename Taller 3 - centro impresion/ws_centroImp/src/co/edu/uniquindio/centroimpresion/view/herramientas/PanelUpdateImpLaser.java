@@ -82,6 +82,6 @@ public class PanelUpdateImpLaser extends BorderPane {
 		tfVelDecimal.setText(Utility.obtenerDecimalesDouble(impresora.getLetrasPorSegundo()) + "");
 		tfDuracion.setText(impresora.getDuracionToner() + "");
 		comboEstados.setValue(impresora.getEstado().getTexto());
-		checkColor.setSelected(impresora.estaActiva());
+		checkColor.setSelected(impresora.esAColor());
 	}
 }

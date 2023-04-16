@@ -28,7 +28,7 @@ public class PanelImpresion extends BorderPane {
 		ObjectProperty<Color> baseColor = new SimpleObjectProperty<>();
 		Timeline timeline = null;
 
-		if (relacion.obtenerCampo1().isEsAColor()) {
+		if (relacion.obtenerCampo1().esAColor()) {
 			baseColor.addListener(CtrlPrintDoc.generarGradianteRgb(textoContenido));
 			timeline = CtrlPrintDoc.generarTimelineRGB(baseColor);
 		} else {

@@ -25,7 +25,7 @@ public class CtrlSeeImpCartucho {
 	}
 
 	public static Callback<CellDataFeatures<ImpresoraCartucho, String>, ObservableValue<String>> obtenerCallbackEsAColor() {
-		return data -> new ReadOnlyStringWrapper(data.getValue().isEsAColor() ? "Si" : "No");
+		return data -> new ReadOnlyStringWrapper(data.getValue().esAColor() ? "Si" : "No");
 	}
 
 	public static Callback<CellDataFeatures<ImpresoraCartucho, String>, ObservableValue<String>> obtenerCallbackVelocidad() {

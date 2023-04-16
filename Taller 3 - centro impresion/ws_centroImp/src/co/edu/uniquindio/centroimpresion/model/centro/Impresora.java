@@ -113,7 +113,7 @@ public abstract class Impresora implements Serializable {
 		this.letrasPorSegundo = letrasPorSegundo;
 	}
 
-	public boolean isEsAColor() {
+	public boolean esAColor() {
 		return esAColor;
 	}
 
