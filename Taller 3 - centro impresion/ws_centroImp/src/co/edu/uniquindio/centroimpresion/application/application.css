@@ -80,36 +80,42 @@
 	-fx-pref-width: 250.0;
 }
 #btn {
+	-fx-ellipsis-string: "";
 	-fx-alignment: center;
 	-fx-font-size: 20.0;
+	-fx-arc-width: 3.0;
 	-fx-max-width: 1000000.0;
 	-fx-max-height: 1000000.0;
+	-fx-text-fill: white;
+	-fx-font-weight: bold;
 }
 #btn-case {
-	-fx-background-color: rgb(0.0,255.0,0.0);
-	-fx-max-width: 200.0;
+	-fx-background-color: #461ee8;
+	-fx-max-width: 400.0;
 	-fx-pref-height: 40.0;
+	-fx-fit-to-width: true;
+	-fx-arc-width: 3.0;
 }
 #btn:hover {
-	-fx-background-color: rgb(0.0,0.0,0.0,0.2)
+	-fx-background-color: rgb(0.0,0.0,0.0,0.3)
 }
 
 #btn:pressed {
-	-fx-background-color: rgb(0.0,0.0,0.0,0.3);
+	-fx-background-color: rgb(0.0,0.0,0.0,0.4);
 }
 
 #btn-volver {
 	-fx-alignment: center;
 	-fx-max-width: 1000000.0;
 	-fx-pref-height: 30.0;
-	-fx-background-color: rgb(30.0,91.0,232.0);
+	-fx-background-color: #e81e5b;
 }
 
 #btn-volver:hover {
-	-fx-background-color: rgb(21.0,75.0,220.0);
+	-fx-background-color: #b81345;
 }
 #btn-volver:pressed {
-	-fx-background-color: rgb(17.0,62.0,167.0);
+	-fx-background-color: #950f38;
 }
 #header {
 	-fx-alignment: center;
@@ -127,6 +133,7 @@
 	-fx-font-size: 25.0;
 	-fx-background-color: rgb(30.0,91.0,232.0);
 	-fx-font-weight: bold;
+	-fx-text-fill: white;
 	-fx-pref-height: 40.0;
 	-fx-pref-width: 300.0;
 	-fx-arc-width: 3.0;
