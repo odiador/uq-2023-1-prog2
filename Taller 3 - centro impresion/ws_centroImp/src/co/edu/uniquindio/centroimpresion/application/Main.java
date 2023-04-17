@@ -2,7 +2,6 @@ package co.edu.uniquindio.centroimpresion.application;
 
 import java.net.URL;
 
-import co.edu.uniquindio.centroimpresion.model.scenes.EscenaMenu;
 import co.edu.uniquindio.centroimpresion.model.scenes.EscenaPrincipal;
 import javafx.application.Application;
 import javafx.scene.Scene;
