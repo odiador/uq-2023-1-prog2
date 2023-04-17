@@ -17,10 +17,16 @@ import javafx.scene.layout.VBox;
 
 public class PanelUpdateImpCartucho extends BorderPane {
 	private ImpresoraCartucho impresora;
+	private boolean sePuedeEditar;
+
+	public PanelUpdateImpCartucho(ImpresoraCartucho impresora, boolean sePuedeEditar) {
+		this.impresora = impresora;
+		this.sePuedeEditar = sePuedeEditar;
+		initComponents();
+	}
 
 	public PanelUpdateImpCartucho(ImpresoraCartucho impresora) {
-		this.impresora = impresora;
-		initComponents();
+		this(impresora, true);
 	}
 
 	private void initComponents() {
@@ -34,7 +40,13 @@ public class PanelUpdateImpCartucho extends BorderPane {
 		TextField tfDesgaste = new TextField();
 		TextField tfDesgasteDecimal = new TextField();
 		ComboBox<String> comboEstados = new ComboBox<String>();
-		CheckBox checkColor = new CheckBox();
+		CheckBox checkColor = new CheckBox() {
+			@Override
+			public void arm() {
+				if (sePuedeEditar)
+					super.arm();
+			}
+		};
 		Boton btnAgregar = new Boton("Actualizar Impresora", event -> {
 			CtrlActualizarImpresora.actualizarImpresoraCartucho(tfCode.getText(), tfMarca.getText(),
 					comboEstados.getValue(), checkColor.isSelected(),
@@ -73,15 +85,31 @@ public class PanelUpdateImpCartucho extends BorderPane {
 		comboEstados.setId("combobox");
 		checkColor.setId("checkbox");
 
+		tfCode.setText(impresora.getCode());
+		tfMarca.setText(impresora.getMarca());
+		tfVel.setText(Utility.obtenerParteEnteraDouble(impresora.getLetrasPorSegundo()) + "");
+		tfVelDecimal.setText(Utility.obtenerDecimalesDouble(impresora.getLetrasPorSegundo()) + "");
+		tfCapacidad.setText(Utility.obtenerParteEnteraDouble(impresora.getCapacidadCartucho()) + "");
+		tfCapacidadDecimal.setText(Utility.obtenerDecimalesDouble(impresora.getCapacidadCartucho()) + "");
+		tfDesgaste.setText(Utility.obtenerParteEnteraDouble(impresora.getDesgasteCartucho()) + "");
+		tfDesgasteDecimal.setText(Utility.obtenerDecimalesDouble(impresora.getDesgasteCartucho()) + "");
+		comboEstados.setValue(impresora.getEstado().getTexto());
+		checkColor.setSelected(impresora.esAColor());
+
 		vBox.getChildren().add(Utility.generarHBox("Codigo de la impresora", tfCode));
-		vBox.getChildren().add(Utility.generarHBox("Escribe la marca de la impresora", tfMarca));
-		vBox.getChildren().add(Utility.generarHBox("Elige el estado de la impresora", comboEstados));
+		vBox.getChildren().add(Utility.generarHBox("Marca de la impresora", tfMarca));
+		vBox.getChildren().add(Utility.generarHBox("Estado de la impresora", comboEstados));
+		if (sePuedeEditar) {
+			vBox.getChildren().add(Utility.generarHBox("Estado de la impresora", comboEstados));
+		} else {
+			vBox.getChildren().add(Utility.generarHBox("Estado de la impresora", new Label(comboEstados.getValue())));
+		}
 		vBox.getChildren().add(Utility.generarHBox("¿La impresora es a color?", checkColor));
-		vBox.getChildren().add(Utility.generarHBox(0, "Escribe la vel de la impresora (letras por segundo)", tfVel,
+		vBox.getChildren().add(Utility.generarHBox(0, "Velocidad de la impresora (letras por segundo)", tfVel,
 				new Label(","), tfVelDecimal));
-		vBox.getChildren().add(Utility.generarHBox(0, "Escribe la capacidad de cartucho de la impresora", tfCapacidad,
+		vBox.getChildren().add(Utility.generarHBox(0, "Capacidad de cartucho de la impresora", tfCapacidad,
 				new Label(","), tfCapacidadDecimal));
-		vBox.getChildren().add(Utility.generarHBox(0, "Escribe el desgaste del cartucho de la impresora", tfDesgaste,
+		vBox.getChildren().add(Utility.generarHBox(0, "Desgaste del cartucho de la impresora", tfDesgaste,
 				new Label(","), tfDesgasteDecimal));
 
 		vBox.getChildren().add(btnAgregar);
@@ -99,16 +127,16 @@ public class PanelUpdateImpCartucho extends BorderPane {
 		Utility.setMaximumTextLength(tfDesgasteDecimal, 2);
 		Utility.setMaximumTextLength(tfVelDecimal, 2);
 
-		tfCode.setText(impresora.getCode());
-		tfMarca.setText(impresora.getMarca());
-		tfVel.setText(Utility.obtenerParteEnteraDouble(impresora.getLetrasPorSegundo()) + "");
-		tfVelDecimal.setText(Utility.obtenerDecimalesDouble(impresora.getLetrasPorSegundo()) + "");
-		tfCapacidad.setText(Utility.obtenerParteEnteraDouble(impresora.getCapacidadCartucho()) + "");
-		tfCapacidadDecimal.setText(Utility.obtenerDecimalesDouble(impresora.getCapacidadCartucho()) + "");
-		tfDesgaste.setText(Utility.obtenerParteEnteraDouble(impresora.getDesgasteCartucho()) + "");
-		tfDesgasteDecimal.setText(Utility.obtenerDecimalesDouble(impresora.getDesgasteCartucho()) + "");
-		comboEstados.setValue(impresora.getEstado().getTexto());
-		checkColor.setSelected(impresora.esAColor());
-
+		if (!sePuedeEditar) {
+			tfMarca.setEditable(false);
+			tfVel.setEditable(false);
+			tfVelDecimal.setEditable(false);
+			tfCapacidad.setEditable(false);
+			tfCapacidadDecimal.setEditable(false);
+			tfDesgaste.setEditable(false);
+			tfDesgasteDecimal.setEditable(false);
+			comboEstados.getEditor().setEditable(false);
+			btnAgregar.setVisible(false);
+		}
 	}
 }

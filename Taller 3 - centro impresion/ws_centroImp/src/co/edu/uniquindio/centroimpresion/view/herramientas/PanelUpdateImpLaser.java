@@ -18,21 +18,33 @@ import javafx.scene.layout.VBox;
 public class PanelUpdateImpLaser extends BorderPane {
 
 	private ImpresoraLaser impresora;
+	private boolean sePuedeEditar;
+
+	public PanelUpdateImpLaser(ImpresoraLaser impresora, boolean sePuedeEditar) {
+		this.impresora = impresora;
+		this.sePuedeEditar = sePuedeEditar;
+		initComponents();
+	}
 
 	public PanelUpdateImpLaser(ImpresoraLaser impresora) {
-		this.impresora = impresora;
-		initComponents();
+		this(impresora, true);
 	}
 
 	private void initComponents() {
 		VBox vBox = new VBox(20);
-		CheckBox checkColor = new CheckBox();
 		ComboBox<String> comboEstados = new ComboBox<String>();
 		TextField tfCode = new TextField();
 		TextField tfMarca = new TextField();
 		TextField tfVel = new TextField();
 		TextField tfVelDecimal = new TextField();
 		TextField tfDuracion = new TextField();
+		CheckBox checkColor = new CheckBox() {
+			@Override
+			public void arm() {
+				if (sePuedeEditar)
+					super.arm();
+			}
+		};
 
 		tfCode.setEditable(false);
 
@@ -61,13 +73,25 @@ public class PanelUpdateImpLaser extends BorderPane {
 		comboEstados.setId("combobox");
 		checkColor.setId("checkbox");
 
+		tfCode.setText(impresora.getCode());
+		tfMarca.setText(impresora.getMarca());
+		tfVel.setText(Utility.obtenerParteEnteraDouble(impresora.getLetrasPorSegundo()) + "");
+		tfVelDecimal.setText(Utility.obtenerDecimalesDouble(impresora.getLetrasPorSegundo()) + "");
+		tfDuracion.setText(impresora.getDuracionToner() + "");
+		comboEstados.setValue(impresora.getEstado().getTexto());
+		checkColor.setSelected(impresora.esAColor());
+
 		vBox.getChildren().add(Utility.generarHBox("Codigo de la impresora", tfCode));
-		vBox.getChildren().add(Utility.generarHBox("Escribe la marca de la impresora", tfMarca));
-		vBox.getChildren().add(Utility.generarHBox("Elige el estado de la impresora", comboEstados));
+		vBox.getChildren().add(Utility.generarHBox("Marca de la impresora", tfMarca));
+		if (sePuedeEditar) {
+			vBox.getChildren().add(Utility.generarHBox("Estado de la impresora", comboEstados));
+		} else {
+			vBox.getChildren().add(Utility.generarHBox("Estado de la impresora", new Label(comboEstados.getValue())));
+		}
 		vBox.getChildren().add(Utility.generarHBox("¿La impresora es a color?", checkColor));
-		vBox.getChildren().add(Utility.generarHBox(0, "Escribe la vel de la impresora (letras por segundo)", tfVel,
+		vBox.getChildren().add(Utility.generarHBox(0, "Velocidad de la impresora (letras por segundo)", tfVel,
 				new Label(","), tfVelDecimal));
-		vBox.getChildren().add(Utility.generarHBox("Escribe la duracion del toner de la impresora", tfDuracion));
+		vBox.getChildren().add(Utility.generarHBox("Duracion del toner de la impresora", tfDuracion));
 
 		vBox.getChildren().add(btnAgregar);
 		setCenter(vBox);
@@ -76,12 +100,14 @@ public class PanelUpdateImpLaser extends BorderPane {
 		Utility.setAsNumberTextfield(tfVelDecimal);
 		Utility.setAsNumberTextfield(tfDuracion);
 
-		tfCode.setText(impresora.getCode());
-		tfMarca.setText(impresora.getMarca());
-		tfVel.setText(Utility.obtenerParteEnteraDouble(impresora.getLetrasPorSegundo()) + "");
-		tfVelDecimal.setText(Utility.obtenerDecimalesDouble(impresora.getLetrasPorSegundo()) + "");
-		tfDuracion.setText(impresora.getDuracionToner() + "");
-		comboEstados.setValue(impresora.getEstado().getTexto());
-		checkColor.setSelected(impresora.esAColor());
+		if (!sePuedeEditar) {
+			tfMarca.setEditable(false);
+			tfVel.setEditable(false);
+			tfVelDecimal.setEditable(false);
+			tfDuracion.setEditable(false);
+			comboEstados.setEditable(false);
+			comboEstados.getEditor().setEditable(false);
+			btnAgregar.setVisible(false);
+		}
 	}
 }

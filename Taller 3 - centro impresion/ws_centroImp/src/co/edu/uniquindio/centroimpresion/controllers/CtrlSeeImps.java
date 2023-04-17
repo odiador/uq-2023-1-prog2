@@ -3,25 +3,42 @@ package co.edu.uniquindio.centroimpresion.controllers;
 import java.util.Set;
 
 import co.edu.uniquindio.centroimpresion.application.Main;
+import co.edu.uniquindio.centroimpresion.exceptions.CentroImpresionException;
 import co.edu.uniquindio.centroimpresion.model.centro.Documento;
 import co.edu.uniquindio.centroimpresion.model.centro.Impresora;
 import co.edu.uniquindio.centroimpresion.view.custom.Boton;
+import co.edu.uniquindio.centroimpresion.view.menu.PanelMenuSee;
 import co.edu.uniquindio.centroimpresion.view.see.PanelSeeDocs;
+import co.edu.uniquindio.centroimpresion.view.see.PanelSeeSelectedImp;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
 public class CtrlSeeImps {
+
+	public static void irAVerImpresoraSeleccionada(PanelMenuSee panelMenuSee, EventHandler<? super MouseEvent> eventoVolver) {
+		SerializedData data = new SerializedData();
+		try {
+			Impresora impresora = data.getCentroImpresion().obtenerPrimerElementoImpresoraThrows();
+			panelMenuSee.setCenter(new PanelSeeSelectedImp(impresora, eventoVolver));
+		} catch (CentroImpresionException e) {
+			new Alert(AlertType.WARNING, e.getMessage()).show();
+		}
+
+	}
+
 	public static Callback<CellDataFeatures<Impresora, String>, ObservableValue<String>> obtenerCallbackCode() {
 		return data -> new ReadOnlyStringWrapper(data.getValue().getCode());
 	}

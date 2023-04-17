@@ -35,6 +35,7 @@ public class CtrlUtil {
 
 	private static void actualizarImpresoraThrows(PanelMenuUpdate panelMenuUpdate, String code,
 			EventHandler<? super MouseEvent> eventoVolver) throws CentroImpresionException, TextIsEmptyException {
+		Utility.throwIfEmpty(code, "codigo");
 		SerializedData data = new SerializedData();
 		Impresora impresora = data.getCentroImpresion().buscarImpresoraThrows(code);
 		if (impresora instanceof ImpresoraLaser)

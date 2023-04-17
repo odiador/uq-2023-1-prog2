@@ -2,6 +2,7 @@ package co.edu.uniquindio.centroimpresion.view.menu;
 
 import java.util.ArrayList;
 
+import co.edu.uniquindio.centroimpresion.controllers.CtrlSeeImps;
 import co.edu.uniquindio.centroimpresion.model.centro.TipoEmpleado;
 import co.edu.uniquindio.centroimpresion.view.custom.Boton;
 import co.edu.uniquindio.centroimpresion.view.see.PanelSeeDocsVolver;
@@ -26,12 +27,10 @@ public class PanelMenuSee extends BorderPane {
 
 	public void initComponents() {
 		VBox vbox = new VBox();
-		if (tipoEmpleado.puedeVerDocs()) {
-			Boton boton = new Boton("Ver Documentos en Cola", e -> setCenter(new PanelSeeDocsVolver(this)),
-					"boton-opcion");
-			VBox.setMargin(boton, new Insets(20));
-			vbox.getChildren().add(boton);
-		}
+		Boton botonCola = new Boton("Ver Documentos en Cola", e -> setCenter(new PanelSeeDocsVolver(this)),
+				"boton-opcion");
+		VBox.setMargin(botonCola, new Insets(20));
+		vbox.getChildren().add(botonCola);
 		if (tipoEmpleado.puedeVerDocs()) {
 			Boton boton = new Boton("Ver Documentos Impresos", e -> setCenter(new PanelSeeDocsVolver(this, true)),
 					"boton-opcion");
@@ -39,15 +38,18 @@ public class PanelMenuSee extends BorderPane {
 			vbox.getChildren().add(boton);
 		}
 		if (tipoEmpleado.puedeVerImpresoras()) {
+			Boton botonImpresora = new Boton("Ver Impresora Seleccionada",
+					e -> CtrlSeeImps.irAVerImpresoraSeleccionada(this, eventoVolver -> initComponents()),
+					"boton-opcion");
+			VBox.setMargin(botonImpresora, new Insets(20));
+			vbox.getChildren().add(botonImpresora);
 			Boton boton = new Boton("Ver Impresoras", e -> setCenter(new PanelSeeImps(this, stage)), "boton-opcion");
 			VBox.setMargin(boton, new Insets(20));
 			vbox.getChildren().add(boton);
-		}
-		if (tipoEmpleado.puedeVerImpresoras()) {
-			Boton boton = new Boton("Ver Impresoras Cartucho", e -> setCenter(new PanelSeeImpCartucho(this, stage)),
-					"boton-opcion");
-			VBox.setMargin(boton, new Insets(20));
-			vbox.getChildren().add(boton);
+			Boton botonCartucho = new Boton("Ver Impresoras Cartucho",
+					e -> setCenter(new PanelSeeImpCartucho(this, stage)), "boton-opcion");
+			VBox.setMargin(botonCartucho, new Insets(20));
+			vbox.getChildren().add(botonCartucho);
 		}
 		if (tipoEmpleado.puedeVerImpresoras()) {
 			Boton boton = new Boton("Ver Impresoras laser", e -> setCenter(new PanelSeeImpLaser(this, stage)),

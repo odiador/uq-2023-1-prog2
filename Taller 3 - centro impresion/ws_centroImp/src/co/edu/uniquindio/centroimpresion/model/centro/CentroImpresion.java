@@ -86,6 +86,14 @@ public class CentroImpresion implements Serializable {
 		return listaImpresoras.stream().findFirst().orElse(null);
 	}
 
+	public Impresora obtenerPrimerElementoImpresoraThrows() throws CentroImpresionException {
+		return listaImpresoras.stream().findFirst().orElseThrow(() -> {
+			CentroImpresionException centroImpresionException = new CentroImpresionException(
+					"El centro de impresion esta vacio", Impresora.class);
+			return centroImpresionException;
+		});
+	}
+
 	public void deleteDocumento(String code) throws CentroImpresionException {
 		if (!listaDocumentos.remove(buscarDocumento(code)))
 			throw new CentroImpresionException("El documento no fue encontrado", Documento.class);
