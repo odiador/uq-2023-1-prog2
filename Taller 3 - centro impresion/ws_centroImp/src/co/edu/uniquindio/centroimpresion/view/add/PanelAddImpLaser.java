@@ -1,11 +1,11 @@
 package co.edu.uniquindio.centroimpresion.view.add;
 
 import co.edu.uniquindio.centroimpresion.controllers.CtrlPanelAddImpLaser;
-import co.edu.uniquindio.centroimpresion.model.centro.EstadoImpresora;
+import co.edu.uniquindio.centroimpresion.model.EstadoImpresora;
+import co.edu.uniquindio.centroimpresion.util.Utility;
 import co.edu.uniquindio.centroimpresion.view.custom.Boton;
 import co.edu.uniquindio.centroimpresion.view.custom.PanelConVolver;
 import co.edu.uniquindio.centroimpresion.view.custom.PanelMenuOpcionObjetos;
-import co.edu.uniquindio.centroimpresion.view.util.Utility;
 import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
 import javafx.scene.control.CheckBox;

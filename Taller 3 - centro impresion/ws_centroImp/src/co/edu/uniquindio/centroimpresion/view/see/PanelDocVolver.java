@@ -1,6 +1,6 @@
 package co.edu.uniquindio.centroimpresion.view.see;
 
-import co.edu.uniquindio.centroimpresion.model.centro.Documento;
+import co.edu.uniquindio.centroimpresion.model.Documento;
 import co.edu.uniquindio.centroimpresion.view.custom.PanelConVolver;
 import javafx.scene.Scene;
 import javafx.stage.Stage;

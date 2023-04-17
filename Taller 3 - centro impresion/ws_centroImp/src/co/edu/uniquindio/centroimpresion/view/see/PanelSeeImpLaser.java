@@ -4,7 +4,7 @@ import java.util.HashSet;
 
 import co.edu.uniquindio.centroimpresion.controllers.CtrlSeeImpLaser;
 import co.edu.uniquindio.centroimpresion.controllers.SerializedData;
-import co.edu.uniquindio.centroimpresion.model.centro.ImpresoraLaser;
+import co.edu.uniquindio.centroimpresion.model.ImpresoraLaser;
 import co.edu.uniquindio.centroimpresion.view.custom.PanelConVolver;
 import co.edu.uniquindio.centroimpresion.view.menu.PanelMenuSee;
 import javafx.collections.FXCollections;

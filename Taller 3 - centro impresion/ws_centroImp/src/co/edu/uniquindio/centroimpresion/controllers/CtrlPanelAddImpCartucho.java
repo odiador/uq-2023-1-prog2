@@ -4,16 +4,18 @@ import co.edu.uniquindio.centroimpresion.exceptions.CentroImpresionException;
 import co.edu.uniquindio.centroimpresion.exceptions.FueraRangoException;
 import co.edu.uniquindio.centroimpresion.exceptions.ObjectNotExists;
 import co.edu.uniquindio.centroimpresion.exceptions.TextIsEmptyException;
-import co.edu.uniquindio.centroimpresion.model.centro.EstadoImpresora;
-import co.edu.uniquindio.centroimpresion.model.centro.ImpresoraCartucho;
-import co.edu.uniquindio.centroimpresion.view.util.Utility;
+import co.edu.uniquindio.centroimpresion.model.EstadoImpresora;
+import co.edu.uniquindio.centroimpresion.model.ImpresoraCartucho;
+import co.edu.uniquindio.centroimpresion.util.Utility;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 
 public class CtrlPanelAddImpCartucho {
 
 	/**
-	 *
+	 * Agrega una impresora de cartucho con sus atributos, muestra errores en caso
+	 * de que no se den las cosas correctamente
+	 * 
 	 * @param code
 	 * @param marca
 	 * @param estadoString
@@ -21,11 +23,12 @@ public class CtrlPanelAddImpCartucho {
 	 * @param letrasSegString
 	 * @param capacidadCartuchoString
 	 * @param desgasteCartuchoString
-	 * @throws CentroImpresionException
-	 * @throws TextIsEmptyException
-	 * @throws ObjectNotExists
-	 * @throws NumberFormatException
-	 * @throws FueraRangoException
+	 * @throws CentroImpresionException en caso de que ya se encuentre
+	 * @throws TextIsEmptyException     en caso de que algun campo este vacio
+	 * @throws ObjectNotExists          en caso de que algo no exista
+	 * @throws NumberFormatException    en caso de que no se haya enviado un dato
+	 *                                  numerico como numero
+	 * @throws FueraRangoException      en caso de que algo este fuera de rango
 	 */
 	static void agregarImpresoraCartuchoThrows(String code, String marca, String estadoString, boolean esAColor,
 			String letrasSegString, String capacidadCartuchoString, String desgasteCartuchoString)
@@ -43,6 +46,21 @@ public class CtrlPanelAddImpCartucho {
 		}
 	}
 
+	/**
+	 * Agrega una impresora de cartucho con sus atributos, muestra alertas en caso
+	 * de que no se den las cosas correctamente
+	 * 
+	 * @param code
+	 * @param marca
+	 * @param estadoString
+	 * @param esAColor
+	 * @param velString
+	 * @param velDecimalString
+	 * @param capacidadString
+	 * @param capacidadDecimalString
+	 * @param desgasteString
+	 * @param desgasteDecimalString
+	 */
 	public static void agregarImpresoraCartucho(String code, String marca, String estadoString, boolean esAColor,
 			String velString, String velDecimalString, String capacidadString, String capacidadDecimalString,
 			String desgasteString, String desgasteDecimalString) {
@@ -66,7 +84,8 @@ public class CtrlPanelAddImpCartucho {
 	}
 
 	/**
-	 *
+	 * Obtiene una impresora de cartucho por medio de sus parametros
+	 * 
 	 * @param code
 	 * @param marca
 	 * @param estadoString
@@ -74,11 +93,12 @@ public class CtrlPanelAddImpCartucho {
 	 * @param letrasSegString
 	 * @param capacidadCartuchoString
 	 * @param desgasteCartuchoString
-	 * @return
-	 * @throws TextIsEmptyException
-	 * @throws ObjectNotExists
-	 * @throws NumberFormatException
-	 * @throws FueraRangoException
+	 * @return la impresora de cartucho
+	 * @throws TextIsEmptyException  en caso de que algun campo no este lleno
+	 * @throws ObjectNotExists       en caso de que algo sea null
+	 * @throws NumberFormatException en caso de que no se haya podido parsear un
+	 *                               dato a numero
+	 * @throws FueraRangoException   en caso de que algo este fuera de rango
 	 */
 	static ImpresoraCartucho obtenerImpresoraCartucho(String code, String marca, String estadoString, boolean esAColor,
 			String letrasSegString, String capacidadCartuchoString, String desgasteCartuchoString)

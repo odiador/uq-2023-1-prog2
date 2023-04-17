@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-import co.edu.uniquindio.centroimpresion.model.centro.Documento;
+import co.edu.uniquindio.centroimpresion.model.Documento;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.control.Alert;
@@ -17,14 +17,30 @@ import javafx.scene.control.TableView;
 import javafx.util.Callback;
 
 public class CtrlSeeDocs {
+	/**
+	 * Obtiene la lista de documentos en cola del centro de impresion
+	 * 
+	 * @return
+	 */
 	public static ArrayList<Documento> obtenerListaCola() {
 		return (ArrayList<Documento>) new SerializedData().getCentroImpresion().getListaDocumentos();
 	}
 
+	/**
+	 * Obtiene la lista de documentos en cola del centro de impresion
+	 * 
+	 * @return
+	 */
 	public static ArrayList<Documento> obtenerListaImpresos() {
 		return (ArrayList<Documento>) new SerializedData().getCentroImpresion().getListaDocumentosImpresos();
 	}
 
+	/**
+	 * Obtiene el callback del contenido del documento, a cada celda de la columna
+	 * se agrega un boton que muestra el contenido del doc
+	 * 
+	 * @return
+	 */
 	public static Callback<TableColumn<Documento, String>, TableCell<Documento, String>> obtenerCallbackContenido() {
 		return new Callback<TableColumn<Documento, String>, TableCell<Documento, String>>() {
 
@@ -49,23 +65,49 @@ public class CtrlSeeDocs {
 		};
 	}
 
+	/**
+	 * Hace que en toda la columna, en las celdas de le asigne el titulo
+	 * 
+	 * @return
+	 */
 	public static Callback<CellDataFeatures<Documento, String>, ObservableValue<String>> obtenerCallbackTitulo() {
 		return data -> new ReadOnlyStringWrapper(data.getValue().getTitulo());
 	}
 
+	/**
+	 * Hace que en toda la columna, en las celdas de le asigne el codigo
+	 * 
+	 * @return
+	 */
 	public static Callback<CellDataFeatures<Documento, String>, ObservableValue<String>> obtenerCallbackCodigo() {
 		return data -> new ReadOnlyStringWrapper(data.getValue().getCode());
 	}
 
+	/**
+	 * Hace que en toda la columna, en las celdas de le asigne la prioridad
+	 * 
+	 * @return
+	 */
 	public static Callback<CellDataFeatures<Documento, String>, ObservableValue<String>> obtenerCallbackPrioridad() {
 		return data -> new ReadOnlyStringWrapper(data.getValue().getPrioridad() + "");
 	}
 
+	/**
+	 * Hace que en toda la columna, en las celdas de le asigne la fecha de
+	 * agregacion
+	 * 
+	 * @return
+	 */
 	public static Callback<CellDataFeatures<Documento, String>, ObservableValue<String>> obtenerCallbackFechaAgregado() {
 		return data -> new ReadOnlyStringWrapper(
 				data.getValue().getFechaAgregado().format(DateTimeFormatter.ofPattern("HH:mm:ss, dd/MM/yy")));
 	}
 
+	/**
+	 * Hace que en toda la columna, en las celdas de le asigne la fecha de impresion
+	 * 
+	 * @return
+	 */
 	public static Callback<CellDataFeatures<Documento, String>, ObservableValue<String>> obtenerCallbackFechaImpresion() {
 		return data -> {
 			LocalDateTime fechaImpresion = data.getValue().getFechaImpresion();
@@ -75,6 +117,12 @@ public class CtrlSeeDocs {
 		};
 	}
 
+	/**
+	 * Hace que en cada fila se haga una verificacion de que si el doc fue impreso
+	 * para cambiar el diseño a las filas
+	 * 
+	 * @return
+	 */
 	public static Callback<TableView<Documento>, TableRow<Documento>> obtenerDisenioFilas() {
 		return arg0 -> {
 			return new TableRow<Documento>() {
@@ -85,11 +133,7 @@ public class CtrlSeeDocs {
 						setStyle("");
 						return;
 					}
-					if (isSelected()) {
-						setStyle("");
-						return;
-					}
-					if (item.getFechaImpresion() != null)
+					if (item.fueImpreso())
 						setId("tabla-true");
 					else
 						setId("tabla-false");

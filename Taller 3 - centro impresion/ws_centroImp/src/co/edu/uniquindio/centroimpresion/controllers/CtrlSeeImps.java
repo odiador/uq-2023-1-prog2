@@ -4,8 +4,8 @@ import java.util.Set;
 
 import co.edu.uniquindio.centroimpresion.application.Main;
 import co.edu.uniquindio.centroimpresion.exceptions.CentroImpresionException;
-import co.edu.uniquindio.centroimpresion.model.centro.Documento;
-import co.edu.uniquindio.centroimpresion.model.centro.Impresora;
+import co.edu.uniquindio.centroimpresion.model.Documento;
+import co.edu.uniquindio.centroimpresion.model.Impresora;
 import co.edu.uniquindio.centroimpresion.view.custom.Boton;
 import co.edu.uniquindio.centroimpresion.view.menu.PanelMenuSee;
 import co.edu.uniquindio.centroimpresion.view.see.PanelSeeDocs;
@@ -27,8 +27,15 @@ import javafx.stage.Stage;
 import javafx.util.Callback;
 
 public class CtrlSeeImps {
-
-	public static void irAVerImpresoraSeleccionada(PanelMenuSee panelMenuSee, EventHandler<? super MouseEvent> eventoVolver) {
+	/**
+	 * Muestra la impresora seleccionada, muestra alertas en caso de que no se den
+	 * las cosas correctamente
+	 * 
+	 * @param panelMenuSee
+	 * @param eventoVolver
+	 */
+	public static void irAVerImpresoraSeleccionada(PanelMenuSee panelMenuSee,
+			EventHandler<? super MouseEvent> eventoVolver) {
 		SerializedData data = new SerializedData();
 		try {
 			Impresora impresora = data.getCentroImpresion().obtenerPrimerElementoImpresoraThrows();
@@ -39,30 +46,67 @@ public class CtrlSeeImps {
 
 	}
 
+	/**
+	 * Hace que en toda la columna, en las celdas se le asigne el codigo
+	 * 
+	 * @return
+	 */
 	public static Callback<CellDataFeatures<Impresora, String>, ObservableValue<String>> obtenerCallbackCode() {
 		return data -> new ReadOnlyStringWrapper(data.getValue().getCode());
 	}
 
+	/**
+	 * Hace que en toda la columna, en las celdas se le asigne
+	 * 
+	 * @return
+	 */
 	public static Callback<CellDataFeatures<Impresora, String>, ObservableValue<String>> obtenerCallbackMarca() {
 		return data -> new ReadOnlyStringWrapper(data.getValue().getMarca());
 	}
 
+	/**
+	 * Hace que en toda la columna, en las celdas se le asigne si es a color o no
+	 * 
+	 * @return
+	 */
 	public static Callback<CellDataFeatures<Impresora, String>, ObservableValue<String>> obtenerCallbackEsAColor() {
 		return data -> new ReadOnlyStringWrapper(data.getValue().esAColor() ? "Si" : "No");
 	}
 
+	/**
+	 * Hace que en toda la columna, en las celdas se le asigne la velocidad
+	 * 
+	 * @return
+	 */
 	public static Callback<CellDataFeatures<Impresora, String>, ObservableValue<String>> obtenerCallbackVelocidad() {
 		return data -> new ReadOnlyStringWrapper(String.format("%.2f", data.getValue().getLetrasPorSegundo()) + " l/s");
 	}
 
+	/**
+	 * Hace que en toda la columna, en las celdas se le asigne el estado
+	 * 
+	 * @return
+	 */
 	public static Callback<CellDataFeatures<Impresora, String>, ObservableValue<String>> obtenerCallbackEstado() {
 		return data -> new ReadOnlyStringWrapper(data.getValue().getEstado().getTexto());
 	}
 
+	/**
+	 * Hace que en toda la columna, en las celdas se le asigne la cantidad de
+	 * paginas imrpesas
+	 * 
+	 * @return
+	 */
 	public static Callback<CellDataFeatures<Impresora, String>, ObservableValue<String>> obtenerCallbackCantidad() {
 		return data -> new ReadOnlyStringWrapper(data.getValue().getPaginasImpresas() + "");
 	}
 
+	/**
+	 * Cambia el diseño de las filas dependiendo de que si la impresora esta activa
+	 * o tiene cualquier otro estado
+	 * 
+	 * @return
+	 */
 	public static Callback<TableView<Impresora>, TableRow<Impresora>> obtenerDisenioFilas() {
 		return arg0 -> {
 			return new TableRow<Impresora>() {
@@ -87,6 +131,14 @@ public class CtrlSeeImps {
 		};
 	}
 
+	/**
+	 * Hace que en toda la columna, en las celdas se le asigne un boton que muestre
+	 * la tabla de documentos
+	 * 
+	 * @param stage
+	 * @param eventoVolver
+	 * @return
+	 */
 	public static Callback<TableColumn<Impresora, String>, TableCell<Impresora, String>> obtenerCallbackDocumentos(
 			Stage stage, EventHandler<? super MouseEvent> eventoVolver) {
 		return new Callback<TableColumn<Impresora, String>, TableCell<Impresora, String>>() {

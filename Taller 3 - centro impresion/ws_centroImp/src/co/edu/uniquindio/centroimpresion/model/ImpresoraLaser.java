@@ -1,4 +1,4 @@
-package co.edu.uniquindio.centroimpresion.model.centro;
+package co.edu.uniquindio.centroimpresion.model;
 
 import java.time.LocalDateTime;
 

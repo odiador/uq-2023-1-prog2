@@ -3,7 +3,7 @@ package co.edu.uniquindio.centroimpresion.view.see;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import co.edu.uniquindio.centroimpresion.model.centro.Documento;
+import co.edu.uniquindio.centroimpresion.model.Documento;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Label;

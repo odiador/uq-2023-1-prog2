@@ -3,7 +3,7 @@ package co.edu.uniquindio.centroimpresion.view.menu;
 import java.util.ArrayList;
 
 import co.edu.uniquindio.centroimpresion.controllers.CtrlSeeImps;
-import co.edu.uniquindio.centroimpresion.model.centro.TipoEmpleado;
+import co.edu.uniquindio.centroimpresion.model.TipoEmpleado;
 import co.edu.uniquindio.centroimpresion.view.custom.Boton;
 import co.edu.uniquindio.centroimpresion.view.see.PanelSeeDocsVolver;
 import co.edu.uniquindio.centroimpresion.view.see.PanelSeeImpCartucho;

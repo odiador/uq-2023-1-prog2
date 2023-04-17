@@ -1,9 +1,9 @@
 package co.edu.uniquindio.centroimpresion.view.principal;
 
 import co.edu.uniquindio.centroimpresion.controllers.ControlLogin;
-import co.edu.uniquindio.centroimpresion.model.centro.TipoEmpleado;
+import co.edu.uniquindio.centroimpresion.model.TipoEmpleado;
+import co.edu.uniquindio.centroimpresion.util.Utility;
 import co.edu.uniquindio.centroimpresion.view.custom.Boton;
-import co.edu.uniquindio.centroimpresion.view.util.Utility;
 import javafx.collections.FXCollections;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;

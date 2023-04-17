@@ -21,7 +21,7 @@ public class PanelPrintDoc extends PanelConVolver {
 		super.initComp();
 
 		VBox vbox = new VBox(30);
-		Boton btnImprimir = new Boton("Imprimir", evt -> CtrlPrintDoc.irAPedirImpresora(panel, this, stage));
+		Boton btnImprimir = new Boton("Imprimir", evt -> CtrlPrintDoc.irAPedirImpresoraImpresion(panel, this, stage));
 		Boton btnVerCola = new Boton("Ver cola", evt -> CtrlPrintDoc.verDocEnCola(stage));
 
 		vbox.setId("centered-box");

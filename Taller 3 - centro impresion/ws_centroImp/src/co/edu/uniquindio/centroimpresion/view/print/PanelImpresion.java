@@ -1,9 +1,9 @@
 package co.edu.uniquindio.centroimpresion.view.print;
 
 import co.edu.uniquindio.centroimpresion.controllers.CtrlPrintDoc;
-import co.edu.uniquindio.centroimpresion.model.centro.Documento;
-import co.edu.uniquindio.centroimpresion.model.centro.Impresora;
-import co.edu.uniquindio.centroimpresion.model.centro.Relacion;
+import co.edu.uniquindio.centroimpresion.model.Documento;
+import co.edu.uniquindio.centroimpresion.model.Impresora;
+import co.edu.uniquindio.centroimpresion.util.Relacion;
 import javafx.animation.Timeline;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;

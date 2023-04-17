@@ -3,8 +3,9 @@ package co.edu.uniquindio.centroimpresion.view.principal;
 import java.util.ArrayList;
 import java.util.List;
 
-import co.edu.uniquindio.centroimpresion.model.centro.TipoAccion;
-import co.edu.uniquindio.centroimpresion.model.centro.TipoEmpleado;
+import co.edu.uniquindio.centroimpresion.model.TipoAccion;
+import co.edu.uniquindio.centroimpresion.model.TipoEmpleado;
+import co.edu.uniquindio.centroimpresion.services.TabComunicationListener;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.control.Label;

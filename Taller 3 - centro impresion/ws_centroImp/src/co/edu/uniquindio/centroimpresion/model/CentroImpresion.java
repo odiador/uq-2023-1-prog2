@@ -1,4 +1,4 @@
-package co.edu.uniquindio.centroimpresion.model.centro;
+package co.edu.uniquindio.centroimpresion.model;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -12,6 +12,7 @@ import co.edu.uniquindio.centroimpresion.exceptions.CentroImpresionException;
 import co.edu.uniquindio.centroimpresion.exceptions.ImpresoraException;
 import co.edu.uniquindio.centroimpresion.exceptions.NoHayColaImpresionException;
 import co.edu.uniquindio.centroimpresion.exceptions.ObjectNotExists;
+import co.edu.uniquindio.centroimpresion.util.Relacion;
 
 public class CentroImpresion implements Serializable {
 	/**

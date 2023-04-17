@@ -2,7 +2,7 @@ package co.edu.uniquindio.centroimpresion.view.see;
 
 import java.util.Collection;
 
-import co.edu.uniquindio.centroimpresion.model.centro.Documento;
+import co.edu.uniquindio.centroimpresion.model.Documento;
 import co.edu.uniquindio.centroimpresion.view.custom.PanelConVolver;
 import co.edu.uniquindio.centroimpresion.view.menu.PanelMenuSee;
 

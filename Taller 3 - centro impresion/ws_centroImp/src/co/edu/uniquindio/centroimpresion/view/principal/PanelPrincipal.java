@@ -1,7 +1,8 @@
 package co.edu.uniquindio.centroimpresion.view.principal;
 
-import co.edu.uniquindio.centroimpresion.model.centro.TipoAccion;
-import co.edu.uniquindio.centroimpresion.model.centro.TipoEmpleado;
+import co.edu.uniquindio.centroimpresion.model.TipoAccion;
+import co.edu.uniquindio.centroimpresion.model.TipoEmpleado;
+import co.edu.uniquindio.centroimpresion.services.TabComunicationListener;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 

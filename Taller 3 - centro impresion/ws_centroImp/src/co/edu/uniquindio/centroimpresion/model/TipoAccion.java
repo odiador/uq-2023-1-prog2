@@ -1,4 +1,4 @@
-package co.edu.uniquindio.centroimpresion.model.centro;
+package co.edu.uniquindio.centroimpresion.model;
 
 public enum TipoAccion {
 	AGREGAR("Agregar"), IMPRIMIR("Imprimir"), ACTUALIZAR("Actualizar"), ELIMINAR("Eliminar"), VER("Ver"),

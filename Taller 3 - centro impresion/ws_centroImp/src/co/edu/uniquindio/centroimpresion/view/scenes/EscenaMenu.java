@@ -1,6 +1,6 @@
 package co.edu.uniquindio.centroimpresion.view.scenes;
 
-import co.edu.uniquindio.centroimpresion.model.centro.TipoEmpleado;
+import co.edu.uniquindio.centroimpresion.model.TipoEmpleado;
 import co.edu.uniquindio.centroimpresion.view.principal.PanelPrincipal;
 import javafx.scene.Scene;
 import javafx.stage.Stage;

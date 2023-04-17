@@ -6,16 +6,16 @@ import co.edu.uniquindio.centroimpresion.exceptions.FueraRangoException;
 import co.edu.uniquindio.centroimpresion.exceptions.NoSePuedeLeerException;
 import co.edu.uniquindio.centroimpresion.exceptions.ObjectNotExists;
 import co.edu.uniquindio.centroimpresion.exceptions.TextIsEmptyException;
-import co.edu.uniquindio.centroimpresion.model.centro.Documento;
-import co.edu.uniquindio.centroimpresion.model.centro.EstadoImpresora;
-import co.edu.uniquindio.centroimpresion.model.centro.Impresora;
-import co.edu.uniquindio.centroimpresion.model.centro.ImpresoraCartucho;
-import co.edu.uniquindio.centroimpresion.model.centro.ImpresoraLaser;
+import co.edu.uniquindio.centroimpresion.model.Documento;
+import co.edu.uniquindio.centroimpresion.model.EstadoImpresora;
+import co.edu.uniquindio.centroimpresion.model.Impresora;
+import co.edu.uniquindio.centroimpresion.model.ImpresoraCartucho;
+import co.edu.uniquindio.centroimpresion.model.ImpresoraLaser;
+import co.edu.uniquindio.centroimpresion.util.Utility;
 import co.edu.uniquindio.centroimpresion.view.custom.Boton;
 import co.edu.uniquindio.centroimpresion.view.herramientas.PanelUpdateImpCartucho;
 import co.edu.uniquindio.centroimpresion.view.herramientas.PanelUpdateImpLaser;
 import co.edu.uniquindio.centroimpresion.view.menu.PanelMenuUpdate;
-import co.edu.uniquindio.centroimpresion.view.util.Utility;
 import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -23,16 +23,34 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 
 public class CtrlUtil {
-
-	public static void irAActualizarImpresora(PanelMenuUpdate panelMenuUpdate, String text,
+	/**
+	 * Mueve paneles para ir a actualizar una impresora por medio de su codigo,
+	 * muestra alertas en caso de que no se den las cosas correctamente
+	 * 
+	 * @param panelMenuUpdate
+	 * @param code
+	 * @param eventoVolver    lo que pasa cuando se oprima el boton de volver en el
+	 *                        panel de actualizar
+	 */
+	public static void irAActualizarImpresora(PanelMenuUpdate panelMenuUpdate, String code,
 			EventHandler<? super MouseEvent> eventoVolver) {
 		try {
-			actualizarImpresoraThrows(panelMenuUpdate, text, eventoVolver);
+			actualizarImpresoraThrows(panelMenuUpdate, code, eventoVolver);
 		} catch (CentroImpresionException | TextIsEmptyException e) {
 			new Alert(AlertType.WARNING, e.getMessage()).show();
 		}
 	}
 
+	/**
+	 * Mueve el panel para ir a actualizar impresoras, muestra errores en caso de
+	 * que no se den las cosas correctamente
+	 * 
+	 * @param panelMenuUpdate
+	 * @param code
+	 * @param eventoVolver
+	 * @throws CentroImpresionException en caso de que no se encuentre la impresora
+	 * @throws TextIsEmptyException     si el codigo esta vacio
+	 */
 	private static void actualizarImpresoraThrows(PanelMenuUpdate panelMenuUpdate, String code,
 			EventHandler<? super MouseEvent> eventoVolver) throws CentroImpresionException, TextIsEmptyException {
 		Utility.throwIfEmpty(code, "codigo");
@@ -44,6 +62,13 @@ public class CtrlUtil {
 			irAActualizarImpresoraCartucho(panelMenuUpdate, (ImpresoraCartucho) impresora, eventoVolver);
 	}
 
+	/**
+	 * Va al panel de actualizar impresora laser
+	 * 
+	 * @param panelMenuUpdate
+	 * @param impresora
+	 * @param eventoVolver
+	 */
 	private static void irAActualizarImpresoraLaser(PanelMenuUpdate panelMenuUpdate, ImpresoraLaser impresora,
 			EventHandler<? super MouseEvent> eventoVolver) {
 		BorderPane pane = new BorderPane(new PanelUpdateImpLaser(impresora));
@@ -51,6 +76,13 @@ public class CtrlUtil {
 		panelMenuUpdate.setCenter(pane);
 	}
 
+	/**
+	 * Va al panel de actualizar impresora de cartucho
+	 * 
+	 * @param panelMenuUpdate
+	 * @param impresora
+	 * @param eventoVolver
+	 */
 	private static void irAActualizarImpresoraCartucho(PanelMenuUpdate panelMenuUpdate, ImpresoraCartucho impresora,
 			EventHandler<? super MouseEvent> eventoVolver) {
 		BorderPane pane = new BorderPane(new PanelUpdateImpCartucho(impresora));
@@ -59,6 +91,14 @@ public class CtrlUtil {
 		panelMenuUpdate.setCenter(pane);
 	}
 
+	/**
+	 * Recarga una impresora, dependiendo del tipo que sea se va a hacer alguna cosa
+	 * o cualquier otra diferente, muestra alertas en caso de que no se den las
+	 * cosas correctamente
+	 * 
+	 * 
+	 * @param code
+	 */
 	public static void recargarImpresora(String code) {
 		SerializedData data = new SerializedData();
 		try {
@@ -70,6 +110,12 @@ public class CtrlUtil {
 		}
 	}
 
+	/**
+	 * Selecciona una impresora especifica, muestra alertas en caso de que no se den
+	 * las cosas correctamente
+	 * 
+	 * @param code
+	 */
 	public static void seleccionarImpresora(String code) {
 		SerializedData data = new SerializedData();
 		try {
@@ -81,6 +127,16 @@ public class CtrlUtil {
 		}
 	}
 
+	/**
+	 * Actualiza un documento, dependiendo de que si se quiere editar tambien el
+	 * titulo y contenido se va a abrir un filechooser o no, muestra alertas en caso
+	 * de que no se den las cosas correctamente
+	 * 
+	 * 
+	 * @param code
+	 * @param prioridadString
+	 * @param editarContenido
+	 */
 	public static void actualizarDocumento(String code, String prioridadString, boolean editarContenido) {
 		try {
 			actualizarDocumentoThrows(code, prioridadString, editarContenido);
@@ -91,6 +147,13 @@ public class CtrlUtil {
 		}
 	}
 
+	/**
+	 * Cambia el estado de una impresora epecifica, muestra alertas en caso de que
+	 * no se den las cosas correctamente
+	 * 
+	 * @param code
+	 * @param estado
+	 */
 	public static void cambiarEstadoImpresora(String code, String estado) {
 		try {
 			cambiarEstadoImpresoraThrows(code, estado);
@@ -101,6 +164,23 @@ public class CtrlUtil {
 		}
 	}
 
+	/**
+	 * Actualiza un documento con sus parametros, en caso de que se quiera editar el
+	 * contenido abre un filechooser; muestra alertas en caso de que no se den las
+	 * cosas correctamente
+	 * 
+	 * @param code
+	 * @param prioridadString
+	 * @param editarContenido
+	 * @throws TextIsEmptyException       en caso de que el codigo este vacio
+	 * @throws FueraRangoException        en caso de que la prioridad este fuera de
+	 *                                    rango
+	 * @throws ArchivoNoObtenidoException en caso de que el archivo no sea obtenido
+	 * @throws NoSePuedeLeerException     en caso de que no se pueda leer
+	 * @throws ObjectNotExists            en caso de que un objeto sea null
+	 * @throws CentroImpresionException   en caso de que no se pueda actualizar el
+	 *                                    documento
+	 */
 	private static void actualizarDocumentoThrows(String code, String prioridadString, boolean editarContenido)
 			throws TextIsEmptyException, FueraRangoException, ArchivoNoObtenidoException, NoSePuedeLeerException,
 			ObjectNotExists, CentroImpresionException {
@@ -125,12 +205,27 @@ public class CtrlUtil {
 		}
 	}
 
+	/**
+	 * Actualiza un documento
+	 * 
+	 * @param doc
+	 * @throws CentroImpresionException en caso de que no se pueda encontrar
+	 */
 	private static void actualizarDocumento(Documento doc) throws CentroImpresionException {
 		SerializedData data = new SerializedData();
 		data.getCentroImpresion().actualizarDocumento(doc);
 		data.updateCentroImpresion();
 	}
 
+	/**
+	 * Cambia el estado de una impresora x, muestra errores en caso de que no se den
+	 * las cosas correctamente
+	 * 
+	 * @param code
+	 * @param estado
+	 * @throws TextIsEmptyException     si faltan por llenar datos
+	 * @throws CentroImpresionException en caso de que no se encuentre la impresora
+	 */
 	private static void cambiarEstadoImpresoraThrows(String code, String estado)
 			throws TextIsEmptyException, CentroImpresionException {
 		Utility.throwIfEmpty(code, "codigo");

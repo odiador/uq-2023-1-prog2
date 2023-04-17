@@ -3,20 +3,18 @@ package co.edu.uniquindio.centroimpresion.controllers;
 import java.io.File;
 
 import javafx.stage.FileChooser;
-import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 
 public class CtrlObtenerArchivo {
 
 	/**
-	 * Obtiene un archivo a traves de un file chooser (se abre una ventana de
-	 * abrir archivo)
+	 * Obtiene un archivo a traves de un file chooser (se abre una ventana de abrir
+	 * archivo)
 	 *
-	 * @param tituloVentana
-	 *            es el titulo de la ventana
-	 * @param extensionFilters
-	 *            son los filtros de extension, va primero el nombre y luego el
-	 *            tipo de archivo "*.*" para todos los archivos
+	 * @param tituloVentana    es el titulo de la ventana
+	 * @param extensionFilters son los filtros de extension, va primero el nombre y
+	 *                         luego el tipo de archivo "*.*" para todos los
+	 *                         archivos
 	 * @return null si se cancela
 	 */
 	public static File obtenerArchivo(String tituloVentana, FileChooser.ExtensionFilter... extensionFilters) {
@@ -76,12 +74,4 @@ public class CtrlObtenerArchivo {
 		return sb.toString();
 	}
 
-	public static FileChooser.ExtensionFilter[] obtenerExtensionFiltersDeFiltroExtension(FiltroExtension... filtros) {
-		ExtensionFilter[] arr = new FileChooser.ExtensionFilter[filtros.length];
-		for (int i = 0; i < arr.length; i++) {
-			FiltroExtension filtroExtension = filtros[i];
-			arr[i] = new FileChooser.ExtensionFilter(filtroExtension.getNombre(), filtroExtension.getArchivosAAbrir());
-		}
-		return arr;
-	}
 }

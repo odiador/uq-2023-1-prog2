@@ -1,6 +1,6 @@
 package co.edu.uniquindio.centroimpresion.view.scenes;
 
-import co.edu.uniquindio.centroimpresion.model.centro.Documento;
+import co.edu.uniquindio.centroimpresion.model.Documento;
 import co.edu.uniquindio.centroimpresion.view.see.PanelDoc;
 import co.edu.uniquindio.centroimpresion.view.see.PanelDocVolver;
 import javafx.scene.Scene;

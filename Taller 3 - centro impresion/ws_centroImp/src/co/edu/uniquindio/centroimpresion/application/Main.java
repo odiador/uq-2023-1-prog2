@@ -8,6 +8,9 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class Main extends Application {
+	/**
+	 * Es el url del diseño de css, se asigna cuando se da un start a la aplicacion
+	 */
 	public static URL css;
 
 	@Override

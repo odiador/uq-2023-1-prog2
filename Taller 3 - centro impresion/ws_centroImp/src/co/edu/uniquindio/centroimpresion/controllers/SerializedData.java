@@ -5,12 +5,17 @@ import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-import co.edu.uniquindio.centroimpresion.model.centro.CentroImpresion;
+import co.edu.uniquindio.centroimpresion.model.CentroImpresion;
 
 public class SerializedData {
 	private static final String RUTA = "src/co/edu/uniquindio/centroimpresion/controllers/info.dat";
 	private CentroImpresion centroImpresion;
 
+	/**
+	 * Es el constructor de la clase, obtiene el centro de impresion, si no se
+	 * encuentra, crea uno nuevo y lo guarda automaticamente en una ruta especifica:
+	 * src/co/edu/uniquindio/centroimpresion/controllers/info.dat
+	 */
 	public SerializedData() {
 		try {
 			leerObjeto();
@@ -24,6 +29,11 @@ public class SerializedData {
 		}
 	}
 
+	/**
+	 * Intenta leer el centro de impresion
+	 * 
+	 * @throws Exception
+	 */
 	public void leerObjeto() throws Exception {
 		ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(RUTA));
 		try {
@@ -31,11 +41,15 @@ public class SerializedData {
 			objectInputStream.close();
 		} catch (Exception e) {
 			objectInputStream.close();
-			e.printStackTrace();
 			throw e;
 		}
 	}
 
+	/**
+	 * Intenta escribrir el centro de impresion
+	 * 
+	 * @throws Exception
+	 */
 	public void escribirObjeto() throws Exception {
 		ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(RUTA));
 		try {
@@ -47,6 +61,10 @@ public class SerializedData {
 		}
 	}
 
+	/**
+	 * Actualiza el centro de impresion, primero intentando guardar, y si no se
+	 * encuentra, intenta leer el objeto
+	 */
 	public void updateCentroImpresion() {
 		try {
 			escribirObjeto();
@@ -56,19 +74,34 @@ public class SerializedData {
 			} catch (Exception e1) {
 			}
 		}
-		System.out.println(getCentroImpresion()); //TODO
 	}
 
+	/**
+	 * Cambia el centro de impresion y luego lo guarda
+	 * 
+	 * @see {@link #updateCentroImpresion()}
+	 * @param centroImpresion
+	 */
 	public void updateCentroImpresion(CentroImpresion centroImpresion) {
 		setCentroImpresion(centroImpresion);
 		updateCentroImpresion();
 	}
 
+	/**
+	 * Obtiene el centro de impresion
+	 * 
+	 * @return
+	 */
 	public CentroImpresion getCentroImpresion() {
 		return centroImpresion;
 	}
 
-	public void setCentroImpresion(CentroImpresion centroImpresion) {
+	/**
+	 * Cambia el centro de impresion
+	 * 
+	 * @param centroImpresion
+	 */
+	private void setCentroImpresion(CentroImpresion centroImpresion) {
 		this.centroImpresion = centroImpresion;
 	}
 

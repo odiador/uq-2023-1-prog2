@@ -1,8 +1,8 @@
 package co.edu.uniquindio.centroimpresion.view.print;
 
-import co.edu.uniquindio.centroimpresion.model.centro.Documento;
-import co.edu.uniquindio.centroimpresion.model.centro.Impresora;
-import co.edu.uniquindio.centroimpresion.model.centro.Relacion;
+import co.edu.uniquindio.centroimpresion.model.Documento;
+import co.edu.uniquindio.centroimpresion.model.Impresora;
+import co.edu.uniquindio.centroimpresion.util.Relacion;
 import co.edu.uniquindio.centroimpresion.view.custom.PanelConVolver;
 import javafx.scene.Scene;
 import javafx.stage.Stage;

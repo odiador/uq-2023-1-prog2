@@ -1,6 +1,6 @@
 package co.edu.uniquindio.centroimpresion.view.menu;
 
-import co.edu.uniquindio.centroimpresion.model.centro.TipoEmpleado;
+import co.edu.uniquindio.centroimpresion.model.TipoEmpleado;
 import co.edu.uniquindio.centroimpresion.view.custom.Boton;
 import co.edu.uniquindio.centroimpresion.view.herramientas.PanelActualizarDoc;
 import co.edu.uniquindio.centroimpresion.view.herramientas.PanelActualizarImpresora;

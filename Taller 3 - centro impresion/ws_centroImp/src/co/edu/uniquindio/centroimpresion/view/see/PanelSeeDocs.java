@@ -3,7 +3,7 @@ package co.edu.uniquindio.centroimpresion.view.see;
 import java.util.Collection;
 
 import co.edu.uniquindio.centroimpresion.controllers.CtrlSeeDocs;
-import co.edu.uniquindio.centroimpresion.model.centro.Documento;
+import co.edu.uniquindio.centroimpresion.model.Documento;
 import javafx.collections.FXCollections;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;

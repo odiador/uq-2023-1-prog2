@@ -12,7 +12,8 @@ import co.edu.uniquindio.centroimpresion.exceptions.CentroImpresionException;
 import co.edu.uniquindio.centroimpresion.exceptions.FueraRangoException;
 import co.edu.uniquindio.centroimpresion.exceptions.NoSePuedeLeerException;
 import co.edu.uniquindio.centroimpresion.exceptions.TextIsEmptyException;
-import co.edu.uniquindio.centroimpresion.model.centro.Documento;
+import co.edu.uniquindio.centroimpresion.model.Documento;
+import co.edu.uniquindio.centroimpresion.util.Utility;
 import co.edu.uniquindio.centroimpresion.view.scenes.EscenaVerDoc;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -21,13 +22,27 @@ import javafx.stage.Stage;
 
 public class CtrlPanelAddDoc {
 
+	/**
+	 * Agrega un documento por medio de un codigo y una prioridad, abre un
+	 * {@code Filechooser} para pedir el archivo del documento y al final lo agrega
+	 * <br>
+	 * Muestra alertas en caso de que no se den las cosas correctamente
+	 * 
+	 * @see
+	 *      <li>{@link #obtenerDocArchivoThrow(String, String)}
+	 *      <li>{@link #pedirDocumento(String, String)}
+	 * @param stage
+	 * @param textoCodigo
+	 * @param textoPrioridad
+	 */
 	public static void agregarDocumento(Stage stage, String textoCodigo, String textoPrioridad) {
 		try {
-			Documento documentoAgregado = CtrlPanelAddDoc.obtenerDocArchivoThrow(textoCodigo, textoPrioridad);
+			Documento documentoAgregado = obtenerDocArchivoThrow(textoCodigo, textoPrioridad);
 			Alert alertaExito = new Alert(AlertType.INFORMATION,
 					"El documento se ha agregado con éxito (" + textoCodigo + ")" + "\n" + "¿Deseas ver el documento?",
 					ButtonType.CANCEL, ButtonType.OK);
 			ButtonType button = alertaExito.showAndWait().orElse(null);
+			// abre el documento
 			if (button == ButtonType.OK) {
 				EscenaVerDoc escenaVerDoc = new EscenaVerDoc(stage, stage.getScene(), documentoAgregado, 800, 600);
 				escenaVerDoc.getStylesheets().add(Main.css.toExternalForm());
@@ -40,6 +55,7 @@ public class CtrlPanelAddDoc {
 			ButtonType buttonType = new Alert(AlertType.WARNING,
 					"Ya se encuentra un documento con tal código\n" + "¿Deseas ver el documento?", ButtonType.OK,
 					ButtonType.CANCEL).showAndWait().orElse(null);
+			// abre el documento
 			if (buttonType == ButtonType.OK) {
 				EscenaVerDoc escenaVerDoc = new EscenaVerDoc(stage, stage.getScene(), (Documento) e.getSource(), 800,
 						600);
@@ -52,38 +68,6 @@ public class CtrlPanelAddDoc {
 			new Alert(AlertType.WARNING, "La prioridad debe de estar entre 0 y 10").show();
 		} catch (TextIsEmptyException e) {
 			new Alert(AlertType.WARNING, "El código está vacío").show();
-		}
-	}
-
-	/**
-	 * Obtiene un documento del panel
-	 *
-	 * @param textoCodigo
-	 * @param textoPrioridad
-	 * @return
-	 * @throws DocumentoEnProcesoException
-	 * @throws ArchivoNoObtenidoException
-	 * @throws NoSePuedeLeerException
-	 * @throws FueraRangoException
-	 * @throws TextIsEmptyException
-	 */
-	private static Documento pedirDocumento(String textoCodigo, String textoPrioridad)
-			throws ArchivoNoObtenidoException, NoSePuedeLeerException, FueraRangoException, TextIsEmptyException {
-		int prioridad = 5;
-		try {
-			prioridad = Integer.parseInt(textoPrioridad);
-		} catch (NumberFormatException e) {
-		}
-		throwIfEmpty(textoCodigo);
-		throwCaseNotInRange(prioridad);
-		Documento documento = pedirDocumento(textoCodigo, prioridad, "Agregar Documento",
-				new FiltroExtension("Documentos de texto", "*.txt"), new FiltroExtension("Todos los archivos", "*.*"));
-		return documento;
-	}
-
-	static void throwIfEmpty(String textoCodigo) throws TextIsEmptyException {
-		if (textoCodigo.isEmpty()) {
-			throw new TextIsEmptyException("codigo");
 		}
 	}
 
@@ -107,7 +91,7 @@ public class CtrlPanelAddDoc {
 	static Documento pedirDocumento(String code, int prioridad, String tituloVentana, FiltroExtension... filtros)
 			throws ArchivoNoObtenidoException, NoSePuedeLeerException {
 		File file = CtrlObtenerArchivo.obtenerArchivo(tituloVentana,
-				CtrlObtenerArchivo.obtenerExtensionFiltersDeFiltroExtension(filtros));
+				FiltroExtension.obtenerExtensionFiltersDeFiltroExtension(filtros));
 		if (file == null) {
 			throw new ArchivoNoObtenidoException();
 		}
@@ -165,12 +149,20 @@ public class CtrlPanelAddDoc {
 			TextIsEmptyException {
 
 		throwifDocExist(textoCodigo);
-		Documento doc = pedirDocumento(textoCodigo, textoPrioridad);
+		int prioridad = 5;
+		try {
+			prioridad = Integer.parseInt(textoPrioridad);
+		} catch (NumberFormatException e) {
+		}
+		Utility.throwIfEmpty(textoCodigo, "codigo");
+		throwCaseNotInRange(prioridad);
+		Documento documento = pedirDocumento(textoCodigo, prioridad, "Agregar Documento",
+				new FiltroExtension("Documentos de texto", "*.txt"), new FiltroExtension("Todos los archivos", "*.*"));
 
 		SerializedData data = new SerializedData();
-		data.getCentroImpresion().agregarDocumento(doc);
+		data.getCentroImpresion().agregarDocumento(documento);
 		data.updateCentroImpresion();
-		return doc;
+		return documento;
 	}
 
 	/**

@@ -4,7 +4,7 @@ import java.util.List;
 
 import co.edu.uniquindio.centroimpresion.controllers.CtrlSeeImps;
 import co.edu.uniquindio.centroimpresion.controllers.SerializedData;
-import co.edu.uniquindio.centroimpresion.model.centro.Impresora;
+import co.edu.uniquindio.centroimpresion.model.Impresora;
 import co.edu.uniquindio.centroimpresion.view.custom.PanelConVolver;
 import co.edu.uniquindio.centroimpresion.view.menu.PanelMenuSee;
 import javafx.collections.FXCollections;

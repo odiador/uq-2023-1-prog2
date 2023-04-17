@@ -1,4 +1,4 @@
-package co.edu.uniquindio.centroimpresion.view.util;
+package co.edu.uniquindio.centroimpresion.util;
 
 import co.edu.uniquindio.centroimpresion.exceptions.FueraRangoException;
 import co.edu.uniquindio.centroimpresion.exceptions.TextIsEmptyException;

@@ -1,10 +1,10 @@
 package co.edu.uniquindio.centroimpresion.view.herramientas;
 
 import co.edu.uniquindio.centroimpresion.controllers.CtrlUtil;
+import co.edu.uniquindio.centroimpresion.util.Utility;
 import co.edu.uniquindio.centroimpresion.view.custom.Boton;
 import co.edu.uniquindio.centroimpresion.view.custom.PanelConVolver;
 import co.edu.uniquindio.centroimpresion.view.menu.PanelMenuUpdate;
-import co.edu.uniquindio.centroimpresion.view.util.Utility;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;

@@ -1,8 +1,8 @@
 package co.edu.uniquindio.centroimpresion.view.custom;
 
-import co.edu.uniquindio.centroimpresion.model.centro.OpcionObjeto;
-import co.edu.uniquindio.centroimpresion.model.centro.TipoAccion;
-import co.edu.uniquindio.centroimpresion.model.centro.TipoEmpleado;
+import co.edu.uniquindio.centroimpresion.model.OpcionObjeto;
+import co.edu.uniquindio.centroimpresion.model.TipoAccion;
+import co.edu.uniquindio.centroimpresion.model.TipoEmpleado;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;

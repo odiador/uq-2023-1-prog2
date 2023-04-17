@@ -1,8 +1,8 @@
 package co.edu.uniquindio.centroimpresion.view.see;
 
-import co.edu.uniquindio.centroimpresion.model.centro.Impresora;
-import co.edu.uniquindio.centroimpresion.model.centro.ImpresoraCartucho;
-import co.edu.uniquindio.centroimpresion.model.centro.ImpresoraLaser;
+import co.edu.uniquindio.centroimpresion.model.Impresora;
+import co.edu.uniquindio.centroimpresion.model.ImpresoraCartucho;
+import co.edu.uniquindio.centroimpresion.model.ImpresoraLaser;
 import co.edu.uniquindio.centroimpresion.view.custom.Boton;
 import co.edu.uniquindio.centroimpresion.view.herramientas.PanelUpdateImpCartucho;
 import co.edu.uniquindio.centroimpresion.view.herramientas.PanelUpdateImpLaser;
