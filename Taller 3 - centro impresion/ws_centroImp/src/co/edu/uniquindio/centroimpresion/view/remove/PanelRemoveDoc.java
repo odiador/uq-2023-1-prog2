@@ -1,6 +1,6 @@
 package co.edu.uniquindio.centroimpresion.view.remove;
 
-import co.edu.uniquindio.centroimpresion.controllers.CtrlEliminarDocumento;
+import co.edu.uniquindio.centroimpresion.controllers.CtrlEliminar;
 import co.edu.uniquindio.centroimpresion.view.custom.Boton;
 import co.edu.uniquindio.centroimpresion.view.custom.PanelConVolver;
 import co.edu.uniquindio.centroimpresion.view.custom.PanelMenuOpcionObjetos;
@@ -22,7 +22,7 @@ public class PanelRemoveDoc extends PanelConVolver {
 		VBox vBox = new VBox(30);
 		TextField tfCode = new TextField();
 		Boton bEliminar = new Boton("Eliminar Documento",
-				evento -> CtrlEliminarDocumento.eliminarDocumento(tfCode.getText()));
+				evento -> CtrlEliminar.eliminarDocumento(tfCode.getText()));
 
 		vBox.setId("centered-box");
 		tfCode.setId("textfield");
