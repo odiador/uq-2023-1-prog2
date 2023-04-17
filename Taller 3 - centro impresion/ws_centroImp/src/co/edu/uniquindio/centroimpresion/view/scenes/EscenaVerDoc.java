@@ -1,4 +1,4 @@
-package co.edu.uniquindio.centroimpresion.model.scenes;
+package co.edu.uniquindio.centroimpresion.view.scenes;
 
 import co.edu.uniquindio.centroimpresion.model.centro.Documento;
 import co.edu.uniquindio.centroimpresion.view.see.PanelDoc;
