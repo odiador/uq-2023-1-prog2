@@ -7,6 +7,11 @@ public enum EstadoImpresora {
 
 	private String texto;
 
+	/**
+	 * Es el constructor del estado de la impresora
+	 * 
+	 * @param texto
+	 */
 	private EstadoImpresora(String texto) {
 		this.texto = texto;
 	}
@@ -15,6 +20,13 @@ public enum EstadoImpresora {
 		return texto;
 	}
 
+	/**
+	 * Obtiene el estado de una impresora a partir de su texto
+	 * 
+	 * @param estadoString
+	 * @return
+	 * @throws ObjetoFaltanteException en caso de que no se encuentre
+	 */
 	public static EstadoImpresora obtenerEstadoThrows(String estadoString) throws ObjetoFaltanteException {
 		EstadoImpresora estadoImpresora = obtenerEstado(estadoString);
 		if (estadoImpresora == null)
@@ -22,6 +34,14 @@ public enum EstadoImpresora {
 		return estadoImpresora;
 	}
 
+	/**
+	 * 
+	 * Obtiene el estado de una impresora a partir de su texto, si no se encuentra
+	 * retorna un null
+	 * 
+	 * @param texto
+	 * @return
+	 */
 	public static EstadoImpresora obtenerEstado(String texto) {
 		EstadoImpresora[] estados = EstadoImpresora.values();
 		for (EstadoImpresora estado : estados)
@@ -31,6 +51,12 @@ public enum EstadoImpresora {
 		return null;
 	}
 
+	/**
+	 * 
+	 * Obtiene los valores del texto de los estados de impresora
+	 * 
+	 * @return
+	 */
 	public static String[] stringValues() {
 		EstadoImpresora[] values = EstadoImpresora.values();
 		String[] arr = new String[values.length];

@@ -17,29 +17,46 @@ public class ImpresoraLaser extends Impresora {
 			int duracionToner) {
 		super(code, marca, estado, esAColor, letrasPorSegundo);
 		this.duracionToner = duracionToner;
-		recargarToner();
+		recargar();
 	}
 
+	/**
+	 * Obtiene la duracion del toner
+	 * 
+	 * @return
+	 */
 	public int getDuracionToner() {
 		return duracionToner;
 	}
 
+	/**
+	 * Obtiene el nivel del toner actual
+	 * 
+	 * @return
+	 */
 	public int getNivelToner() {
 		return nivelToner;
 	}
 
+	/**
+	 * Cambia el nivel del toner actual
+	 * 
+	 * @param nivelToner
+	 */
 	public void setNivelToner(int nivelToner) {
 		this.nivelToner = nivelToner;
 	}
 
+	/**
+	 * Baja el nivel del toner, muestra un error en caso de que no haya suficiente
+	 * capacidad en la impresora
+	 * 
+	 * @throws ImpresoraException
+	 */
 	public void bajarNivelToner() throws ImpresoraException {
 		if (nivelToner <= 0)
 			throw new ImpresoraException("No hay suficiente capacidad en la impresora");
 		setNivelToner(nivelToner - 1);
-	}
-
-	public void recargarToner() {
-		setNivelToner(getDuracionToner());
 	}
 
 	@Override
@@ -61,7 +78,7 @@ public class ImpresoraLaser extends Impresora {
 
 	@Override
 	protected void recargar() {
-		recargarToner();
+		setNivelToner(getDuracionToner());
 	}
 
 }

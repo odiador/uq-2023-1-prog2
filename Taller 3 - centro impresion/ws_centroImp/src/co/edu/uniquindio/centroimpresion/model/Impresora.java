@@ -2,8 +2,8 @@ package co.edu.uniquindio.centroimpresion.model;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.ArrayList;
+import java.util.List;
 
 import co.edu.uniquindio.centroimpresion.exceptions.ImpresoraException;
 
@@ -16,122 +16,176 @@ public abstract class Impresora implements Serializable {
 	protected final String code;
 	protected String marca;
 	protected EstadoImpresora estado;
-	protected final TreeSet<Documento> listaDocumentos = new TreeSet<Documento>();
+	protected final List<Documento> listaDocumentos = new ArrayList<Documento>();
 	protected double letrasPorSegundo;
 	protected boolean esAColor;
 	protected int documentosImpresos;
 
+	/**
+	 * Es el constructor de la clase impresora (no instanciable naturalmente)
+	 * 
+	 * @param code
+	 * @param marca
+	 * @param estado
+	 * @param esAColor
+	 * @param letrasPorSegundo
+	 */
 	public Impresora(String code, String marca, EstadoImpresora estado, boolean esAColor, double letrasPorSegundo) {
-		this(code, marca, estado);
+		this.code = code;
+		this.marca = marca;
+		this.estado = estado;
 		this.esAColor = esAColor;
 		this.letrasPorSegundo = letrasPorSegundo;
 	}
 
+	/**
+	 * Es el constructor de la clase impresora sin parametros (no instanciable
+	 * naturalmente)
+	 */
 	public Impresora() {
-		code = null;
+		code = "";
 	}
 
-	public Impresora(String code, String marca, EstadoImpresora estado) {
-		this(code);
-		this.marca = marca;
-		this.estado = estado;
-	}
-
-	public Impresora(String code) {
-		this.code = code;
-	}
-
-	public void addDocumento(String code, String titulo, int prioridad, String contenido, LocalDateTime fechaAgregado)
-			throws ImpresoraException {
-		addDocumento(new Documento(code, titulo, prioridad, contenido, fechaAgregado));
-	}
-
-	public void addDocumento(Documento doc) throws ImpresoraException {
-		throwIfNotActive();
-
-		if (!getListaDocumentos().add(doc))
-			throw new ImpresoraException("El documento ya existe");
-	}
-
-	public Documento buscarDocumento(String code) {
-		return getListaDocumentos().stream().filter(doc -> doc.getCode().equals(code)).findAny()
-				.orElse(new Documento());
-	}
-
-	public void deleteDocumento(String code) throws ImpresoraException {
-		throwIfNotActive();
-
-		if (!getListaDocumentos().remove(buscarDocumento(code)))
-			throw new ImpresoraException("El documento no existe");
-	}
-
-	public void actualizarDocumento(Documento doc) throws ImpresoraException {
-		deleteDocumento(doc.getCode());
-		addDocumento(code, marca, documentosImpresos, code, null);
-	}
-
+	/**
+	 * Suelta un error en caso de que la impresora no este activa
+	 * 
+	 * @throws ImpresoraException
+	 */
 	protected void throwIfNotActive() throws ImpresoraException {
 		if (!estaActiva())
 			throw new ImpresoraException("La impresora no esta activa (Estado: " + estado.getTexto() + ")");
 	}
 
+	/**
+	 * Imprime un documento en una fecha especifica
+	 * 
+	 * @param dateTime
+	 * @param documento
+	 * @throws ImpresoraException en caso de que no se pueda realizar la accion
+	 */
 	public abstract void imprimirDocumento(LocalDateTime dateTime, Documento documento) throws ImpresoraException;
 
+	/**
+	 * Obtiene el codigo de la impresora
+	 * 
+	 * @return
+	 */
 	public String getCode() {
 		return code;
 	}
 
+	/**
+	 * Obtiene la marca de la impresora
+	 * 
+	 * @return
+	 */
 	public String getMarca() {
 		return marca;
 	}
 
+	/**
+	 * Cambia la marca de la impresora
+	 * 
+	 * @param marca
+	 */
 	public void setMarca(String marca) {
 		this.marca = marca;
 	}
 
+	/**
+	 * Obtiene el estado de la impresora
+	 * 
+	 * @return
+	 */
 	public EstadoImpresora getEstado() {
 		return estado;
 	}
 
+	/**
+	 * Cambia el estado de la impresora
+	 * 
+	 * @param estado
+	 */
 	public void setEstado(EstadoImpresora estado) {
 		this.estado = estado;
 	}
 
+	/**
+	 * Determina si la impresora esta activa o no
+	 * 
+	 * @return
+	 */
 	public boolean estaActiva() {
 		return getEstado() == EstadoImpresora.ACTIVO;
 	}
 
-	public Set<Documento> getListaDocumentos() {
+	/**
+	 * Obtiene la lista de documentos de la impresora
+	 * 
+	 * @return
+	 */
+	public List<Documento> getListaDocumentos() {
 		return listaDocumentos;
 	}
 
+	/**
+	 * Obtiene la velocidad de la impresora (letras/seg)
+	 * 
+	 * @return
+	 */
 	public double getLetrasPorSegundo() {
 		return letrasPorSegundo;
 	}
 
+	/**
+	 * Cambia la velocidad de la impresora (letras/seg)
+	 * 
+	 * @param letrasPorSegundo
+	 */
 	public void setLetrasPorSegundo(double letrasPorSegundo) {
 		this.letrasPorSegundo = letrasPorSegundo;
 	}
 
+	/**
+	 * Obtiene si la impresora es a color o no
+	 * 
+	 * @return
+	 */
 	public boolean esAColor() {
 		return esAColor;
 	}
 
+	/**
+	 * Cambia si la impresora es a color o no
+	 * 
+	 * @param esAColor
+	 */
 	public void setEsAColor(boolean esAColor) {
 		this.esAColor = esAColor;
 	}
 
+	/**
+	 * Obtiene las paginas impresas de la impresora
+	 * 
+	 * @return
+	 */
 	public int getPaginasImpresas() {
 		return documentosImpresos;
 	}
 
+	/**
+	 * Cambia las paginas impresas de la impresora
+	 * 
+	 * @param paginasImpresas
+	 */
 	public void setPaginasImpresas(int paginasImpresas) {
 		this.documentosImpresos = paginasImpresas;
 	}
 
-	public boolean exists() {
-		return code != null && marca != null && estado != null;
-	}
+	/**
+	 * Recarga la impresora
+	 */
+	protected abstract void recargar();
 
 	@Override
 	public int hashCode() {
@@ -164,7 +218,5 @@ public abstract class Impresora implements Serializable {
 				+ listaDocumentos + ", letrasPorSegundo=" + letrasPorSegundo + ", esAColor=" + esAColor
 				+ ", paginasImpresas=" + documentosImpresos + "]";
 	}
-
-	protected abstract void recargar();
 
 }

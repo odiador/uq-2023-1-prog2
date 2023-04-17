@@ -1,6 +1,6 @@
 package co.edu.uniquindio.centroimpresion.controllers;
 
-import java.util.Set;
+import java.util.List;
 
 import co.edu.uniquindio.centroimpresion.application.Main;
 import co.edu.uniquindio.centroimpresion.exceptions.CentroImpresionException;
@@ -15,12 +15,12 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -167,7 +167,7 @@ public class CtrlSeeImps {
 
 	static void abrirDocumentosImpresora(Stage stage, EventHandler<? super MouseEvent> eventoVolver,
 			Impresora impresora) {
-		Set<Documento> listaDocumentos = impresora.getListaDocumentos();
+		List<Documento> listaDocumentos = impresora.getListaDocumentos();
 		BorderPane borderPane = new BorderPane(new PanelSeeDocs(listaDocumentos));
 		borderPane.setBottom(new Boton("Volver", eventoVolver, "btn-volver"));
 		Scene escena = new Scene(borderPane, 800, 400);

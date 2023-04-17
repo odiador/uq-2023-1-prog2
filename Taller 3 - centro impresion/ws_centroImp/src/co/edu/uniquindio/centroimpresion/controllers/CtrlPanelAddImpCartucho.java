@@ -34,13 +34,11 @@ public class CtrlPanelAddImpCartucho {
 		ImpresoraCartucho impresoraCartucho = obtenerImpresoraCartucho(code, marca, estadoString, esAColor,
 				letrasSegString, capacidadCartuchoString, desgasteCartuchoString);
 		SerializedData data = new SerializedData();
-		if (impresoraCartucho.exists()) {
-			data.getCentroImpresion().agregarImpresoraCartucho(impresoraCartucho.getCode(),
-					impresoraCartucho.getMarca(), impresoraCartucho.getEstado(), impresoraCartucho.esAColor(),
-					impresoraCartucho.getLetrasPorSegundo(), impresoraCartucho.getCapacidadCartucho(),
-					impresoraCartucho.getCapacidadCartucho());
-			data.updateCentroImpresion();
-		}
+		data.getCentroImpresion().agregarImpresoraCartucho(impresoraCartucho.getCode(), impresoraCartucho.getMarca(),
+				impresoraCartucho.getEstado(), impresoraCartucho.esAColor(), impresoraCartucho.getLetrasPorSegundo(),
+				impresoraCartucho.getCapacidadCartucho(), impresoraCartucho.getCapacidadCartucho());
+		data.updateCentroImpresion();
+
 	}
 
 	/**

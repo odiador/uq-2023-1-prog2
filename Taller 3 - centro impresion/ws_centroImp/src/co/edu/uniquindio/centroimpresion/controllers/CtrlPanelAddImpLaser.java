@@ -56,12 +56,11 @@ public class CtrlPanelAddImpLaser {
 		ImpresoraLaser impresoraLaser = obtenerImpresoraLaser(code, marca, estadoString, esAColor,
 				letrasPorSegundoString, duracionTonerString);
 		SerializedData data = new SerializedData();
-		if (impresoraLaser.exists()) {
-			data.getCentroImpresion().agregarImpresoraLaser(impresoraLaser.getCode(), impresoraLaser.getMarca(),
-					impresoraLaser.getEstado(), impresoraLaser.esAColor(), impresoraLaser.getLetrasPorSegundo(),
-					impresoraLaser.getDuracionToner());
-			data.updateCentroImpresion();
-		}
+		data.getCentroImpresion().agregarImpresoraLaser(impresoraLaser.getCode(), impresoraLaser.getMarca(),
+				impresoraLaser.getEstado(), impresoraLaser.esAColor(), impresoraLaser.getLetrasPorSegundo(),
+				impresoraLaser.getDuracionToner());
+		data.updateCentroImpresion();
+
 	}
 
 	/**

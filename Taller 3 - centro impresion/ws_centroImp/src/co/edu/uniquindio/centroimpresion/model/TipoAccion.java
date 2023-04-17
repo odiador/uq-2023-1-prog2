@@ -15,6 +15,11 @@ public enum TipoAccion {
 		this.text = text;
 	}
 
+	/**
+	 * Obtiene el texto del tipo de accion
+	 * 
+	 * @return
+	 */
 	public String getText() {
 		return text;
 	}

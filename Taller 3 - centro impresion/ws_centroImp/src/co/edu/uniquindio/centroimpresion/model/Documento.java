@@ -16,7 +16,8 @@ public class Documento implements Comparable<Documento>, Serializable {
 	private LocalDateTime fechaImpresion = null;
 
 	/**
-	 *
+	 * Es el constructor del documento
+	 * 
 	 * @param code
 	 * @param titulo
 	 * @param prioridad
@@ -30,62 +31,129 @@ public class Documento implements Comparable<Documento>, Serializable {
 		this.fechaAgregado = fechaAgregado;
 	}
 
+	/**
+	 * Es el constructor del documento sin parametros
+	 */
 	public Documento() {
 		this.code = "";
 	}
 
+	/**
+	 * Es el constructor del documento solo con el codigo
+	 * 
+	 * @param code
+	 */
 	public Documento(String code) {
 		this.code = code;
 	}
 
-	public int obtenerCantidadPaginas() {
-		return 1;
-	}
-
+	/**
+	 * Determina si el documento fue impreso o no a partir de que la fecha de
+	 * impresion sea o no null
+	 * 
+	 * @return
+	 */
 	public boolean fueImpreso() {
 		return fechaImpresion != null;
 	}
 
+	/**
+	 * Obtiene el codigo de la impresora
+	 * 
+	 * @return
+	 */
 	public String getCode() {
 		return code;
 	}
 
+	/**
+	 * Obtiene el titulo de la impresora
+	 * 
+	 * @return
+	 */
 	public String getTitulo() {
 		return titulo;
 	}
 
+	/**
+	 * Cambia el titulo de la impresora
+	 * 
+	 * @param titulo
+	 */
 	public void setTitulo(String titulo) {
 		this.titulo = titulo;
 	}
 
+	/**
+	 * Obtiene la prioridad de la impresora
+	 * 
+	 * @return
+	 */
 	public int getPrioridad() {
 		return prioridad;
 	}
 
+	/**
+	 * 
+	 * Cambia la prioridad de la impresora
+	 * 
+	 * @param prioridad
+	 */
 	public void setPrioridad(int prioridad) {
 		this.prioridad = prioridad;
 	}
 
+	/**
+	 * 
+	 * Obtiene el contenido de la impresora
+	 * 
+	 * @return
+	 */
 	public String getContenido() {
 		return contenido;
 	}
 
+	/**
+	 * Cambia el contenido de la impresora
+	 * 
+	 * @param cuerpo
+	 */
 	public void setContenido(String cuerpo) {
 		this.contenido = cuerpo;
 	}
 
+	/**
+	 * Obtiene la fecha de agregacion de la impresora
+	 * 
+	 * @return
+	 */
 	public LocalDateTime getFechaAgregado() {
 		return fechaAgregado;
 	}
 
+	/**
+	 * Cambia la fecha de agregacion de la impresora
+	 * 
+	 * @param fechaAgregado
+	 */
 	public void setFechaAgregado(LocalDateTime fechaAgregado) {
 		this.fechaAgregado = fechaAgregado;
 	}
 
+	/**
+	 * Cambia la fecha de agregacion de la impresora
+	 * 
+	 * @return
+	 */
 	public LocalDateTime getFechaImpresion() {
 		return fechaImpresion;
 	}
 
+	/**
+	 * Cambia la fecha de impresion de la impresora
+	 * 
+	 * @param fechaImpresion
+	 */
 	public void setFechaImpresion(LocalDateTime fechaImpresion) {
 		this.fechaImpresion = fechaImpresion;
 	}
@@ -120,21 +188,10 @@ public class Documento implements Comparable<Documento>, Serializable {
 		return o.getPrioridad() - getPrioridad();
 	}
 
-	public int compareByImpresionTo(Documento o) {
-		if (fueImpreso() == o.fueImpreso())
-			return 0;
-		if (fueImpreso())
-			return 1;
-		return -1;
-	}
-
-	public int compareCodeTo(Documento o) {
-		return code.compareTo(o.getCode());
-	}
-
 	@Override
 	public String toString() {
-		return "Documento [code=" + code + ", titulo=" + titulo + ", prioridad=" + prioridad + "]";
+		return String.format(
+				"Documento [code=%s, titulo=%s, prioridad=%s, contenido=%s, fechaAgregado=%s, fechaImpresion=%s]", code,
+				titulo, prioridad, contenido, fechaAgregado, fechaImpresion);
 	}
-
 }
