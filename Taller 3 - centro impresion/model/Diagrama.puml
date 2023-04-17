@@ -13,13 +13,13 @@ class CentroImpresion {
     +imprimirDocumento(): void
     +imprimirDocumento(codeImpresora: String): void
     +imprimirDocumento(codeImpresora: String, codeDocumento: String): void
+    +imprimirDocumentoCodigoDoc(codeDocumento: String): void
 }
 
 enum EstadoImpresora <<enumeration>> {
     ACTIVO
     INACTIVO
     DESCONECTADO
-    VACIA
     MANTENIMIENTO
 }
 
@@ -30,10 +30,8 @@ abstract class Impresora <<abstract>> {
     #esAColor : boolean
     #paginasImpresas : int
     +estaActiva() : boolean
-    +agregarDocumento(code: String, titulo: String, prioridad: int, contenido: String): void
-    +eliminarDocumento(code: String) : void
-    +buscarDocumento(code: String) : Documento
     +<i>imprimirDocumento(momento: LocalDateTime, documento: Documento) : void
+    +<i>recargar() : void
 }
 class ImpresoraLaser {
     -nivelToner : int
@@ -47,8 +45,8 @@ class ImpresoraCartucho {
     -capacidadCartucho : double
     -nivelCartucho : double
     -desgasteCartucho : double
-    +recargarCartucho() :void
-    +imprimirDocumento() : void+imprimirDocumento(momento: LocalDateTime, documento: Documento) : void
+    +recargar() :void
+    +imprimirDocumento(momento: LocalDateTime, documento: Documento) : void
 }
 
 class Documento {
@@ -63,9 +61,10 @@ class Documento {
 }
 ImpresoraCartucho --|> Impresora
 ImpresoraLaser --|> Impresora
-CentroImpresion " 1 " o-- " * " Documento : -listaDocumentos
-CentroImpresion " 1 " *-- " * " Impresora : -listaImpresoras
-Impresora " 1 " o-- " * " Documento : -listaDocumentos
+CentroImpresion " * " *---> " 1 " Documento : -listaDocumentos
+CentroImpresion " * " *---> " 1 " Documento : -listaDocumentosImpresos
+CentroImpresion " * "  *--> " 1 " Impresora : -listaImpresoras
+Impresora " 1 " o--> " * " Documento : -listaDocumentos
 
 Impresora ". 1 " --> EstadoImpresora : -estado
 @enduml
