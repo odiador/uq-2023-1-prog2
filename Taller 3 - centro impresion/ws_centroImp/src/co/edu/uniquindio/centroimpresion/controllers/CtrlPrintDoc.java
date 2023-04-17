@@ -135,11 +135,15 @@ public class CtrlPrintDoc {
 
 	public static Timeline generarTimelineRGB(ObjectProperty<Color> baseColor) {
 		Timeline timeline;
-		KeyValue keyValue1 = new KeyValue(baseColor, Color.MAGENTA);
-		KeyValue keyValue2 = new KeyValue(baseColor, Color.DODGERBLUE);
+		KeyValue keyValue1 = new KeyValue(baseColor, new Color(0.118, 0.357, 0.91, 1));
+		KeyValue keyValue2 = new KeyValue(baseColor, new Color(0.91, 0.208, 0.49, 1));
+		KeyValue keyValue3 = new KeyValue(baseColor, new Color(0.91, 0.647, 0.27, 1));
+		KeyValue keyValue4 = new KeyValue(baseColor, new Color(0.075, 0.91, 0.118, 1));
 		KeyFrame keyFrame1 = new KeyFrame(Duration.ZERO, keyValue1);
 		KeyFrame keyFrame2 = new KeyFrame(Duration.millis(500), keyValue2);
-		timeline = new Timeline(keyFrame1, keyFrame2);
+		KeyFrame keyFrame3 = new KeyFrame(Duration.millis(1000), keyValue3);
+		KeyFrame keyFrame4 = new KeyFrame(Duration.millis(1500), keyValue4);
+		timeline = new Timeline(keyFrame1, keyFrame2, keyFrame3, keyFrame4);
 		timeline.setAutoReverse(true);
 		timeline.setCycleCount(Animation.INDEFINITE);
 		timeline.play();

@@ -9,7 +9,8 @@
 }
 #impresion {
     -gradient-base: blue;
-    -fx-text-fill: linear-gradient(to bottom, -gradient-base, black);
+    -fx-text-fill: linear-gradient(to right, -gradient-base, #1e5be8);
+    -fx-font-weight: bold;
 }
 #tabla-true {
 	-fx-background-color: #baffba;

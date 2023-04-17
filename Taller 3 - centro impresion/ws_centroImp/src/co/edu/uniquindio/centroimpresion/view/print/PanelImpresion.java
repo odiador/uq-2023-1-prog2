@@ -32,7 +32,7 @@ public class PanelImpresion extends BorderPane {
 			baseColor.addListener(CtrlPrintDoc.generarGradianteRgb(textoContenido));
 			timeline = CtrlPrintDoc.generarTimelineRGB(baseColor);
 		} else {
-			textoContenido.setStyle("-fx-text-fill: rgb(0.0, 0.0, 0.0);");
+			textoContenido.setStyle("-fx-text-fill: rgb(0.0, 0.0, 0.0); -fx-font-weight: bold;");
 
 		}
 		setCenter(textoContenido);
