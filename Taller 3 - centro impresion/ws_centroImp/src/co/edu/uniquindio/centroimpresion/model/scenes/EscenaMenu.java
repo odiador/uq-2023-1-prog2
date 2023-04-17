@@ -11,9 +11,4 @@ public class EscenaMenu extends Scene {
 		super(new PanelPrincipal(stage, name, tipoEmpleado), 1200, 800);
 
 	}
-
-	public static EscenaMenu obtenerEscenaJm(Stage stage) {
-		return new EscenaMenu(stage, "Juan Manuel Amador Roa", TipoEmpleado.ADMINISTRADOR);
-	}
-
 }
