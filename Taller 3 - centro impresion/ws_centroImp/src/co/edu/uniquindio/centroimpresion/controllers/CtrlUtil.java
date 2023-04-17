@@ -4,8 +4,7 @@ import co.edu.uniquindio.centroimpresion.exceptions.ArchivoNoObtenidoException;
 import co.edu.uniquindio.centroimpresion.exceptions.CentroImpresionException;
 import co.edu.uniquindio.centroimpresion.exceptions.FueraRangoException;
 import co.edu.uniquindio.centroimpresion.exceptions.NoSePuedeLeerException;
-import co.edu.uniquindio.centroimpresion.exceptions.ObjectNotExists;
-import co.edu.uniquindio.centroimpresion.exceptions.TextIsEmptyException;
+import co.edu.uniquindio.centroimpresion.exceptions.ObjetoFaltanteException;
 import co.edu.uniquindio.centroimpresion.model.Documento;
 import co.edu.uniquindio.centroimpresion.model.EstadoImpresora;
 import co.edu.uniquindio.centroimpresion.model.Impresora;
@@ -36,7 +35,7 @@ public class CtrlUtil {
 			EventHandler<? super MouseEvent> eventoVolver) {
 		try {
 			actualizarImpresoraThrows(panelMenuUpdate, code, eventoVolver);
-		} catch (CentroImpresionException | TextIsEmptyException e) {
+		} catch (CentroImpresionException | ObjetoFaltanteException e) {
 			new Alert(AlertType.WARNING, e.getMessage()).show();
 		}
 	}
@@ -49,10 +48,10 @@ public class CtrlUtil {
 	 * @param code
 	 * @param eventoVolver
 	 * @throws CentroImpresionException en caso de que no se encuentre la impresora
-	 * @throws TextIsEmptyException     si el codigo esta vacio
+	 * @throws ObjetoFaltanteException  si el codigo esta vacio
 	 */
 	private static void actualizarImpresoraThrows(PanelMenuUpdate panelMenuUpdate, String code,
-			EventHandler<? super MouseEvent> eventoVolver) throws CentroImpresionException, TextIsEmptyException {
+			EventHandler<? super MouseEvent> eventoVolver) throws CentroImpresionException, ObjetoFaltanteException {
 		Utility.throwIfEmpty(code, "codigo");
 		SerializedData data = new SerializedData();
 		Impresora impresora = data.getCentroImpresion().buscarImpresoraThrows(code);
@@ -141,8 +140,8 @@ public class CtrlUtil {
 		try {
 			actualizarDocumentoThrows(code, prioridadString, editarContenido);
 			new Alert(AlertType.CONFIRMATION, "El documento con codigo " + code + " ha sido actualizado").show();
-		} catch (TextIsEmptyException | FueraRangoException | ArchivoNoObtenidoException | NoSePuedeLeerException
-				| ObjectNotExists | CentroImpresionException e) {
+		} catch (ObjetoFaltanteException | FueraRangoException | ArchivoNoObtenidoException | NoSePuedeLeerException
+				| CentroImpresionException e) {
 			new Alert(AlertType.WARNING, e.getMessage()).show();
 		}
 	}
@@ -159,7 +158,7 @@ public class CtrlUtil {
 			cambiarEstadoImpresoraThrows(code, estado);
 			new Alert(AlertType.CONFIRMATION, "La impresora con codigo " + code + " ahora tiene estado " + estado)
 					.show();
-		} catch (TextIsEmptyException | CentroImpresionException e) {
+		} catch (ObjetoFaltanteException | CentroImpresionException e) {
 			new Alert(AlertType.WARNING, e.getMessage()).show();
 		}
 	}
@@ -172,18 +171,17 @@ public class CtrlUtil {
 	 * @param code
 	 * @param prioridadString
 	 * @param editarContenido
-	 * @throws TextIsEmptyException       en caso de que el codigo este vacio
+	 * @throws ObjetoFaltanteException    en caso de que el codigo este vacio
 	 * @throws FueraRangoException        en caso de que la prioridad este fuera de
 	 *                                    rango
 	 * @throws ArchivoNoObtenidoException en caso de que el archivo no sea obtenido
 	 * @throws NoSePuedeLeerException     en caso de que no se pueda leer
-	 * @throws ObjectNotExists            en caso de que un objeto sea null
 	 * @throws CentroImpresionException   en caso de que no se pueda actualizar el
 	 *                                    documento
 	 */
 	private static void actualizarDocumentoThrows(String code, String prioridadString, boolean editarContenido)
-			throws TextIsEmptyException, FueraRangoException, ArchivoNoObtenidoException, NoSePuedeLeerException,
-			ObjectNotExists, CentroImpresionException {
+			throws ObjetoFaltanteException, FueraRangoException, ArchivoNoObtenidoException, NoSePuedeLeerException,
+			CentroImpresionException {
 		Utility.throwIfEmpty(code, "codigo");
 		int prioridad = 5;
 		try {
@@ -223,11 +221,11 @@ public class CtrlUtil {
 	 * 
 	 * @param code
 	 * @param estado
-	 * @throws TextIsEmptyException     si faltan por llenar datos
+	 * @throws ObjetoFaltanteException  si faltan por llenar datos
 	 * @throws CentroImpresionException en caso de que no se encuentre la impresora
 	 */
 	private static void cambiarEstadoImpresoraThrows(String code, String estado)
-			throws TextIsEmptyException, CentroImpresionException {
+			throws ObjetoFaltanteException, CentroImpresionException {
 		Utility.throwIfEmpty(code, "codigo");
 		Utility.throwIfNull(estado, "estado");
 		EstadoImpresora estadoImpresora = EstadoImpresora.obtenerEstado(estado);

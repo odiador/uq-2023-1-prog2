@@ -3,7 +3,7 @@ package co.edu.uniquindio.centroimpresion.controllers;
 import co.edu.uniquindio.centroimpresion.exceptions.CentroImpresionException;
 import co.edu.uniquindio.centroimpresion.exceptions.ImpresoraException;
 import co.edu.uniquindio.centroimpresion.exceptions.NoHayColaImpresionException;
-import co.edu.uniquindio.centroimpresion.exceptions.TextIsEmptyException;
+import co.edu.uniquindio.centroimpresion.exceptions.ObjetoFaltanteException;
 import co.edu.uniquindio.centroimpresion.model.Documento;
 import co.edu.uniquindio.centroimpresion.model.Impresora;
 import co.edu.uniquindio.centroimpresion.util.Relacion;
@@ -31,7 +31,7 @@ public class CtrlPrintEspDoc {
 		try {
 			Relacion<Impresora, Documento> relacion = imprimirDocumentoThrows(codigoImpresora, codigoDocumento);
 			CtrlPrintDoc.mostrarPanelImpresion(stage, relacion);
-		} catch (CentroImpresionException | NoHayColaImpresionException | ImpresoraException | TextIsEmptyException e) {
+		} catch (CentroImpresionException | NoHayColaImpresionException | ImpresoraException | ObjetoFaltanteException e) {
 			new Alert(AlertType.WARNING, e.getMessage()).show();
 		}
 	}
@@ -44,7 +44,7 @@ public class CtrlPrintEspDoc {
 	 * @param codigoImpresora
 	 * @param codigoDocumento
 	 * @return
-	 * @throws TextIsEmptyException        si algo esta vacio, no aplica para el
+	 * @throws ObjetoFaltanteException        si algo esta vacio, no aplica para el
 	 *                                     codigo de la impresora
 	 * @throws CentroImpresionException    en caso de que algo no se encuentre
 	 * @throws NoHayColaImpresionException en caso de que la cola este vacia
@@ -53,9 +53,9 @@ public class CtrlPrintEspDoc {
 	 */
 	private static Relacion<Impresora, Documento> imprimirDocumentoThrows(String codigoImpresora,
 			String codigoDocumento)
-			throws TextIsEmptyException, CentroImpresionException, NoHayColaImpresionException, ImpresoraException {
+			throws ObjetoFaltanteException, CentroImpresionException, NoHayColaImpresionException, ImpresoraException {
 		if (codigoDocumento.isEmpty())
-			throw new TextIsEmptyException("codigo del documento");
+			throw new ObjetoFaltanteException("codigo del documento");
 		if (codigoImpresora.isEmpty())
 			return imprimirDocumentoThrows(codigoDocumento);
 

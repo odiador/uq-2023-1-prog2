@@ -2,8 +2,7 @@ package co.edu.uniquindio.centroimpresion.controllers;
 
 import co.edu.uniquindio.centroimpresion.exceptions.CentroImpresionException;
 import co.edu.uniquindio.centroimpresion.exceptions.FueraRangoException;
-import co.edu.uniquindio.centroimpresion.exceptions.ObjectNotExists;
-import co.edu.uniquindio.centroimpresion.exceptions.TextIsEmptyException;
+import co.edu.uniquindio.centroimpresion.exceptions.ObjetoFaltanteException;
 import co.edu.uniquindio.centroimpresion.model.EstadoImpresora;
 import co.edu.uniquindio.centroimpresion.model.ImpresoraLaser;
 import co.edu.uniquindio.centroimpresion.util.Utility;
@@ -30,13 +29,7 @@ public class CtrlPanelAddImpLaser {
 			new Alert(AlertType.CONFIRMATION, "La impresora ha sido agregada con éxito").show();
 		} catch (NumberFormatException e) {
 			new Alert(AlertType.WARNING, "Rellena todos los campos").show();
-		} catch (CentroImpresionException e) {
-			new Alert(AlertType.WARNING, "Ya existe una impresora con ese codigo").show();
-		} catch (TextIsEmptyException e) {
-			new Alert(AlertType.WARNING, "Rellena todos los campos (" + e.getTipoTexto() + ")").show();
-		} catch (ObjectNotExists e) {
-			new Alert(AlertType.WARNING, "Rellena todos los campos (" + e.getClase().getSimpleName() + ")").show();
-		} catch (FueraRangoException e) {
+		} catch (CentroImpresionException | ObjetoFaltanteException | FueraRangoException e) {
 			new Alert(AlertType.WARNING, e.getMessage()).show();
 		}
 	}
@@ -52,15 +45,14 @@ public class CtrlPanelAddImpLaser {
 	 * @param letrasPorSegundoString
 	 * @param duracionTonerString
 	 * @throws CentroImpresionException en caso de que ya se encuentre
-	 * @throws TextIsEmptyException     en caso de que algun campo este vacio
-	 * @throws ObjectNotExists          en caso de que algo no exista
+	 * @throws ObjetoFaltanteException  en caso de que algun campo este vacio
 	 * @throws NumberFormatException    en caso de que no se haya enviado un dato
 	 *                                  numerico como numero
 	 * @throws FueraRangoException      en caso de que algo este fuera de rango
 	 */
 	private static void agregarImpresoraLaser(String code, String marca, String estadoString, boolean esAColor,
-			String letrasPorSegundoString, String duracionTonerString) throws CentroImpresionException,
-			TextIsEmptyException, ObjectNotExists, NumberFormatException, FueraRangoException {
+			String letrasPorSegundoString, String duracionTonerString)
+			throws CentroImpresionException, ObjetoFaltanteException, NumberFormatException, FueraRangoException {
 		ImpresoraLaser impresoraLaser = obtenerImpresoraLaser(code, marca, estadoString, esAColor,
 				letrasPorSegundoString, duracionTonerString);
 		SerializedData data = new SerializedData();
@@ -83,22 +75,21 @@ public class CtrlPanelAddImpLaser {
 	 * @param capacidadCartuchoString
 	 * @param desgasteCartuchoString
 	 * @return la impresora laser
-	 * @throws TextIsEmptyException  en caso de que algun campo no este lleno
-	 * @throws ObjectNotExists       en caso de que algo sea null
-	 * @throws NumberFormatException en caso de que no se haya podido parsear un
-	 *                               dato a numero
-	 * @throws FueraRangoException   en caso de que algo este fuera de rango
+	 * @throws ObjetoFaltanteException en caso de que algun campo no este lleno
+	 * @throws NumberFormatException   en caso de que no se haya podido parsear un
+	 *                                 dato a numero
+	 * @throws FueraRangoException     en caso de que algo este fuera de rango
 	 */
 	public static ImpresoraLaser obtenerImpresoraLaser(String code, String marca, String estadoString, boolean esAColor,
 			String letrasPorSegundo, String duracionTonerString)
-			throws TextIsEmptyException, ObjectNotExists, NumberFormatException, FueraRangoException {
+			throws ObjetoFaltanteException, NumberFormatException, FueraRangoException {
 		Utility.throwIfEmpty(code, "codigo");
 		Utility.throwIfEmpty(marca, "marca");
 		Utility.throwIfNull(estadoString, "estado");
 		Utility.throwIfEmpty(estadoString, "estado");
 		Utility.throwIfEmpty(letrasPorSegundo, "letras por segundo");
 
-		EstadoImpresora estadoImpresora = EstadoImpresora.obtenerEstadoImpresora(estadoString);
+		EstadoImpresora estadoImpresora = EstadoImpresora.obtenerEstadoThrows(estadoString);
 		double letrasSeg = Utility.obtenerDoublelimitarMayorCero(letrasPorSegundo);
 		int duracionToner = Utility.obtenerIntlimitarMayorCero(duracionTonerString);
 

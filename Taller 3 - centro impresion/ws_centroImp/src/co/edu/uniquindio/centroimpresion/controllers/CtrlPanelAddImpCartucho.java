@@ -2,8 +2,7 @@ package co.edu.uniquindio.centroimpresion.controllers;
 
 import co.edu.uniquindio.centroimpresion.exceptions.CentroImpresionException;
 import co.edu.uniquindio.centroimpresion.exceptions.FueraRangoException;
-import co.edu.uniquindio.centroimpresion.exceptions.ObjectNotExists;
-import co.edu.uniquindio.centroimpresion.exceptions.TextIsEmptyException;
+import co.edu.uniquindio.centroimpresion.exceptions.ObjetoFaltanteException;
 import co.edu.uniquindio.centroimpresion.model.EstadoImpresora;
 import co.edu.uniquindio.centroimpresion.model.ImpresoraCartucho;
 import co.edu.uniquindio.centroimpresion.util.Utility;
@@ -24,16 +23,14 @@ public class CtrlPanelAddImpCartucho {
 	 * @param capacidadCartuchoString
 	 * @param desgasteCartuchoString
 	 * @throws CentroImpresionException en caso de que ya se encuentre
-	 * @throws TextIsEmptyException     en caso de que algun campo este vacio
-	 * @throws ObjectNotExists          en caso de que algo no exista
+	 * @throws ObjetoFaltanteException  en caso de que algun campo este vacio
 	 * @throws NumberFormatException    en caso de que no se haya enviado un dato
 	 *                                  numerico como numero
 	 * @throws FueraRangoException      en caso de que algo este fuera de rango
 	 */
 	static void agregarImpresoraCartuchoThrows(String code, String marca, String estadoString, boolean esAColor,
 			String letrasSegString, String capacidadCartuchoString, String desgasteCartuchoString)
-			throws CentroImpresionException, TextIsEmptyException, ObjectNotExists, NumberFormatException,
-			FueraRangoException {
+			throws CentroImpresionException, ObjetoFaltanteException, NumberFormatException, FueraRangoException {
 		ImpresoraCartucho impresoraCartucho = obtenerImpresoraCartucho(code, marca, estadoString, esAColor,
 				letrasSegString, capacidadCartuchoString, desgasteCartuchoString);
 		SerializedData data = new SerializedData();
@@ -72,13 +69,7 @@ public class CtrlPanelAddImpCartucho {
 			new Alert(AlertType.CONFIRMATION, "La impresora ha sido agregada con éxito").show();
 		} catch (NumberFormatException e) {
 			new Alert(AlertType.WARNING, "Solo coloca numeros en la velocidad, capacidad y desgaste").show();
-		} catch (CentroImpresionException e) {
-			new Alert(AlertType.WARNING, "Ya existe una impresora con ese codigo").show();
-		} catch (TextIsEmptyException e) {
-			new Alert(AlertType.WARNING, "Rellena todos los campos (" + e.getTipoTexto() + ")").show();
-		} catch (ObjectNotExists e) {
-			new Alert(AlertType.WARNING, "Rellena todos los campos (" + e.getClase().getSimpleName() + ")").show();
-		} catch (FueraRangoException e) {
+		} catch (CentroImpresionException | ObjetoFaltanteException | FueraRangoException e) {
 			new Alert(AlertType.WARNING, e.getMessage()).show();
 		}
 	}
@@ -94,15 +85,14 @@ public class CtrlPanelAddImpCartucho {
 	 * @param capacidadCartuchoString
 	 * @param desgasteCartuchoString
 	 * @return la impresora de cartucho
-	 * @throws TextIsEmptyException  en caso de que algun campo no este lleno
-	 * @throws ObjectNotExists       en caso de que algo sea null
-	 * @throws NumberFormatException en caso de que no se haya podido parsear un
-	 *                               dato a numero
-	 * @throws FueraRangoException   en caso de que algo este fuera de rango
+	 * @throws ObjetoFaltanteException en caso de que algun campo no este lleno
+	 * @throws NumberFormatException   en caso de que no se haya podido parsear un
+	 *                                 dato a numero
+	 * @throws FueraRangoException     en caso de que algo este fuera de rango
 	 */
 	static ImpresoraCartucho obtenerImpresoraCartucho(String code, String marca, String estadoString, boolean esAColor,
 			String letrasSegString, String capacidadCartuchoString, String desgasteCartuchoString)
-			throws TextIsEmptyException, ObjectNotExists, NumberFormatException, FueraRangoException {
+			throws ObjetoFaltanteException, NumberFormatException, FueraRangoException {
 		Utility.throwIfEmpty(code, "codigo");
 		Utility.throwIfEmpty(marca, "marca");
 		Utility.throwIfNull(estadoString, "Elige un estado de impresora");

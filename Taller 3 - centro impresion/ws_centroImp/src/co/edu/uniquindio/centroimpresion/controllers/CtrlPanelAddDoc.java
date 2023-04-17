@@ -11,7 +11,7 @@ import co.edu.uniquindio.centroimpresion.exceptions.ArchivoNoObtenidoException;
 import co.edu.uniquindio.centroimpresion.exceptions.CentroImpresionException;
 import co.edu.uniquindio.centroimpresion.exceptions.FueraRangoException;
 import co.edu.uniquindio.centroimpresion.exceptions.NoSePuedeLeerException;
-import co.edu.uniquindio.centroimpresion.exceptions.TextIsEmptyException;
+import co.edu.uniquindio.centroimpresion.exceptions.ObjetoFaltanteException;
 import co.edu.uniquindio.centroimpresion.model.Documento;
 import co.edu.uniquindio.centroimpresion.util.Utility;
 import co.edu.uniquindio.centroimpresion.view.scenes.EscenaVerDoc;
@@ -66,7 +66,7 @@ public class CtrlPanelAddDoc {
 			new Alert(AlertType.ERROR, "El archivo no se puede leer").show();
 		} catch (FueraRangoException e) {
 			new Alert(AlertType.WARNING, "La prioridad debe de estar entre 0 y 10").show();
-		} catch (TextIsEmptyException e) {
+		} catch (ObjetoFaltanteException e) {
 			new Alert(AlertType.WARNING, "El código está vacío").show();
 		}
 	}
@@ -142,11 +142,11 @@ public class CtrlPanelAddDoc {
 	 * @throws CentroImpresionException
 	 * @throws NoSePuedeLeerException
 	 * @throws FueraRangoException
-	 * @throws TextIsEmptyException
+	 * @throws ObjetoFaltanteException
 	 */
 	private static Documento obtenerDocArchivoThrow(String textoCodigo, String textoPrioridad)
 			throws ArchivoNoObtenidoException, CentroImpresionException, NoSePuedeLeerException, FueraRangoException,
-			TextIsEmptyException {
+			ObjetoFaltanteException {
 
 		throwifDocExist(textoCodigo);
 		int prioridad = 5;

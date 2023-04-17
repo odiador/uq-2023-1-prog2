@@ -2,8 +2,7 @@ package co.edu.uniquindio.centroimpresion.controllers;
 
 import co.edu.uniquindio.centroimpresion.exceptions.CentroImpresionException;
 import co.edu.uniquindio.centroimpresion.exceptions.FueraRangoException;
-import co.edu.uniquindio.centroimpresion.exceptions.ObjectNotExists;
-import co.edu.uniquindio.centroimpresion.exceptions.TextIsEmptyException;
+import co.edu.uniquindio.centroimpresion.exceptions.ObjetoFaltanteException;
 import co.edu.uniquindio.centroimpresion.model.Impresora;
 import co.edu.uniquindio.centroimpresion.model.ImpresoraCartucho;
 import co.edu.uniquindio.centroimpresion.model.ImpresoraLaser;
@@ -29,8 +28,7 @@ public class CtrlActualizarImpresora {
 		try {
 			actualizarImpresoraLaserThrows(code, marca, estadoString, esAColor, letrasPorSegundo, duracionTonerString);
 			new Alert(AlertType.CONFIRMATION, "La impresora ha sido actualizada con exito").show();
-		} catch (NumberFormatException | TextIsEmptyException | ObjectNotExists | FueraRangoException
-				| CentroImpresionException e) {
+		} catch (NumberFormatException | ObjetoFaltanteException | FueraRangoException | CentroImpresionException e) {
 			new Alert(AlertType.WARNING, e.getMessage()).show();
 		}
 	}
@@ -55,8 +53,7 @@ public class CtrlActualizarImpresora {
 			actualizarImpresoraCartuchoThrows(code, marca, estadoString, esAColor, letrasSegString,
 					capacidadCartuchoString, desgasteCartuchoString);
 			new Alert(AlertType.CONFIRMATION, "La impresora ha sido actualizada con exito").show();
-		} catch (NumberFormatException | TextIsEmptyException | ObjectNotExists | FueraRangoException
-				| CentroImpresionException e) {
+		} catch (NumberFormatException | ObjetoFaltanteException | FueraRangoException | CentroImpresionException e) {
 			new Alert(AlertType.WARNING, e.getMessage()).show();
 		}
 	}
@@ -74,14 +71,14 @@ public class CtrlActualizarImpresora {
 	 * @param letrasPorSegundo
 	 * @param duracionTonerString
 	 * @throws NumberFormatException
-	 * @throws TextIsEmptyException
+	 * @throws ObjetoFaltanteException
 	 * @throws ObjectNotExists
 	 * @throws FueraRangoException
 	 * @throws CentroImpresionException
 	 */
 	private static void actualizarImpresoraLaserThrows(String code, String marca, String estadoString, boolean esAColor,
-			String letrasPorSegundo, String duracionTonerString) throws NumberFormatException, TextIsEmptyException,
-			ObjectNotExists, FueraRangoException, CentroImpresionException {
+			String letrasPorSegundo, String duracionTonerString)
+			throws NumberFormatException, ObjetoFaltanteException, FueraRangoException, CentroImpresionException {
 		ImpresoraLaser impresoraLaser = CtrlPanelAddImpLaser.obtenerImpresoraLaser(code, marca, estadoString, esAColor,
 				letrasPorSegundo, duracionTonerString);
 		actualizarImpresoracentroImpresion(impresoraLaser);
@@ -113,15 +110,13 @@ public class CtrlActualizarImpresora {
 	 * @param capacidadCartuchoString
 	 * @param desgasteCartuchoString
 	 * @throws NumberFormatException
-	 * @throws TextIsEmptyException
-	 * @throws ObjectNotExists
+	 * @throws ObjetoFaltanteException
 	 * @throws FueraRangoException
 	 * @throws CentroImpresionException
 	 */
 	public static void actualizarImpresoraCartuchoThrows(String code, String marca, String estadoString,
 			boolean esAColor, String letrasSegString, String capacidadCartuchoString, String desgasteCartuchoString)
-			throws NumberFormatException, TextIsEmptyException, ObjectNotExists, FueraRangoException,
-			CentroImpresionException {
+			throws NumberFormatException, ObjetoFaltanteException, FueraRangoException, CentroImpresionException {
 		ImpresoraCartucho impresoraCartucho = CtrlPanelAddImpCartucho.obtenerImpresoraCartucho(code, marca,
 				estadoString, esAColor, letrasSegString, capacidadCartuchoString, desgasteCartuchoString);
 		actualizarImpresoracentroImpresion(impresoraCartucho);

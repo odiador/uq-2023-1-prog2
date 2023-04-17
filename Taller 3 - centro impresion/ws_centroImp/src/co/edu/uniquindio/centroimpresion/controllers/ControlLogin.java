@@ -1,7 +1,7 @@
 package co.edu.uniquindio.centroimpresion.controllers;
 
 import co.edu.uniquindio.centroimpresion.application.Main;
-import co.edu.uniquindio.centroimpresion.exceptions.TextIsEmptyException;
+import co.edu.uniquindio.centroimpresion.exceptions.ObjetoFaltanteException;
 import co.edu.uniquindio.centroimpresion.model.TipoEmpleado;
 import co.edu.uniquindio.centroimpresion.util.Utility;
 import co.edu.uniquindio.centroimpresion.view.scenes.EscenaMenu;
@@ -23,7 +23,7 @@ public class ControlLogin {
 	public static void hacerLogin(Stage stage, String name, String value) {
 		try {
 			hacerLoginThrows(stage, name, value);
-		} catch (TextIsEmptyException e) {
+		} catch (ObjetoFaltanteException e) {
 			new Alert(AlertType.WARNING, e.getMessage()).show();
 		}
 	}
@@ -36,9 +36,9 @@ public class ControlLogin {
 	 * @param stage
 	 * @param name
 	 * @param value
-	 * @throws TextIsEmptyException
+	 * @throws ObjetoFaltanteException
 	 */
-	public static void hacerLoginThrows(Stage stage, String name, String value) throws TextIsEmptyException {
+	public static void hacerLoginThrows(Stage stage, String name, String value) throws ObjetoFaltanteException {
 		Utility.throwIfEmpty(name, "nombre");
 		Utility.throwIfNull(value, "tipo de empleado");
 		Utility.throwIfEmpty(value, "tipo de empleado");

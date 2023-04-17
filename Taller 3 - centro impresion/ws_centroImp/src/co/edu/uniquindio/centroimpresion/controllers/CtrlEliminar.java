@@ -1,7 +1,7 @@
 package co.edu.uniquindio.centroimpresion.controllers;
 
 import co.edu.uniquindio.centroimpresion.exceptions.CentroImpresionException;
-import co.edu.uniquindio.centroimpresion.exceptions.TextIsEmptyException;
+import co.edu.uniquindio.centroimpresion.exceptions.ObjetoFaltanteException;
 import co.edu.uniquindio.centroimpresion.util.Utility;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -17,7 +17,7 @@ public class CtrlEliminar {
 		try {
 			eliminarDocumentoThrow(code);
 			new Alert(AlertType.INFORMATION, "El documento con codigo " + code + " fue eliminado correctamente").show();
-		} catch (TextIsEmptyException e) {
+		} catch (ObjetoFaltanteException e) {
 			new Alert(AlertType.WARNING, "Rellena todos los campos (" + e.getTipoTexto() + ")").show();
 		} catch (CentroImpresionException e) {
 			new Alert(AlertType.ERROR, "El documento con codigo " + code + " no fue encontrado").show();
@@ -28,10 +28,10 @@ public class CtrlEliminar {
 	 * Elimina un documento por medio del codigo {@code code}
 	 * 
 	 * @param code
-	 * @throws TextIsEmptyException     en caso de que esté vacío el codigo
+	 * @throws ObjetoFaltanteException     en caso de que esté vacío el codigo
 	 * @throws CentroImpresionException en caso de que no se encuentre
 	 */
-	public static void eliminarDocumentoThrow(String code) throws TextIsEmptyException, CentroImpresionException {
+	public static void eliminarDocumentoThrow(String code) throws ObjetoFaltanteException, CentroImpresionException {
 		Utility.throwIfEmpty(code, "codigo");
 		SerializedData data = new SerializedData();
 		data.getCentroImpresion().deleteDocumento(code);
@@ -48,7 +48,7 @@ public class CtrlEliminar {
 		try {
 			eliminarImpresoraThrow(code);
 			new Alert(AlertType.INFORMATION, "La impresora con codigo " + code + " fue eliminada correctamente").show();
-		} catch (TextIsEmptyException e) {
+		} catch (ObjetoFaltanteException e) {
 			new Alert(AlertType.WARNING, "Rellena todos los campos (" + e.getTipoTexto() + ")").show();
 		} catch (CentroImpresionException e) {
 			new Alert(AlertType.ERROR, "La impresora con codigo " + code + " no fue encontrada").show();
@@ -60,10 +60,10 @@ public class CtrlEliminar {
 	 * Elimina una impresora por medio del codigo {@code code}
 	 * 
 	 * @param code
-	 * @throws TextIsEmptyException     en caso de que esté vacío el codigo
+	 * @throws ObjetoFaltanteException     en caso de que esté vacío el codigo
 	 * @throws CentroImpresionException en caso de que no se encuentre
 	 */
-	public static void eliminarImpresoraThrow(String code) throws TextIsEmptyException, CentroImpresionException {
+	public static void eliminarImpresoraThrow(String code) throws ObjetoFaltanteException, CentroImpresionException {
 		Utility.throwIfEmpty(code, "codigo");
 		SerializedData data = new SerializedData();
 		data.getCentroImpresion().deleteImpresora(code);

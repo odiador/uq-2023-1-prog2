@@ -1,9 +1,10 @@
 package co.edu.uniquindio.centroimpresion.model;
 
-import co.edu.uniquindio.centroimpresion.exceptions.ObjectNotExists;
+import co.edu.uniquindio.centroimpresion.exceptions.ObjetoFaltanteException;
 
 public enum EstadoImpresora {
 	ACTIVO("Activo"), INACTIVO("Inactivo"), DESCONECTADO("Desconectado"), MANTENIMIENTO("En Mantenimiento");
+
 	private String texto;
 
 	private EstadoImpresora(String texto) {
@@ -14,10 +15,10 @@ public enum EstadoImpresora {
 		return texto;
 	}
 
-	public static EstadoImpresora obtenerEstadoThrows(String estadoString) throws ObjectNotExists {
+	public static EstadoImpresora obtenerEstadoThrows(String estadoString) throws ObjetoFaltanteException {
 		EstadoImpresora estadoImpresora = obtenerEstado(estadoString);
 		if (estadoImpresora == null)
-			throw new ObjectNotExists(EstadoImpresora.class);
+			throw new ObjetoFaltanteException("El estado no fue encontrado", estadoString);
 		return estadoImpresora;
 	}
 
@@ -36,13 +37,6 @@ public enum EstadoImpresora {
 		for (int i = 0; i < arr.length; i++)
 			arr[i] = values[i].getTexto();
 		return arr;
-	}
-
-	public static EstadoImpresora obtenerEstadoImpresora(String estadoString) throws ObjectNotExists {
-		EstadoImpresora estadoImpresora = EstadoImpresora.obtenerEstado(estadoString);
-		if (estadoImpresora == null)
-			throw new ObjectNotExists(EstadoImpresora.class);
-		return estadoImpresora;
 	}
 
 }

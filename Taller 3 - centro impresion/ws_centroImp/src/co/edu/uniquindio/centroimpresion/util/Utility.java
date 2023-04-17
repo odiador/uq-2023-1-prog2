@@ -1,7 +1,7 @@
 package co.edu.uniquindio.centroimpresion.util;
 
 import co.edu.uniquindio.centroimpresion.exceptions.FueraRangoException;
-import co.edu.uniquindio.centroimpresion.exceptions.TextIsEmptyException;
+import co.edu.uniquindio.centroimpresion.exceptions.ObjetoFaltanteException;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.beans.value.ChangeListener;
@@ -84,19 +84,19 @@ public class Utility {
 		return concatenacion;
 	}
 
-	public static void throwIfEmpty(String texto, String tipo) throws TextIsEmptyException {
+	public static void throwIfEmpty(String texto, String tipo) throws ObjetoFaltanteException {
 		if (texto.isEmpty())
-			throw new TextIsEmptyException(tipo);
+			throw new ObjetoFaltanteException(tipo);
 	}
 
-	public static void throwIfNull(String estadoString, String msg) throws TextIsEmptyException {
+	public static void throwIfNull(String estadoString, String msg) throws ObjetoFaltanteException {
 		if (estadoString == null)
-			throw new TextIsEmptyException(msg);
+			throw new ObjetoFaltanteException(msg);
 	}
 
-	public static void throwIfNull(Object obj, String msg) throws TextIsEmptyException {
+	public static void throwIfNull(Object obj, String msg) throws ObjetoFaltanteException {
 		if (obj == null)
-			throw new TextIsEmptyException(msg);
+			throw new ObjetoFaltanteException(msg);
 	}
 
 	public static double obtenerDoublelimitarMayorCero(String desgasteString)
