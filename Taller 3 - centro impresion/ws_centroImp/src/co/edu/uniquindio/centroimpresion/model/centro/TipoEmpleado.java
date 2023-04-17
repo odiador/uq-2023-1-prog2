@@ -32,6 +32,23 @@ public enum TipoEmpleado {
 		this.puedeActualizarImpresora = puedeActualizarImpresora;
 	}
 
+	public static String[] textValues() {
+		TipoEmpleado[] values = TipoEmpleado.values();
+		String[] stringValues = new String[values.length];
+		for (int i = 0; i < values.length; i++)
+			stringValues[i] = values[i].getText();
+		return stringValues;
+	}
+
+	public static TipoEmpleado obtenerTipoTexto(String texto) {
+		TipoEmpleado[] values = TipoEmpleado.values();
+		for (TipoEmpleado tipoEmpleado : values)
+			if (tipoEmpleado.getText().equals(texto))
+				return tipoEmpleado;
+
+		return null;
+	}
+
 	public String getText() {
 		return text;
 	}

@@ -3,7 +3,9 @@ package co.edu.uniquindio.centroimpresion.application;
 import java.net.URL;
 
 import co.edu.uniquindio.centroimpresion.model.scenes.EscenaMenu;
+import co.edu.uniquindio.centroimpresion.model.scenes.EscenaPrincipal;
 import javafx.application.Application;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class Main extends Application {
@@ -12,7 +14,7 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			EscenaMenu scene = EscenaMenu.obtenerEscenaJm(primaryStage);
+			Scene scene = new EscenaPrincipal(primaryStage);
 			css = getClass().getResource("application.css");
 			scene.getStylesheets().add(css.toExternalForm());
 			primaryStage.setTitle("Centro de Impresion - Amador");
