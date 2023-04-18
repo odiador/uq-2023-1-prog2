@@ -7,12 +7,21 @@ public class Reunion {
 	private String nombre;
 	private Contacto[] listaContactos;
 
+	/**
+	 * Es el constructor de la clase reunion
+	 * 
+	 * @param nombre
+	 * @param listaContactos
+	 */
 	public Reunion(String nombre, Contacto[] listaContactos) {
 		super();
 		this.nombre = nombre;
 		this.listaContactos = listaContactos;
 	}
 
+	/**
+	 * Es el constructor de la clase reunion sin atributos
+	 */
 	public Reunion() {
 		super();
 	}
@@ -20,6 +29,34 @@ public class Reunion {
 	@Override
 	public String toString() {
 		return "Reunion [nombre=" + nombre + ", listaContactos=" + Arrays.toString(listaContactos) + "]";
+	}
+
+	/**
+	 * @return the nombre
+	 */
+	public String getNombre() {
+		return nombre;
+	}
+
+	/**
+	 * @param nombre the nombre to set
+	 */
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	/**
+	 * @return the listaContactos
+	 */
+	public Contacto[] getListaContactos() {
+		return listaContactos;
+	}
+
+	/**
+	 * @param listaContactos the listaContactos to set
+	 */
+	public void setListaContactos(Contacto[] listaContactos) {
+		this.listaContactos = listaContactos;
 	}
 
 	@Override
