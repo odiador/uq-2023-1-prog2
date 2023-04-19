@@ -15,16 +15,7 @@ public class SerializedData {
 		try {
 			leerObjeto();
 		} catch (Exception e) {
-			try {
-				agenda = new Agenda("Agenda", 7, 5, 3);
-				escribirObjeto();
-			} catch (Exception e1) {
-				e1.printStackTrace();
-			}
 		}
-	}
-
-	public SerializedData(boolean noWrite) {
 	}
 
 	protected void escribirObjeto() throws Exception {

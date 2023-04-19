@@ -76,4 +76,8 @@ public class Utility {
 		if (nombre.isEmpty())
 			throw new CampoException(msg);
 	}
+
+	public static void throwIfEmpty(String nombre) throws CampoException {
+		throwIfEmpty(nombre, "Recuerda llenar todos los campos");
+	}
 }

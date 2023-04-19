@@ -27,10 +27,10 @@ public class CtrlAgenda {
 
 	private static void crearAgendaThrows(String nombre, String cantContactosString, String cantGruposString,
 			String cantReunionesString) throws CampoException {
-		throwIfEmpty(nombre);
-		throwIfEmpty(cantContactosString);
-		throwIfEmpty(cantGruposString);
-		throwIfEmpty(cantReunionesString);
+		Utility.throwIfEmpty(nombre);
+		Utility.throwIfEmpty(cantContactosString);
+		Utility.throwIfEmpty(cantGruposString);
+		Utility.throwIfEmpty(cantReunionesString);
 		int cantContactos = pasarEnteroThrows(cantContactosString);
 		int cantGrupos = pasarEnteroThrows(cantGruposString);
 		int cantReuniones = pasarEnteroThrows(cantReunionesString);
@@ -47,12 +47,8 @@ public class CtrlAgenda {
 		}
 	}
 
-	public static void throwIfEmpty(String nombre) throws CampoException {
-		Utility.throwIfEmpty(nombre, "Recuerda llenar todas los campos");
-	}
-
 	public static void crearData(Stage stage) {
-		SerializedData data = new SerializedData(false);
+		SerializedData data = new SerializedData();
 		try {
 			data.leerObjeto();
 			preguntarCrearAgenda(stage, "La agenda ya existe, deseas sobreescribirla?");
