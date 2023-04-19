@@ -1,11 +1,14 @@
 package co.edu.uniquindio.agentatelefonica.p2.model;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Objects;
 
 public class Reunion {
 	private String nombre;
 	private Contacto[] listaContactos;
+	private String descripcion;
+	private LocalDateTime fechaHora;
 
 	/**
 	 * Es el constructor de la clase reunion
@@ -13,9 +16,11 @@ public class Reunion {
 	 * @param nombre
 	 * @param listaContactos
 	 */
-	public Reunion(String nombre, Contacto[] listaContactos) {
+	public Reunion(String nombre, String descripcion, LocalDateTime fechaHora, Contacto[] listaContactos) {
 		super();
 		this.nombre = nombre;
+		this.descripcion = descripcion;
+		this.fechaHora = fechaHora;
 		this.listaContactos = listaContactos;
 	}
 
@@ -57,6 +62,22 @@ public class Reunion {
 	 */
 	public void setListaContactos(Contacto[] listaContactos) {
 		this.listaContactos = listaContactos;
+	}
+
+	public String getDescripcion() {
+		return descripcion;
+	}
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+
+	public LocalDateTime getFechaHora() {
+		return fechaHora;
+	}
+
+	public void setFechaHora(LocalDateTime fechaHora) {
+		this.fechaHora = fechaHora;
 	}
 
 	@Override

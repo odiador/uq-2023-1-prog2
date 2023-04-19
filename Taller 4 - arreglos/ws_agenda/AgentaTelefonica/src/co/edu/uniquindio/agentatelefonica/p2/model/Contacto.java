@@ -1,6 +1,9 @@
 package co.edu.uniquindio.agentatelefonica.p2.model;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+
+import co.edu.uniquindio.agentatelefonica.p2.exceptions.GrupoException;
 
 public class Contacto {
 	private String nombre;
@@ -52,6 +55,45 @@ public class Contacto {
 		this.direccion = direccion;
 		this.telefono = telefono;
 		this.email = email;
+		createGroupArrIfNull();
+	}
+
+	private void createGroupArrIfNull() {
+		if (gruposALosQuePertenece == null)
+			this.gruposALosQuePertenece = new Grupo[0];
+	}
+
+	public void addGrupo(Grupo grupo) {
+		int pos = obtenerPosLibreGrupos();
+		if (pos == -1) {
+			pos = gruposALosQuePertenece.length;
+			gruposALosQuePertenece = Arrays.copyOf(gruposALosQuePertenece, pos + 1);
+			gruposALosQuePertenece[pos] = grupo;
+		} else
+			gruposALosQuePertenece[pos] = grupo;
+	}
+
+	public void removeGrupo(Grupo grupo) throws GrupoException {
+		int posGrupo = buscarPosGrupo(grupo);
+		if (posGrupo == -1)
+			throw new GrupoException("El grupo no se ha encontrado, no se puede eliminar");
+		gruposALosQuePertenece[posGrupo] = null;
+	}
+
+	private int obtenerPosLibreGrupos() {
+		return buscarPosGrupo(null);
+	}
+
+	public boolean hayPosLibreGrupo() {
+		return obtenerPosLibreGrupos() != -1;
+	}
+
+	public boolean existeGrupo(Grupo grupo) {
+		return buscarPosGrupo(grupo) != -1;
+	}
+
+	public int buscarPosGrupo(Grupo grupo) {
+		return ((ArrayList<Grupo>) Arrays.asList(gruposALosQuePertenece)).indexOf(grupo);
 	}
 
 	/**
