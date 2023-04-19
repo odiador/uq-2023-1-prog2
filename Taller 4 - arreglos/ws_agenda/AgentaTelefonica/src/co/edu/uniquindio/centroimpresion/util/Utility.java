@@ -1,5 +1,6 @@
 package co.edu.uniquindio.centroimpresion.util;
 
+import co.edu.uniquindio.agentatelefonica.p2.exceptions.CampoException;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.beans.value.ChangeListener;
@@ -69,5 +70,10 @@ public class Utility {
 		hbox.getChildren().addAll(nodos);
 		hbox.setId("centered-box");
 		return hbox;
+	}
+
+	public static void throwIfEmpty(String nombre, String msg) throws CampoException {
+		if (nombre.isEmpty())
+			throw new CampoException(msg);
 	}
 }
