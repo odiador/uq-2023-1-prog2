@@ -1,9 +1,14 @@
 package co.edu.uniquindio.agentatelefonica.p2.model;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Objects;
 
-public class Grupo {
+public class Grupo implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String nombre;
 	private Categoria categoria;
 	private Contacto[] listaContactos;

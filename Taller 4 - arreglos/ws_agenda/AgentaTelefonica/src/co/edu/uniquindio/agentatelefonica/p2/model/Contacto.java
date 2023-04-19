@@ -1,11 +1,16 @@
 package co.edu.uniquindio.agentatelefonica.p2.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 import co.edu.uniquindio.agentatelefonica.p2.exceptions.GrupoException;
 
-public class Contacto {
+public class Contacto implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String nombre;
 	private String alias;
 	private String direccion;

@@ -1,10 +1,15 @@
 package co.edu.uniquindio.agentatelefonica.p2.model;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Objects;
 
-public class Reunion {
+public class Reunion implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String nombre;
 	private Contacto[] listaContactos;
 	private String descripcion;
