@@ -6,6 +6,8 @@ import javafx.event.EventHandler;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 
 public class PanelEliminarContacto extends BorderPane {
@@ -16,12 +18,16 @@ public class PanelEliminarContacto extends BorderPane {
 		Boton botonEliminar = new Boton("Eliminar", e -> {
 			System.out.println("Eliminado");
 		});
+		Boton botonVolver = new Boton("Volver", eventoVolver, "btn-volver");
+		HBox botonesBox = new HBox(botonEliminar, botonVolver);
+
 		vbox.setId("centered-box");
 		vbox.getChildren().add(Utility.generarHBox("Escribe el nombre del contacto", tfNombre));
 		vbox.getChildren().add(Utility.generarHBox("Escribe el telefono del contacto", tfTelefono));
-		vbox.getChildren().add(botonEliminar);
-		Boton botonVolver = new Boton("Volver", eventoVolver, "btn-volver");
+
+		HBox.setHgrow(botonEliminar, Priority.ALWAYS);
+		HBox.setHgrow(botonVolver, Priority.ALWAYS);
 		setCenter(vbox);
-		setBottom(botonVolver);
+		setBottom(botonesBox);
 	}
 }

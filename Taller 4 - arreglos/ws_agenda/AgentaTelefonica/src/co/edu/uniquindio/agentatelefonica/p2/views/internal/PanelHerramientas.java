@@ -8,8 +8,15 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 
 public class PanelHerramientas extends BorderPane {
+	private EventHandler<? super MouseEvent> eventoVolver;
+
 	public PanelHerramientas(EventHandler<? super MouseEvent> eventoVolver) {
-		VBox vbox = new VBox(0);
+		this.eventoVolver = eventoVolver;
+		initComponents();
+	}
+
+	private void initComponents() {
+		VBox vbox = new VBox(20);
 		Boton btnListar = new Boton("Listar Contactos", e -> {
 			System.out.println("listado");
 		});
@@ -20,8 +27,10 @@ public class PanelHerramientas extends BorderPane {
 		vbox.getChildren().add(btnHuecosLibres);
 		vbox.getChildren().add(btnListar);
 
-		VBox.setMargin(btnHuecosLibres, new Insets(0, 80, 20, 80));
-		VBox.setMargin(btnListar, new Insets(0, 80, 0, 80));
+		Insets instets = new Insets(0, 80, 0, 80);
+
+		VBox.setMargin(btnHuecosLibres, instets);
+		VBox.setMargin(btnListar, instets);
 		Boton botonVolver = new Boton("Volver", eventoVolver, "btn-volver");
 		setCenter(vbox);
 		setBottom(botonVolver);

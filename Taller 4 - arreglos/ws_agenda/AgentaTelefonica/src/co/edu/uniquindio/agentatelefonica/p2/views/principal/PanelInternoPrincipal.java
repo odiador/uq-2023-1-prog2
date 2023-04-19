@@ -3,6 +3,7 @@ package co.edu.uniquindio.agentatelefonica.p2.views.principal;
 import co.edu.uniquindio.agentatelefonica.p2.views.internal.PanelAnadirContacto;
 import co.edu.uniquindio.agentatelefonica.p2.views.internal.PanelBuscarContacto;
 import co.edu.uniquindio.agentatelefonica.p2.views.internal.PanelEliminarContacto;
+import co.edu.uniquindio.agentatelefonica.p2.views.internal.PanelFuncExtendida;
 import co.edu.uniquindio.agentatelefonica.p2.views.internal.PanelHerramientas;
 import co.edu.uniquindio.centroimpresion.util.Boton;
 import javafx.event.EventHandler;
@@ -17,7 +18,7 @@ public class PanelInternoPrincipal extends BorderPane {
 	}
 
 	public void initComponents() {
-		VBox box = new VBox();
+		VBox box = new VBox(20);
 		EventHandler<? super MouseEvent> eventoVolver = evtVolver -> initComponents();
 
 		Boton anadirContactos = new Boton("Añadir contacto", e -> {
@@ -33,16 +34,19 @@ public class PanelInternoPrincipal extends BorderPane {
 		Boton btnHerramientas = new Boton("Herramientas", e -> {
 			setCenter(new PanelHerramientas(eventoVolver));
 		});
+		Boton btnFuncExtendida = new Boton("Funcionalidad Extendida", e -> {
+			setCenter(new PanelFuncExtendida(eventoVolver));
+		});
 
-		box.getChildren().add(anadirContactos);
-		box.getChildren().add(buscarContacto);
-		box.getChildren().add(eliminarContacto);
-		box.getChildren().add(btnHerramientas);
+		box.getChildren().addAll(anadirContactos, buscarContacto, eliminarContacto, btnHerramientas, btnFuncExtendida);
 
-		VBox.setMargin(anadirContactos, new Insets(20));
-		VBox.setMargin(buscarContacto, new Insets(20));
-		VBox.setMargin(eliminarContacto, new Insets(20));
-		VBox.setMargin(btnHerramientas, new Insets(20));
+		Insets insets = new Insets(0, 20, 0, 20);
+
+		VBox.setMargin(anadirContactos, insets);
+		VBox.setMargin(buscarContacto, insets);
+		VBox.setMargin(eliminarContacto, insets);
+		VBox.setMargin(btnHerramientas, insets);
+		VBox.setMargin(btnFuncExtendida, insets);
 
 		box.setId("centered-box");
 		setCenter(box);
