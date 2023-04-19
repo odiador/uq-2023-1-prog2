@@ -11,6 +11,8 @@ public class Main extends Application {
 		try {
 			Scene scene = new EscenaPrincipal("Juan Manuel Amador Roa");
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			primaryStage.setMinWidth(400);
+			primaryStage.setMinHeight(400);
 			primaryStage.setScene(scene);
 			primaryStage.show();
 		} catch (Exception e) {
