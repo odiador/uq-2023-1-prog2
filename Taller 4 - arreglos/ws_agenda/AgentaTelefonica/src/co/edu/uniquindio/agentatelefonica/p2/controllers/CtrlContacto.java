@@ -1,6 +1,5 @@
 package co.edu.uniquindio.agentatelefonica.p2.controllers;
 
-import co.edu.uniquindio.agentatelefonica.p2.exceptions.ArregloLlenoException;
 import co.edu.uniquindio.agentatelefonica.p2.exceptions.CampoException;
 import co.edu.uniquindio.agentatelefonica.p2.exceptions.ContactoException;
 import co.edu.uniquindio.agentatelefonica.p2.exceptions.ObjetoNoExisteException;
@@ -13,13 +12,23 @@ public class CtrlContacto {
 	public static void agregarContacto(String nombre, String alias, String direccion, String telefono, String email) {
 		try {
 			agregarContactoThrows(nombre, alias, direccion, telefono, email);
-		} catch (CampoException | ObjetoNoExisteException | ContactoException | ArregloLlenoException e) {
+			new Alert(AlertType.WARNING, "El contacto ha sido agregado exitosamente").show();
+		} catch (CampoException | ObjetoNoExisteException | ContactoException e) {
 			new Alert(AlertType.WARNING, e.getMessage()).show();
 		}
 	}
 
-	public static void agregarContactoThrows(String nombre, String alias, String direccion, String telefono,
-			String email) throws CampoException, ObjetoNoExisteException, ContactoException, ArregloLlenoException {
+	public static void buscarContacto(String nombre, String telefono) {
+		try {
+			Contacto contactoThrows = buscarContactoThrows(nombre, telefono);
+			new Alert(AlertType.WARNING, contactoThrows.toString()).show();
+		} catch (CampoException | ContactoException e) {
+			new Alert(AlertType.WARNING, e.getMessage()).show();
+		}
+	}
+
+	private static void agregarContactoThrows(String nombre, String alias, String direccion, String telefono,
+			String email) throws CampoException, ObjetoNoExisteException, ContactoException {
 		Utility.throwIfEmpty(nombre);
 		Utility.throwIfEmpty(alias);
 		Utility.throwIfEmpty(direccion);
@@ -28,6 +37,16 @@ public class CtrlContacto {
 		Contacto contacto = new Contacto(nombre, alias, direccion, telefono, email);
 		SerializedData data = new SerializedData();
 		data.getAgenda().aniadirContacto(contacto);
+		data.actualizarAgenda();
 	}
 
+	private static Contacto buscarContactoThrows(String nombre, String telefono)
+			throws CampoException, ContactoException {
+		Utility.throwIfEmpty(nombre);
+		Utility.throwIfEmpty(telefono);
+		SerializedData data = new SerializedData();
+		Contacto contacto = new Contacto(nombre, telefono);
+		Contacto buscarContactoThrows = data.getAgenda().buscarContactoThrows(contacto);
+		return buscarContactoThrows;
+	}
 }

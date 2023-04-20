@@ -1,5 +1,6 @@
 package co.edu.uniquindio.agentatelefonica.p2.views.internal;
 
+import co.edu.uniquindio.agentatelefonica.p2.controllers.CtrlContacto;
 import co.edu.uniquindio.centroimpresion.util.Boton;
 import co.edu.uniquindio.centroimpresion.util.Utility;
 import javafx.event.EventHandler;
@@ -19,7 +20,8 @@ public class PanelAnadirContacto extends BorderPane {
 		TextField tfTelefono = new TextField();
 		TextField tfEmail = new TextField();
 		Boton botonAgregar = new Boton("Agregar", e -> {
-			System.out.println("agregado");
+			CtrlContacto.agregarContacto(tfNombre.getText(), tfAlias.getText(), tfDireccion.getText(),
+					tfTelefono.getText(), tfEmail.getText());
 		});
 		Boton botonVolver = new Boton("Volver", eventoVolver, "btn-volver");
 		vbox.setId("centered-box");
