@@ -44,12 +44,6 @@ public class SerializedData {
 		try {
 			escribirObjeto();
 		} catch (Exception e) {
-			agenda = new Agenda("Agenda", 7, 5, 3);
-			try {
-				escribirObjeto();
-			} catch (Exception e1) {
-				e1.printStackTrace();
-			}
 
 		}
 	}
