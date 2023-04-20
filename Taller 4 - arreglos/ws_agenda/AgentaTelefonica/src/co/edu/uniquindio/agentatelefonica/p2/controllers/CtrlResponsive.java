@@ -7,7 +7,14 @@ import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 
 public class CtrlResponsive {
-
+	/**
+	 * Cambia el tamaño del header cada vez que se actualiza el alto de la ventana,
+	 * se usa para hacer la ventana responsiva
+	 * 
+	 * @param scene
+	 * @param header
+	 * @return
+	 */
 	public static ChangeListener<? super Number> generarResponsiveListenerHeaderStage(Scene scene, Header header) {
 		return (observable, oldValue, newValue) -> {
 			// obtiene la altura de la escena
@@ -19,9 +26,15 @@ public class CtrlResponsive {
 		};
 	}
 
+	/**
+	 * Escala la imagen del header para hacerla responsive
+	 * 
+	 * @param header
+	 * @param imgView
+	 */
 	public static void escalarImagenHeaderResponsive(Header header, ImageView imgView) {
 		DoubleBinding multiply = header.heightProperty().multiply(0.85).subtract(67.9d);
-	
+
 		imgView.fitHeightProperty().bind(multiply);
 		imgView.fitWidthProperty().bind(multiply);
 	}

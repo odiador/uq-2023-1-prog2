@@ -14,6 +14,34 @@ import javafx.stage.Stage;
 
 public class CtrlAgenda {
 
+	/**
+	 * Este metodo se ejecuta al inicio, para decidir si crear, sobreescribir o no
+	 * hacer nada con respecto al archivo de la agenda
+	 * 
+	 * @param stage
+	 */
+	public static void crearData(Stage stage) {
+		SerializedData data = new SerializedData();
+		try {
+			data.leerObjeto();
+			preguntarCrearAgenda(stage, "La agenda ya existe, deseas sobreescribirla?");
+
+		} catch (Exception e) {
+			CtrlAgenda.irACrearAgenda(stage);
+		}
+	}
+
+	/**
+	 * Crea una agenda a partir de sus atributos, en caso de que haya un campo vacío
+	 * muestra una advertencia y si la crea, se muestra la ventana principal
+	 * 
+	 * @param stage
+	 * @param stageMain
+	 * @param nombre
+	 * @param cantContactosString
+	 * @param cantGruposString
+	 * @param cantReunionesString
+	 */
 	public static void crearAgenda(Stage stage, Stage stageMain, String nombre, String cantContactosString,
 			String cantGruposString, String cantReunionesString) {
 		try {
@@ -25,6 +53,9 @@ public class CtrlAgenda {
 		}
 	}
 
+	/**
+	 * Indica los tanto los contactos ocupados como los libres de la agenda
+	 */
 	public static void huecosLibres() {
 		SerializedData data = new SerializedData();
 		int huecosLibres = data.getAgenda().huecosLibres();
@@ -38,6 +69,15 @@ public class CtrlAgenda {
 		alert.show();
 	}
 
+	/**
+	 * Crea una agenda y la guarda en un archivo .dat
+	 * 
+	 * @param nombre
+	 * @param cantContactosString
+	 * @param cantGruposString
+	 * @param cantReunionesString
+	 * @throws CampoException
+	 */
 	private static void crearAgendaThrows(String nombre, String cantContactosString, String cantGruposString,
 			String cantReunionesString) throws CampoException {
 		Utility.throwIfEmpty(nombre);
@@ -52,6 +92,13 @@ public class CtrlAgenda {
 		data.actualizarAgenda();
 	}
 
+	/**
+	 * Intenta pasar una cadena a un entero, si no se puede se muestra un error
+	 * 
+	 * @param cadena
+	 * @return
+	 * @throws CampoException
+	 */
 	private static int pasarEnteroThrows(String cadena) throws CampoException {
 		try {
 			return Integer.parseInt(cadena);
@@ -60,31 +107,33 @@ public class CtrlAgenda {
 		}
 	}
 
-	public static void crearData(Stage stage) {
-		SerializedData data = new SerializedData();
-		try {
-			data.leerObjeto();
-			preguntarCrearAgenda(stage, "La agenda ya existe, deseas sobreescribirla?");
-
-		} catch (Exception e) {
-			CtrlAgenda.irACrearAgenda(stage);
-		}
-	}
-
+	/**
+	 * En caso de que se quiera preguntar si se quiere crear la agenda se ejecuta
+	 * este metodo, y si se decide que no, se muestra la ventana principal
+	 * 
+	 * @param stage
+	 * @param msg
+	 */
 	private static void preguntarCrearAgenda(Stage stage, String msg) {
 		Alert alert = new Alert(AlertType.INFORMATION, msg, ButtonType.YES, ButtonType.NO);
 		Optional<ButtonType> crearAgenda = alert.showAndWait();
 		ButtonType resultadoCrear = crearAgenda.orElse(null);
 		if (resultadoCrear == ButtonType.YES)
-			CtrlAgenda.irACrearAgenda(stage);
+			irACrearAgenda(stage);
 		else
 			stage.show();
 	}
 
+	/**
+	 * Crea una nueva stage para crear la agenda, de la cual, cuando se termine de
+	 * crear lleva al usuario a la ventana principal {@code stageMain}
+	 * 
+	 * @param stageMain
+	 */
 	static void irACrearAgenda(Stage stageMain) {
 		Stage stage = new Stage();
 		EscenaCrearAgenda escenaCrearAgenda = new EscenaCrearAgenda(stage, stageMain);
-		stage.setTitle("Agenda - agregar agenda | Juan Manuel Amador Roa");
+		stage.setTitle("Agenda - Agregar Agenda | Juan Manuel Amador Roa");
 		stage.setScene(escenaCrearAgenda);
 		escenaCrearAgenda.getStylesheets().add(Main.applicationCss);
 		stage.show();
