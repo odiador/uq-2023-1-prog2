@@ -23,31 +23,12 @@ public class PanelFuncExtendida extends BorderPane {
 			setCenter(new PanelAnadirReunion(eventoVolver));
 			setBottom(null);
 		});
-		Boton botonEliminarReunion = new Boton("Eliminar Reunion", e -> {
-			System.out.println("reunion eliminada");
-		});
-		Boton botonAgregarGrupo = new Boton("Agregar Grupo", e -> {
-			System.out.println("grupo agregado");
-		});
-		Boton botonAgregarContactoGrupo = new Boton("Agregar Contacto a Grupo", e -> {
-			System.out.println("contacto agregado al grupo");
-		});
-
-		Boton botonEliminarGrupo = new Boton("Eliminar grupo", e -> {
-			System.out.println("grupo eliminado");
-		});
-
 		vbox.setId("centered-box");
-		vbox.getChildren().addAll(botonAgregarReunion, botonEliminarReunion, botonAgregarGrupo,
-				botonAgregarContactoGrupo, botonEliminarGrupo);
+		vbox.getChildren().addAll(botonAgregarReunion);
 
 		Insets insets = new Insets(0, 80, 0, 80);
 
 		VBox.setMargin(botonAgregarReunion, insets);
-		VBox.setMargin(botonEliminarReunion, insets);
-		VBox.setMargin(botonAgregarGrupo, insets);
-		VBox.setMargin(botonAgregarContactoGrupo, insets);
-		VBox.setMargin(botonEliminarGrupo, insets);
 
 		setCenter(vbox);
 		setBottom(botonVolver);

@@ -80,4 +80,19 @@ public class Utility {
 	public static void throwIfEmpty(String nombre) throws CampoException {
 		throwIfEmpty(nombre, "Recuerda llenar todos los campos");
 	}
+
+	/**
+	 * Intenta pasar una cadena a un entero, si no se puede se muestra un error
+	 * 
+	 * @param cadena
+	 * @return
+	 * @throws CampoException
+	 */
+	public static int pasarEnteroThrows(String cadena) throws CampoException {
+		try {
+			return Integer.parseInt(cadena);
+		} catch (NumberFormatException e) {
+			throw new CampoException("Recuerda solo colocar numeros en campos numericos");
+		}
+	}
 }

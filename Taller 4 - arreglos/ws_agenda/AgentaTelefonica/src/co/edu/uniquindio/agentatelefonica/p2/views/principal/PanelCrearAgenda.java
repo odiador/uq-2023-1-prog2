@@ -32,6 +32,7 @@ public class PanelCrearAgenda extends BorderPane {
 		vBox.getChildren().add(generarHBox("Escribe la cantidad de grupos", tfCantGrupos));
 		vBox.getChildren().add(generarHBox("Escribe la cantidad de reuniones", tfCantReuniones));
 
+		vBox.setId("centered-box");
 		setCenter(vBox);
 		setBottom(new Boton("Aceptar", e -> CtrlAgenda.crearAgenda(stage, stageMain, tfNombre.getText(),
 				tfCantContactos.getText(), tfCantGrupos.getText(), tfCantReuniones.getText())));

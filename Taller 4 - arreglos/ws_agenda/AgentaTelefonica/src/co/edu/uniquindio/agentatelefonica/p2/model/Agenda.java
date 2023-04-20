@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 import co.edu.uniquindio.agentatelefonica.p2.exceptions.ArregloLlenoException;
 import co.edu.uniquindio.agentatelefonica.p2.exceptions.ContactoException;
 import co.edu.uniquindio.agentatelefonica.p2.exceptions.ObjetoNoExisteException;
+import co.edu.uniquindio.agentatelefonica.p2.exceptions.ReunionException;
 
 public class Agenda implements Serializable {
 	/**
@@ -52,9 +53,20 @@ public class Agenda implements Serializable {
 		listaContactos[posLibre] = c;
 	}
 
+	/**
+	 * Muestra un error si el contacto es null
+	 * 
+	 * @param c
+	 * @throws ObjetoNoExisteException
+	 */
 	private void throwifNull(Contacto c) throws ObjetoNoExisteException {
 		if (c == null)
 			throw new ObjetoNoExisteException("El contacto no existe");
+	}
+
+	private void throwifNull(Reunion reunion) throws ObjetoNoExisteException {
+		if (reunion == null)
+			throw new ObjetoNoExisteException("La reunion no existe");
 	}
 
 	/**
@@ -85,6 +97,54 @@ public class Agenda implements Serializable {
 	}
 
 	/**
+	 * Agrega una reunion, muestra errores si no pasan las cosas como deberian de
+	 * pasar
+	 * 
+	 * @param reunion
+	 * @throws ObjetoNoExisteException
+	 * @throws ReunionException
+	 * @throws ArregloLlenoException
+	 */
+	public void agregarReunion(Reunion reunion)
+			throws ObjetoNoExisteException, ReunionException, ArregloLlenoException {
+		throwifNull(reunion);
+		if (buscarReunion(reunion) != null)
+			throw new ReunionException("La reunion ya existe, no se puede agregar");
+		int pos = buscarPosLibreReunion();
+		if (pos == -1)
+			throw new ArregloLlenoException("La lista de reuniones ya esta llena");
+		listaReuniones[pos] = reunion;
+	}
+
+	/**
+	 * Busca la posicion en la que una reunion esta libre
+	 * 
+	 * @return
+	 */
+	private int buscarPosLibreReunion() {
+		return buscarPosReunion(null);
+	}
+
+	/**
+	 * Busca una reunion, retorna null si no se encuentra
+	 * 
+	 * @param reunion
+	 */
+	private Reunion buscarReunion(Reunion reunion) {
+		int pos = buscarPosReunion(reunion);
+		if (pos == -1)
+			return null;
+		return listaReuniones[pos];
+	}
+
+	private int buscarPosReunion(Reunion reunion) {
+		ArrayList<Reunion> auxListaReuniones = Arrays.asList(listaReuniones).stream()
+				.collect(Collectors.toCollection(ArrayList::new));
+		int indexOf = auxListaReuniones.indexOf(reunion);
+		return indexOf;
+	}
+
+	/**
 	 * Busca un contacto a partir del contacto, si no se encuentra se retorna un
 	 * null
 	 * 
@@ -98,6 +158,13 @@ public class Agenda implements Serializable {
 		return null;
 	}
 
+	/**
+	 * Busca un contacto y si no se encuentra se muestra un error
+	 * 
+	 * @param contacto
+	 * @return el contacto encontrado
+	 * @throws ContactoException
+	 */
 	public Contacto buscarContactoThrows(Contacto contacto) throws ContactoException {
 		Contacto contactoEncontrado = buscarContacto(contacto);
 		if (contactoEncontrado != null)
@@ -155,14 +222,29 @@ public class Agenda implements Serializable {
 		return contador;
 	}
 
+	/**
+	 * Obtiene la cantidad de espacios del contacto
+	 * 
+	 * @return
+	 */
 	public int cantidadEspaciosContactos() {
 		return listaContactos.length;
 	}
 
+	/**
+	 * Obtiene la cantidad de contactos ocupados
+	 * 
+	 * @return
+	 */
 	public int cantidadOcupados() {
 		return cantidadEspaciosContactos() - huecosLibres();
 	}
 
+	/**
+	 * Obtiene la lista de contactos
+	 * 
+	 * @return
+	 */
 	public ArrayList<Contacto> listarContactos() {
 		List<Contacto> listaAux = Arrays.asList(listaContactos);
 		return listaAux.stream().filter(contacto -> contacto != null).collect(Collectors.toCollection(ArrayList::new));

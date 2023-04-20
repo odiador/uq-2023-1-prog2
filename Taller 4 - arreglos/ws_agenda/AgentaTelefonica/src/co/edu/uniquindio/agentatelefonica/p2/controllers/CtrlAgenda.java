@@ -47,6 +47,7 @@ public class CtrlAgenda {
 		try {
 			crearAgendaThrows(nombre, cantContactosString, cantGruposString, cantReunionesString);
 			stage.close();
+			stageMain.setTitle(new SerializedData().getAgenda().getNombre() + " | Juan Manuel Amador Roa");
 			stageMain.show();
 		} catch (CampoException e) {
 			new Alert(AlertType.WARNING, e.getMessage()).show();
@@ -84,27 +85,12 @@ public class CtrlAgenda {
 		Utility.throwIfEmpty(cantContactosString);
 		Utility.throwIfEmpty(cantGruposString);
 		Utility.throwIfEmpty(cantReunionesString);
-		int cantContactos = pasarEnteroThrows(cantContactosString);
-		int cantGrupos = pasarEnteroThrows(cantGruposString);
-		int cantReuniones = pasarEnteroThrows(cantReunionesString);
+		int cantContactos = Utility.pasarEnteroThrows(cantContactosString);
+		int cantGrupos = Utility.pasarEnteroThrows(cantGruposString);
+		int cantReuniones = Utility.pasarEnteroThrows(cantReunionesString);
 		SerializedData data = new SerializedData();
 		data.setAgenda(new Agenda(nombre, cantContactos, cantReuniones, cantGrupos));
 		data.actualizarAgenda();
-	}
-
-	/**
-	 * Intenta pasar una cadena a un entero, si no se puede se muestra un error
-	 * 
-	 * @param cadena
-	 * @return
-	 * @throws CampoException
-	 */
-	private static int pasarEnteroThrows(String cadena) throws CampoException {
-		try {
-			return Integer.parseInt(cadena);
-		} catch (NumberFormatException e) {
-			throw new CampoException("Recuerda solo colocar numeros en campos numericos");
-		}
 	}
 
 	/**
@@ -120,8 +106,10 @@ public class CtrlAgenda {
 		ButtonType resultadoCrear = crearAgenda.orElse(null);
 		if (resultadoCrear == ButtonType.YES)
 			irACrearAgenda(stage);
-		else
+		else {
+			stage.setTitle(new SerializedData().getAgenda().getNombre() + " | Juan Manuel Amador Roa");
 			stage.show();
+		}
 	}
 
 	/**
