@@ -3,6 +3,7 @@ package co.edu.uniquindio.agentatelefonica.p2.model;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
@@ -92,7 +93,7 @@ public class Agenda implements Serializable {
 	 */
 	public Contacto buscarContacto(Contacto contacto) {
 		for (Contacto cadaContacto : listaContactos)
-			if (cadaContacto.equals(contacto))
+			if (contacto.equals(cadaContacto))
 				return cadaContacto;
 		return null;
 	}
@@ -126,12 +127,10 @@ public class Agenda implements Serializable {
 	 */
 	public void eliminarContacto(Contacto c) throws ObjetoNoExisteException, ContactoException {
 		throwifNull(c);
-		for (int i = 0; i < listaContactos.length; i++)
-			if (listaContactos[i].equals(c)) {
-				listaContactos[i] = null;
-				return;
-			}
-		throw new ContactoException("El contacto no pudo ser eliminado (no existe)");
+		int posContacto = buscarPosContacto(c);
+		if (posContacto == -1)
+			throw new ContactoException("El contacto no pudo ser eliminado (no existe)");
+		listaContactos[posContacto] = null;
 	}
 
 	/**
@@ -162,6 +161,11 @@ public class Agenda implements Serializable {
 
 	public int cantidadOcupados() {
 		return cantidadEspaciosContactos() - huecosLibres();
+	}
+
+	public ArrayList<Contacto> listarContactos() {
+		List<Contacto> listaAux = Arrays.asList(listaContactos);
+		return listaAux.stream().filter(contacto -> contacto != null).collect(Collectors.toCollection(ArrayList::new));
 	}
 
 	/**
