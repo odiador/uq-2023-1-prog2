@@ -19,7 +19,10 @@ public class PanelHerramientas extends BorderPane {
 	private void initComponents() {
 		VBox vbox = new VBox(20);
 		Boton btnListar = new Boton("Listar Contactos", e -> {
-			System.out.println("listado");
+			setCenter(new PanelVerContactos());
+			setBottom(new Boton("Volver", evtVolver2 -> {
+				initComponents();
+			}, "btn-volver"));
 		});
 		Boton btnHuecosLibres = new Boton("Indicar Huecos libres", e -> {
 			CtrlAgenda.huecosLibres();
