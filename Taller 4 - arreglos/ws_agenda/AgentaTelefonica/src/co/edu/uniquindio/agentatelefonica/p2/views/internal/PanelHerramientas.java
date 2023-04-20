@@ -1,5 +1,6 @@
 package co.edu.uniquindio.agentatelefonica.p2.views.internal;
 
+import co.edu.uniquindio.agentatelefonica.p2.controllers.CtrlAgenda;
 import co.edu.uniquindio.centroimpresion.util.Boton;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -21,7 +22,7 @@ public class PanelHerramientas extends BorderPane {
 			System.out.println("listado");
 		});
 		Boton btnHuecosLibres = new Boton("Indicar Huecos libres", e -> {
-			System.out.println("huecos");
+			CtrlAgenda.huecosLibres();
 		});
 		vbox.setId("centered-box");
 		vbox.getChildren().add(btnHuecosLibres);

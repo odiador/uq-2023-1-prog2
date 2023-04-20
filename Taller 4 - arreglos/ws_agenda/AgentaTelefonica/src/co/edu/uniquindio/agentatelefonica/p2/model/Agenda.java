@@ -41,16 +41,13 @@ public class Agenda implements Serializable {
 	 * @throws ArregloLlenoException   en caso de que el arreglo de contactos este
 	 *                                 lleno
 	 */
-	public void aniadirContacto(Contacto c) throws ObjetoNoExisteException, ContactoException {
+	public void aniadirContacto(Contacto c) throws ObjetoNoExisteException, ContactoException, ArregloLlenoException {
 		throwifNull(c);
 		if (existeContacto(c))
 			throw new ContactoException("El contacto no se pudo agregar (ya existe)");
 		int posLibre = buscarPosLibreContacto();
-		if (posLibre == -1) {
-			posLibre = listaContactos.length;
-			listaContactos = Arrays.copyOf(listaContactos, posLibre + 1);
-			listaContactos[posLibre] = c;
-		}
+		if (posLibre == -1)
+			throw new ArregloLlenoException("La lista de contactos esta llena");
 		listaContactos[posLibre] = c;
 	}
 
@@ -157,6 +154,14 @@ public class Agenda implements Serializable {
 			if (contacto == null)
 				contador++;
 		return contador;
+	}
+
+	public int cantidadEspaciosContactos() {
+		return listaContactos.length;
+	}
+
+	public int cantidadOcupados() {
+		return cantidadEspaciosContactos() - huecosLibres();
 	}
 
 	/**

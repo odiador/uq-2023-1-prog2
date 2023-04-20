@@ -25,6 +25,19 @@ public class CtrlAgenda {
 		}
 	}
 
+	public static void huecosLibres() {
+		SerializedData data = new SerializedData();
+		int huecosLibres = data.getAgenda().huecosLibres();
+		int ocupados = data.getAgenda().cantidadOcupados();
+		StringBuilder sringBuilder = new StringBuilder();
+		sringBuilder.append("La cantidad de contactos ocupados son: ");
+		sringBuilder.append(ocupados);
+		sringBuilder.append(" y de libres son: ");
+		sringBuilder.append(huecosLibres);
+		Alert alert = new Alert(AlertType.INFORMATION, sringBuilder.toString());
+		alert.show();
+	}
+
 	private static void crearAgendaThrows(String nombre, String cantContactosString, String cantGruposString,
 			String cantReunionesString) throws CampoException {
 		Utility.throwIfEmpty(nombre);
