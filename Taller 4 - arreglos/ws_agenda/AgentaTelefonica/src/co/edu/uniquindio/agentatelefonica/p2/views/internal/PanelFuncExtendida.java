@@ -20,7 +20,8 @@ public class PanelFuncExtendida extends BorderPane {
 		VBox vbox = new VBox(20);
 		Boton botonVolver = new Boton("Volver", eventoVolver, "btn-volver");
 		Boton botonAgregarReunion = new Boton("Agregar Reunion", e -> {
-			System.out.println("reunion agregada");
+			setCenter(new PanelAnadirReunion(eventoVolver));
+			setBottom(null);
 		});
 		Boton botonEliminarReunion = new Boton("Eliminar Reunion", e -> {
 			System.out.println("reunion eliminada");

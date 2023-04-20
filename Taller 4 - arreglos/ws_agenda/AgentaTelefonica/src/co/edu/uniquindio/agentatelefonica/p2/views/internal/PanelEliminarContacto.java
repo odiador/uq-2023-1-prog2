@@ -22,6 +22,9 @@ public class PanelEliminarContacto extends BorderPane {
 		Boton botonVolver = new Boton("Volver", eventoVolver, "btn-volver");
 		HBox botonesBox = new HBox(botonEliminar, botonVolver);
 
+		Utility.setAsNumberTextfield(tfTelefono);
+		Utility.setMaximumTextLength(tfTelefono, 11);
+
 		vbox.setId("centered-box");
 		vbox.getChildren().add(Utility.generarHBox("Escribe el nombre del contacto", tfNombre));
 		vbox.getChildren().add(Utility.generarHBox("Escribe el telefono del contacto", tfTelefono));

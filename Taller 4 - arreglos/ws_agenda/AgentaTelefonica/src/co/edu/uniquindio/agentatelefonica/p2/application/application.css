@@ -21,6 +21,8 @@
 	-fx-text-fill: white;
 	-fx-font-weight: bold;
 	-fx-font-size: 20.0;
+	-fx-max-width: 1000000.0;
+	-fx-max-height: 1000000.0;
 }
 #btn:hover {
 	-fx-background-color: rgb(0.0,0.0,0.0,0.15);
@@ -33,4 +35,7 @@
 }
 #btn-volver {
 	-fx-background-color: #DB2A10;
+}
+#bg-red {
+	-fx-background-color: red;
 }

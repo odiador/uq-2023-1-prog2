@@ -6,8 +6,10 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 
 public class Boton extends BorderPane {
+	private Label label;
+
 	public Boton(String text, EventHandler<? super MouseEvent> listener) {
-		Label label = new Label(text);
+		label = new Label(text);
 		label.setId("btn");
 		label.setOnMouseReleased(listener);
 
@@ -18,5 +20,10 @@ public class Boton extends BorderPane {
 	public Boton(String text, EventHandler<? super MouseEvent> listener, String id) {
 		this(text, listener);
 		setId(id);
+	}
+
+	public void setEventoBtnPresionado(EventHandler<? super MouseEvent> listener) {
+		label.setOnMouseReleased(listener);
+
 	}
 }

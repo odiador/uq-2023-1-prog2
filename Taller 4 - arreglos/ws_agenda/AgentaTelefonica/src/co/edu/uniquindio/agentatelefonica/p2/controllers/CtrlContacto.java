@@ -61,7 +61,7 @@ public class CtrlContacto {
 		data.actualizarAgenda();
 	}
 
-	private static Contacto buscarContactoThrows(String nombre, String telefono)
+	protected static Contacto buscarContactoThrows(String nombre, String telefono)
 			throws CampoException, ContactoException {
 		Utility.throwIfEmpty(nombre);
 		Utility.throwIfEmpty(telefono);

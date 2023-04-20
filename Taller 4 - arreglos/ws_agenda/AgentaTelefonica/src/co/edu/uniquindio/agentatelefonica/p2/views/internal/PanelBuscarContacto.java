@@ -12,12 +12,22 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 
 public class PanelBuscarContacto extends BorderPane {
+	private EventHandler<? super MouseEvent> eventoVolver;
+	private Boton botonBuscar;
+	private TextField tfNombre;
+	private TextField tfTelefono;
+
 	public PanelBuscarContacto(EventHandler<? super MouseEvent> eventoVolver) {
+		this.eventoVolver = eventoVolver;
+		initComponents();
+	}
+
+	private void initComponents() {
 		VBox vbox = new VBox(20);
-		TextField tfNombre = new TextField();
-		TextField tfTelefono = new TextField();
+		tfNombre = new TextField();
+		tfTelefono = new TextField();
 		Boton botonVolver = new Boton("Volver", eventoVolver, "btn-volver");
-		Boton botonBuscar = new Boton("Buscar", e -> {
+		botonBuscar = new Boton("Buscar", e -> {
 			CtrlContacto.buscarContacto(tfNombre.getText(), tfTelefono.getText());
 		});
 		HBox botonesBox = new HBox(botonBuscar, botonVolver);
@@ -35,4 +45,17 @@ public class PanelBuscarContacto extends BorderPane {
 		setCenter(vbox);
 		setBottom(botonesBox);
 	}
+
+	public void setComportamientoBotonBuscar(EventHandler<? super MouseEvent> eventoBuscar) {
+		botonBuscar.setEventoBtnPresionado(eventoBuscar);
+	}
+
+	public TextField getTfNombre() {
+		return tfNombre;
+	}
+
+	public TextField getTfTelefono() {
+		return tfTelefono;
+	}
+
 }

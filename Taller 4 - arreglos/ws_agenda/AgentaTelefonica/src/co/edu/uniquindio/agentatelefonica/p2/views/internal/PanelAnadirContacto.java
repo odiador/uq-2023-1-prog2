@@ -32,6 +32,9 @@ public class PanelAnadirContacto extends BorderPane {
 		vbox.getChildren().add(Utility.generarHBox("Escribe un telefono", tfTelefono));
 		vbox.getChildren().add(Utility.generarHBox("Escribe un email", tfEmail));
 
+		Utility.setAsNumberTextfield(tfTelefono);
+		Utility.setMaximumTextLength(tfTelefono, 11);
+
 		HBox botonesBox = new HBox(botonAgregar, botonVolver);
 		HBox.setHgrow(botonAgregar, Priority.ALWAYS);
 		HBox.setHgrow(botonVolver, Priority.ALWAYS);
