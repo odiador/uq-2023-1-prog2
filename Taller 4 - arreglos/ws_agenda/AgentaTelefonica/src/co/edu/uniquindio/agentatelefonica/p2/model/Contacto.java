@@ -11,10 +11,10 @@ public class Contacto implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private String nombre;
+	private final String nombre;
 	private String alias;
 	private String direccion;
-	private String telefono;
+	private final String telefono;
 	private String email;
 	private Grupo[] gruposALosQuePertenece;
 
@@ -63,6 +63,16 @@ public class Contacto implements Serializable {
 		createGroupArrIfNull();
 	}
 
+	public Contacto(String nombre, String telefono) {
+		super();
+		this.nombre = nombre;
+		this.telefono = telefono;
+	}
+
+	public boolean exists() {
+		return nombre != null && telefono != null;
+	}
+
 	private void createGroupArrIfNull() {
 		if (gruposALosQuePertenece == null)
 			this.gruposALosQuePertenece = new Grupo[0];
@@ -109,7 +119,8 @@ public class Contacto implements Serializable {
 	 *      <li>{@link #Contacto(String, String, String, String, String, Grupo[])}
 	 */
 	public Contacto() {
-		super();
+		this.nombre = null;
+		this.telefono = null;
 	}
 
 	/**
@@ -117,13 +128,6 @@ public class Contacto implements Serializable {
 	 */
 	public String getNombre() {
 		return nombre;
-	}
-
-	/**
-	 * @param nombre the nombre to set
-	 */
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
 	}
 
 	/**
@@ -159,13 +163,6 @@ public class Contacto implements Serializable {
 	 */
 	public String getTelefono() {
 		return telefono;
-	}
-
-	/**
-	 * @param telefono the telefono to set
-	 */
-	public void setTelefono(String telefono) {
-		this.telefono = telefono;
 	}
 
 	/**

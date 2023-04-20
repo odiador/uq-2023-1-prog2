@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 import co.edu.uniquindio.agentatelefonica.p2.exceptions.ArregloLlenoException;
 import co.edu.uniquindio.agentatelefonica.p2.exceptions.ContactoException;
@@ -40,13 +41,16 @@ public class Agenda implements Serializable {
 	 * @throws ArregloLlenoException   en caso de que el arreglo de contactos este
 	 *                                 lleno
 	 */
-	public void aniadirContacto(Contacto c) throws ObjetoNoExisteException, ContactoException, ArregloLlenoException {
+	public void aniadirContacto(Contacto c) throws ObjetoNoExisteException, ContactoException {
 		throwifNull(c);
 		if (existeContacto(c))
 			throw new ContactoException("El contacto no se pudo agregar (ya existe)");
 		int posLibre = buscarPosLibreContacto();
-		if (posLibre == -1)
-			throw new ArregloLlenoException("La lista de contactos esta llena");
+		if (posLibre == -1) {
+			posLibre = listaContactos.length;
+			listaContactos = Arrays.copyOf(listaContactos, posLibre + 1);
+			listaContactos[posLibre] = c;
+		}
 		listaContactos[posLibre] = c;
 	}
 
@@ -76,20 +80,31 @@ public class Agenda implements Serializable {
 	 * @return el indice de la posicion del contacto o -1 si no se encuentra
 	 */
 	private int buscarPosContacto(Contacto c) {
-		return ((ArrayList<Contacto>) Arrays.asList(listaContactos)).indexOf(c);
+		ArrayList<Contacto> auxListaContactos = Arrays.asList(listaContactos).stream()
+				.collect(Collectors.toCollection(ArrayList::new));
+		int indexOf = auxListaContactos.indexOf(c);
+		return indexOf;
 	}
 
 	/**
-	 * Busca un contacto a partir del nombre, si no se encuentra se retorna un null
+	 * Busca un contacto a partir del contacto, si no se encuentra se retorna un
+	 * null
 	 * 
-	 * @param nombre
+	 * @param contacto
 	 * @return el contacto, si no se encuentra null
 	 */
-	public Contacto buscarContacto(String nombre) {
-		for (Contacto contacto : listaContactos)
-			if (contacto.getNombre().equals(nombre))
-				return contacto;
+	public Contacto buscarContacto(Contacto contacto) {
+		for (Contacto cadaContacto : listaContactos)
+			if (cadaContacto.equals(contacto))
+				return cadaContacto;
 		return null;
+	}
+
+	public Contacto buscarContactoThrows(Contacto contacto) throws ContactoException {
+		Contacto contactoEncontrado = buscarContacto(contacto);
+		if (contactoEncontrado != null)
+			return contactoEncontrado;
+		throw new ContactoException("El contacto no fue encontrado");
 	}
 
 	/**
