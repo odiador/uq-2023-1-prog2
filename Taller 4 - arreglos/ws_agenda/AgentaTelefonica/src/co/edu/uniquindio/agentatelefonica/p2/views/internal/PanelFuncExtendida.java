@@ -1,6 +1,6 @@
 package co.edu.uniquindio.agentatelefonica.p2.views.internal;
 
-import co.edu.uniquindio.centroimpresion.util.Boton;
+import co.edu.uniquindio.agentatelefonica.p2.util.Boton;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.input.MouseEvent;
@@ -23,12 +23,31 @@ public class PanelFuncExtendida extends BorderPane {
 			setCenter(new PanelAnadirReunion(eventoVolver));
 			setBottom(null);
 		});
+		Boton botonEliminarAgenda = new Boton("Eliminar Reunion", e -> {
+			setCenter(new PanelEliminarReunion(eventoVolver));
+			setBottom(null);
+		});
+		Boton botonAgregarGrupo = new Boton("Agregar Grupo", e -> {
+			setCenter(new PanelAnadirGrupo(eventoVolver));
+			setBottom(null);
+		});
+		Boton botonEliminarGrupo = new Boton("Eliminar Grupo", e -> {
+			setCenter(new PanelAnadirReunion(eventoVolver));
+			setBottom(null);
+		});
+		Boton botonAsignarContactos = new Boton("Asignar Contactos", e -> {
+			setCenter(new PanelAnadirReunion(eventoVolver));
+			setBottom(null);
+		});
+
 		vbox.setId("centered-box");
-		vbox.getChildren().addAll(botonAgregarReunion);
+		vbox.getChildren().addAll(botonAgregarReunion, botonEliminarAgenda, botonAgregarGrupo);
 
 		Insets insets = new Insets(0, 80, 0, 80);
 
 		VBox.setMargin(botonAgregarReunion, insets);
+		VBox.setMargin(botonEliminarAgenda, insets);
+		VBox.setMargin(botonAgregarGrupo, insets);
 
 		setCenter(vbox);
 		setBottom(botonVolver);
