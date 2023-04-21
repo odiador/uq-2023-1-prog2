@@ -30,7 +30,7 @@ public class PanelAnadirGrupo extends BorderPane {
 		VBox vbox = new VBox(20);
 		HBox hbox = new HBox();
 		Boton botonVolver = new Boton("Volver", eventoVolver, "btn-volver");
-		Boton botonEliminar = new Boton("Agregar", e -> {
+		Boton botonAnadir = new Boton("Añadir", e -> {
 			CtrlGrupo.anadirGrupo(tfNombre.getText(), comboCategoria.getValue());
 		});
 
@@ -38,9 +38,9 @@ public class PanelAnadirGrupo extends BorderPane {
 
 		vbox.getChildren().add(Utility.generarHBox("Escribe el nombre del grupo", tfNombre));
 		vbox.getChildren().add(Utility.generarHBox("Elige su categoria", comboCategoria));
-		hbox.getChildren().addAll(botonEliminar, botonVolver);
+		hbox.getChildren().addAll(botonAnadir, botonVolver);
 
-		HBox.setHgrow(botonEliminar, Priority.ALWAYS);
+		HBox.setHgrow(botonAnadir, Priority.ALWAYS);
 		HBox.setHgrow(botonVolver, Priority.ALWAYS);
 
 		setCenter(vbox);
