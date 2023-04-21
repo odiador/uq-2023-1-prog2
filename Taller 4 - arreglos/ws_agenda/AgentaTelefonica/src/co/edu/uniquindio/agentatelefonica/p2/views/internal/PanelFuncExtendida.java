@@ -32,7 +32,7 @@ public class PanelFuncExtendida extends BorderPane {
 			setBottom(null);
 		});
 		Boton botonEliminarGrupo = new Boton("Eliminar Grupo", e -> {
-			setCenter(new PanelAnadirReunion(eventoVolver));
+			setCenter(new PanelEliminarGrupo(eventoVolver));
 			setBottom(null);
 		});
 		Boton botonAsignarContactos = new Boton("Asignar Contactos", e -> {
