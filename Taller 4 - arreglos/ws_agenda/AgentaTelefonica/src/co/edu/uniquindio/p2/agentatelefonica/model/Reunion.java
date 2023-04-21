@@ -10,7 +10,7 @@ public class Reunion implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private String nombre;
+	private final String nombre;
 	private Contacto[] listaContactos;
 	private String descripcion;
 	private LocalDateTime fechaHora;
@@ -33,7 +33,16 @@ public class Reunion implements Serializable {
 	 * Es el constructor de la clase reunion sin atributos
 	 */
 	public Reunion() {
-		super();
+		this.nombre = null;
+	}
+
+	/**
+	 * Es el constructor de la clase reunion solo con el nombre de la reunion
+	 * 
+	 * @param nombre
+	 */
+	public Reunion(String nombre) {
+		this.nombre = nombre;
 	}
 
 	@Override
@@ -46,13 +55,6 @@ public class Reunion implements Serializable {
 	 */
 	public String getNombre() {
 		return nombre;
-	}
-
-	/**
-	 * @param nombre the nombre to set
-	 */
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
 	}
 
 	/**

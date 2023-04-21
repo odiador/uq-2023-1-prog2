@@ -331,4 +331,18 @@ public class Agenda implements Serializable {
 				Arrays.toString(listaContactos), Arrays.toString(listaReuniones), Arrays.toString(listaGrupos));
 	}
 
+	/**
+	 * Elimina una reunion de la agenda, muestra errores si no se puede
+	 * 
+	 * @param reunion
+	 * @throws ReunionException
+	 * @throws ObjetoNoExisteException
+	 */
+	public void eliminarReunion(Reunion reunion) throws ReunionException, ObjetoNoExisteException {
+		Utility.throwifNull(reunion, "La reunion enviada no funciona para eliminar");
+		int pos = buscarPosReunion(reunion);
+		if (pos == -1)
+			throw new ReunionException("La reunion no existe, no se puede eliminar");
+		listaReuniones[pos] = null;
+	}
 }
