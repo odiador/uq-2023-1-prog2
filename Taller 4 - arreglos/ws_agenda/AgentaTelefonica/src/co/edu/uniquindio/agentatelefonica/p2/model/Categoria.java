@@ -12,4 +12,12 @@ public enum Categoria {
 	public String getNombre() {
 		return nombre;
 	}
+
+	public static String[] textValues() {
+		Categoria[] values = Categoria.values();
+		String[] textValues = new String[values.length];
+		for (int i = 0; i < values.length; i++)
+			textValues[i] = values[i].getNombre();
+		return textValues;
+	}
 }

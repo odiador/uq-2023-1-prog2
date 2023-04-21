@@ -11,6 +11,7 @@ import co.edu.uniquindio.agentatelefonica.p2.exceptions.ArregloLlenoException;
 import co.edu.uniquindio.agentatelefonica.p2.exceptions.ContactoException;
 import co.edu.uniquindio.agentatelefonica.p2.exceptions.ObjetoNoExisteException;
 import co.edu.uniquindio.agentatelefonica.p2.exceptions.ReunionException;
+import co.edu.uniquindio.agentatelefonica.p2.util.Utility;
 
 public class Agenda implements Serializable {
 	/**
@@ -44,29 +45,13 @@ public class Agenda implements Serializable {
 	 *                                 lleno
 	 */
 	public void aniadirContacto(Contacto c) throws ObjetoNoExisteException, ContactoException, ArregloLlenoException {
-		throwifNull(c);
+		Utility.throwifNull(c, "El contacto no existe");
 		if (existeContacto(c))
 			throw new ContactoException("El contacto no se pudo agregar (ya existe)");
 		int posLibre = buscarPosLibreContacto();
 		if (posLibre == -1)
 			throw new ArregloLlenoException("La lista de contactos esta llena");
 		listaContactos[posLibre] = c;
-	}
-
-	/**
-	 * Muestra un error si el contacto es null
-	 * 
-	 * @param c
-	 * @throws ObjetoNoExisteException
-	 */
-	private void throwifNull(Contacto c) throws ObjetoNoExisteException {
-		if (c == null)
-			throw new ObjetoNoExisteException("El contacto no existe");
-	}
-
-	private void throwifNull(Reunion reunion) throws ObjetoNoExisteException {
-		if (reunion == null)
-			throw new ObjetoNoExisteException("La reunion no existe");
 	}
 
 	/**
@@ -107,7 +92,7 @@ public class Agenda implements Serializable {
 	 */
 	public void agregarReunion(Reunion reunion)
 			throws ObjetoNoExisteException, ReunionException, ArregloLlenoException {
-		throwifNull(reunion);
+		Utility.throwifNull(reunion, "La reunion no existe");
 		if (buscarReunion(reunion) != null)
 			throw new ReunionException("La reunion ya existe, no se puede agregar");
 		int pos = buscarPosLibreReunion();
@@ -193,7 +178,7 @@ public class Agenda implements Serializable {
 	 * @throws ContactoException       en caso de que no exista el contacto
 	 */
 	public void eliminarContacto(Contacto c) throws ObjetoNoExisteException, ContactoException {
-		throwifNull(c);
+		Utility.throwifNull(c, "El contacto no existe");
 		int posContacto = buscarPosContacto(c);
 		if (posContacto == -1)
 			throw new ContactoException("El contacto no pudo ser eliminado (no existe)");
