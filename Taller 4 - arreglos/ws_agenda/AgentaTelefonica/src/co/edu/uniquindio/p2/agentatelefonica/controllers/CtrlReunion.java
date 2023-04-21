@@ -57,6 +57,13 @@ public class CtrlReunion {
 	public static void anadirReunionThrows(String nombre, String descripcion, Set<Contacto> listaContactos,
 			LocalDate fecha, String horas, String minutos)
 			throws CampoException, ObjetoNoExisteException, ReunionException, ArregloLlenoException {
+		Utility.throwifNull(fecha, "Recuerda llenar la fecha");
+
+		Utility.throwIfEmpty(nombre);
+		Utility.throwIfEmpty(descripcion);
+		Utility.throwIfEmpty(minutos);
+		Utility.throwIfEmpty(horas);
+
 		Contacto arrContactos[] = listaContactos.toArray(new Contacto[listaContactos.size()]);
 		int horasNum = Utility.pasarEnteroThrows(horas);
 		int minutosNum = Utility.pasarEnteroThrows(minutos);
@@ -66,6 +73,7 @@ public class CtrlReunion {
 			Reunion reunion = new Reunion(nombre, descripcion, fechaHora, arrContactos);
 			SerializedData data = new SerializedData();
 			data.getAgenda().agregarReunion(reunion);
+			data.actualizarAgenda();
 		} catch (DateTimeException e) {
 			throw new ObjetoNoExisteException("Organiza bien la fecha y la hora");
 		}
@@ -98,7 +106,7 @@ public class CtrlReunion {
 	public static void eliminarReunion(String nombreReunion) {
 		try {
 			eliminarReunionThrows(nombreReunion);
-			new Alert(AlertType.CONFIRMATION, "La reunion de nombre: " + nombreReunion + " ha sido eliminada").show();
+			new Alert(AlertType.CONFIRMATION, "La reunion de nombre " + nombreReunion + " ha sido eliminada").show();
 		} catch (CampoException | ReunionException | ObjetoNoExisteException e) {
 			new Alert(AlertType.WARNING, e.getMessage()).show();
 		}
