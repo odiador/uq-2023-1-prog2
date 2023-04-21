@@ -5,7 +5,7 @@ import co.edu.uniquindio.agentatelefonica.p2.exceptions.CampoException;
 import co.edu.uniquindio.agentatelefonica.p2.exceptions.ContactoException;
 import co.edu.uniquindio.agentatelefonica.p2.exceptions.ObjetoNoExisteException;
 import co.edu.uniquindio.agentatelefonica.p2.model.Contacto;
-import co.edu.uniquindio.centroimpresion.util.Utility;
+import co.edu.uniquindio.agentatelefonica.p2.util.Utility;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 

@@ -1,6 +1,7 @@
-package co.edu.uniquindio.centroimpresion.util;
+package co.edu.uniquindio.agentatelefonica.p2.util;
 
 import co.edu.uniquindio.agentatelefonica.p2.exceptions.CampoException;
+import co.edu.uniquindio.agentatelefonica.p2.exceptions.ObjetoNoExisteException;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.beans.value.ChangeListener;
@@ -94,5 +95,10 @@ public class Utility {
 		} catch (NumberFormatException e) {
 			throw new CampoException("Recuerda solo colocar numeros en campos numericos");
 		}
+	}
+
+	public static void throwifNull(Object object, String msg) throws ObjetoNoExisteException {
+		if (object == null)
+			throw new ObjetoNoExisteException(msg);
 	}
 }

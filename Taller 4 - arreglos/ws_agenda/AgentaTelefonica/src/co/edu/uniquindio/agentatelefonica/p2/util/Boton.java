@@ -1,4 +1,4 @@
-package co.edu.uniquindio.centroimpresion.util;
+package co.edu.uniquindio.agentatelefonica.p2.util;
 
 import javafx.event.EventHandler;
 import javafx.scene.control.Label;

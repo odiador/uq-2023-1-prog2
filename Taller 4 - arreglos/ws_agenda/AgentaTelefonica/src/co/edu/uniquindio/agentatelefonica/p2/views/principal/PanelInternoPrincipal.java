@@ -1,11 +1,11 @@
 package co.edu.uniquindio.agentatelefonica.p2.views.principal;
 
+import co.edu.uniquindio.agentatelefonica.p2.util.Boton;
 import co.edu.uniquindio.agentatelefonica.p2.views.internal.PanelAnadirContacto;
 import co.edu.uniquindio.agentatelefonica.p2.views.internal.PanelBuscarContacto;
 import co.edu.uniquindio.agentatelefonica.p2.views.internal.PanelEliminarContacto;
 import co.edu.uniquindio.agentatelefonica.p2.views.internal.PanelFuncExtendida;
 import co.edu.uniquindio.agentatelefonica.p2.views.internal.PanelHerramientas;
-import co.edu.uniquindio.centroimpresion.util.Boton;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.input.MouseEvent;

@@ -1,8 +1,8 @@
 package co.edu.uniquindio.agentatelefonica.p2.views.internal;
 
 import co.edu.uniquindio.agentatelefonica.p2.controllers.CtrlContacto;
-import co.edu.uniquindio.centroimpresion.util.Boton;
-import co.edu.uniquindio.centroimpresion.util.Utility;
+import co.edu.uniquindio.agentatelefonica.p2.util.Boton;
+import co.edu.uniquindio.agentatelefonica.p2.util.Utility;
 import javafx.event.EventHandler;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;

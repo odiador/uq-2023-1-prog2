@@ -1,7 +1,7 @@
 package co.edu.uniquindio.agentatelefonica.p2.views.internal;
 
 import co.edu.uniquindio.agentatelefonica.p2.controllers.CtrlAgenda;
-import co.edu.uniquindio.centroimpresion.util.Boton;
+import co.edu.uniquindio.agentatelefonica.p2.util.Boton;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.input.MouseEvent;

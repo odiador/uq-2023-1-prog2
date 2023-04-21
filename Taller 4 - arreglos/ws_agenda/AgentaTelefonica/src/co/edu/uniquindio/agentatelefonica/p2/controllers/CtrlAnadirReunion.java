@@ -14,7 +14,7 @@ import co.edu.uniquindio.agentatelefonica.p2.exceptions.ObjetoNoExisteException;
 import co.edu.uniquindio.agentatelefonica.p2.exceptions.ReunionException;
 import co.edu.uniquindio.agentatelefonica.p2.model.Contacto;
 import co.edu.uniquindio.agentatelefonica.p2.model.Reunion;
-import co.edu.uniquindio.centroimpresion.util.Utility;
+import co.edu.uniquindio.agentatelefonica.p2.util.Utility;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 
@@ -73,5 +73,9 @@ public class CtrlAnadirReunion {
 		} catch (DateTimeException e) {
 			throw new ObjetoNoExisteException("Organiza bien la fecha y la hora");
 		}
+	}
+
+	public static void eliminarReunion(String text) {
+		
 	}
 }

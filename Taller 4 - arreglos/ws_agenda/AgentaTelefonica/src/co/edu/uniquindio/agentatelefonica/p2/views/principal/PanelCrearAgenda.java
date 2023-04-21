@@ -1,10 +1,10 @@
 package co.edu.uniquindio.agentatelefonica.p2.views.principal;
 
-import static co.edu.uniquindio.centroimpresion.util.Utility.generarHBox;
+import static co.edu.uniquindio.agentatelefonica.p2.util.Utility.generarHBox;
 
 import co.edu.uniquindio.agentatelefonica.p2.controllers.CtrlAgenda;
-import co.edu.uniquindio.centroimpresion.util.Boton;
-import co.edu.uniquindio.centroimpresion.util.Utility;
+import co.edu.uniquindio.agentatelefonica.p2.util.Boton;
+import co.edu.uniquindio.agentatelefonica.p2.util.Utility;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
