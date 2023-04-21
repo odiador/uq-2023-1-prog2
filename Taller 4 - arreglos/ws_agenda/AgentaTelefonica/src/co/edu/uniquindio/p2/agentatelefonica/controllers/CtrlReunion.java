@@ -18,7 +18,7 @@ import co.edu.uniquindio.p2.agentatelefonica.util.Utility;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 
-public class CtrlAnadirReunion {
+public class CtrlReunion {
 	private Set<Contacto> listaContactos = new HashSet<>();
 
 	public void anadirContacto(String nombre, String telefono) {
@@ -34,10 +34,6 @@ public class CtrlAnadirReunion {
 
 	public void agregarContactoThrows(Contacto contacto) {
 		listaContactos.add(contacto);
-	}
-
-	public static void goToAnadirReunion() {
-
 	}
 
 	public Set<Contacto> getListaContactos() {
@@ -75,7 +71,36 @@ public class CtrlAnadirReunion {
 		}
 	}
 
-	public static void eliminarReunion(String text) {
-		
+	/**
+	 * Elimina una reunion con su nombre, en caso de que pase algo no deseado se
+	 * suelta un error
+	 * 
+	 * @param nombreReunion
+	 * @throws CampoException
+	 * @throws ReunionException
+	 * @throws ObjetoNoExisteException
+	 */
+	public static void eliminarReunionThrows(String nombreReunion)
+			throws CampoException, ReunionException, ObjetoNoExisteException {
+		Utility.throwIfEmpty(nombreReunion);
+		SerializedData data = new SerializedData();
+		Reunion reunion = new Reunion(nombreReunion);
+		data.getAgenda().eliminarReunion(reunion);
+		data.actualizarAgenda();
+	}
+
+	/**
+	 * Elimina una reunion con su nombre, en caso de que pase algo no deseado
+	 * muestra una alerta
+	 * 
+	 * @param nombreReunion
+	 */
+	public static void eliminarReunion(String nombreReunion) {
+		try {
+			eliminarReunionThrows(nombreReunion);
+			new Alert(AlertType.CONFIRMATION, "La reunion de nombre: " + nombreReunion + " ha sido eliminada").show();
+		} catch (CampoException | ReunionException | ObjetoNoExisteException e) {
+			new Alert(AlertType.WARNING, e.getMessage()).show();
+		}
 	}
 }

@@ -2,7 +2,7 @@ package co.edu.uniquindio.p2.agentatelefonica.views.internal;
 
 import static co.edu.uniquindio.p2.agentatelefonica.util.Utility.generarHBox;
 
-import co.edu.uniquindio.p2.agentatelefonica.controllers.CtrlAnadirReunion;
+import co.edu.uniquindio.p2.agentatelefonica.controllers.CtrlReunion;
 import co.edu.uniquindio.p2.agentatelefonica.util.Boton;
 import co.edu.uniquindio.p2.agentatelefonica.util.Utility;
 import javafx.event.EventHandler;
@@ -17,7 +17,7 @@ import javafx.scene.layout.VBox;
 
 public class PanelAnadirReunion extends BorderPane {
 	private EventHandler<? super MouseEvent> eventoVolver;
-	private CtrlAnadirReunion ctrlAnadirReunion = new CtrlAnadirReunion();
+	private CtrlReunion ctrlAnadirReunion = new CtrlReunion();
 
 	public PanelAnadirReunion(EventHandler<? super MouseEvent> eventoVolver) {
 		this.eventoVolver = eventoVolver;
@@ -33,7 +33,7 @@ public class PanelAnadirReunion extends BorderPane {
 
 		Boton botonVolver = new Boton("Volver", eventoVolver, "btn-volver");
 		Boton botonAnadir = new Boton("Añadir Reunion", e -> {
-			CtrlAnadirReunion.anadirReunion(tfNombre.getText(), tfDescripcion.getText(),
+			CtrlReunion.anadirReunion(tfNombre.getText(), tfDescripcion.getText(),
 					ctrlAnadirReunion.getListaContactos(), datePicker.getValue(), tfHora.getText(),
 					tfMinutos.getText());
 		});

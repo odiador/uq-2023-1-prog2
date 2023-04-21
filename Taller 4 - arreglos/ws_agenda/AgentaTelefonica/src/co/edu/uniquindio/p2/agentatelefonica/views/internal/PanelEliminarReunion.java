@@ -1,6 +1,6 @@
 package co.edu.uniquindio.p2.agentatelefonica.views.internal;
 
-import co.edu.uniquindio.p2.agentatelefonica.controllers.CtrlAnadirReunion;
+import co.edu.uniquindio.p2.agentatelefonica.controllers.CtrlReunion;
 import co.edu.uniquindio.p2.agentatelefonica.util.Boton;
 import co.edu.uniquindio.p2.agentatelefonica.util.Utility;
 import javafx.event.EventHandler;
@@ -26,7 +26,7 @@ public class PanelEliminarReunion extends BorderPane {
 		HBox hbox = new HBox();
 		Boton botonVolver = new Boton("Volver", eventoVolver, "btn-volver");
 		Boton botonEliminar = new Boton("Eliminar", e -> {
-			CtrlAnadirReunion.eliminarReunion(tfNombre.getText());
+			CtrlReunion.eliminarReunion(tfNombre.getText());
 		});
 
 		vbox.setId("centered-box");
