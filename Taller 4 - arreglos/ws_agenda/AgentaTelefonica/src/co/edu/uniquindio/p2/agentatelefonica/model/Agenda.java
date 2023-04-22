@@ -235,6 +235,11 @@ public class Agenda implements Serializable {
 		return listaAux.stream().filter(contacto -> contacto != null).collect(Collectors.toCollection(ArrayList::new));
 	}
 
+	public ArrayList<Reunion> listarReuniones() {
+		List<Reunion> listaAux = Arrays.asList(listaReuniones);
+		return listaAux.stream().filter(reunion -> reunion != null).collect(Collectors.toCollection(ArrayList::new));
+	}
+
 	/**
 	 * Obtiene el nombre de la agenda
 	 * 
