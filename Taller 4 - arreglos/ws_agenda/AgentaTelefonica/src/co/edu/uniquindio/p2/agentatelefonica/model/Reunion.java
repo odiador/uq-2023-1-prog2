@@ -45,6 +45,20 @@ public class Reunion implements Serializable {
 		this.nombre = nombre;
 	}
 
+	/**
+	 * Es el constructor de la reunion pero sin contar la lista de contactos
+	 * 
+	 * @param nombre
+	 * @param descripcion
+	 * @param fechaHora
+	 */
+	public Reunion(String nombre, String descripcion, LocalDateTime fechaHora) {
+		this.nombre = nombre;
+		this.descripcion = descripcion;
+		this.fechaHora = fechaHora;
+		this.listaContactos = new Contacto[0];
+	}
+
 	@Override
 	public String toString() {
 		return "Reunion [nombre=" + nombre + ", listaContactos=" + Arrays.toString(listaContactos) + "]";
