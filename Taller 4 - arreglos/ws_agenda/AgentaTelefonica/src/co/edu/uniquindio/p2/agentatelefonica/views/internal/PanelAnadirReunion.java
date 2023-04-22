@@ -17,7 +17,6 @@ import javafx.scene.layout.VBox;
 
 public class PanelAnadirReunion extends BorderPane {
 	private EventHandler<? super MouseEvent> eventoVolver;
-	private CtrlReunion ctrlAnadirReunion = new CtrlReunion();
 
 	public PanelAnadirReunion(EventHandler<? super MouseEvent> eventoVolver) {
 		this.eventoVolver = eventoVolver;
@@ -33,9 +32,8 @@ public class PanelAnadirReunion extends BorderPane {
 
 		Boton botonVolver = new Boton("Volver", eventoVolver, "btn-volver");
 		Boton botonAnadir = new Boton("Añadir Reunion", e -> {
-			CtrlReunion.anadirReunion(tfNombre.getText(), tfDescripcion.getText(),
-					ctrlAnadirReunion.getListaContactos(), datePicker.getValue(), tfHora.getText(),
-					tfMinutos.getText());
+			CtrlReunion.anadirReunion(tfNombre.getText(), tfDescripcion.getText(), datePicker.getValue(),
+					tfHora.getText(), tfMinutos.getText());
 		});
 		VBox vbox = new VBox(20);
 
