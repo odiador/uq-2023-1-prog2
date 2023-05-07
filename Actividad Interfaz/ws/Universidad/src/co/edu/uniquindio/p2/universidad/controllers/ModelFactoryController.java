@@ -10,18 +10,26 @@ import co.edu.uniquindio.p2.universidad.model.Universidad;
 
 public class ModelFactoryController {
 	private static final String RUTA = "data.dat";
-	private static Universidad universidad = null;
+	private Universidad universidad = null;
+
+	private static class SingletonHolder {
+		private final static ModelFactoryController eINSTANCE = new ModelFactoryController();
+	}
+
+	public static ModelFactoryController getInstance() {
+		return SingletonHolder.eINSTANCE;
+	}
 
 	/**
 	 * @return the universidad
 	 */
-	public static Universidad getInstance() {
+	public Universidad getUniversidad() {
 		if (universidad == null)
-			readInstance();
+			readUniversidad();
 		return universidad;
 	}
 
-	public static void readInstance() {
+	public void readUniversidad() {
 		try {
 			ObjectInputStream ois = new ObjectInputStream(new FileInputStream(RUTA));
 			universidad = (Universidad) ois.readObject();
@@ -32,7 +40,7 @@ public class ModelFactoryController {
 		}
 	}
 
-	public static void saveInstance() {
+	public void saveInstance() {
 		try {
 			ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(RUTA));
 			oos.writeObject(universidad);

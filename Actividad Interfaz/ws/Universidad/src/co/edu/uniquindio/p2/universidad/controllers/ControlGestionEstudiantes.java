@@ -83,13 +83,13 @@ public class ControlGestionEstudiantes {
 		FxUtility.setAsNumberTextfield(txtIdentificacion);
 		FxUtility.setAsIntegerTextfield(comboSemestre.getEditor(), 1, 11);
 		FxUtility.setAsIntegerTextfield(comboEdad.getEditor(), 1, 120);
-		tablaEstudiantes.setItems(
-				FXCollections.observableArrayList(ModelFactoryController.getInstance().getListaEstudiantes()));
+		tablaEstudiantes.setItems(FXCollections
+				.observableArrayList(ModelFactoryController.getInstance().getUniversidad().getListaEstudiantes()));
 
 	}
 
 	void actualizarInformacion() {
-		ModelFactoryController.saveInstance();
+		ModelFactoryController.getInstance().saveInstance();
 		actualizarTabla();
 	}
 
@@ -109,8 +109,8 @@ public class ControlGestionEstudiantes {
 	}
 
 	void actualizarTabla() {
-		tablaEstudiantes.setItems(
-				FXCollections.observableArrayList(ModelFactoryController.getInstance().getListaEstudiantes()));
+		tablaEstudiantes.setItems(FXCollections
+				.observableArrayList(ModelFactoryController.getInstance().getUniversidad().getListaEstudiantes()));
 		tablaEstudiantes.refresh();
 	}
 
@@ -140,7 +140,7 @@ public class ControlGestionEstudiantes {
 
 	void agregarEstudiante() {
 		try {
-			ModelFactoryController.getInstance().agregarEstudiante(obtenerEstudianteCampos());
+			ModelFactoryController.getInstance().getUniversidad().agregarEstudiante(obtenerEstudianteCampos());
 			actualizarInformacion();
 			FxUtility.mostrarMensaje("Informacion", "El estudiante ha sido agregado",
 					"El estudiante con identificación: " + txtIdentificacion.getText() + " ha sido agregado con éxito",
@@ -160,7 +160,7 @@ public class ControlGestionEstudiantes {
 	void eliminarEstudiante() {
 		try {
 			Estudiante estudianteEliminar = tablaEstudiantes.getSelectionModel().getSelectedItem();
-			ModelFactoryController.getInstance().eliminarEstudiante(estudianteEliminar);
+			ModelFactoryController.getInstance().getUniversidad().eliminarEstudiante(estudianteEliminar);
 			actualizarInformacion();
 			FxUtility.mostrarMensaje("Informacion", "El estudiante ha sido eliminado",
 					"El estudiante con identificación: " + estudianteEliminar.getId() + " ha sido eliminado con éxito",
@@ -181,7 +181,7 @@ public class ControlGestionEstudiantes {
 
 	void actualizarEstudiante() {
 		try {
-			ModelFactoryController.getInstance().actualizarEstudiante(obtenerEstudianteCampos());
+			ModelFactoryController.getInstance().getUniversidad().actualizarEstudiante(obtenerEstudianteCampos());
 			actualizarInformacion();
 			FxUtility
 					.mostrarMensaje("Informacion",
