@@ -1,0 +1,121 @@
+.root {
+	-fx-background-color: #202020;
+}
+.borde-punteado {
+	-fx-background-color: #323232;
+	-fx-border-width: 1.0;
+	-fx-border-color: #F0F0F0;
+}
+.split-pane-divider {
+	-fx-background-color: transparent;
+}
+.button {
+	-fx-text-fill: #F0F0F0;
+	-fx-background-color: #555555;
+}
+.button:focused {
+	-fx-background-color: #686868;
+}
+.button:hover {
+	-fx-background-color: #686868;
+}
+.button:pressed {
+	-fx-background-color: #7c7c7c;
+}
+.label {
+	-fx-text-fill: #F0F0F0;
+}
+.context-menu .label {
+	-fx-text-fill: black;
+}
+
+.grid-info-estudiante > .label {
+	-fx-pref-height: 1000000.0;
+	-fx-pref-width: 1000000.0;
+}
+.text-field {
+	-fx-background-color: #535353;
+	-fx-text-fill: #F0F0F0;
+	-fx-pref-width: 1000000.0;
+	-fx-prompt-text-fill: #AAAAAA;
+	-fx-shape: "m 0 0 l 0 100 h 95 a 1 10 0 0 0 0 -100 z";
+}
+
+.text-field:focused {
+	-fx-background-color: #C0C0C0;
+	-fx-prompt-text-fill: #909090;
+	-fx-text-fill: #323232;
+}
+.combo-box .list-cell {
+	-fx-background-color: #505050;
+	-fx-text-fill: #F0F0F0;
+}
+.combo-box .list-cell:odd {
+	-fx-background-color: #656565;
+}
+.combo-box .list-cell:hover {
+	-fx-background-color: #4F8AFF;
+	-fx-text-fill: black;
+}
+.combo-box {
+	-fx-background-color: #535353;
+}
+.combo-box:focused {
+	-fx-background-color: #C0C0C0;
+}
+.combo-box .arrow {
+	-fx-background-color: #535353;
+}
+.combo-box .arrow-button {
+	-fx-background-color: #C0C0C0;
+}
+.combo-box .arrow-button:hover {
+	-fx-background-color: #ACACAC;
+}
+.combo-box:focused .arrow {
+	-fx-background-color: #C0C0C0;
+}
+.combo-box:focused .arrow-button {
+	-fx-background-color: #535353;
+}
+.combo-box:focused .arrow-button:hover {
+	-fx-background-color: #676767;
+}
+
+.columna-tabla-estudiantes > .label {
+	-fx-text-fill: #F0F0F0;
+	-fx-background-color: #323232
+}
+.table-view .cell {
+	-fx-text-fill: white;
+}
+.show-hide-columns-button {
+	-fx-background-color: #505050;
+}
+.show-hide-column-image {
+	-fx-background-color: #F0F0F0;
+}
+.table-view:focused {
+	-fx-border-width: 3.0;
+	-fx-border-color: #4F8AFF;
+}
+.table-view > .filler {
+    -fx-background-color: transparent;
+}
+.table-row-cell {
+	-fx-background-color: #505050;
+}
+.table-row-cell:odd {
+	-fx-background-color: #656565;
+}
+.table-row-cell:selected {
+	-fx-background-color: #4F8AFF;
+}
+.table-row-cell:selected .cell {
+	-fx-text-fill: black;
+}
+
+.table-view {
+	-fx-background-color: transparent;
+	-fx-border-color: #F0F0F0;
+}
