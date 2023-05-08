@@ -75,8 +75,8 @@ public class ControlGestionEstudiantes {
 		FxUtility.cambiarTituloStage(mainPane, "Gestion estudiantes | Universidad");
 		columnaIdentificacion.setCellValueFactory(e -> new ReadOnlyStringWrapper(e.getValue().getId()));
 		columnaNombre.setCellValueFactory(e -> new ReadOnlyStringWrapper(e.getValue().getNombre()));
-		comboCarrera.setItems(FXCollections.observableArrayList("Ingeniería de Sistemas y Computación",
-				"Ingeniería Civil", "Ingeniería Topográfica", "Zoología"));
+		comboCarrera.setItems(FXCollections.observableArrayList("IngenierÃ­a de Sistemas y ComputaciÃ³n",
+				"IngenierÃ­a Civil", "IngenierÃ­a TopogrÃ¡fica", "ZoologÃ­a"));
 		comboSemestre.setItems(FXCollections.observableArrayList("1", "2", "3", "4", "5", "6", "7", "8", "9", "10"));
 		comboEdad.setItems(FXCollections.observableArrayList("16", "18", "20", "22", "24", "26", "32", "40", "50", "64",
 				"80", "96"));
@@ -143,7 +143,7 @@ public class ControlGestionEstudiantes {
 			ModelFactoryController.getInstance().getUniversidad().agregarEstudiante(obtenerEstudianteCampos());
 			actualizarInformacion();
 			FxUtility.mostrarMensaje("Informacion", "El estudiante ha sido agregado",
-					"El estudiante con identificación: " + txtIdentificacion.getText() + " ha sido agregado con éxito",
+					"El estudiante con identificaciÃ³n: " + txtIdentificacion.getText() + " ha sido agregado con Ã©xito",
 					AlertType.CONFIRMATION);
 		} catch (NumberFormatException | NullException | EstudianteException e) {
 			FxUtility.mostrarMensaje("Error", "No se pudo agregar el estudiante", e.getMessage(), AlertType.ERROR);
@@ -151,8 +151,8 @@ public class ControlGestionEstudiantes {
 	}
 
 	void eliminarAction() {
-		ButtonType showAndWait = FxUtility.crearDecisionAlerta("Advertencia", "Advertencia de eliminación de elemento",
-				"Confirma la eliminación", AlertType.WARNING, ButtonType.OK, ButtonType.CLOSE);
+		ButtonType showAndWait = FxUtility.crearDecisionAlerta("Advertencia", "Advertencia de eliminaciÃ³n de elemento",
+				"Confirma la eliminaciÃ³n", AlertType.WARNING, ButtonType.OK, ButtonType.CLOSE);
 		if (showAndWait == ButtonType.OK)
 			eliminarEstudiante();
 	}
@@ -163,7 +163,7 @@ public class ControlGestionEstudiantes {
 			ModelFactoryController.getInstance().getUniversidad().eliminarEstudiante(estudianteEliminar);
 			actualizarInformacion();
 			FxUtility.mostrarMensaje("Informacion", "El estudiante ha sido eliminado",
-					"El estudiante con identificación: " + estudianteEliminar.getId() + " ha sido eliminado con éxito",
+					"El estudiante con identificaciï¿½n: " + estudianteEliminar.getId() + " ha sido eliminado con Ã©xito",
 					AlertType.CONFIRMATION);
 		} catch (NullException | EstudianteException e) {
 			FxUtility.mostrarMensaje("Advertencia", "No se pudo eliminar el estudiante", e.getMessage(),
@@ -184,9 +184,9 @@ public class ControlGestionEstudiantes {
 			ModelFactoryController.getInstance().getUniversidad().actualizarEstudiante(obtenerEstudianteCampos());
 			actualizarInformacion();
 			FxUtility
-					.mostrarMensaje("Informacion",
-							"El estudiante ha sido actualizado", "El estudiante con identificación: "
-									+ txtIdentificacion.getText() + " ha sido actualizado con éxito",
+					.mostrarMensaje(
+							"Informacion", "El estudiante ha sido actualizado", "El estudiante con identificaciÃ³n: "
+									+ txtIdentificacion.getText() + " ha sido actualizado con Ã©xito",
 							AlertType.CONFIRMATION);
 		} catch (NullException | EstudianteException e) {
 			FxUtility.mostrarMensaje("Error", "No se pudo actualizar el estudiante", e.getMessage(), AlertType.ERROR);
@@ -195,7 +195,7 @@ public class ControlGestionEstudiantes {
 
 	void cargarEstudianteAction() {
 		ButtonType showAndWait = FxUtility.crearDecisionAlerta("Advertencia", "Advertencia de sobreescritura de campos",
-				"Se pueden sobreescribir campos, confirma para efectuar la acción", AlertType.WARNING, ButtonType.OK,
+				"Se pueden sobreescribir campos, confirma para efectuar la acciÃ³n", AlertType.WARNING, ButtonType.OK,
 				ButtonType.CLOSE);
 		if (showAndWait == ButtonType.OK)
 			cargarEstudianteCampos();
@@ -211,12 +211,12 @@ public class ControlGestionEstudiantes {
 			comboSemestre.setValue(estudianteCargado.getNumSemestre() + "");
 		} else
 			FxUtility.mostrarMensaje("Error", "El estudiante no fue cargado",
-					"El estudiante no se encontró o no tiene sus datos completos", AlertType.ERROR);
+					"El estudiante no se encontrÃ³ o no tiene sus datos completos", AlertType.ERROR);
 	}
 
 	void vaciarAction() {
 		ButtonType showAndWait = FxUtility.crearDecisionAlerta("Advertencia", "Advertencia de sobreescritura de campos",
-				"Se pueden sobreescribir campos, confirma para efectuar la acción", AlertType.WARNING, ButtonType.OK,
+				"Se pueden sobreescribir campos, confirma para efectuar la acciÃ³n", AlertType.WARNING, ButtonType.OK,
 				ButtonType.CLOSE);
 		if (showAndWait == ButtonType.OK)
 			vaciarCampos();
