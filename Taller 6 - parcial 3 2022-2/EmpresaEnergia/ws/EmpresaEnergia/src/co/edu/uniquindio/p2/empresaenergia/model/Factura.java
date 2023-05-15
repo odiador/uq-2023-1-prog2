@@ -1,8 +1,13 @@
 package co.edu.uniquindio.p2.empresaenergia.model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Factura {
+public class Factura implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String codigo;
 	private LocalDate fechaFacturacion;
 	private Double total;
@@ -62,6 +67,22 @@ public class Factura {
 	 */
 	public Double getTotal() {
 		return total;
+	}
+
+	/**
+	 * Obtiene el total de la factura con un formato de dinero con 2 decimales:<br>
+	 * <li>Ejemplos:
+	 * <ul>
+	 * <b>15000</b> -> $15000.00<br>
+	 * <b>3000</b> -> $3000.00<br>
+	 * <b>1555,3</b> -> $1555.30<br>
+	 * <b>1234,56</b> -> $1234.56<br>
+	 * <b>1234,561</b> -> $1234.56<br>
+	 * 
+	 * @return
+	 */
+	public String getTotalConFormato() {
+		return "$" + String.format("%.2f", getTotal()).replace(',', '.');
 	}
 
 	/**

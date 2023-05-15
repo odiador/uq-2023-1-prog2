@@ -2,6 +2,10 @@ package co.edu.uniquindio.p2.empresaenergia.model;
 
 public class ClienteJuridico extends Cliente {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String nit;
 	private String telefono;
 	private String tipoEmpresa;

@@ -2,6 +2,11 @@ package co.edu.uniquindio.p2.empresaenergia.model;
 
 public class ClienteNatural extends Cliente {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private String cedula;
 	private String apellidos;
 	private Integer estrato;

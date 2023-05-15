@@ -1,6 +1,13 @@
 package co.edu.uniquindio.p2.empresaenergia.model;
 
-public abstract class Cliente {
+import java.io.Serializable;
+
+public abstract class Cliente implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	protected String id;
 	protected String nombre;
 
@@ -82,5 +89,5 @@ public abstract class Cliente {
 	public String toString() {
 		return String.format("Cliente [id=%s, nombre=%s]", id, nombre);
 	}
-	
+
 }

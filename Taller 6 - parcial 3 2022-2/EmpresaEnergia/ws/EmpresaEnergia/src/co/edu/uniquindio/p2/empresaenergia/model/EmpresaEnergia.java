@@ -1,5 +1,6 @@
 package co.edu.uniquindio.p2.empresaenergia.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,7 +8,12 @@ import co.edu.uniquindio.p2.empresaenergia.exceptions.ClienteException;
 import co.edu.uniquindio.p2.empresaenergia.exceptions.FacturaException;
 import co.edu.uniquindio.p2.empresaenergia.exceptions.NullException;
 
-public class EmpresaEnergia {
+public class EmpresaEnergia implements Serializable, ClienteManager {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private String nombre;
 	private String ubicacion;
 	private List<Cliente> listaClientes;
@@ -163,7 +169,7 @@ public class EmpresaEnergia {
 	}
 
 	/**
-	 * @return the listaFacturas
+	 * @return la lista de facturas de la empresa
 	 */
 	public List<Factura> getListaFacturas() {
 		return listaFacturas;

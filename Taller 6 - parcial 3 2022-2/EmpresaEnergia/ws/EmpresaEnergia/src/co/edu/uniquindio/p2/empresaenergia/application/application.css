@@ -1,1 +1,118 @@
-/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+* {
+	blanco: #F0F0F0;
+}
+.root {
+	-fx-background-color: #202020;
+}
+.label {
+	-fx-font-size: 20;
+}
+.titulo {
+	-fx-font-size: 30.0;
+	-fx-font-weight: bold;
+	-fx-underline: true;
+}
+.borde-punteado {
+	-fx-background-color: #323232;
+	-fx-border-width: 1.0;
+	-fx-border-style: dashed;
+	-fx-border-color: blanco;
+}
+.split-pane-divider {
+	-fx-background-color: transparent;
+}
+.button {
+	-fx-text-fill: blanco;
+	-fx-background-color: #555555;
+}
+.button:focused {
+	-fx-background-color: #686868;
+}
+.button:hover {
+	-fx-background-color: #686868;
+}
+.button:pressed {
+	-fx-background-color: #7c7c7c;
+}
+.label {
+	-fx-text-fill: blanco;
+}
+.context-menu .label {
+	-fx-text-fill: black;
+}
+
+.grid-info-estudiante > .label {
+	-fx-pref-height: 1000000.0;
+	-fx-pref-width: 1000000.0;
+}
+.text-field {
+	-fx-background-color: #535353;
+	-fx-text-fill: blanco;
+	-fx-pref-width: 1000000.0;
+	-fx-prompt-text-fill: #AAAAAA;
+	-fx-shape: "m 3 100 a 1 20 0 0 1 0 -100 h 97 v 100 z";
+}
+.date-picker-popup .month-year-pane {
+	-fx-background-color: #535353;
+}
+.date-picker .cell {
+	-fx-border-color: blanco;
+	-fx-background-color: #535353;
+	-fx-text-fill: blanco;
+}
+.date-picker .cell:hover {
+	-fx-background-color: #33ccff;	
+}
+.date-picker .cell:focused {
+	-fx-border-color: #33ccff;
+	-fx-border-style: solid inside;
+	-fx-border-width: 2;
+}
+.date-picker .text-field {
+	-fx-shape: "m 0 0 v 100 h 100 v -100 z";
+}
+
+
+.text-field:focused {
+	-fx-background-color: #C0C0C0;
+	-fx-prompt-text-fill: #909090;
+	-fx-text-fill: #323232;
+}
+.columna-tabla {
+	-fx-border-color: blanco;
+	-fx-background-color: #323232;
+}
+.columna-tabla .arrow{
+	-fx-background-color: blanco;
+	
+}
+.columna-tabla > .label {
+	-fx-text-fill: blanco;
+}
+.table-view .cell {
+	-fx-text-fill: white;
+}
+.table-view:focused {
+	-fx-border-width: 3.0;
+	-fx-border-color: #4F8AFF;
+}
+.table-view > .filler {
+    -fx-background-color: transparent;
+}
+.table-row-cell {
+	-fx-background-color: #505050;
+}
+.table-row-cell:odd {
+	-fx-background-color: #656565;
+}
+.table-row-cell:selected {
+	-fx-background-color: #4F8AFF;
+}
+.table-row-cell:selected .cell {
+	-fx-text-fill: black;
+}
+
+.table-view {
+	-fx-background-color: transparent;
+	-fx-border-color: #F0F0F0;
+}
