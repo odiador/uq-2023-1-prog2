@@ -11,6 +11,7 @@ public class Factura implements Serializable {
 	private String codigo;
 	private LocalDate fechaFacturacion;
 	private Double total;
+	private Cliente cliente;
 
 	/**
 	 * Es el constructor de la clase Factura
@@ -19,10 +20,11 @@ public class Factura implements Serializable {
 	 * @param fechaFacturacion
 	 * @param total
 	 */
-	public Factura(String codigo, LocalDate fechaFacturacion, Double total) {
+	public Factura(String codigo, LocalDate fechaFacturacion, Double total, Cliente cliente) {
 		this.codigo = codigo;
 		this.fechaFacturacion = fechaFacturacion;
 		this.total = total;
+		this.cliente = cliente;
 	}
 
 	/**
@@ -31,7 +33,8 @@ public class Factura implements Serializable {
 	 * @return true si no le falta algo
 	 */
 	public boolean tieneTodoLleno() {
-		return codigo != null && fechaFacturacion != null && total != null;
+		return codigo != null && fechaFacturacion != null && total != null && cliente != null
+				&& cliente.tieneTodoLleno();
 	}
 
 	/**
@@ -94,6 +97,14 @@ public class Factura implements Serializable {
 
 	public boolean tieneCodigo(String codigo) {
 		return this.codigo.equals(codigo);
+	}
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
 	}
 
 }

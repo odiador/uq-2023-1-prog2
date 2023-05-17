@@ -69,7 +69,8 @@ public class ClienteJuridico extends Cliente {
 
 	@Override
 	protected boolean tieneTodoLleno() {
-		return id != null && nombre != null && nit != null && telefono != null && tipoEmpresa != null;
+		return id != null && nombre != null && nit != null && telefono != null && tipoEmpresa != null && !id.isEmpty()
+				&& !nombre.isEmpty() && !nit.isEmpty() && !telefono.isEmpty();
 	}
 
 	@Override

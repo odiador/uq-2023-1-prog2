@@ -1,5 +1,7 @@
 package co.edu.uniquindio.p2.empresaenergia.application;
 
+import java.net.URL;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -11,10 +13,11 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 		try {
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(getClass().getResource("../view/GestionFacturas.fxml"));
+			URL resource = getClass().getResource("../view/MenuPrncipal.fxml");
+			System.out.println(resource);
+			loader.setLocation(resource);
 			SplitPane root = loader.load();
 			Scene scene = new Scene(root, 1280, 720);
-			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
 			primaryStage.show();
 		} catch (Exception e) {

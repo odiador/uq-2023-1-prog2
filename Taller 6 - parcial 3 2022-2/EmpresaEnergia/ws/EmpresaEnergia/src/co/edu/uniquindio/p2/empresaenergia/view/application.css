@@ -4,6 +4,10 @@
 .root {
 	-fx-background-color: #202020;
 }
+.menu-izquierdo {
+	-fx-border-color: blanco;
+	-fx-background-color: #555555;
+}
 .label {
 	-fx-font-size: 20;
 }

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<SplitPane dividerPositions="0.25" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@application.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.p2.empresaenergia.controllers.ControlMenuPrincipal">
+   <items>
+      <VBox styleClass="menu-izquierdo" SplitPane.resizableWithParent="false">
+         <children>
+            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#gestionarNaturalesEvent" text="Gestionar Clientes Naturales" />
+            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#gestionarJuridicosEvent" text="Gestionar Clientes Juridicos" />
+            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#gestionarFacturasEvent" text="Gestionar Facturas" />
+         </children>
+      </VBox>
+      <BorderPane fx:id="panelDinamico" prefHeight="200.0" prefWidth="200.0">
+         <center>
+            <Label text="Bienvenido a la empresa de energia" BorderPane.alignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+         </center>
+      </BorderPane>
+   </items>
+</SplitPane>

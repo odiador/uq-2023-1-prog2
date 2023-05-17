@@ -94,6 +94,7 @@ public class ModelFactoryController {
 	 */
 	public void agregarCliente(Cliente cliente) throws NullException, ClienteException {
 		getEmpresaEnergia().agregarCliente(cliente);
+		saveEmpresaEnergia();
 	}
 
 	/**
@@ -136,6 +137,11 @@ public class ModelFactoryController {
 	 */
 	public void registrarFactura(Factura factura) throws NullException, FacturaException {
 		getEmpresaEnergia().registrarFactura(factura);
+	}
+
+	public Cliente buscarCliente(String id) {
+		return getEmpresaEnergia().buscarCliente(id);
+		
 	}
 
 }

@@ -6,6 +6,7 @@ import java.time.LocalDate;
 
 import co.edu.uniquindio.p2.empresaenergia.exceptions.FacturaException;
 import co.edu.uniquindio.p2.empresaenergia.exceptions.NullException;
+import co.edu.uniquindio.p2.empresaenergia.model.Cliente;
 import co.edu.uniquindio.p2.empresaenergia.model.Factura;
 import co.edu.uniquindio.p2.empresaenergia.utility.FxUtility;
 import javafx.beans.property.ReadOnlyStringWrapper;
@@ -30,6 +31,9 @@ public class GestionFacturaController {
 	private TableView<Factura> tableFacturas;
 
 	@FXML
+	private TextField txtIdentificacion;
+
+	@FXML
 	private TextField txtCodigo;
 
 	@FXML
@@ -43,7 +47,6 @@ public class GestionFacturaController {
 
 	@FXML
 	void initialize() {
-		FxUtility.cambiarTituloStage(mainPane, "Gestion de Facturas | Empresa");
 		columnCodigo.setCellValueFactory(e -> new ReadOnlyStringWrapper(e.getValue().getCodigo()));
 		columnTotal.setCellValueFactory(e -> new ReadOnlyStringWrapper(e.getValue().getTotalConFormato()));
 		dateFechaFacturacion.setValue(LocalDate.now());
@@ -61,7 +64,8 @@ public class GestionFacturaController {
 			total = Double.parseDouble(txtTotal.getText());
 		} catch (NumberFormatException e) {
 		}
-		return new Factura(txtCodigo.getText(), dateFechaFacturacion.getValue(), total);
+		Cliente cliente = ModelFactoryController.getInstance().buscarCliente(txtIdentificacion.getText());
+		return new Factura(txtCodigo.getText(), dateFechaFacturacion.getValue(), total, cliente);
 	}
 
 	@FXML
@@ -69,17 +73,7 @@ public class GestionFacturaController {
 		agregarAction();
 	}
 
-	private boolean camposValidos() {
-		return !txtCodigo.getText().isEmpty() && !txtTotal.getText().isEmpty()
-				&& dateFechaFacturacion.getValue() != null;
-	}
-
 	private void agregarAction() {
-		if (!camposValidos()) {
-			FxUtility.mostrarMensaje("Advertencia", "Faltan campos", "Recuerda ingresar todos los campos",
-					AlertType.WARNING);
-			return;
-		}
 		try {
 			ModelFactoryController.getInstance().registrarFactura(obtenerFacturaCampos());
 			actualizarTabla();

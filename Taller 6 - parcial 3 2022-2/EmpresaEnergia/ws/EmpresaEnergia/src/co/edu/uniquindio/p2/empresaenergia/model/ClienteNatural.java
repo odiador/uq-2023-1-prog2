@@ -70,7 +70,8 @@ public class ClienteNatural extends Cliente {
 
 	@Override
 	protected boolean tieneTodoLleno() {
-		return id != null && nombre != null && cedula != null && apellidos != null && estrato != null;
+		return id != null && nombre != null && cedula != null && apellidos != null && estrato != null && !id.isEmpty()
+				&& !nombre.isEmpty() && !cedula.isEmpty() && !apellidos.isEmpty() && estrato > 0;
 	}
 
 	@Override

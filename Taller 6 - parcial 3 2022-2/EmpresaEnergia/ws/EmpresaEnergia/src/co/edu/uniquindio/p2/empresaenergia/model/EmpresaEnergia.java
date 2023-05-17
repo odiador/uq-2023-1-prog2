@@ -97,7 +97,9 @@ public class EmpresaEnergia implements Serializable, ClienteManagement, FacturaM
 	public void registrarFactura(Factura factura) throws NullException, FacturaException {
 		if (factura == null)
 			throw new NullException("La factura enviada es null");
-
+		if (factura.getCliente() == null) {
+			throw new FacturaException("El cliente no fue econtrado");
+		}
 		if (!factura.tieneTodoLleno())
 			throw new FacturaException("A la factura le faltan atributos por llenar");
 		if (validarFactura(factura.getCodigo())) {
