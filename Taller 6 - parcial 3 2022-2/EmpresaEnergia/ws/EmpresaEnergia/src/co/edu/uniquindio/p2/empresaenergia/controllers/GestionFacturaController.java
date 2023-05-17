@@ -87,17 +87,6 @@ public class GestionFacturaController {
 	}
 
 	@FXML
-	void actualizarEvent(ActionEvent event) {
-		actualizarAction();
-	}
-
-	private void actualizarAction() {
-		FxUtility.generarAdvertenciaSobreescritura(() -> {
-
-		});
-	}
-
-	@FXML
 	void vaciarCamposEvent(ActionEvent event) {
 		vaciarCamposAction();
 	}
@@ -112,12 +101,41 @@ public class GestionFacturaController {
 
 	@FXML
 	void cargarDatosEvent(ActionEvent event) {
+		cargarDatosAction();
 
+	}
+
+	private void cargarDatosAction() {
+		Factura factura = tableFacturas.getSelectionModel().getSelectedItem();
+		if (factura == null)
+			FxUtility.mostrarMensaje("Advertencia", "", "La factura no existe", AlertType.WARNING);
+		txtCodigo.setText(factura.getCodigo());
+		txtTotal.setText(factura.getTotal() + "");
+		dateFechaFacturacion.setValue(factura.getFechaFacturacion());
+		txtIdentificacion.setText(factura.getCliente().getId());
+		FxUtility.mostrarMensaje("Informacion", "", "La factura fue cargada exitosamente", AlertType.CONFIRMATION);
 	}
 
 	@FXML
 	void eliminarSelecionEvent(ActionEvent event) {
+		eliminarSeleccionAction();
+	}
 
+	private void eliminarSeleccionAction() {
+		Factura factura = tableFacturas.getSelectionModel().getSelectedItem();
+		if (factura == null)
+			FxUtility.mostrarMensaje("Advertencia", "", "La factura no existe", AlertType.WARNING);
+		if (factura.getCodigo() != null) {
+			try {
+				ModelFactoryController.getInstance().eliminarFactura(factura);
+				actualizarTabla();
+				FxUtility.mostrarMensaje("Informacion", "La factura ha sido eliminada con exito", "",
+						AlertType.WARNING);
+			} catch (NullException | FacturaException e) {
+				FxUtility.mostrarMensaje("Advertencia", "No se pudo eliminar la seleccion", e.getMessage(),
+						AlertType.WARNING);
+			}
+		}
 	}
 
 }

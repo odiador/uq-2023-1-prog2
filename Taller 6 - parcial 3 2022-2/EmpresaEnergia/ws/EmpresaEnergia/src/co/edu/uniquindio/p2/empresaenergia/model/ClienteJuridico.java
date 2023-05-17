@@ -79,4 +79,9 @@ public class ClienteJuridico extends Cliente {
 				telefono, tipoEmpresa);
 	}
 
+	@Override
+	public String getTipoCliente() {
+		return "Juridico";
+	}
+
 }

@@ -9,4 +9,6 @@ public interface FacturaManagement {
 	public boolean validarFactura(String codigo);
 
 	public Factura buscarFactura(String codigo);
+
+	public void eliminarFactura(Factura factura) throws NullException, FacturaException;
 }

@@ -1,12 +1,16 @@
 * {
 	blanco: #F0F0F0;
 }
-.root {
+.main-pane {
 	-fx-background-color: #202020;
 }
 .menu-izquierdo {
 	-fx-border-color: blanco;
 	-fx-background-color: #555555;
+}
+.menu-izquierdo .label {
+	-fx-font-size: 17;
+	-fx-font-weight: bold;
 }
 .label {
 	-fx-font-size: 20;
@@ -103,16 +107,14 @@
 .table-view > .filler {
     -fx-background-color: transparent;
 }
-.table-row-cell {
+.cell {
 	-fx-background-color: #505050;
 }
-.table-row-cell:odd {
+.table-row-cell:odd .cell{
 	-fx-background-color: #656565;
 }
-.table-row-cell:selected {
-	-fx-background-color: #4F8AFF;
-}
 .table-row-cell:selected .cell {
+	-fx-background-color: #4F8AFF;
 	-fx-text-fill: black;
 }
 

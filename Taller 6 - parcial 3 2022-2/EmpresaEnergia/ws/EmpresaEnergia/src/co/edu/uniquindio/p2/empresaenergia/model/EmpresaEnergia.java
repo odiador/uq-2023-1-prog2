@@ -186,4 +186,28 @@ public class EmpresaEnergia implements Serializable, ClienteManagement, FacturaM
 	public void setListaFacturas(List<Factura> listaFacturas) {
 		this.listaFacturas = listaFacturas;
 	}
+
+	public void actualizarCliente(Cliente cliente) throws NullException, ClienteException {
+		if (cliente == null)
+			throw new NullException("El cliente enviado es null");
+		int indice = listaClientes.indexOf(cliente);
+		if (indice == -1) {
+			throw new ClienteException("El cliente con esa id no fue encontrado");
+		}
+		if (!cliente.tieneTodoLleno()) {
+			throw new ClienteException("Al cliente le faltan campos por llenar");
+		}
+		listaClientes.set(indice, cliente);
+	}
+
+	public void eliminarFactura(Factura factura) throws NullException, FacturaException {
+		if (factura == null)
+			throw new NullException("El la factura enviada es null");
+		if (!factura.existeCodigo())
+			throw new FacturaException("A la factura le falta el codigo");
+		if (!validarCliente(factura.getCodigo())) {
+			throw new FacturaException("La factura no existe, no se puede eliminar");
+		}
+		listaFacturas.remove(factura);
+	}
 }

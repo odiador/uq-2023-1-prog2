@@ -88,7 +88,20 @@ public class GestionClienteJuridicoController {
 
 	@FXML
 	void actualizarEvent(ActionEvent event) {
+		actualizarAction();
+	}
 
+	private void actualizarAction() {
+		ClienteJuridico clienteJuridicoCampos = obtenerClienteJuridicoCampos();
+		try {
+			ModelFactoryController.getInstance().actualizarCliente(clienteJuridicoCampos);
+			actualizarTabla();
+			FxUtility.mostrarMensaje("Informacion", "Informacion", "El cliente fue actualizado con exito",
+					AlertType.CONFIRMATION);
+		} catch (NullException | ClienteException e) {
+			FxUtility.mostrarMensaje("Advertencia", "No se pudo actualizar el cliente", e.getMessage(),
+					AlertType.WARNING);
+		}
 	}
 
 	@FXML
@@ -141,7 +154,8 @@ public class GestionClienteJuridicoController {
 			actualizarTabla();
 			FxUtility.mostrarMensaje("Informacion", "El cliente fue eliminado con éxito", "", AlertType.CONFIRMATION);
 		} catch (NullException | ClienteException e) {
-			FxUtility.mostrarMensaje("Informacion", "El cliente no pudo ser eliminado", e.getMessage(), AlertType.CONFIRMATION);
+			FxUtility.mostrarMensaje("Informacion", "El cliente no pudo ser eliminado", e.getMessage(),
+					AlertType.CONFIRMATION);
 		}
 	}
 

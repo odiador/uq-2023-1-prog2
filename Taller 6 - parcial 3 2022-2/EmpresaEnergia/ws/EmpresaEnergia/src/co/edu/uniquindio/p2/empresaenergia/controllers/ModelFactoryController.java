@@ -109,6 +109,7 @@ public class ModelFactoryController {
 	 */
 	public void eliminarCliente(Cliente cliente) throws NullException, ClienteException {
 		getEmpresaEnergia().eliminarCliente(cliente);
+		saveEmpresaEnergia();
 	}
 
 	/**
@@ -137,11 +138,22 @@ public class ModelFactoryController {
 	 */
 	public void registrarFactura(Factura factura) throws NullException, FacturaException {
 		getEmpresaEnergia().registrarFactura(factura);
+		saveEmpresaEnergia();
 	}
 
 	public Cliente buscarCliente(String id) {
 		return getEmpresaEnergia().buscarCliente(id);
-		
+
+	}
+
+	public void actualizarCliente(Cliente cliente) throws NullException, ClienteException {
+		getEmpresaEnergia().actualizarCliente(cliente);
+		saveEmpresaEnergia();
+	}
+
+	public void eliminarFactura(Factura factura) throws NullException, FacturaException {
+		getEmpresaEnergia().eliminarFactura(factura);
+
 	}
 
 }

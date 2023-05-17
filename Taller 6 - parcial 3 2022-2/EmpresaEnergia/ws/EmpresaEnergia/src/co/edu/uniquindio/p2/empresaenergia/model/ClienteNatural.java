@@ -80,4 +80,9 @@ public class ClienteNatural extends Cliente {
 				cedula, apellidos, estrato);
 	}
 
+	@Override
+	public String getTipoCliente() {
+		return "Natural";
+	}
+
 }

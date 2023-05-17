@@ -14,7 +14,6 @@ public class Main extends Application {
 		try {
 			FXMLLoader loader = new FXMLLoader();
 			URL resource = getClass().getResource("../view/MenuPrncipal.fxml");
-			System.out.println(resource);
 			loader.setLocation(resource);
 			SplitPane root = loader.load();
 			Scene scene = new Scene(root, 1280, 720);

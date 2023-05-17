@@ -16,6 +16,8 @@ public abstract class Cliente implements Serializable {
 		this.nombre = nombre;
 	}
 
+	public abstract String getTipoCliente();
+
 	/**
 	 * @return el id del cliente
 	 */

@@ -8,8 +8,10 @@ public interface ClienteManagement {
 
 	public void eliminarCliente(Cliente cliente) throws NullException, ClienteException;
 
+	public void actualizarCliente(Cliente cliente) throws NullException, ClienteException;
+
 	public Cliente buscarCliente(String id);
-	
+
 	public boolean validarCliente(String id);
 
 }

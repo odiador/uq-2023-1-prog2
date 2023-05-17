@@ -107,4 +107,8 @@ public class Factura implements Serializable {
 		this.cliente = cliente;
 	}
 
+	public boolean existeCodigo() {
+		return getCodigo() != null;
+	}
+
 }
