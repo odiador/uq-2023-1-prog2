@@ -8,7 +8,7 @@ import co.edu.uniquindio.p2.empresaenergia.exceptions.ClienteException;
 import co.edu.uniquindio.p2.empresaenergia.exceptions.FacturaException;
 import co.edu.uniquindio.p2.empresaenergia.exceptions.NullException;
 
-public class EmpresaEnergia implements Serializable, ClienteManager {
+public class EmpresaEnergia implements Serializable, ClienteManagement, FacturaManagement {
 	/**
 	 * 
 	 */
@@ -93,6 +93,7 @@ public class EmpresaEnergia implements Serializable, ClienteManager {
 	 *                          o en caso de que ya exista en la lista de facturas
 	 *                          de le empresa
 	 */
+	@Override
 	public void registrarFactura(Factura factura) throws NullException, FacturaException {
 		if (factura == null)
 			throw new NullException("La factura enviada es null");
@@ -112,7 +113,8 @@ public class EmpresaEnergia implements Serializable, ClienteManager {
 	 * @param codigo
 	 * @return
 	 */
-	private boolean validarFactura(String codigo) {
+	@Override
+	public boolean validarFactura(String codigo) {
 		return buscarFactura(codigo) != null;
 	}
 
@@ -122,7 +124,8 @@ public class EmpresaEnergia implements Serializable, ClienteManager {
 	 * @param codigo
 	 * @return la factura encontrada, null si no se encuentra
 	 */
-	private Factura buscarFactura(String codigo) {
+	@Override
+	public Factura buscarFactura(String codigo) {
 		return listaFacturas.stream().filter(factura -> factura.tieneCodigo(codigo)).findFirst().orElse(null);
 	}
 

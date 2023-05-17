@@ -3,7 +3,7 @@ package co.edu.uniquindio.p2.empresaenergia.model;
 import co.edu.uniquindio.p2.empresaenergia.exceptions.ClienteException;
 import co.edu.uniquindio.p2.empresaenergia.exceptions.NullException;
 
-public interface ClienteManager {
+public interface ClienteManagement {
 	public void agregarCliente(Cliente cliente) throws NullException, ClienteException;
 
 	public void eliminarCliente(Cliente cliente) throws NullException, ClienteException;
