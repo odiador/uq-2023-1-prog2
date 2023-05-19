@@ -5,6 +5,11 @@ public enum TipoCliente {
 
 	private String nombre;
 
+	/**
+	 * Es el constructor del enum de tipo de cliente
+	 * 
+	 * @param nombre
+	 */
 	private TipoCliente(String nombre) {
 		this.nombre = nombre;
 	}

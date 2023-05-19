@@ -8,7 +8,7 @@ import co.edu.uniquindio.p2.empresaenergia.exceptions.FacturaException;
 import co.edu.uniquindio.p2.empresaenergia.exceptions.NullException;
 import co.edu.uniquindio.p2.empresaenergia.exceptions.PersonaException;
 
-public class EmpresaEnergia implements Serializable, ClienteManagement, FacturaManagement {
+public class EmpresaEnergia implements Serializable, ClienteManagement, FacturaManagement, EmpleadoManagement {
 	/**
 	 * 
 	 */
@@ -36,11 +36,24 @@ public class EmpresaEnergia implements Serializable, ClienteManagement, FacturaM
 		this.listaEmpleados = new ArrayList<>();
 	}
 
+	/**
+	 * Busca un cliente en la lista de clientes a partir de su id, si no se
+	 * encuentra se retorna un null
+	 * 
+	 * @param id
+	 * @return el cliente, en caso de que no se encuentre {@code null}
+	 */
 	@Override
 	public Cliente buscarCliente(String id) {
 		return listaClientes.stream().filter(cliente -> cliente.tieneId(id)).findFirst().orElse(null);
 	}
 
+	/**
+	 * Valida si el cliente existe o no en la lista de clientes
+	 * 
+	 * @param id
+	 * @return true si el cliente existe
+	 */
 	@Override
 	public boolean validarCliente(String id) {
 		return buscarCliente(id) != null;
@@ -48,7 +61,7 @@ public class EmpresaEnergia implements Serializable, ClienteManagement, FacturaM
 
 	/**
 	 * Agrega un cliente a la empresa de energía, manda errores en caso de que hayan
-	 * problemas:
+	 * problemas
 	 * 
 	 * @param cliente el cliente a agregar
 	 * @throws NullException    en caso de que el cliente enviado sea null
@@ -70,7 +83,7 @@ public class EmpresaEnergia implements Serializable, ClienteManagement, FacturaM
 
 	/**
 	 * Elimina un cliente a la empresa de energía, manda errores en caso de que
-	 * hayan problemas:
+	 * hayan problemas
 	 * 
 	 * @param cliente el cliente a agregar
 	 * @throws NullException    en caso de que el cliente enviado sea null
@@ -87,6 +100,29 @@ public class EmpresaEnergia implements Serializable, ClienteManagement, FacturaM
 			throw new PersonaException("El cliente no existe, no se puede eliminar");
 		}
 		listaClientes.remove(cliente);
+	}
+
+	/**
+	 * Actualiza un cliente a la empresa de energía, manda errores en caso de que
+	 * hayan problemas
+	 * 
+	 * @param cliente
+	 * @throws NullException    en caso de que el cliente sea null
+	 * @throws PersonaException en caso de que no haya sido encontrado o si le
+	 *                          faltan campos por llenar
+	 */
+	@Override
+	public void actualizarCliente(Cliente cliente) throws NullException, PersonaException {
+		if (cliente == null)
+			throw new NullException("El cliente enviado es null");
+		int indice = listaClientes.indexOf(cliente);
+		if (indice == -1) {
+			throw new PersonaException("El cliente con esa id no fue encontrado");
+		}
+		if (!cliente.tieneTodoLleno()) {
+			throw new PersonaException("Al cliente le faltan campos por llenar");
+		}
+		listaClientes.set(indice, cliente);
 	}
 
 	/**
@@ -137,6 +173,14 @@ public class EmpresaEnergia implements Serializable, ClienteManagement, FacturaM
 		return listaFacturas.stream().filter(factura -> factura.tieneCodigo(codigo)).findFirst().orElse(null);
 	}
 
+	/**
+	 * Elimina una factura a la empresa de energía, suelta errores en caso de que no
+	 * hallan pasado las cosas de la manera correcta
+	 * 
+	 * @param factura
+	 * @throws NullException
+	 * @throws PersonaException
+	 */
 	@Override
 	public void eliminarFactura(Factura factura) throws NullException, FacturaException {
 		if (factura == null)
@@ -155,6 +199,7 @@ public class EmpresaEnergia implements Serializable, ClienteManagement, FacturaM
 	 * @param id
 	 * @return el empleado encontrado, null si no se encuentra
 	 */
+	@Override
 	public Empleado buscarEmpleado(String id) {
 		return listaEmpleados.stream().filter(empleado -> empleado.tieneId(id)).findFirst().orElse(null);
 	}
@@ -166,36 +211,54 @@ public class EmpresaEnergia implements Serializable, ClienteManagement, FacturaM
 	 * @param id
 	 * @return
 	 */
+	@Override
 	public boolean validarEmpleado(String id) {
 		return buscarEmpleado(id) != null;
 	}
 
-	public void actualizarCliente(Cliente cliente) throws NullException, PersonaException {
-		if (cliente == null)
-			throw new NullException("El cliente enviado es null");
-		int indice = listaClientes.indexOf(cliente);
-		if (indice == -1) {
-			throw new PersonaException("El cliente con esa id no fue encontrado");
-		}
-		if (!cliente.tieneTodoLleno()) {
-			throw new PersonaException("Al cliente le faltan campos por llenar");
-		}
-		listaClientes.set(indice, cliente);
-	}
-
+	/**
+	 * Agrega un empleado de la lista de empleados, suelta errores en caso de que no
+	 * se den las cosas correctamente
+	 * 
+	 * @param empleado
+	 * @throws NullException    en caso de que el empleado enviado sea null
+	 * @throws PersonaException en caso de que le falten datos o ya exista el
+	 *                          empleado
+	 */
+	@Override
 	public void agregarEmpleado(Empleado empleado) throws NullException, PersonaException {
 		if (empleado == null)
 			throw new NullException("El empleado enviado es null");
 		if (!empleado.tieneTodoLleno())
 			throw new PersonaException("Al empleado le faltan datos");
 		if (validarEmpleado(empleado.getId()))
-			throw new PersonaException("El empleado ya existe, no se puede agregarA");
+			throw new PersonaException("El empleado ya existe, no se puede agregar");
 		listaEmpleados.add(empleado);
 	}
 
 	/**
+	 * Elimina un empleado de la lista de empleados, suelta errores en caso de que
+	 * no se den las cosas correctamente
+	 * 
+	 * @param empleado
+	 * @throws NullException    en caso de que el empleado enviado sea null
+	 * @throws PersonaException en caso de que al empleado le falte la
+	 *                          identificacion o en caso de que no exista
+	 */
+	@Override
+	public void eliminarEmpleado(Empleado empleado) throws NullException, PersonaException {
+		if (empleado == null)
+			throw new NullException("El empleado enviado es null");
+		if (empleado.getId() == null)
+			throw new PersonaException("Al empleado le falta la identificacion");
+		if (!validarEmpleado(empleado.getId()))
+			throw new PersonaException("El empleado no existe, no se puede eliminar");
+		listaEmpleados.remove(empleado);
+	}
+
+	/**
 	 * Inicia la sesion de un empleado, retorna el empleado si se inició la sesion y
-	 * null si no
+	 * null si no se pudo iniciar sesion
 	 * 
 	 * @param id
 	 * @param pass
@@ -272,9 +335,18 @@ public class EmpresaEnergia implements Serializable, ClienteManagement, FacturaM
 	}
 
 	/**
-	 * @param listaEmpleados la lista de empleados de la empresa de energia a cambiar
+	 * @param listaEmpleados la lista de empleados de la empresa de energia a
+	 *                       cambiar
 	 */
 	public void setListaEmpleados(List<Empleado> listaEmpleados) {
 		this.listaEmpleados = listaEmpleados;
 	}
+
+	@Override
+	public String toString() {
+		return String.format(
+				"EmpresaEnergia [nombre=%s, ubicacion=%s, listaClientes=%s, listaEmpleados=%s, listaFacturas=%s]",
+				nombre, ubicacion, listaClientes, listaEmpleados, listaFacturas);
+	}
+
 }

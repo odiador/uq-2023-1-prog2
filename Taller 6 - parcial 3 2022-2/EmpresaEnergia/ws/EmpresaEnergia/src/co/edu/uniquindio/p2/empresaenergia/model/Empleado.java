@@ -40,4 +40,9 @@ public class Empleado extends Persona {
 		this.contrasena = contrasena;
 	}
 
+	@Override
+	public String toString() {
+		return String.format("Empleado [contrasena=%s, id=%s, nombre=%s]", contrasena, id, nombre);
+	}
+
 }

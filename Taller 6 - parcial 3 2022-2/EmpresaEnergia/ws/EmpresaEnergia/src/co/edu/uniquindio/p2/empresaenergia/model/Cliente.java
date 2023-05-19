@@ -13,4 +13,9 @@ public abstract class Cliente extends Persona {
 
 	public abstract TipoCliente getTipoCliente();
 
+	@Override
+	public String toString() {
+		return String.format("Cliente [id=%s, nombre=%s]", id, nombre);
+	}
+
 }

@@ -11,6 +11,12 @@ public abstract class Persona implements Serializable {
 	protected String id;
 	protected String nombre;
 
+	/**
+	 * Es el constructor de la clase persona
+	 * 
+	 * @param id
+	 * @param nombre
+	 */
 	public Persona(String id, String nombre) {
 		this.id = id;
 		this.nombre = nombre;
@@ -54,8 +60,18 @@ public abstract class Persona implements Serializable {
 		return id.equals(this.id);
 	}
 
+	/**
+	 * Determina si la persona tiene todos los atributos llenos
+	 * 
+	 * @return
+	 */
 	protected abstract boolean tieneTodoLleno();
 
+	/**
+	 * Determina si la persona tiene un id o no
+	 * 
+	 * @return
+	 */
 	public boolean existeId() {
 		return this.id != null;
 	}
