@@ -70,6 +70,20 @@
                         </HBox>
                      </graphic>
                   </Button>
+                  <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#gestionarEmpleadosEvent">
+                     <graphic>
+                        <HBox alignment="CENTER_LEFT" spacing="5.0">
+                           <children>
+                              <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../../../../resources/images/Empleado.png" />
+                                 </image>
+                              </ImageView>
+                              <Label ellipsisString="" text="Gestionar Empleados" textOverrun="CLIP" />
+                           </children>
+                        </HBox>
+                     </graphic>
+                  </Button>
                   <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#acercaDeEvent">
                      <graphic>
                         <HBox alignment="CENTER_LEFT" spacing="5.0">

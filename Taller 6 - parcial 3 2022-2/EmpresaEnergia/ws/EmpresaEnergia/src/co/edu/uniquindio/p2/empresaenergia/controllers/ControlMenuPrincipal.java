@@ -22,6 +22,7 @@ public class ControlMenuPrincipal {
 	public static final int IR_NATURAL = 0;
 	public static final int IR_JURIDICA = 1;
 	public static final int IR_FACTURAS = 2;
+	public static final int IR_EMPLEADOS = 3;
 
 	@FXML
 	private Label lblNombreEmpleado;
@@ -103,6 +104,15 @@ public class ControlMenuPrincipal {
 		cambiarPanel(IR_FACTURAS);
 	}
 
+	@FXML
+	void gestionarEmpleadosEvent(ActionEvent event) {
+		gestionarEmpleafosAction();
+	}
+
+	private void gestionarEmpleafosAction() {
+		cambiarPanel(IR_EMPLEADOS);
+	}
+
 	private void cambiarPanel(int option) {
 		String ruta = "";
 		String msg = "";
@@ -120,14 +130,16 @@ public class ControlMenuPrincipal {
 			msg = "Gestion de Facturas";
 			ruta = "GestionFacturas";
 			break;
+		case IR_EMPLEADOS:
+			msg = "Gestion de Empleados";
+			ruta = "GestionEmpleados";
 		default:
 			break;
 		}
 		try {
-			SplitPane load = FXMLLoader.load(getClass().getResource("../view/" + ruta + ".fxml"));
 			stage.setTitle(
 					msg + " | " + ModelFactoryController.getInstance().obtenerNombreEmpresa() + " | J Amador Roa");
-			panelDinamico.setCenter(load);
+			panelDinamico.setCenter(FXMLLoader.load(getClass().getResource("../view/" + ruta + ".fxml")));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

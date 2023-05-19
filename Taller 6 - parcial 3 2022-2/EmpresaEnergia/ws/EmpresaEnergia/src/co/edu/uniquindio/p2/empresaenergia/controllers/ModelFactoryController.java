@@ -11,6 +11,7 @@ import co.edu.uniquindio.p2.empresaenergia.exceptions.PersonaException;
 import co.edu.uniquindio.p2.empresaenergia.exceptions.FacturaException;
 import co.edu.uniquindio.p2.empresaenergia.exceptions.NullException;
 import co.edu.uniquindio.p2.empresaenergia.model.Persona;
+import javafx.util.Callback;
 import co.edu.uniquindio.p2.empresaenergia.model.Cliente;
 import co.edu.uniquindio.p2.empresaenergia.model.Empleado;
 import co.edu.uniquindio.p2.empresaenergia.model.EmpresaEnergia;
@@ -174,6 +175,15 @@ public class ModelFactoryController {
 	 */
 	public String obtenerNombreEmpresa() {
 		return getEmpresaEnergia().getNombre();
+	}
+
+	public void eliminarEmpleado(Empleado empleado) throws NullException, PersonaException {
+		getEmpresaEnergia().eliminarEmpleado(empleado);
+		saveEmpresaEnergia();
+	}
+
+	public List<Empleado> getListaEmpleados() {
+		return getEmpresaEnergia().getListaEmpleados();
 	}
 
 }

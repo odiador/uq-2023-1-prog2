@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane fx:id="mainPane" styleClass="main-pane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.p2.empresaenergia.controllers.GestionEmpleadosController">
+   <center>
+      <TableView fx:id="tablaEmpleados" styleClass="columna-tabla" BorderPane.alignment="CENTER">
+        <columns>
+          <TableColumn fx:id="columnaIdentificacion" prefWidth="75.0" styleClass="columna-tabla" text="Identificacion" />
+          <TableColumn fx:id="columnaNombre" prefWidth="75.0" styleClass="columna-tabla" text="Nombre" />
+        </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+      </TableView>
+   </center>
+   <bottom>
+      <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#eliminarSelectionEvent" text="Eliminar Seleccion" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </BorderPane.margin>
+      </Button>
+   </bottom>
+   <top>
+      <Label styleClass="titulo" text="Gestion de Empleados" BorderPane.alignment="CENTER" />
+   </top>
+   <padding>
+      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+   </padding>
+</BorderPane>
