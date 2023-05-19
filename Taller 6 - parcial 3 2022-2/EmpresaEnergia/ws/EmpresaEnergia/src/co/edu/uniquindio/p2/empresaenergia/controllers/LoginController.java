@@ -9,10 +9,10 @@ import co.edu.uniquindio.p2.empresaenergia.view.EscenaPrincipal;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
@@ -53,6 +53,8 @@ public class LoginController {
 
 			try {
 				Scene scene = new EscenaPrincipal(empleadoInicioSesion);
+				stage.setTitle("Menu principal | " + ModelFactoryController.getInstance().obtenerNombreEmpresa()
+						+ " | J Amador Roa");
 				stage.setScene(scene);
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -71,6 +73,8 @@ public class LoginController {
 		loader.setLocation(resource);
 		try {
 			Scene scene = new Scene(loader.load(), 600, 400);
+			stage.setTitle("Registro de Empleado | " + ModelFactoryController.getInstance().obtenerNombreEmpresa()
+					+ " | J Amador Roa");
 			stage.setScene(scene);
 		} catch (IOException e) {
 			e.printStackTrace();

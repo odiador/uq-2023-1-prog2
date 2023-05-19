@@ -2,17 +2,20 @@ package co.edu.uniquindio.p2.empresaenergia.controllers;
 
 import java.io.IOException;
 
+import co.edu.uniquindio.p2.empresaenergia.utility.FxUtility;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Label;
 import javafx.scene.control.SplitPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
 public class ControlMenuPrincipal {
@@ -65,7 +68,12 @@ public class ControlMenuPrincipal {
 
 	@FXML
 	void acercaDeEvent(ActionEvent event) {
+		acercaDeAction();
+	}
 
+	private void acercaDeAction() {
+		FxUtility.mostrarMensaje("Acerca De", "Made by: Juan Manuel Amador Roa",
+				"Hecha para seguimiento de programación II para el profesor Robinson Arias", AlertType.INFORMATION);
 	}
 
 	@FXML
@@ -96,22 +104,29 @@ public class ControlMenuPrincipal {
 	}
 
 	private void cambiarPanel(int option) {
+		String ruta = "";
 		String msg = "";
+		Stage stage = (Stage) mainPane.getScene().getWindow();
 		switch (option) {
 		case IR_NATURAL:
-			msg = "GestionClienteNatural";
+			msg = "Gestion de Clientes Naturales";
+			ruta = "GestionClienteNatural";
 			break;
 		case IR_JURIDICA:
-			msg = "GestionClienteJuridico";
+			msg = "Gestion de Clientes Juridicos";
+			ruta = "GestionClienteJuridico";
 			break;
 		case IR_FACTURAS:
-			msg = "GestionFacturas";
+			msg = "Gestion de Facturas";
+			ruta = "GestionFacturas";
 			break;
 		default:
 			break;
 		}
 		try {
-			SplitPane load = FXMLLoader.load(getClass().getResource("../view/" + msg + ".fxml"));
+			SplitPane load = FXMLLoader.load(getClass().getResource("../view/" + ruta + ".fxml"));
+			stage.setTitle(
+					msg + " | " + ModelFactoryController.getInstance().obtenerNombreEmpresa() + " | J Amador Roa");
 			panelDinamico.setCenter(load);
 		} catch (IOException e) {
 			e.printStackTrace();

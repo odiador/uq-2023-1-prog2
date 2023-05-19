@@ -56,6 +56,8 @@ public class RegistrarController {
 		loader.setLocation(resource);
 		try {
 			Scene scene = new Scene(loader.load(), 600, 400);
+			stage.setTitle("Inicio de Sesion | " + ModelFactoryController.getInstance().obtenerNombreEmpresa()
+					+ " | J Amador Roa");
 			stage.setScene(scene);
 		} catch (IOException e) {
 			e.printStackTrace();

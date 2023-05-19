@@ -76,6 +76,9 @@ public class GestionFacturaController {
 						try {
 							final Cliente cliente = obtenerClienteFactura(getTableView(), getIndex());
 							EscenaDetalleCliente escenaDetalleCliente = new EscenaDetalleCliente(cliente);
+
+							stage.setTitle("Detalle de cliente | "
+									+ ModelFactoryController.getInstance().obtenerNombreEmpresa() + " | J Amador Roa");
 							stage.setScene(escenaDetalleCliente);
 							stage.show();
 						} catch (final IOException e) {

@@ -19,7 +19,8 @@ public class Main extends Application {
 			Scene scene = new Scene(loader.load(), 600, 400);
 			primaryStage.setScene(scene);
 			primaryStage.setResizable(false);
-			primaryStage.setTitle("Inicio de Sesion | " + obtenerNombreEmpresa() + " ©");
+			primaryStage.setTitle("Inicio de Sesion | " + ModelFactoryController.getInstance().obtenerNombreEmpresa()
+					+ " | J Amador Roa");
 			primaryStage.getIcons().add(new Image("/resources/images/logoEmpresaEnergia.png"));
 			primaryStage.show();
 		} catch (Exception e) {
@@ -29,14 +30,5 @@ public class Main extends Application {
 
 	public static void main(String[] args) {
 		launch(args);
-	}
-
-	/**
-	 * Obtiene el nombre de la empresa de energía
-	 * 
-	 * @return
-	 */
-	public static String obtenerNombreEmpresa() {
-		return ModelFactoryController.getInstance().getEmpresaEnergia().getNombre();
 	}
 }

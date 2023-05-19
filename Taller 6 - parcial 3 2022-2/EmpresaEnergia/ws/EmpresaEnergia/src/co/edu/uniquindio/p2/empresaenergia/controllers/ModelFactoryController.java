@@ -167,4 +167,13 @@ public class ModelFactoryController {
 		saveEmpresaEnergia();
 	}
 
+	/**
+	 * Obtiene el nombre de la empresa de energía
+	 * 
+	 * @return
+	 */
+	public String obtenerNombreEmpresa() {
+		return getEmpresaEnergia().getNombre();
+	}
+
 }
