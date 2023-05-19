@@ -122,3 +122,14 @@
 	-fx-background-color: transparent;
 	-fx-border-color: #F0F0F0;
 }
+
+.hipervinculo {
+	-fx-text-fill: white;
+	-fx-border-width: 0.0;
+}
+.hipervinculo:hover {
+	-fx-text-fill: #9bb6f5;
+}
+.hipervinculo:pressed {
+	-fx-text-fill: #5382ed;
+}

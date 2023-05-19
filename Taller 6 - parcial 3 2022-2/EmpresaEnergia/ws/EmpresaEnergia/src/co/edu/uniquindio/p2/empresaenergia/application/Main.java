@@ -5,7 +5,7 @@ import java.net.URL;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.SplitPane;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 public class Main extends Application {
@@ -13,11 +13,13 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 		try {
 			FXMLLoader loader = new FXMLLoader();
-			URL resource = getClass().getResource("../view/MenuPrncipal.fxml");
+			URL resource = getClass().getResource("../view/InicioSesion.fxml");
 			loader.setLocation(resource);
-			SplitPane root = loader.load();
-			Scene scene = new Scene(root, 1280, 720);
+			Scene scene = new Scene(loader.load(), 600, 400);
 			primaryStage.setScene(scene);
+			primaryStage.setResizable(false);
+			primaryStage.setTitle("Empresa de Energia | Juan Manuel Amador Roa");
+			primaryStage.getIcons().add(new Image("/resources/images/logoEmpresaEnergia.png"));
 			primaryStage.show();
 		} catch (Exception e) {
 			e.printStackTrace();

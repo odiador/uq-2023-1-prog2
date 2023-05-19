@@ -6,7 +6,7 @@ import java.time.LocalDate;
 
 import co.edu.uniquindio.p2.empresaenergia.exceptions.FacturaException;
 import co.edu.uniquindio.p2.empresaenergia.exceptions.NullException;
-import co.edu.uniquindio.p2.empresaenergia.model.Cliente;
+import co.edu.uniquindio.p2.empresaenergia.model.Persona;
 import co.edu.uniquindio.p2.empresaenergia.model.Factura;
 import co.edu.uniquindio.p2.empresaenergia.utility.FxUtility;
 import javafx.beans.property.ReadOnlyStringWrapper;
@@ -64,7 +64,7 @@ public class GestionFacturaController {
 			total = Double.parseDouble(txtTotal.getText());
 		} catch (NumberFormatException e) {
 		}
-		Cliente cliente = ModelFactoryController.getInstance().buscarCliente(txtIdentificacion.getText());
+		Persona cliente = ModelFactoryController.getInstance().buscarCliente(txtIdentificacion.getText());
 		return new Factura(txtCodigo.getText(), dateFechaFacturacion.getValue(), total, cliente);
 	}
 

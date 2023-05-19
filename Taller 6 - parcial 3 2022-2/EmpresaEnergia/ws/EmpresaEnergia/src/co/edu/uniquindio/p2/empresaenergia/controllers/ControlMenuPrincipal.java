@@ -9,9 +9,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.SplitPane;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 
 public class ControlMenuPrincipal {
@@ -20,12 +20,21 @@ public class ControlMenuPrincipal {
 	public static final int IR_FACTURAS = 2;
 
 	@FXML
+	private ImageView imgLogo;
+
+	@FXML
 	private SplitPane mainPane;
 	@FXML
-	private VBox menuIzq;
+	private BorderPane menuIzq;
 
 	@FXML
 	private BorderPane panelDinamico;
+
+	@FXML
+	void initialize() {
+		imgLogo.fitHeightProperty().bind(menuIzq.widthProperty());
+		imgLogo.fitWidthProperty().bind(menuIzq.widthProperty());
+	}
 
 	@FXML
 	void extenderMenuIzqEvent(MouseEvent event) {

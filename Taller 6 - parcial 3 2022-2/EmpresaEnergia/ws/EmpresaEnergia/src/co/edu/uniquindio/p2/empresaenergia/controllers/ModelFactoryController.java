@@ -7,10 +7,12 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.List;
 
-import co.edu.uniquindio.p2.empresaenergia.exceptions.ClienteException;
+import co.edu.uniquindio.p2.empresaenergia.exceptions.PersonaException;
 import co.edu.uniquindio.p2.empresaenergia.exceptions.FacturaException;
 import co.edu.uniquindio.p2.empresaenergia.exceptions.NullException;
+import co.edu.uniquindio.p2.empresaenergia.model.Persona;
 import co.edu.uniquindio.p2.empresaenergia.model.Cliente;
+import co.edu.uniquindio.p2.empresaenergia.model.Empleado;
 import co.edu.uniquindio.p2.empresaenergia.model.EmpresaEnergia;
 import co.edu.uniquindio.p2.empresaenergia.model.Factura;
 
@@ -86,13 +88,13 @@ public class ModelFactoryController {
 	/**
 	 * Agrega un cliente a la empresa de energía, manda errores en caso de que hayan
 	 * problemas.<br>
-	 * Usa el metodo {@link EmpresaEnergia#agregarCliente(Cliente)}
+	 * Usa el metodo {@link EmpresaEnergia#agregarCliente(Persona)}
 	 * 
 	 * @param cliente
 	 * @throws NullException
-	 * @throws ClienteException
+	 * @throws PersonaException
 	 */
-	public void agregarCliente(Cliente cliente) throws NullException, ClienteException {
+	public void agregarCliente(Cliente cliente) throws NullException, PersonaException {
 		getEmpresaEnergia().agregarCliente(cliente);
 		saveEmpresaEnergia();
 	}
@@ -100,20 +102,20 @@ public class ModelFactoryController {
 	/**
 	 * Elimina un cliente a la empresa de energía, manda errores en caso de que
 	 * hayan problemas.<br>
-	 * Usa el metodo {@link EmpresaEnergia#eliminarCliente(Cliente)}
+	 * Usa el metodo {@link EmpresaEnergia#eliminarCliente(Persona)}
 	 * 
 	 * 
 	 * @param cliente
 	 * @throws NullException
-	 * @throws ClienteException
+	 * @throws PersonaException
 	 */
-	public void eliminarCliente(Cliente cliente) throws NullException, ClienteException {
+	public void eliminarCliente(Cliente cliente) throws NullException, PersonaException {
 		getEmpresaEnergia().eliminarCliente(cliente);
 		saveEmpresaEnergia();
 	}
 
 	/**
-	 * @return {@link EmpresaEnergia#agregarCliente(Cliente)}
+	 * @return {@link EmpresaEnergia#agregarCliente(Persona)}
 	 */
 	public List<Cliente> getListaClientes() {
 		return getEmpresaEnergia().getListaClientes();
@@ -141,19 +143,28 @@ public class ModelFactoryController {
 		saveEmpresaEnergia();
 	}
 
-	public Cliente buscarCliente(String id) {
+	public Persona buscarCliente(String id) {
 		return getEmpresaEnergia().buscarCliente(id);
 
 	}
 
-	public void actualizarCliente(Cliente cliente) throws NullException, ClienteException {
+	public void actualizarCliente(Cliente cliente) throws NullException, PersonaException {
 		getEmpresaEnergia().actualizarCliente(cliente);
 		saveEmpresaEnergia();
 	}
 
 	public void eliminarFactura(Factura factura) throws NullException, FacturaException {
 		getEmpresaEnergia().eliminarFactura(factura);
+		saveEmpresaEnergia();
+	}
 
+	public Empleado iniciarSesion(String id, String pass) {
+		return getEmpresaEnergia().iniciarSesion(id, pass);
+	}
+
+	public void agregarEmpleado(Empleado empleado) throws NullException, PersonaException {
+		getEmpresaEnergia().agregarEmpleado(empleado);
+		saveEmpresaEnergia();
 	}
 
 }

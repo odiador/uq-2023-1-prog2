@@ -1,10 +1,10 @@
 package co.edu.uniquindio.p2.empresaenergia.controllers;
 
-import co.edu.uniquindio.p2.empresaenergia.exceptions.ClienteException;
 import co.edu.uniquindio.p2.empresaenergia.exceptions.NullException;
+import co.edu.uniquindio.p2.empresaenergia.exceptions.PersonaException;
 import co.edu.uniquindio.p2.empresaenergia.model.Cliente;
 import co.edu.uniquindio.p2.empresaenergia.model.ClienteJuridico;
-import co.edu.uniquindio.p2.empresaenergia.model.ClienteNatural;
+import co.edu.uniquindio.p2.empresaenergia.model.Persona;
 import co.edu.uniquindio.p2.empresaenergia.utility.FxUtility;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
@@ -48,10 +48,7 @@ public class GestionClienteJuridicoController {
 	void initialize() {
 		columnId.setCellValueFactory(e -> new ReadOnlyStringWrapper(e.getValue().getId()));
 		columnNombre.setCellValueFactory(e -> new ReadOnlyStringWrapper(e.getValue().getNombre()));
-		columnTipoCliente.setCellValueFactory(e -> {
-			String tipoCliente = e.getValue() instanceof ClienteNatural ? "Natural" : "Juridico";
-			return new ReadOnlyStringWrapper(tipoCliente);
-		});
+		columnTipoCliente.setCellValueFactory(e -> new ReadOnlyStringWrapper(e.getValue().getTipoPersona()));
 		FxUtility.setAsNumberTextfield(txtTelefono);
 		actualizarTabla();
 	}
@@ -81,7 +78,7 @@ public class GestionClienteJuridicoController {
 			actualizarTabla();
 			FxUtility.mostrarMensaje("Informacion", "El cliente ha sido agregado con éxito", "",
 					AlertType.CONFIRMATION);
-		} catch (NullException | ClienteException e) {
+		} catch (NullException | PersonaException e) {
 			FxUtility.mostrarMensaje("Advertencia", "No se pudo agregar el cliente", e.getMessage(), AlertType.WARNING);
 		}
 	}
@@ -98,7 +95,7 @@ public class GestionClienteJuridicoController {
 			actualizarTabla();
 			FxUtility.mostrarMensaje("Informacion", "Informacion", "El cliente fue actualizado con exito",
 					AlertType.CONFIRMATION);
-		} catch (NullException | ClienteException e) {
+		} catch (NullException | PersonaException e) {
 			FxUtility.mostrarMensaje("Advertencia", "No se pudo actualizar el cliente", e.getMessage(),
 					AlertType.WARNING);
 		}
@@ -124,7 +121,7 @@ public class GestionClienteJuridicoController {
 	}
 
 	private void cargarDatosAction() {
-		Cliente cliente = tableClientes.getSelectionModel().getSelectedItem();
+		Persona cliente = tableClientes.getSelectionModel().getSelectedItem();
 		if (cliente == null) {
 			FxUtility.mostrarMensaje("Advertencia", "Selecciona un elemento en la tabla", "", AlertType.ERROR);
 			return;
@@ -153,7 +150,7 @@ public class GestionClienteJuridicoController {
 			ModelFactoryController.getInstance().eliminarCliente(cliente);
 			actualizarTabla();
 			FxUtility.mostrarMensaje("Informacion", "El cliente fue eliminado con éxito", "", AlertType.CONFIRMATION);
-		} catch (NullException | ClienteException e) {
+		} catch (NullException | PersonaException e) {
 			FxUtility.mostrarMensaje("Informacion", "El cliente no pudo ser eliminado", e.getMessage(),
 					AlertType.CONFIRMATION);
 		}

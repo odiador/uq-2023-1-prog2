@@ -1,7 +1,8 @@
 package co.edu.uniquindio.p2.empresaenergia.controllers;
 
-import co.edu.uniquindio.p2.empresaenergia.exceptions.ClienteException;
+import co.edu.uniquindio.p2.empresaenergia.exceptions.PersonaException;
 import co.edu.uniquindio.p2.empresaenergia.exceptions.NullException;
+import co.edu.uniquindio.p2.empresaenergia.model.Persona;
 import co.edu.uniquindio.p2.empresaenergia.model.Cliente;
 import co.edu.uniquindio.p2.empresaenergia.model.ClienteNatural;
 import co.edu.uniquindio.p2.empresaenergia.utility.FxUtility;
@@ -47,7 +48,7 @@ public class GestionClienteNaturalController {
 	void initialize() {
 		columnId.setCellValueFactory(e -> new ReadOnlyStringWrapper(e.getValue().getId()));
 		columnNombre.setCellValueFactory(e -> new ReadOnlyStringWrapper(e.getValue().getNombre()));
-		columnTipoCliente.setCellValueFactory(e -> new ReadOnlyStringWrapper(e.getValue().getTipoCliente()));
+		columnTipoCliente.setCellValueFactory(e -> new ReadOnlyStringWrapper(e.getValue().getTipoPersona()));
 		FxUtility.setAsIntegerTextfield(txtEstrato, 1, 6);
 		actualizarTabla();
 	}
@@ -81,7 +82,7 @@ public class GestionClienteNaturalController {
 			actualizarTabla();
 			FxUtility.mostrarMensaje("Informacion", "El cliente ha sido agregado con éxito", "",
 					AlertType.CONFIRMATION);
-		} catch (NullException | ClienteException e) {
+		} catch (NullException | PersonaException e) {
 			FxUtility.mostrarMensaje("Advertencia", "No se pudo agregar el cliente", e.getMessage(), AlertType.WARNING);
 		}
 	}
@@ -98,7 +99,7 @@ public class GestionClienteNaturalController {
 			actualizarTabla();
 			FxUtility.mostrarMensaje("Informacion", "Informacion", "El cliente fue actualizado con exito",
 					AlertType.CONFIRMATION);
-		} catch (NullException | ClienteException e) {
+		} catch (NullException | PersonaException e) {
 			FxUtility.mostrarMensaje("Advertencia", "No se pudo actualizar el cliente", e.getMessage(),
 					AlertType.WARNING);
 		}
@@ -124,7 +125,7 @@ public class GestionClienteNaturalController {
 	}
 
 	private void cargarDatosAction() {
-		Cliente cliente = tableClientes.getSelectionModel().getSelectedItem();
+		Persona cliente = tableClientes.getSelectionModel().getSelectedItem();
 		if (cliente == null) {
 			FxUtility.mostrarMensaje("Advertencia", "Selecciona un elemento en la tabla", "", AlertType.ERROR);
 			return;
@@ -157,7 +158,7 @@ public class GestionClienteNaturalController {
 			ModelFactoryController.getInstance().eliminarCliente(cliente);
 			actualizarTabla();
 			FxUtility.mostrarMensaje("Informacion", "El cliente fue eliminado con éxito", "", AlertType.CONFIRMATION);
-		} catch (NullException | ClienteException e) {
+		} catch (NullException | PersonaException e) {
 			FxUtility.mostrarMensaje("Informacion", "El cliente no pudo ser eliminado", e.getMessage(),
 					AlertType.CONFIRMATION);
 		}

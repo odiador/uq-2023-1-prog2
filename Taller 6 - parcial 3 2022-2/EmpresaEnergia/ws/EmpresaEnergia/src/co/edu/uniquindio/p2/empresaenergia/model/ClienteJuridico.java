@@ -80,7 +80,7 @@ public class ClienteJuridico extends Cliente {
 	}
 
 	@Override
-	public String getTipoCliente() {
+	public String getTipoPersona() {
 		return "Juridico";
 	}
 
