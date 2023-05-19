@@ -5,6 +5,7 @@ import java.net.URL;
 
 import co.edu.uniquindio.p2.empresaenergia.model.Empleado;
 import co.edu.uniquindio.p2.empresaenergia.utility.FxUtility;
+import co.edu.uniquindio.p2.empresaenergia.view.EscenaPrincipal;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -50,11 +51,8 @@ public class LoginController {
 			Stage stage = (Stage) mainPane.getScene().getWindow();
 			stage.setResizable(true);
 
-			FXMLLoader loader = new FXMLLoader();
-			URL resource = getClass().getResource("../view/MenuPrncipal.fxml");
-			loader.setLocation(resource);
 			try {
-				Scene scene = new Scene(loader.load(), 1280, 720);
+				Scene scene = new EscenaPrincipal(empleadoInicioSesion);
 				stage.setScene(scene);
 			} catch (IOException e) {
 				e.printStackTrace();

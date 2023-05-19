@@ -89,6 +89,7 @@
             <TableView fx:id="tableFacturas" prefHeight="200.0" prefWidth="200.0" styleClass="columna-tabla" BorderPane.alignment="CENTER">
               <columns>
                 <TableColumn fx:id="columnCodigo" prefWidth="75.0" styleClass="columna-tabla" text="Codigo" />
+                  <TableColumn fx:id="columnCliente" prefWidth="75.0" styleClass="columna-tabla" text="Cliente" />
                 <TableColumn fx:id="columnTotal" prefWidth="75.0" styleClass="columna-tabla" text="Total" />
               </columns>
                <columnResizePolicy>

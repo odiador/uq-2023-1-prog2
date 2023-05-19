@@ -2,13 +2,15 @@ package co.edu.uniquindio.p2.empresaenergia.controllers;
 
 import static co.edu.uniquindio.p2.empresaenergia.controllers.ModelFactoryController.getInstance;
 
+import java.io.IOException;
 import java.time.LocalDate;
 
 import co.edu.uniquindio.p2.empresaenergia.exceptions.FacturaException;
 import co.edu.uniquindio.p2.empresaenergia.exceptions.NullException;
-import co.edu.uniquindio.p2.empresaenergia.model.Persona;
+import co.edu.uniquindio.p2.empresaenergia.model.Cliente;
 import co.edu.uniquindio.p2.empresaenergia.model.Factura;
 import co.edu.uniquindio.p2.empresaenergia.utility.FxUtility;
+import co.edu.uniquindio.p2.empresaenergia.view.EscenaDetalleCliente;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -16,11 +18,16 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.SplitPane;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 public class GestionFacturaController {
+
+	@FXML
+	private TableColumn<Factura, String> columnCliente;
 	@FXML
 	private TableColumn<Factura, String> columnCodigo;
 
@@ -49,8 +56,44 @@ public class GestionFacturaController {
 	void initialize() {
 		columnCodigo.setCellValueFactory(e -> new ReadOnlyStringWrapper(e.getValue().getCodigo()));
 		columnTotal.setCellValueFactory(e -> new ReadOnlyStringWrapper(e.getValue().getTotalConFormato()));
+		columnCliente.setCellFactory(param -> obtenerCeldaColumna());
 		dateFechaFacturacion.setValue(LocalDate.now());
 		actualizarTabla();
+	}
+
+	private TableCell<Factura, String> obtenerCeldaColumna() {
+		return new TableCell<Factura, String>() {
+			@Override
+			protected void updateItem(final String item, final boolean empty) {
+				super.updateItem(item, empty);
+				if (empty) {
+					setText(null);
+				} else {
+					setId("btn-tabla");
+					setText("Ver Cliente");
+					setOnMouseClicked(event -> {
+						final Stage stage = new Stage();
+						try {
+							final Cliente cliente = obtenerClienteFactura(getTableView(), getIndex());
+							EscenaDetalleCliente escenaDetalleCliente = new EscenaDetalleCliente(cliente);
+							stage.setScene(escenaDetalleCliente);
+							stage.show();
+						} catch (final IOException e) {
+							FxUtility.mostrarMensaje("Alerta", "Detalle de Cliente", "No se pudo mostrar el detalle",
+									AlertType.ERROR);
+						}
+
+					});
+				}
+			}
+
+		};
+	}
+
+	private static Cliente obtenerClienteFactura(TableView<Factura> tabla, int index) {
+		final Factura factura = tabla.getItems().get(index);
+		final Cliente cliente = factura.getCliente();
+		return cliente;
 	}
 
 	private void actualizarTabla() {
@@ -64,7 +107,7 @@ public class GestionFacturaController {
 			total = Double.parseDouble(txtTotal.getText());
 		} catch (NumberFormatException e) {
 		}
-		Persona cliente = ModelFactoryController.getInstance().buscarCliente(txtIdentificacion.getText());
+		Cliente cliente = ModelFactoryController.getInstance().buscarCliente(txtIdentificacion.getText());
 		return new Factura(txtCodigo.getText(), dateFechaFacturacion.getValue(), total, cliente);
 	}
 

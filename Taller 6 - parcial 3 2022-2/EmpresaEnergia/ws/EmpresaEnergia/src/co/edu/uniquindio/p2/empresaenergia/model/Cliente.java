@@ -11,6 +11,6 @@ public abstract class Cliente extends Persona {
 		super(id, nombre);
 	}
 
-	public abstract String getTipoPersona();
+	public abstract TipoCliente getTipoCliente();
 
 }

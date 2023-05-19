@@ -7,18 +7,23 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<SplitPane fx:id="mainPane" dividerPositions="0.48" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="600.0" stylesheets="@application.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.p2.empresaenergia.controllers.ControlMenuPrincipal">
+<SplitPane fx:id="mainPane" dividerPositions="0.48" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" stylesheets="@application.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <items>
       <BorderPane fx:id="menuIzq" maxWidth="283.0" minWidth="60.0" onMouseEntered="#extenderMenuIzqEvent" onMouseExited="#comprimirMenuIzqEvent" prefWidth="283.0" styleClass="menu-izquierdo" SplitPane.resizableWithParent="false">
          <bottom>
-            <ImageView fx:id="imgLogo" fitHeight="283.0" fitWidth="283.0" pickOnBounds="true" BorderPane.alignment="CENTER">
-               <image>
-                  <Image url="@../../../../../../resources/images/logoEmpresaEnergia.png" />
-               </image>
-               <viewport>
-                  <Rectangle2D />
-               </viewport>
-            </ImageView>
+            <VBox alignment="CENTER">
+               <children>
+                  <Label fx:id="lblNombreEmpleado" maxHeight="70.0" text="Bienvenid@, incógnito" textAlignment="CENTER" wrapText="true" />
+                  <ImageView fx:id="imgLogo" fitHeight="283.0" fitWidth="283.0" pickOnBounds="true" BorderPane.alignment="CENTER">
+                     <image>
+                        <Image url="@../../../../../../resources/images/logoEmpresaEnergia.png" />
+                     </image>
+                     <viewport>
+                        <Rectangle2D />
+                     </viewport>
+                  </ImageView>
+               </children>
+            </VBox>
          </bottom>
          <center>
             <VBox maxWidth="283.0" minWidth="60.0" prefWidth="283.0" BorderPane.alignment="CENTER">
@@ -82,6 +87,9 @@
                </children>
             </VBox>
          </center>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
       </BorderPane>
       <BorderPane fx:id="panelDinamico" styleClass="main-pane">
          <center>

@@ -81,8 +81,8 @@ public class ClienteNatural extends Cliente {
 	}
 
 	@Override
-	public String getTipoPersona() {
-		return "Natural";
+	public TipoCliente getTipoCliente() {
+		return TipoCliente.NATURAL;
 	}
 
 }

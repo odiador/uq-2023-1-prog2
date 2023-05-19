@@ -11,7 +11,7 @@ public class ClienteJuridico extends Cliente {
 	private String tipoEmpresa;
 
 	/**
-	 * Es el constructor de la clase ClienteNatural
+	 * Es el constructor de la clase ClienteJuridico
 	 * 
 	 * @param id
 	 * @param nombre
@@ -80,8 +80,8 @@ public class ClienteJuridico extends Cliente {
 	}
 
 	@Override
-	public String getTipoPersona() {
-		return "Juridico";
+	public TipoCliente getTipoCliente() {
+		return TipoCliente.JURIDICO;
 	}
 
 }

@@ -8,6 +8,7 @@ import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Label;
 import javafx.scene.control.SplitPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -19,6 +20,8 @@ public class ControlMenuPrincipal {
 	public static final int IR_JURIDICA = 1;
 	public static final int IR_FACTURAS = 2;
 
+	@FXML
+	private Label lblNombreEmpleado;
 	@FXML
 	private ImageView imgLogo;
 
@@ -113,5 +116,14 @@ public class ControlMenuPrincipal {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	/**
+	 * Obtiene el label del nombre del empleado
+	 * 
+	 * @return
+	 */
+	public Label getLblNombreEmpleado() {
+		return lblNombreEmpleado;
 	}
 }

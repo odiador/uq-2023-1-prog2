@@ -143,7 +143,7 @@ public class ModelFactoryController {
 		saveEmpresaEnergia();
 	}
 
-	public Persona buscarCliente(String id) {
+	public Cliente buscarCliente(String id) {
 		return getEmpresaEnergia().buscarCliente(id);
 
 	}

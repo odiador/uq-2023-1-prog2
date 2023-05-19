@@ -15,6 +15,11 @@
 .label {
 	-fx-font-size: 20;
 }
+#label-fondo {
+	-fx-background-color: blanco;
+	-fx-text-fill: black;
+	-fx-shape: "m 0 0 v 100 h 95 a 1 10 0 0 0 0 -100 z";
+}
 .titulo {
 	-fx-font-size: 30.0;
 	-fx-font-weight: bold;
@@ -116,6 +121,15 @@
 .table-row-cell:selected .cell {
 	-fx-background-color: #4F8AFF;
 	-fx-text-fill: black;
+}
+#btn-tabla {
+	-fx-background-color: #4f8aff;
+}
+#btn-tabla:hover {
+	-fx-background-color: #2870ff;
+}
+#btn-tabla:pressed {
+	-fx-background-color: #0156ff;
 }
 
 .table-view {

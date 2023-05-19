@@ -48,7 +48,8 @@ public class GestionClienteNaturalController {
 	void initialize() {
 		columnId.setCellValueFactory(e -> new ReadOnlyStringWrapper(e.getValue().getId()));
 		columnNombre.setCellValueFactory(e -> new ReadOnlyStringWrapper(e.getValue().getNombre()));
-		columnTipoCliente.setCellValueFactory(e -> new ReadOnlyStringWrapper(e.getValue().getTipoPersona()));
+		columnTipoCliente
+				.setCellValueFactory(e -> new ReadOnlyStringWrapper(e.getValue().getTipoCliente().getNombre()));
 		FxUtility.setAsIntegerTextfield(txtEstrato, 1, 6);
 		actualizarTabla();
 	}

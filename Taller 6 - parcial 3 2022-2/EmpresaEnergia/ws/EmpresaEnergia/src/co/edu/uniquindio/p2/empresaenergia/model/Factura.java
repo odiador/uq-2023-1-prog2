@@ -11,7 +11,7 @@ public class Factura implements Serializable {
 	private String codigo;
 	private LocalDate fechaFacturacion;
 	private Double total;
-	private Persona cliente;
+	private Cliente cliente;
 
 	/**
 	 * Es el constructor de la clase Factura
@@ -20,7 +20,7 @@ public class Factura implements Serializable {
 	 * @param fechaFacturacion
 	 * @param total
 	 */
-	public Factura(String codigo, LocalDate fechaFacturacion, Double total, Persona cliente) {
+	public Factura(String codigo, LocalDate fechaFacturacion, Double total, Cliente cliente) {
 		this.codigo = codigo;
 		this.fechaFacturacion = fechaFacturacion;
 		this.total = total;
@@ -99,11 +99,11 @@ public class Factura implements Serializable {
 		return this.codigo.equals(codigo);
 	}
 
-	public Persona getCliente() {
+	public Cliente getCliente() {
 		return cliente;
 	}
 
-	public void setCliente(Persona cliente) {
+	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
 
