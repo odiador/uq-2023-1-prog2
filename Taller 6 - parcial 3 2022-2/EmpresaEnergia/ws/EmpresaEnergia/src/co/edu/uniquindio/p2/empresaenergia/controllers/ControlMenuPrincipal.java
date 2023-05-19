@@ -73,7 +73,8 @@ public class ControlMenuPrincipal {
 	}
 
 	private void acercaDeAction() {
-		FxUtility.mostrarMensaje("Acerca De", "Made by: Juan Manuel Amador Roa",
+		FxUtility.mostrarMensaje("Acerca De",
+				"Nombre de la Empresa: " + ModelFactoryController.getInstance().obtenerNombreEmpresa(),
 				"Hecha para seguimiento de programación II para el profesor Robinson Arias", AlertType.INFORMATION);
 	}
 
