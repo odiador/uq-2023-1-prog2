@@ -7,15 +7,14 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.List;
 
-import co.edu.uniquindio.p2.empresaenergia.exceptions.PersonaException;
 import co.edu.uniquindio.p2.empresaenergia.exceptions.FacturaException;
 import co.edu.uniquindio.p2.empresaenergia.exceptions.NullException;
-import co.edu.uniquindio.p2.empresaenergia.model.Persona;
-import javafx.util.Callback;
+import co.edu.uniquindio.p2.empresaenergia.exceptions.PersonaException;
 import co.edu.uniquindio.p2.empresaenergia.model.Cliente;
 import co.edu.uniquindio.p2.empresaenergia.model.Empleado;
 import co.edu.uniquindio.p2.empresaenergia.model.EmpresaEnergia;
 import co.edu.uniquindio.p2.empresaenergia.model.Factura;
+import co.edu.uniquindio.p2.empresaenergia.model.Persona;
 
 public class ModelFactoryController {
 	/**
