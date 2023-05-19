@@ -16,6 +16,7 @@ import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.image.Image;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TableCell;
@@ -79,6 +80,7 @@ public class GestionFacturaController {
 
 							stage.setTitle("Detalle de cliente | "
 									+ ModelFactoryController.getInstance().obtenerNombreEmpresa() + " | J Amador Roa");
+							stage.getIcons().add(new Image("/resources/images/logoEmpresaEnergia.png"));
 							stage.setScene(escenaDetalleCliente);
 							stage.show();
 						} catch (final IOException e) {
