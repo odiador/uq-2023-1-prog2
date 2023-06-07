@@ -1,7 +1,5 @@
 package co.edu.uniquindio.p2.empresaenergia.utility;
 
-import java.util.function.Consumer;
-
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.beans.value.ChangeListener;
