@@ -1,5 +1,6 @@
 package co.edu.uniquindio.p2.diplomado.model;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -15,7 +16,12 @@ import co.edu.uniquindio.p2.diplomado.exceptions.EstudianteException;
 import co.edu.uniquindio.p2.diplomado.exceptions.NotPresentException;
 import co.edu.uniquindio.p2.diplomado.exceptions.NullException;
 
-public class Diplomado implements EstudianteGestionable {
+public class Diplomado implements EstudianteGestionable, Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private Set<Estudiante> listaEstudiantes;
 	private String nombre;
 	private int cupos;
@@ -78,12 +84,12 @@ public class Diplomado implements EstudianteGestionable {
 			throws EstudianteException, NullException, AtributosFaltantesException, CuposLlenosException {
 		if (estudiante == null)
 			throw new NullException("El estudiante enviado es null");
-		if (estudiante.atributosLlenos())
+		if (!estudiante.atributosLlenos())
 			throw new AtributosFaltantesException("Al estudiante le faltan campos por llenar");
 		if (listaEstudiantes.size() == cupos) {
-			throw new CuposLlenosException("El");
+			throw new CuposLlenosException("Ya no hay mas cupos para el diplomado");
 		}
-		if (validarEstudiante(nombre))
+		if (validarEstudiante(estudiante.getId()))
 			throw new EstudianteException("El estudiante ya existe, no se puede agregar");
 		listaEstudiantes.add(estudiante);
 	}
@@ -163,5 +169,12 @@ public class Diplomado implements EstudianteGestionable {
 		}
 		builder.append("]");
 		return builder.toString();
+	}
+
+	public List<Float> listarNotasEstudiante(String id) throws EstudianteException {
+		Estudiante estudiante = buscarEstudiante(id);
+		if (estudiante == null)
+			throw new EstudianteException("El estudiante no fue encontrado");
+		return estudiante.getListaNotas();
 	}
 }
