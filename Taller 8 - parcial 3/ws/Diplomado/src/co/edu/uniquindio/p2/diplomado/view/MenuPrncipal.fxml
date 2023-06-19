@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<SplitPane fx:id="mainPane" dividerPositions="0.48" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" stylesheets="@application.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <items>
+      <BorderPane fx:id="menuIzq" maxWidth="200.0" minWidth="60.0" onMouseEntered="#extenderMenuIzqEvent" onMouseExited="#comprimirMenuIzqEvent" prefWidth="200.0" styleClass="menu-izquierdo" SplitPane.resizableWithParent="false">
+         <center>
+            <VBox maxWidth="283.0" minWidth="60.0" prefWidth="283.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#gestionarEstudiantesEvent" styleClass="boton-izquierdo">
+                     <graphic>
+                        <HBox alignment="CENTER_LEFT" spacing="5.0">
+                           <children>
+                              <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../../../../resources/images/Estudiante.png" />
+                                 </image>
+                              </ImageView>
+                              <Label ellipsisString="" text="Gestionar Estudiantes" textOverrun="CLIP" />
+                           </children>
+                        </HBox>
+                     </graphic>
+                  </Button>
+                  <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#verEstadisticasEvent" styleClass="boton-izquierdo">
+                     <graphic>
+                        <HBox alignment="CENTER_LEFT" spacing="5.0">
+                           <children>
+                              <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../../../../resources/images/Estadisticas.png" />
+                                 </image>
+                              </ImageView>
+                              <Label ellipsisString="" text="Ver Estadísticas" textOverrun="CLIP" />
+                           </children>
+                        </HBox>
+                     </graphic>
+                  </Button>
+                  <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#acercaDeEvent" styleClass="boton-izquierdo">
+                     <graphic>
+                        <HBox alignment="CENTER_LEFT" spacing="5.0">
+                           <children>
+                              <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../../../../resources/images/AcercaDe.png" />
+                                 </image>
+                              </ImageView>
+                              <Label ellipsisString="" text="Acerca de" textOverrun="CLIP" />
+                           </children>
+                        </HBox>
+                     </graphic>
+                  </Button>
+               </children>
+            </VBox>
+         </center>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <top>
+            <HBox alignment="CENTER" minHeight="61.0">
+               <children>
+                  <ImageView fx:id="imgLogo" fitHeight="190.0" fitWidth="190.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+                     <image>
+                        <Image url="@../../../../../../resources/images/Diplomado%20logo.png" />
+                     </image>
+                     <viewport>
+                        <Rectangle2D />
+                     </viewport>
+                  </ImageView>
+               </children>
+            </HBox>
+         </top>
+      </BorderPane>
+      <BorderPane fx:id="panelDinamico" styleClass="main-pane">
+         <center>
+            <Label text="Selecciona una opcion" BorderPane.alignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+         </center>
+      </BorderPane>
+   </items>
+</SplitPane>
