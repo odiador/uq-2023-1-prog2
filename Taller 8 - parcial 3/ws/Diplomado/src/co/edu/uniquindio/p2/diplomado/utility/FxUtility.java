@@ -29,6 +29,18 @@ public class FxUtility {
 		});
 	}
 
+	public static void setRegexTextFieldTo(TextField tf, String regex, String msg) {
+		tf.textProperty().addListener(new ChangeListener<String>() {
+			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+				if (!newValue.matches(regex + "*")) {
+					tf.setText(newValue.replaceAll("[^\\" + regex, ""));
+					abrirContextMenu(tf, msg);
+				}
+			}
+
+		});
+	}
+
 	private static void abrirContextMenu(Node nodo, String msg) {
 		final ContextMenu menu = new ContextMenu();
 		menu.getItems().add(new MenuItem(msg));
