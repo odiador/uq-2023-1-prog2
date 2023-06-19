@@ -1,0 +1,5 @@
+Esta actividad es una bonificacion para cualquier nota de parcial, esta actividad es relacionada a un centro de impresion, en el cual se encuentran tanto impresoras como documentos que se van a imprimir (que tienen una prioridad específica y son archivos .txt), hay diferentes tipos de impresoras por lo que se recomienda usar uno de los principios SOLID.
+
+Hay libertad creativa para adicionar cosas al proyecto, por lo que se decidio por agregarle una animacion de impresion por medio de una linea de tiempo (timeline) y cuando una impresora es a color, va imprimiendo cada letra con un color diferente, en cambio a blanco y negro solo será de color negro. Además los documentos que ya se imprimieron se guardan en otra parte para mejor manejo de información.
+
+Hay 2 tipos de impresoras en este caso y cada una cuenta con un tipo de desgaste diferente, una es por usos y la otra es por caracteres impresos.

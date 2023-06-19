@@ -1,0 +1,3 @@
+Es una actividad no calificable (planeada como tarea) con el fin de practicar el uso de interfaces gráficas, el tema es libre y el requisito es tener un objeto principal que contenga x de otros objetos
+
+En este caso se usó una relacion Estudiante-Universidad, de la cual la universidad tiene x estudiantes registrados, y cuando alguien se registra aparecerá en una tabla que representa el listado de estudiantes
